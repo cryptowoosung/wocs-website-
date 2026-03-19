@@ -66,6 +66,7 @@ document.querySelectorAll('[data-t]').forEach(function(el){var v=t(el.getAttribu
 document.querySelectorAll('[data-t-html]').forEach(function(el){var v=t(el.getAttribute('data-t-html'));if(v!==el.getAttribute('data-t-html'))el.innerHTML=v});
 document.querySelectorAll('[data-t-placeholder]').forEach(function(el){var v=t(el.getAttribute('data-t-placeholder'));if(v!==el.getAttribute('data-t-placeholder'))el.placeholder=v});
 document.querySelectorAll('[data-t-alt]').forEach(function(el){var v=t(el.getAttribute('data-t-alt'));if(v!==el.getAttribute('data-t-alt'))el.alt=v});
+document.querySelectorAll('[data-t-title]').forEach(function(el){var v=t(el.getAttribute('data-t-title'));if(v!==el.getAttribute('data-t-title'))el.title=v});
 document.title=t('pageTitle')||document.title;
 var descMeta=document.querySelector('meta[name="description"]');if(descMeta){var d=t('pageDesc');if(d!=='pageDesc')descMeta.setAttribute('content',d)}
 }

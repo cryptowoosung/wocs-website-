@@ -1,78 +1,70 @@
 /* ============================================================
    WOCS 블로그 데이터
    새 글: 배열 맨 위에 객체 추가 → 자동 반영
+   category uses translation keys — render with t(p.category)
+   title/excerpt use translation keys — render with t(p.title) / t(p.excerpt)
    ============================================================ */
 var BLOG_POSTS = [
 {
-  id:10, title:"텐트 수명 15년 보장: 프레임 소재와 캔버스 관리 노하우",
-  date:"2026-03-05", category:"시공기술", featured:true,
+  id:10, title:"bt10", excerpt:"be10",
+  date:"2026-03-05", category:"cat_construction", featured:true,
   image:"https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=500&fit=crop&q=85",
-  excerpt:"6063-T5 알루미늄 합금 프레임은 15년 이상 사용 가능합니다. 하지만 관리를 모르면 3년 만에 녹이 슬죠. 프레임과 캔버스를 오래 쓰는 실전 관리법을 공개합니다.",
-  content:'<p>글램핑 구조물에 수천만 원을 투자하면서 관리 매뉴얼을 받지 못하는 경우가 허다합니다. <strong>WOCS는 시공 완료 시 관리 매뉴얼을 의무 제공</strong>합니다. 이 글에서 핵심만 공개합니다.</p><h2>프레임 소재별 수명과 관리</h2><p>WOCS가 사용하는 프레임은 두 가지입니다.</p><p><strong>6063-T5 알루미늄 합금</strong> — 무게 대비 강도가 뛰어나고 부식에 강합니다. 해안가처럼 염분이 많은 환경에서도 15년 이상 사용 가능합니다. 단, 연 1회 물 세척 후 실리콘 스프레이를 뿌려주면 산화 피막이 유지됩니다.</p><p><strong>Q235B 스틸</strong> — 알루미늄 대비 강도가 높아 대형 구조물에 적합합니다. 용융아연도금 처리되어 있지만, 볼트 체결부는 매년 방청 스프레이를 뿌려야 합니다.</p><h2>캔버스(커버) 관리가 수명을 결정한다</h2><p>프레임이 뼈대라면 캔버스는 피부입니다. <strong>PVC 타포린은 3~5년, 캔버스는 2~3년</strong>이 교체 주기입니다.</p><blockquote>핵심: 캔버스 교체 비용은 전체 투자비의 5~10% 수준입니다. 프레임은 반영구, 캔버스는 소모품으로 인식해야 합니다.</blockquote><p>관리 팁:</p><ul><li>비 온 후 반드시 환기하여 곰팡이 방지</li><li>새똥·나뭇진은 즉시 중성세제로 제거</li><li>겨울철 적설은 30cm 이상 쌓이기 전 제설</li><li>연 1회 방수 코팅 스프레이 처리</li></ul><h2>WOCS A/S 체계</h2><p>시공 완료 후 <strong>1년 무상 A/S</strong>, 프레임 10년 보증, 조인트 5년 보증을 제공합니다. 커버 교체는 영상 매뉴얼을 제공하여 고객이 직접 하실 수도 있습니다.</p><p>더 자세한 관리법은 <a href="../contact/index.html">화순 쇼룸 방문 시</a> 실물을 보며 설명드립니다.</p>'
+  content:'bc10'
 },
 {
-  id:9, title:"대형 리조트 및 지자체 B2B 대단지 글램핑 기획 전략",
-  date:"2026-03-02", category:"사례", featured:true,
+  id:9, title:"bt9", excerpt:"be9",
+  date:"2026-03-02", category:"cat_case", featured:true,
   image:"https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=500&fit=crop&q=85",
-  excerpt:"3,000평 이상 대단지, 지자체 관광 위탁 사업에서 WOCS의 국내 자체 공장 직송이 어떻게 30~40% 원가를 절감하는지 B2B 전략을 공개합니다.",
-  content:'<p>글램핑 시장이 성숙해지면서 개인 창업을 넘어 <strong>지자체·대형 리조트·테마파크</strong>가 대단지 글램핑을 도입하고 있습니다. 25동 이상 규모에서는 개별 시공과 완전히 다른 전략이 필요합니다.</p><h2>국내 자체 공장 직송의 위력</h2><p>일반 업체의 유통 구조: 중국 공장 → 수출업자 → 수입업자 → 국내 유통 → 시공업체</p><p><strong>WOCS: 국내 자체 공장 → 현장 직송</strong></p><p>중간 2~3단계가 사라지면서 <strong>30~40% 원가 절감</strong>이 자동으로 발생합니다. 25동 이상이면 이 차이가 억 단위입니다.</p><h2>지자체 연계 전략</h2><p>WOCS는 나라장터·벤처나라 조달 등록을 준비 중이며, 특허 기반 혁신제품으로 수의계약이 가능합니다.</p><ul><li>사업계획서 작성 지원</li><li>지자체 사전 협의 동행</li><li>관광기금·농촌융복합 보조금 활용 설계</li><li>마스터플랜 + 조감도 + 3D 도면 패키지</li></ul><blockquote>D타입(대단지) 프로젝트는 반드시 화순 쇼룸 대면 상담 후 진행됩니다. 전화·이메일만으로는 진행하지 않습니다.</blockquote><h2>예상 투자 및 수익</h2><p>25동 기준 총 투자비 25억원+, 예상 연 매출 40억원+. 발주 후 8~12주 납품 가능합니다.</p>'
+  content:'bc9'
 },
 {
-  id:8, title:"유휴 부지 지주를 위한 WOCS 수익 공유 파트너십 제안",
-  date:"2026-02-26", category:"수익분석", featured:true,
+  id:8, title:"bt8", excerpt:"be8",
+  date:"2026-02-26", category:"cat_revenue", featured:true,
   image:"https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=500&fit=crop&q=85",
-  excerpt:"좋은 땅은 있지만 자금이 없다? WOCS가 시공 기술과 자본을 투자하고, 지주는 부지를 제공하여 매출을 나누는 O4O 합작 모델을 설명합니다.",
-  content:'<p>전국에 수천 개의 유휴 부지가 놀고 있습니다. 토지주는 활용법을 모르고, 창업자는 땅이 없습니다. <strong>WOCS의 E타입 수익 공유 파트너십</strong>은 이 미스매치를 해결합니다.</p><h2>구조는 단순합니다</h2><p><strong>지주:</strong> 우수한 유휴 부지 제공 + 인허가 협조<br><strong>WOCS:</strong> 글램핑 시공 원가 투자 + 16년 기획/기술력 + 운영 시스템 + 마케팅<br><strong>수익:</strong> 매출 비율 기반 공동 분배</p><h2>지주에게 유리한 이유</h2><ul><li>초기 투자금 0원 가능 (100% WOCS 투자 모델)</li><li>놀고 있는 땅에서 월 고정 수익 발생</li><li>토지 가치 자체가 상승</li><li>운영·마케팅·A/S는 WOCS가 전담</li></ul><h2>어떤 부지가 적합한가?</h2><p>면적 300평 이상, 관리지역·농림지역, 4m 이상 접면도로, 전기 인입 200m 이내. 산·호수·바다 뷰가 있으면 객단가가 30% 이상 올라갑니다.</p><blockquote>⚠ E타입은 아무 부지나 되는 것이 아닙니다. 화순 쇼룸 대면 상담 + 현장 실사 후에만 결정됩니다.</blockquote><p><a href="../contact/index.html">파트너십 상담 예약은 이곳에서.</a></p>'
+  content:'bc8'
 },
 {
-  id:7, title:"화순 O4O 쇼룸에서 3D 가설계를 무조건 받아야 하는 이유",
-  date:"2026-02-20", category:"창업가이드", featured:false,
+  id:7, title:"bt7", excerpt:"be7",
+  date:"2026-02-20", category:"cat_startup", featured:false,
   image:"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=500&fit=crop&q=85",
-  excerpt:"사진 몇 장 보고 수천만 원을 결정하시겠습니까? 화순 쇼룸에서 실물을 만져보고, Fusion 360으로 3D 도면을 함께 그리는 과정이 왜 필수인지 설명합니다.",
-  content:'<p>온라인에서 글램핑 업체를 검색하면 프리미엄 사진은 넘쳐납니다. 하지만 <strong>사진과 실물의 괴리</strong>를 경험한 고객이 WOCS를 찾아옵니다.</p><h2>왜 쇼룸 방문인가</h2><p>16년 동안 현장에서 일해온 사람으로서 단언합니다: <strong>사진 몇 장 보고 수천만 원을 결정하는 것은 도박</strong>입니다.</p><ul><li>특허 무용접 조인트를 손으로 직접 잡아보세요. 견고함이 다릅니다.</li><li>PVC 커버의 두께와 질감을 느껴보세요. 저가 자재와의 차이가 명확합니다.</li><li>Fusion 360으로 내 부지에 맞는 배치를 실시간으로 함께 그립니다.</li></ul><h2>3D 가설계 무료 제공</h2><p>부지 위치만 알려주시면 위성사진 분석 → 용도지역 확인 → 최적 배치안을 <strong>무료</strong>로 제공합니다. 시공 계약 시 상세 3D 설계·조감도·시공 도면을 전액 무료 제공합니다.</p><blockquote>화순 쇼룸 방문 시 견적 추가 5% 할인. 📍 전남 화순군 · 연중 예약제 · 010-4337-0582</blockquote>'
+  content:'bc7'
 },
 {
-  id:6, title:"부동산 업자도 안 알려주는 야영장 인허가 필수 체크리스트",
-  date:"2026-02-14", category:"인허가", featured:true,
+  id:6, title:"bt6", excerpt:"be6",
+  date:"2026-02-14", category:"cat_permit", featured:true,
   image:"https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=500&fit=crop&q=85",
-  excerpt:"용도지역 확인 없이 계약금 날린 사례가 부지기수입니다. 야영장업 등록, 소방, 환경 — 계약 전 반드시 확인할 인허가 체크리스트를 공개합니다.",
-  content:'<p>부동산 중개인은 땅을 팔아야 수수료를 받습니다. <strong>야영장이 불가능한 용도지역인지 알려줄 의무가 없습니다.</strong> 계약금 수천만 원을 날린 후 WOCS를 찾아온 고객이 한둘이 아닙니다.</p><h2>계약 전 7대 체크포인트</h2><p><strong>1. 용도지역:</strong> 토지이용규제정보서비스(LURIS)에서 무료 확인. 관리지역 중에서도 야영장이 안 되는 곳이 있습니다.</p><p><strong>2. 배수:</strong> 비 온 다음 날 부지를 방문하세요. 물이 고이면 배수 공사에 수천만 원이 추가됩니다.</p><p><strong>3. 전기 인입:</strong> 가장 가까운 전봇대까지 거리. 200m 초과 시 전기 인입 비용만 1,000만 원 이상.</p><p><strong>4. 도로:</strong> 4m 이상 접면도로 필수. 맹지는 진입로 확보에 추가 토지 매입 필요.</p><p><strong>5. 상하수도:</strong> 미공급 지역은 지하수 개발(500만~1,000만 원) + 정화조(500만 원+) 추가.</p><p><strong>6. 경사도:</strong> 완경사 5~15% 남향 최적. 급경사는 토목비 폭증.</p><p><strong>7. 민원 리스크:</strong> 축사·공장 인접 여부. 악취·소음 요인 확인.</p><blockquote>WOCS는 부지 위치만 알려주시면 위성사진 기반 무료 사전 진단을 해드립니다.</blockquote><p><a href="../project/buying-land.html">부지 매입 가이드 전체 보기 →</a></p>'
+  content:'bc6'
 },
 {
-  id:5, title:"난민촌은 가라: 객단가 3배 높이는 1동당 80평 황금비율",
-  date:"2026-02-08", category:"창업가이드", featured:true,
+  id:5, title:"bt5", excerpt:"be5",
+  date:"2026-02-08", category:"cat_startup", featured:true,
   image:"https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=800&h=500&fit=crop&q=85",
-  excerpt:"10동을 빽빽이 넣어야 수익이 높다? 정반대입니다. 5동 × 35만 원이 10동 × 12만 원보다 총 매출도, 리뷰 점수도 높은 이유를 숫자로 증명합니다.",
-  content:'<p>글램핑장을 검색하다 보면 한 가지 패턴이 보입니다. <strong>"좁은 땅에 최대한 많은 동수를 넣어야 수익이 높다"는 착각</strong>입니다.</p><h2>밀집 배치의 함정</h2><p>동간 거리 5m의 밀집형 10동 글램핑장을 상상해보세요. 옆 동에서 고기 굽는 연기, 아이들 뛰어노는 소리, 밤에 들리는 대화 — <strong>이런 곳의 리뷰 점수는 3점대</strong>입니다. 객단가는 12만 원이 한계이고, 재방문율은 바닥입니다.</p><h2>80평 원칙의 수익 구조</h2><p>WOCS의 원칙: 1동당 최소 80평(264㎡). 동간 충분한 이격, 시야 차단 조경, 프라이빗 정원 포함.</p><p>이렇게 배치하면:</p><ul><li>객단가: 30~50만 원 (밀집형의 2~3배)</li><li>리뷰 점수: 4.8+ (프라이버시 = 만족도)</li><li>재방문율: 40%+ (밀집형은 10% 미만)</li></ul><blockquote>5동 × 35만 원 = 연 6.4억 (가동률 50%)<br>10동 × 12만 원 = 연 4.4억 (가동률 50%)<br><strong>적게 짓고 비싸게 파는 것이 WOCS의 전략입니다.</strong></blockquote><p><a href="../project/planning-cases.html">5가지 마스터플랜 보기 →</a></p>'
+  content:'bc5'
 },
 {
-  id:4, title:"태풍(160km/h)에도 끄떡없는 무용접 특허 조인트 기술",
-  date:"2026-02-01", category:"시공기술", featured:true,
+  id:4, title:"bt4", excerpt:"be4",
+  date:"2026-02-01", category:"cat_construction", featured:true,
   image:"https://images.unsplash.com/photo-1513828583688-c52646db42da?w=800&h=500&fit=crop&q=85",
-  excerpt:"용접은 열 변형과 피로 파괴에 취약합니다. WOCS의 이중 쐐기 가압 방식은 볼트만으로 내구성 2배, 시공 시간 절반. 특허 기술의 핵심을 공개합니다.",
-  content:'<p>글램핑 프레임의 99%는 용접으로 만들어집니다. 하지만 <strong>용접에는 치명적인 단점 3가지</strong>가 있습니다.</p><h2>용접의 3대 약점</h2><p><strong>1. 열 변형:</strong> 용접 시 발생하는 열이 금속의 분자 구조를 바꿉니다. 미세한 뒤틀림은 시간이 지나면서 구조적 약점이 됩니다.</p><p><strong>2. 피로 파괴:</strong> 용접 비드 끝단에 응력이 집중됩니다. 바람에 흔들리는 글램핑 구조물에서 이것은 치명적입니다.</p><p><strong>3. 현장 의존성:</strong> 전문 용접사가 필요하고, 비·바람이 불면 작업이 불가능합니다. 인건비와 공기가 늘어납니다.</p><h2>WOCS 이중 쐐기 가압 방식</h2><p>WOCS가 직접 출원한 <strong>"무용접 다방향 유니버설 조인트"</strong>는 이 세 가지를 모두 해결합니다.</p><ul><li>열 변형 제로 — 볼트 체결만으로 조립, 열을 가하지 않음</li><li>응력 분산 — 이중 쐐기가 하중을 360도 균등 분산</li><li>현장 독립 — 전문 도구 불필요, 2~3인이면 충분</li></ul><p>테스트 결과: 풍속 160km/h(태풍 10급), 적설 0.3kN/㎡, 안전계수 15.7(축방향).</p><blockquote>화순 쇼룸에서 특허 조인트의 실제 강도 테스트를 직접 체험할 수 있습니다.</blockquote>'
+  content:'bc4'
 },
 {
-  id:3, title:"영하 20도 견디는 극한환경 · 동계 특화 수익형: 4겹 단열 시스템의 원리",
-  date:"2026-01-25", category:"시공기술", featured:false,
+  id:3, title:"bt3", excerpt:"be3",
+  date:"2026-01-25", category:"cat_construction", featured:false,
   image:"https://images.unsplash.com/photo-1517299321609-52687d1bc55a?w=800&h=500&fit=crop&q=85",
-  excerpt:"겨울은 비수기가 아닙니다. WOCS의 4겹 알루미늄 포일 버블 + 캔버스 단열 시스템으로 영하 20도에서도 실내 20도 이상. 원리와 구조를 공개합니다.",
-  content:'<p>대부분의 글램핑장은 겨울에 문을 닫습니다. 하지만 <strong>겨울 글램핑 수요는 연 35% 증가</strong> 중이고, 눈 덮인 풍경 속 따뜻한 글램핑은 여름보다 높은 객단가를 받습니다.</p><h2>4겹 단열 시스템 구조</h2><p>WOCS의 이중 단열 이너 라이닝은 4개의 층으로 구성됩니다:</p><p><strong>1층: 알루미늄 포일</strong> — 복사열을 90% 반사<br><strong>2층: 에어 버블</strong> — 공기층이 전도열을 차단<br><strong>3층: 알루미늄 포일</strong> — 2중 복사열 반사<br><strong>4층: 캔버스</strong> — 최종 마감 + 결로 방지</p><h2>난방 옵션</h2><ul><li><strong>장작 스토브:</strong> 분위기 연출+실용. 체험 패키지로 객단가 +5만 원</li><li><strong>전기 히터:</strong> 가장 간편. 무인 운영에 적합</li><li><strong>온수 난방:</strong> 바닥 배관. 호텔급 쾌적함</li><li><strong>온돌:</strong> 한국형 프리미엄. 외국인 관광객에 인기</li></ul><blockquote>결론: 겨울 글램핑은 비수기가 아니라 프리미엄 시즌입니다. 단열만 제대로 하면 객단가를 50% 올릴 수 있습니다.</blockquote>'
+  content:'bc3'
 },
 {
-  id:2, title:"유통 마진 제로: 국내 자체 공장 다이렉트 시공이 30% 저렴한 이유",
-  date:"2026-01-15", category:"수익분석", featured:false,
+  id:2, title:"bt2", excerpt:"be2",
+  date:"2026-01-15", category:"cat_revenue", featured:false,
   image:"https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=500&fit=crop&q=85",
-  excerpt:"품질을 낮춘 것이 아닙니다. 불필요한 중간 유통 단계를 완전히 제거했기 때문입니다. WOCS의 원가 구조를 투명하게 공개합니다.",
-  content:'<p>"왜 30% 싼 거죠? 뭘 빼먹은 거 아닙니까?" — 가장 많이 받는 질문입니다. 답은 간단합니다: <strong>빼먹은 게 아니라 중간상을 빼낸 겁니다.</strong></p><h2>일반 업체 vs WOCS 원가 구조</h2><p><strong>일반 업체:</strong> 해외 공장 → 수출업자(+10%) → 수입업자(+10%) → 국내 유통(+10%) → 시공업체(+마진) → 고객</p><p><strong>WOCS:</strong> 국내 자체 공장 → WOCS 직송 → 현장 시공 → 고객</p><p>중간 2~3단계가 사라지면서 <strong>30%가 자동으로 절감</strong>됩니다. 여기에 특허 조인트로 용접사 인건비까지 절감하면 차이는 더 벌어집니다.</p><h2>자재 품질은 오히려 높습니다</h2><ul><li>프레임: 6063-T5 알루미늄 합금 (T5 열처리, 가장 비싼 등급)</li><li>커버: 750g/㎡ 더블코팅 PVC (저가 업체는 500g 미만 사용)</li><li>이너: 370g/㎡ 방염 캔버스</li></ul><blockquote>16년 현장 소장이 매 자재를 직접 검수합니다. 저가 자재로 단가를 맞추는 곳과는 근본적으로 다릅니다.</blockquote><p>직접 비교하고 싶으시면 <a href="../contact/index.html">화순 쇼룸에서 타사 자재와 WOCS 자재를 나란히 체험</a>하세요.</p>'
+  content:'bc2'
 },
 {
-  id:1, title:"초보 창업자를 위한 토목 공사비 3천만 원 방어하는 법",
-  date:"2026-01-05", category:"창업가이드", featured:false,
+  id:1, title:"bt1", excerpt:"be1",
+  date:"2026-01-05", category:"cat_startup", featured:false,
   image:"https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&h=500&fit=crop&q=85",
-  excerpt:"글램핑 창업 실패의 핵심 원인은 글램핑이 아니라 토목입니다. 배수·전기·상하수도 — 예상 밖 토목비 폭탄을 막는 실전 가이드.",
-  content:'<p>글램핑 글램핑는 보통 3,000만~5,000만 원입니다. 하지만 <strong>토목 공사비가 3,000만 원을 넘기는 순간</strong> 투자 회수 기간이 2배로 늘어납니다. 대부분의 초보 창업자가 이 함정에 빠집니다.</p><h2>토목비 폭탄 3대 원인</h2><p><strong>1. 배수 불량:</strong> 점토질 토양은 빗물이 안 빠집니다. 암거 배수 공사 추가 시 500만~1,500만 원.</p><p><strong>2. 전기 인입 거리:</strong> 가장 가까운 전봇대까지 200m 초과 시 전봇대 1개 추가당 300만~500만 원. 전기 인입만 1,000만 원 넘는 사례가 흔합니다.</p><p><strong>3. 상하수도 미공급:</strong> 지하수 개발(500만~1,000만 원) + 정화조(500만 원+). 도심에서 20분만 벗어나도 상하수도가 안 되는 곳이 수두룩합니다.</p><h2>3천만 원 방어 전략</h2><ul><li><strong>부지 선정 단계에서 차단:</strong> 계약 전 반드시 전기·수도·배수 조건 확인</li><li><strong>모듈 데크 활용:</strong> 콘크리트 기초 없이 WOCS 모듈 데크로 시공 → 토목비 50% 절감</li><li><strong>합벽정화조:</strong> FRP 합벽정화조 사용 시 정화조 비용 30% 절감</li><li><strong>WOCS 무료 부지 진단:</strong> 부지 위치만 알려주시면 위성사진 기반 토목 리스크를 무료 진단</li></ul><blockquote>핵심: 토목은 글램핑 사업의 숨은 비용입니다. WOCS는 토목 리스크를 사전 차단하는 배치 설계를 제공합니다.</blockquote><p><a href="../project/buying-land.html">부지 매입 7대 체크포인트 전체 보기 →</a></p>'
+  content:'bc1'
 }
 ];
 
-var BLOG_CATEGORIES = ["전체","창업가이드","시공기술","트렌드","수익분석","인허가","사례"];
+var BLOG_CATEGORIES = ["cat_all","cat_startup","cat_construction","cat_trend","cat_revenue","cat_permit","cat_case"];
