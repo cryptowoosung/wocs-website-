@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -oP '\\([^/\\\\\\\\]+\\\\.html\\):\\\\d+:.*?src=\"\"\"\"https://images\\\\.unsplash\\\\.com/photo-[a-z0-9-]+')",
+      "Bash(for f:*)",
+      "Bash(do echo:*)",
+      "Read(//c/Users/user/Desktop/wocs-site/**)",
+      "Bash(done)"
+    ]
+  }
+}
