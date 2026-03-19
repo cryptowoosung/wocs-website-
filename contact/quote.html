@@ -63,15 +63,15 @@
 <!-- HERO -->
 <section class="qt-hero">
   <div class="container">
-    <div class="breadcrumb" style="text-align:left;margin-bottom:24px"><a href="../index.html" data-t="home">홈</a> <span>›</span> <a href="index.html">문의</a> <span>›</span> <span>견적 요청</span></div>
-    <div class="kicker anim">REQUEST A QUOTE</div>
-    <h1 class="anim anim-delay-1">정확한 데이터가<br><span class="gold-text">성공적인 사업</span>을 만듭니다.</h1>
-    <p class="lead anim anim-delay-2">구체적인 정보를 입력해 주시면, WOCS의 16년 노하우가 담긴<br>최적의 모듈러/글램핑 솔루션을 제안해 드립니다.</p>
+    <div class="breadcrumb" style="text-align:left;margin-bottom:24px"><a href="../index.html" data-t="home">홈</a> <span>›</span> <a href="index.html" data-t="qt_bcContact">문의</a> <span>›</span> <span data-t="qt_bcQuote">견적 요청</span></div>
+    <div class="kicker anim" data-t="qt_kicker">REQUEST A QUOTE</div>
+    <h1 class="anim anim-delay-1" data-t-html="qt_heroH1">정확한 데이터가<br><span class="gold-text">성공적인 사업</span>을 만듭니다.</h1>
+    <p class="lead anim anim-delay-2" data-t-html="qt_heroLead">구체적인 정보를 입력해 주시면, WOCS의 16년 노하우가 담긴<br>최적의 모듈러/글램핑 솔루션을 제안해 드립니다.</p>
     <div class="qt-trust anim anim-delay-3">
-      <div class="qt-trust-item"><div class="qt-trust-num">무료</div><div class="qt-trust-label">1차 가견적</div></div>
-      <div class="qt-trust-item"><div class="qt-trust-num">24h</div><div class="qt-trust-label">회신 보장</div></div>
-      <div class="qt-trust-item"><div class="qt-trust-num">16년</div><div class="qt-trust-label">시공 노하우</div></div>
-      <div class="qt-trust-item"><div class="qt-trust-num">30%↓</div><div class="qt-trust-label">타사 대비 원가</div></div>
+      <div class="qt-trust-item"><div class="qt-trust-num" data-t="qt_trustFree">무료</div><div class="qt-trust-label" data-t="qt_trustFreeL">1차 가견적</div></div>
+      <div class="qt-trust-item"><div class="qt-trust-num">24h</div><div class="qt-trust-label" data-t="qt_trust24hL">회신 보장</div></div>
+      <div class="qt-trust-item"><div class="qt-trust-num" data-t="qt_trustYears">16년</div><div class="qt-trust-label" data-t="qt_trustYearsL">시공 노하우</div></div>
+      <div class="qt-trust-item"><div class="qt-trust-num">30%↓</div><div class="qt-trust-label" data-t="qt_trustCostL">타사 대비 원가</div></div>
     </div>
   </div>
 </section>
@@ -84,21 +84,21 @@
     <div class="qt-section">
       <div class="qt-section-header">
         <div class="qt-section-num">1</div>
-        <div class="qt-section-title">기본 정보</div>
+        <div class="qt-section-title" data-t="qt_sec1">기본 정보</div>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label">이름 *</label>
-          <input type="text" class="form-input" placeholder="홍길동" required>
+          <label class="form-label" data-t="qt_labelName">이름 *</label>
+          <input type="text" class="form-input" placeholder="홍길동" data-t-placeholder="qt_phName" required>
         </div>
         <div class="form-group">
-          <label class="form-label">연락처 *</label>
-          <input type="tel" class="form-input" placeholder="010-0000-0000" required>
+          <label class="form-label" data-t="qt_labelPhone">연락처 *</label>
+          <input type="tel" class="form-input" placeholder="010-0000-0000" data-t-placeholder="qt_phPhone" required>
         </div>
       </div>
       <div class="form-group">
-        <label class="form-label">회사명 <span class="opt">(선택)</span></label>
-        <input type="text" class="form-input" placeholder="회사명 또는 상호">
+        <label class="form-label" data-t-html="qt_labelCompany">회사명 <span class="opt">(선택)</span></label>
+        <input type="text" class="form-input" placeholder="회사명 또는 상호" data-t-placeholder="qt_phCompany" required>
       </div>
     </div>
 
@@ -106,16 +106,16 @@
     <div class="qt-section">
       <div class="qt-section-header">
         <div class="qt-section-num">2</div>
-        <div class="qt-section-title">부지 정보</div>
+        <div class="qt-section-title" data-t="qt_sec2">부지 정보</div>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label">시공 예정 지역 *</label>
-          <input type="text" class="form-input" placeholder="예: 강원도 평창군" required>
+          <label class="form-label" data-t="qt_labelRegion">시공 예정 지역 *</label>
+          <input type="text" class="form-input" placeholder="예: 강원도 평창군" data-t-placeholder="qt_phRegion" required>
         </div>
         <div class="form-group">
-          <label class="form-label">부지 면적 (평) *</label>
-          <input type="text" class="form-input" placeholder="예: 300평" required>
+          <label class="form-label" data-t="qt_labelArea">부지 면적 (평) *</label>
+          <input type="text" class="form-input" placeholder="예: 300평" data-t-placeholder="qt_phArea" required>
         </div>
       </div>
     </div>
@@ -124,22 +124,22 @@
     <div class="qt-section">
       <div class="qt-section-header">
         <div class="qt-section-num">3</div>
-        <div class="qt-section-title">예산 및 일정</div>
+        <div class="qt-section-title" data-t="qt_sec3">예산 및 일정</div>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label">총 예상 예산 *</label>
+          <label class="form-label" data-t="qt_labelBudget">총 예상 예산 *</label>
           <select class="form-select" required>
-            <option value="" disabled selected>선택해 주세요</option>
-            <option value="under50">5천만 원 이하</option>
-            <option value="50to100">5천만 원 ~ 1억</option>
-            <option value="100to300">1억 ~ 3억</option>
-            <option value="over300">3억 이상</option>
+            <option value="" disabled selected data-t="qt_optSelect">선택해 주세요</option>
+            <option value="under50" data-t="qt_budgetUnder50">5천만 원 이하</option>
+            <option value="50to100" data-t="qt_budget50to100">5천만 원 ~ 1억</option>
+            <option value="100to300" data-t="qt_budget100to300">1억 ~ 3억</option>
+            <option value="over300" data-t="qt_budgetOver300">3억 이상</option>
           </select>
         </div>
         <div class="form-group">
-          <label class="form-label">오픈 목표일</label>
-          <input type="text" class="form-input" placeholder="예: 2026년 6월">
+          <label class="form-label" data-t="qt_labelTarget">오픈 목표일</label>
+          <input type="text" class="form-input" placeholder="예: 2026년 6월" data-t-placeholder="qt_phTarget">
         </div>
       </div>
     </div>
@@ -148,28 +148,28 @@
     <div class="qt-section">
       <div class="qt-section-header">
         <div class="qt-section-num">4</div>
-        <div class="qt-section-title">희망 모델 <span style="font-size:12px;color:rgba(240,235,224,0.35);margin-left:8px">복수 선택 가능</span></div>
+        <div class="qt-section-title" data-t-html="qt_sec4">희망 모델 <span style="font-size:12px;color:rgba(240,235,224,0.35);margin-left:8px">복수 선택 가능</span></div>
       </div>
       <div class="check-grid">
         <label class="check-item">
           <input type="checkbox" name="model" value="dome">
           <div class="check-box"></div>
-          <span class="check-label">🔵 D-시리즈 돔</span>
+          <span class="check-label" data-t="qt_modelDome">D-시리즈 돔</span>
         </label>
         <label class="check-item">
           <input type="checkbox" name="model" value="safari">
           <div class="check-box"></div>
-          <span class="check-label">🟤 S-시리즈 스위트</span>
+          <span class="check-label" data-t="qt_modelSafari">S-시리즈 스위트</span>
         </label>
         <label class="check-item">
           <input type="checkbox" name="model" value="signature">
           <div class="check-box"></div>
-          <span class="check-label">🟡 Signature 라운지</span>
+          <span class="check-label" data-t="qt_modelSignature">Signature 라운지</span>
         </label>
         <label class="check-item">
           <input type="checkbox" name="model" value="modular">
           <div class="check-box"></div>
-          <span class="check-label">⬜ 모듈러 유닛</span>
+          <span class="check-label" data-t="qt_modelModular">모듈러 유닛</span>
         </label>
       </div>
     </div>
@@ -178,32 +178,768 @@
     <div class="qt-section" style="margin-bottom:32px">
       <div class="qt-section-header">
         <div class="qt-section-num">5</div>
-        <div class="qt-section-title">추가 요청사항</div>
+        <div class="qt-section-title" data-t="qt_sec5">추가 요청사항</div>
       </div>
       <div class="form-group" style="margin-bottom:0">
-        <textarea class="form-textarea" placeholder="운영 콘셉트, 특별 요구사항, 참고 이미지 등을 자유롭게 작성해 주세요."></textarea>
+        <textarea class="form-textarea" placeholder="운영 콘셉트, 특별 요구사항, 참고 이미지 등을 자유롭게 작성해 주세요." data-t-placeholder="qt_phAdditional"></textarea>
       </div>
     </div>
 
-    <button type="button" class="form-submit" onclick="alert('견적 요청이 접수되었습니다.\n영업일 기준 24시간 내 1차 가견적을 회신 드리겠습니다.\n감사합니다!')">무료 1차 가견적 요청하기</button>
+    <button type="button" class="form-submit" data-t="qt_submit" onclick="alert('견적 요청이 접수되었습니다.\n영업일 기준 24시간 내 1차 가견적을 회신 드리겠습니다.\n감사합니다!')">무료 1차 가견적 요청하기</button>
 
     <div class="qt-footer-note">
-      입력하신 정보는 견적 제안 목적으로만 사용되며, 제3자에게 제공되지 않습니다.<br>
-      영업일 기준 24시간 내 전화 또는 이메일로 1차 가견적을 회신 드립니다.
+      <span data-t="qt_footerNote1">입력하신 정보는 견적 제안 목적으로만 사용되며, 제3자에게 제공되지 않습니다.</span><br>
+      <span data-t="qt_footerNote2">영업일 기준 24시간 내 전화 또는 이메일로 1차 가견적을 회신 드립니다.</span>
     </div>
   </div>
 </div>
 
 <!-- Simple inquiry banner -->
 <div class="ct-simple-banner">
-  <p>견적이 아닌 일반 문의(쇼룸 예약, A/S, 제휴)는 → <a href="index.html">일반 문의 페이지</a>를 이용해 주세요.</p>
+  <p><span data-t="qt_banner1">견적이 아닌 일반 문의(쇼룸 예약, A/S, 제휴)는</span> → <a href="index.html" data-t="qt_bannerLink">일반 문의 페이지</a><span data-t="qt_banner2">를 이용해 주세요.</span></p>
 </div>
 
 <div id="wocs-cta"></div>
 <div id="wocs-footer"></div>
 
 <script>
-var WOCS_PAGE_TR={ko:{},en:{},ja:{},zh:{},es:{},fr:{},de:{},pt:{},it:{},ar:{},ru:{},tr:{},tw:{},id:{},th:{}};
+var WOCS_PAGE_TR={
+ko:{
+pageTitle:"WOCS 견적 요청 | 무료 1차 가견적",
+pageDesc:"글램핑·펜션 창업을 위한 맞춤 견적. 구체적인 부지·예산·모델 정보를 입력하면 WOCS의 16년 노하우가 담긴 최적의 솔루션을 제안합니다.",
+qt_bcContact:"문의",
+qt_bcQuote:"견적 요청",
+qt_kicker:"REQUEST A QUOTE",
+qt_heroH1:"정확한 데이터가<br><span class=\"gold-text\">성공적인 사업</span>을 만듭니다.",
+qt_heroLead:"구체적인 정보를 입력해 주시면, WOCS의 16년 노하우가 담긴<br>최적의 모듈러/글램핑 솔루션을 제안해 드립니다.",
+qt_trustFree:"무료",
+qt_trustFreeL:"1차 가견적",
+qt_trust24hL:"회신 보장",
+qt_trustYears:"16년",
+qt_trustYearsL:"시공 노하우",
+qt_trustCostL:"타사 대비 원가",
+qt_sec1:"기본 정보",
+qt_labelName:"이름 *",
+qt_phName:"홍길동",
+qt_labelPhone:"연락처 *",
+qt_phPhone:"010-0000-0000",
+qt_labelCompany:"회사명 <span class=\"opt\">(선택)</span>",
+qt_phCompany:"회사명 또는 상호",
+qt_sec2:"부지 정보",
+qt_labelRegion:"시공 예정 지역 *",
+qt_phRegion:"예: 강원도 평창군",
+qt_labelArea:"부지 면적 (평) *",
+qt_phArea:"예: 300평",
+qt_sec3:"예산 및 일정",
+qt_labelBudget:"총 예상 예산 *",
+qt_optSelect:"선택해 주세요",
+qt_budgetUnder50:"5천만 원 이하",
+qt_budget50to100:"5천만 원 ~ 1억",
+qt_budget100to300:"1억 ~ 3억",
+qt_budgetOver300:"3억 이상",
+qt_labelTarget:"오픈 목표일",
+qt_phTarget:"예: 2026년 6월",
+qt_sec4:"희망 모델 <span style=\"font-size:12px;color:rgba(240,235,224,0.35);margin-left:8px\">복수 선택 가능</span>",
+qt_modelDome:"D-시리즈 돔",
+qt_modelSafari:"S-시리즈 스위트",
+qt_modelSignature:"Signature 라운지",
+qt_modelModular:"모듈러 유닛",
+qt_sec5:"추가 요청사항",
+qt_phAdditional:"운영 콘셉트, 특별 요구사항, 참고 이미지 등을 자유롭게 작성해 주세요.",
+qt_submit:"무료 1차 가견적 요청하기",
+qt_footerNote1:"입력하신 정보는 견적 제안 목적으로만 사용되며, 제3자에게 제공되지 않습니다.",
+qt_footerNote2:"영업일 기준 24시간 내 전화 또는 이메일로 1차 가견적을 회신 드립니다.",
+qt_banner1:"견적이 아닌 일반 문의(쇼룸 예약, A/S, 제휴)는",
+qt_bannerLink:"일반 문의 페이지",
+qt_banner2:"를 이용해 주세요."
+},
+en:{
+pageTitle:"WOCS Quote Request | Free Preliminary Estimate",
+pageDesc:"Custom quotes for glamping & pension businesses. Enter your site, budget, and model preferences to receive an optimized solution backed by 16 years of WOCS expertise.",
+qt_bcContact:"Contact",
+qt_bcQuote:"Quote Request",
+qt_kicker:"REQUEST A QUOTE",
+qt_heroH1:"Accurate data creates<br><span class=\"gold-text\">a successful business.</span>",
+qt_heroLead:"Provide your details and WOCS will propose<br>the optimal modular/glamping solution backed by 16 years of expertise.",
+qt_trustFree:"Free",
+qt_trustFreeL:"Preliminary Estimate",
+qt_trust24hL:"Reply Guaranteed",
+qt_trustYears:"16 Yrs",
+qt_trustYearsL:"Build Know-how",
+qt_trustCostL:"vs. Competitors",
+qt_sec1:"Basic Information",
+qt_labelName:"Name *",
+qt_phName:"John Doe",
+qt_labelPhone:"Phone *",
+qt_phPhone:"+82-10-0000-0000",
+qt_labelCompany:"Company <span class=\"opt\">(Optional)</span>",
+qt_phCompany:"Company or business name",
+qt_sec2:"Site Information",
+qt_labelRegion:"Planned Construction Area *",
+qt_phRegion:"e.g. Gangwon-do, Pyeongchang",
+qt_labelArea:"Site Area (pyeong) *",
+qt_phArea:"e.g. 300 pyeong",
+qt_sec3:"Budget & Timeline",
+qt_labelBudget:"Estimated Total Budget *",
+qt_optSelect:"Please select",
+qt_budgetUnder50:"Under 50M KRW",
+qt_budget50to100:"50M ~ 100M KRW",
+qt_budget100to300:"100M ~ 300M KRW",
+qt_budgetOver300:"Over 300M KRW",
+qt_labelTarget:"Target Opening Date",
+qt_phTarget:"e.g. June 2026",
+qt_sec4:"Preferred Models <span style=\"font-size:12px;color:rgba(240,235,224,0.35);margin-left:8px\">Multiple selection</span>",
+qt_modelDome:"D-Series Dome",
+qt_modelSafari:"S-Series Suite",
+qt_modelSignature:"Signature Lounge",
+qt_modelModular:"Modular Unit",
+qt_sec5:"Additional Requests",
+qt_phAdditional:"Feel free to describe your concept, special requirements, reference images, etc.",
+qt_submit:"Request Free Preliminary Estimate",
+qt_footerNote1:"Your information is used solely for quote purposes and is never shared with third parties.",
+qt_footerNote2:"We will reply with a preliminary estimate within 24 business hours by phone or email.",
+qt_banner1:"For general inquiries (showroom visits, A/S, partnerships)",
+qt_bannerLink:"General Inquiry Page",
+qt_banner2:" — please use this instead."
+},
+ja:{
+pageTitle:"WOCS 見積もり依頼 | 無料概算見積もり",
+pageDesc:"グランピング・ペンション事業向けオーダーメイド見積もり。敷地・予算・モデル情報をご入力いただければ、WOCSの16年のノウハウで最適なソリューションをご提案します。",
+qt_bcContact:"お問合せ",
+qt_bcQuote:"見積もり依頼",
+qt_kicker:"REQUEST A QUOTE",
+qt_heroH1:"正確なデータが<br><span class=\"gold-text\">成功する事業</span>を生み出します。",
+qt_heroLead:"具体的な情報をご入力いただければ、WOCSの16年のノウハウを活かした<br>最適なモジュラー/グランピングソリューションをご提案します。",
+qt_trustFree:"無料",
+qt_trustFreeL:"概算見積もり",
+qt_trust24hL:"返信保証",
+qt_trustYears:"16年",
+qt_trustYearsL:"施工ノウハウ",
+qt_trustCostL:"他社比コスト",
+qt_sec1:"基本情報",
+qt_labelName:"お名前 *",
+qt_phName:"山田太郎",
+qt_labelPhone:"電話番号 *",
+qt_phPhone:"090-0000-0000",
+qt_labelCompany:"会社名 <span class=\"opt\">(任意)</span>",
+qt_phCompany:"会社名または屋号",
+qt_sec2:"敷地情報",
+qt_labelRegion:"施工予定地域 *",
+qt_phRegion:"例：長野県軽井沢町",
+qt_labelArea:"敷地面積 (坪) *",
+qt_phArea:"例：300坪",
+qt_sec3:"予算とスケジュール",
+qt_labelBudget:"総予算 *",
+qt_optSelect:"選択してください",
+qt_budgetUnder50:"5,000万ウォン以下",
+qt_budget50to100:"5,000万〜1億ウォン",
+qt_budget100to300:"1億〜3億ウォン",
+qt_budgetOver300:"3億ウォン以上",
+qt_labelTarget:"オープン目標日",
+qt_phTarget:"例：2026年6月",
+qt_sec4:"希望モデル <span style=\"font-size:12px;color:rgba(240,235,224,0.35);margin-left:8px\">複数選択可</span>",
+qt_modelDome:"D-シリーズ ドーム",
+qt_modelSafari:"S-シリーズ スイート",
+qt_modelSignature:"Signature ラウンジ",
+qt_modelModular:"モジュラーユニット",
+qt_sec5:"追加リクエスト",
+qt_phAdditional:"運営コンセプト、特別なご要望、参考画像などをご自由にご記入ください。",
+qt_submit:"無料概算見積もりを依頼する",
+qt_footerNote1:"ご入力いただいた情報は見積もり提案のみに使用され、第三者に提供されることはありません。",
+qt_footerNote2:"営業日基準24時間以内にお電話またはメールで概算見積もりをご返信いたします。",
+qt_banner1:"見積もり以外の一般的なお問い合わせ（ショールーム予約、A/S、提携）は",
+qt_bannerLink:"一般お問合せページ",
+qt_banner2:"をご利用ください。"
+},
+zh:{
+pageTitle:"WOCS 报价请求 | 免费初步估价",
+pageDesc:"为露营和民宿创业提供定制报价。输入您的场地、预算和型号信息，WOCS将凭借16年经验为您提供最优方案。",
+qt_bcContact:"联系",
+qt_bcQuote:"报价请求",
+qt_kicker:"REQUEST A QUOTE",
+qt_heroH1:"精准的数据<br><span class=\"gold-text\">成就成功的事业。</span>",
+qt_heroLead:"请输入具体信息，WOCS将凭借16年的专业经验<br>为您推荐最优的模块化/露营解决方案。",
+qt_trustFree:"免费",
+qt_trustFreeL:"初步估价",
+qt_trust24hL:"保证回复",
+qt_trustYears:"16年",
+qt_trustYearsL:"施工经验",
+qt_trustCostL:"低于同行成本",
+qt_sec1:"基本信息",
+qt_labelName:"姓名 *",
+qt_phName:"张三",
+qt_labelPhone:"联系电话 *",
+qt_phPhone:"+82-10-0000-0000",
+qt_labelCompany:"公司名称 <span class=\"opt\">(选填)</span>",
+qt_phCompany:"公司名称或商号",
+qt_sec2:"场地信息",
+qt_labelRegion:"计划施工地区 *",
+qt_phRegion:"例：江原道平昌郡",
+qt_labelArea:"场地面积 (坪) *",
+qt_phArea:"例：300坪",
+qt_sec3:"预算与日程",
+qt_labelBudget:"预计总预算 *",
+qt_optSelect:"请选择",
+qt_budgetUnder50:"5000万韩元以下",
+qt_budget50to100:"5000万 ~ 1亿韩元",
+qt_budget100to300:"1亿 ~ 3亿韩元",
+qt_budgetOver300:"3亿韩元以上",
+qt_labelTarget:"目标开业日期",
+qt_phTarget:"例：2026年6月",
+qt_sec4:"意向型号 <span style=\"font-size:12px;color:rgba(240,235,224,0.35);margin-left:8px\">可多选</span>",
+qt_modelDome:"D系列穹顶",
+qt_modelSafari:"S系列套房",
+qt_modelSignature:"Signature 休息室",
+qt_modelModular:"模块单元",
+qt_sec5:"附加需求",
+qt_phAdditional:"请自由描述运营理念、特殊需求、参考图片等。",
+qt_submit:"申请免费初步估价",
+qt_footerNote1:"您输入的信息仅用于报价建议，不会提供给第三方。",
+qt_footerNote2:"我们将在24个工作小时内通过电话或邮件回复初步估价。",
+qt_banner1:"如有一般咨询（展厅预约、售后、合作）",
+qt_bannerLink:"一般咨询页面",
+qt_banner2:"请前往此页面。"
+},
+es:{
+pageTitle:"WOCS Solicitud de Presupuesto | Estimación Preliminar Gratuita",
+pageDesc:"Presupuestos personalizados para negocios de glamping y pensiones. Ingrese la información de su terreno, presupuesto y modelo para recibir la solución óptima con 16 años de experiencia WOCS.",
+qt_bcContact:"Contacto",
+qt_bcQuote:"Solicitar Presupuesto",
+qt_kicker:"REQUEST A QUOTE",
+qt_heroH1:"Los datos precisos crean<br><span class=\"gold-text\">un negocio exitoso.</span>",
+qt_heroLead:"Proporcione su información y WOCS le propondrá<br>la solución modular/glamping óptima con 16 años de experiencia.",
+qt_trustFree:"Gratis",
+qt_trustFreeL:"Estimación Preliminar",
+qt_trust24hL:"Respuesta Garantizada",
+qt_trustYears:"16 Años",
+qt_trustYearsL:"Experiencia en Construcción",
+qt_trustCostL:"vs. Competidores",
+qt_sec1:"Información Básica",
+qt_labelName:"Nombre *",
+qt_phName:"Juan Pérez",
+qt_labelPhone:"Teléfono *",
+qt_phPhone:"+34-000-000-000",
+qt_labelCompany:"Empresa <span class=\"opt\">(Opcional)</span>",
+qt_phCompany:"Nombre de empresa o comercio",
+qt_sec2:"Información del Terreno",
+qt_labelRegion:"Área de Construcción Planificada *",
+qt_phRegion:"ej. Madrid, España",
+qt_labelArea:"Superficie del Terreno (m²) *",
+qt_phArea:"ej. 1000 m²",
+qt_sec3:"Presupuesto y Calendario",
+qt_labelBudget:"Presupuesto Total Estimado *",
+qt_optSelect:"Seleccione por favor",
+qt_budgetUnder50:"Menos de 50M KRW",
+qt_budget50to100:"50M ~ 100M KRW",
+qt_budget100to300:"100M ~ 300M KRW",
+qt_budgetOver300:"Más de 300M KRW",
+qt_labelTarget:"Fecha Objetivo de Apertura",
+qt_phTarget:"ej. Junio 2026",
+qt_sec4:"Modelos Preferidos <span style=\"font-size:12px;color:rgba(240,235,224,0.35);margin-left:8px\">Selección múltiple</span>",
+qt_modelDome:"D-Series Dome",
+qt_modelSafari:"S-Series Suite",
+qt_modelSignature:"Signature Lounge",
+qt_modelModular:"Unidad Modular",
+qt_sec5:"Solicitudes Adicionales",
+qt_phAdditional:"Describa libremente su concepto, requisitos especiales, imágenes de referencia, etc.",
+qt_submit:"Solicitar Estimación Preliminar Gratuita",
+qt_footerNote1:"Su información se utiliza únicamente para fines de presupuesto y nunca se comparte con terceros.",
+qt_footerNote2:"Responderemos con una estimación preliminar dentro de 24 horas hábiles por teléfono o correo electrónico.",
+qt_banner1:"Para consultas generales (visitas al showroom, servicio postventa, alianzas)",
+qt_bannerLink:"Página de Consultas Generales",
+qt_banner2:" — utilice esta página."
+},
+fr:{
+pageTitle:"WOCS Demande de Devis | Estimation Préliminaire Gratuite",
+pageDesc:"Devis personnalisés pour les entreprises de glamping et pensions. Entrez vos informations de terrain, budget et modèle pour recevoir une solution optimale avec 16 ans d'expertise WOCS.",
+qt_bcContact:"Contact",
+qt_bcQuote:"Demande de Devis",
+qt_kicker:"REQUEST A QUOTE",
+qt_heroH1:"Des données précises créent<br><span class=\"gold-text\">une entreprise prospère.</span>",
+qt_heroLead:"Fournissez vos informations et WOCS vous proposera<br>la solution modulaire/glamping optimale avec 16 ans d'expertise.",
+qt_trustFree:"Gratuit",
+qt_trustFreeL:"Estimation Préliminaire",
+qt_trust24hL:"Réponse Garantie",
+qt_trustYears:"16 Ans",
+qt_trustYearsL:"Savoir-faire Construction",
+qt_trustCostL:"vs. Concurrents",
+qt_sec1:"Informations de Base",
+qt_labelName:"Nom *",
+qt_phName:"Jean Dupont",
+qt_labelPhone:"Téléphone *",
+qt_phPhone:"+33-0-00-00-00-00",
+qt_labelCompany:"Entreprise <span class=\"opt\">(Facultatif)</span>",
+qt_phCompany:"Nom d'entreprise ou enseigne",
+qt_sec2:"Informations sur le Terrain",
+qt_labelRegion:"Zone de Construction Prévue *",
+qt_phRegion:"ex. Provence, France",
+qt_labelArea:"Surface du Terrain (m²) *",
+qt_phArea:"ex. 1000 m²",
+qt_sec3:"Budget et Calendrier",
+qt_labelBudget:"Budget Total Estimé *",
+qt_optSelect:"Veuillez sélectionner",
+qt_budgetUnder50:"Moins de 50M KRW",
+qt_budget50to100:"50M ~ 100M KRW",
+qt_budget100to300:"100M ~ 300M KRW",
+qt_budgetOver300:"Plus de 300M KRW",
+qt_labelTarget:"Date d'Ouverture Cible",
+qt_phTarget:"ex. Juin 2026",
+qt_sec4:"Modèles Souhaités <span style=\"font-size:12px;color:rgba(240,235,224,0.35);margin-left:8px\">Sélection multiple</span>",
+qt_modelDome:"Dôme Série D",
+qt_modelSafari:"Suite Série S",
+qt_modelSignature:"Lounge Signature",
+qt_modelModular:"Unité Modulaire",
+qt_sec5:"Demandes Supplémentaires",
+qt_phAdditional:"Décrivez librement votre concept, exigences spéciales, images de référence, etc.",
+qt_submit:"Demander une Estimation Préliminaire Gratuite",
+qt_footerNote1:"Vos informations sont utilisées uniquement à des fins de devis et ne sont jamais partagées avec des tiers.",
+qt_footerNote2:"Nous vous répondrons avec une estimation préliminaire sous 24 heures ouvrées par téléphone ou e-mail.",
+qt_banner1:"Pour les demandes générales (visite showroom, SAV, partenariats)",
+qt_bannerLink:"Page de Contact Général",
+qt_banner2:" — veuillez utiliser cette page."
+},
+de:{
+pageTitle:"WOCS Angebotsanfrage | Kostenlose Vorabschätzung",
+pageDesc:"Maßgeschneiderte Angebote für Glamping- und Pensionsunternehmen. Geben Sie Ihre Grundstücks-, Budget- und Modellinformationen ein und erhalten Sie die optimale Lösung mit 16 Jahren WOCS-Erfahrung.",
+qt_bcContact:"Kontakt",
+qt_bcQuote:"Angebotsanfrage",
+qt_kicker:"REQUEST A QUOTE",
+qt_heroH1:"Präzise Daten schaffen<br><span class=\"gold-text\">ein erfolgreiches Geschäft.</span>",
+qt_heroLead:"Geben Sie Ihre Informationen ein und WOCS wird Ihnen<br>die optimale Modular-/Glamping-Lösung mit 16 Jahren Erfahrung vorschlagen.",
+qt_trustFree:"Kostenlos",
+qt_trustFreeL:"Vorabschätzung",
+qt_trust24hL:"Antwort Garantiert",
+qt_trustYears:"16 Jahre",
+qt_trustYearsL:"Bau-Know-how",
+qt_trustCostL:"vs. Wettbewerber",
+qt_sec1:"Grundinformationen",
+qt_labelName:"Name *",
+qt_phName:"Max Mustermann",
+qt_labelPhone:"Telefon *",
+qt_phPhone:"+49-000-0000000",
+qt_labelCompany:"Unternehmen <span class=\"opt\">(Optional)</span>",
+qt_phCompany:"Firmenname oder Handelsname",
+qt_sec2:"Grundstücksinformationen",
+qt_labelRegion:"Geplantes Baugebiet *",
+qt_phRegion:"z.B. Bayern, Deutschland",
+qt_labelArea:"Grundstücksfläche (m²) *",
+qt_phArea:"z.B. 1000 m²",
+qt_sec3:"Budget und Zeitplan",
+qt_labelBudget:"Geschätztes Gesamtbudget *",
+qt_optSelect:"Bitte auswählen",
+qt_budgetUnder50:"Unter 50M KRW",
+qt_budget50to100:"50M ~ 100M KRW",
+qt_budget100to300:"100M ~ 300M KRW",
+qt_budgetOver300:"Über 300M KRW",
+qt_labelTarget:"Zieleröffnungsdatum",
+qt_phTarget:"z.B. Juni 2026",
+qt_sec4:"Bevorzugte Modelle <span style=\"font-size:12px;color:rgba(240,235,224,0.35);margin-left:8px\">Mehrfachauswahl</span>",
+qt_modelDome:"D-Series Dome",
+qt_modelSafari:"S-Series Suite",
+qt_modelSignature:"Signature Lounge",
+qt_modelModular:"Modulare Einheit",
+qt_sec5:"Zusätzliche Anfragen",
+qt_phAdditional:"Beschreiben Sie frei Ihr Konzept, besondere Anforderungen, Referenzbilder usw.",
+qt_submit:"Kostenlose Vorabschätzung Anfordern",
+qt_footerNote1:"Ihre Angaben werden ausschließlich zur Angebotserstellung verwendet und niemals an Dritte weitergegeben.",
+qt_footerNote2:"Wir antworten innerhalb von 24 Geschäftsstunden per Telefon oder E-Mail mit einer Vorabschätzung.",
+qt_banner1:"Für allgemeine Anfragen (Showroom-Besuch, Kundendienst, Partnerschaften)",
+qt_bannerLink:"Allgemeine Kontaktseite",
+qt_banner2:" — bitte nutzen Sie diese Seite."
+},
+pt:{
+pageTitle:"WOCS Solicitação de Orçamento | Estimativa Preliminar Gratuita",
+pageDesc:"Orçamentos personalizados para negócios de glamping e pousadas. Insira as informações do terreno, orçamento e modelo para receber a solução ideal com 16 anos de experiência WOCS.",
+qt_bcContact:"Contato",
+qt_bcQuote:"Solicitar Orçamento",
+qt_kicker:"REQUEST A QUOTE",
+qt_heroH1:"Dados precisos criam<br><span class=\"gold-text\">um negócio de sucesso.</span>",
+qt_heroLead:"Forneça suas informações e a WOCS proporá<br>a solução modular/glamping ideal com 16 anos de experiência.",
+qt_trustFree:"Grátis",
+qt_trustFreeL:"Estimativa Preliminar",
+qt_trust24hL:"Resposta Garantida",
+qt_trustYears:"16 Anos",
+qt_trustYearsL:"Know-how em Construção",
+qt_trustCostL:"vs. Concorrentes",
+qt_sec1:"Informações Básicas",
+qt_labelName:"Nome *",
+qt_phName:"João Silva",
+qt_labelPhone:"Telefone *",
+qt_phPhone:"+55-00-00000-0000",
+qt_labelCompany:"Empresa <span class=\"opt\">(Opcional)</span>",
+qt_phCompany:"Nome da empresa ou razão social",
+qt_sec2:"Informações do Terreno",
+qt_labelRegion:"Área de Construção Planejada *",
+qt_phRegion:"ex. São Paulo, Brasil",
+qt_labelArea:"Área do Terreno (m²) *",
+qt_phArea:"ex. 1000 m²",
+qt_sec3:"Orçamento e Cronograma",
+qt_labelBudget:"Orçamento Total Estimado *",
+qt_optSelect:"Selecione por favor",
+qt_budgetUnder50:"Menos de 50M KRW",
+qt_budget50to100:"50M ~ 100M KRW",
+qt_budget100to300:"100M ~ 300M KRW",
+qt_budgetOver300:"Mais de 300M KRW",
+qt_labelTarget:"Data Alvo de Inauguração",
+qt_phTarget:"ex. Junho 2026",
+qt_sec4:"Modelos Preferidos <span style=\"font-size:12px;color:rgba(240,235,224,0.35);margin-left:8px\">Seleção múltipla</span>",
+qt_modelDome:"Domo Série D",
+qt_modelSafari:"Suíte Série S",
+qt_modelSignature:"Lounge Signature",
+qt_modelModular:"Unidade Modular",
+qt_sec5:"Solicitações Adicionais",
+qt_phAdditional:"Descreva livremente seu conceito, requisitos especiais, imagens de referência, etc.",
+qt_submit:"Solicitar Estimativa Preliminar Gratuita",
+qt_footerNote1:"Suas informações são usadas apenas para fins de orçamento e nunca são compartilhadas com terceiros.",
+qt_footerNote2:"Responderemos com uma estimativa preliminar em até 24 horas úteis por telefone ou e-mail.",
+qt_banner1:"Para consultas gerais (visita ao showroom, assistência técnica, parcerias)",
+qt_bannerLink:"Página de Consultas Gerais",
+qt_banner2:" — utilize esta página."
+},
+it:{
+pageTitle:"WOCS Richiesta Preventivo | Stima Preliminare Gratuita",
+pageDesc:"Preventivi personalizzati per attività di glamping e pensioni. Inserisci le informazioni su terreno, budget e modello per ricevere la soluzione ottimale con 16 anni di esperienza WOCS.",
+qt_bcContact:"Contatti",
+qt_bcQuote:"Richiesta Preventivo",
+qt_kicker:"REQUEST A QUOTE",
+qt_heroH1:"Dati precisi creano<br><span class=\"gold-text\">un'attività di successo.</span>",
+qt_heroLead:"Fornisci le tue informazioni e WOCS ti proporrà<br>la soluzione modulare/glamping ottimale con 16 anni di esperienza.",
+qt_trustFree:"Gratuito",
+qt_trustFreeL:"Stima Preliminare",
+qt_trust24hL:"Risposta Garantita",
+qt_trustYears:"16 Anni",
+qt_trustYearsL:"Know-how Costruttivo",
+qt_trustCostL:"vs. Concorrenti",
+qt_sec1:"Informazioni di Base",
+qt_labelName:"Nome *",
+qt_phName:"Mario Rossi",
+qt_labelPhone:"Telefono *",
+qt_phPhone:"+39-000-000-0000",
+qt_labelCompany:"Azienda <span class=\"opt\">(Facoltativo)</span>",
+qt_phCompany:"Nome azienda o ragione sociale",
+qt_sec2:"Informazioni sul Terreno",
+qt_labelRegion:"Area di Costruzione Prevista *",
+qt_phRegion:"es. Toscana, Italia",
+qt_labelArea:"Superficie del Terreno (m²) *",
+qt_phArea:"es. 1000 m²",
+qt_sec3:"Budget e Tempistiche",
+qt_labelBudget:"Budget Totale Stimato *",
+qt_optSelect:"Seleziona per favore",
+qt_budgetUnder50:"Meno di 50M KRW",
+qt_budget50to100:"50M ~ 100M KRW",
+qt_budget100to300:"100M ~ 300M KRW",
+qt_budgetOver300:"Oltre 300M KRW",
+qt_labelTarget:"Data Obiettivo di Apertura",
+qt_phTarget:"es. Giugno 2026",
+qt_sec4:"Modelli Preferiti <span style=\"font-size:12px;color:rgba(240,235,224,0.35);margin-left:8px\">Selezione multipla</span>",
+qt_modelDome:"Cupola Serie D",
+qt_modelSafari:"Suite Serie S",
+qt_modelSignature:"Lounge Signature",
+qt_modelModular:"Unità Modulare",
+qt_sec5:"Richieste Aggiuntive",
+qt_phAdditional:"Descrivi liberamente il tuo concept, requisiti speciali, immagini di riferimento, ecc.",
+qt_submit:"Richiedi Stima Preliminare Gratuita",
+qt_footerNote1:"Le informazioni inserite sono utilizzate esclusivamente per la proposta di preventivo e non vengono condivise con terzi.",
+qt_footerNote2:"Risponderemo con una stima preliminare entro 24 ore lavorative per telefono o e-mail.",
+qt_banner1:"Per richieste generali (visite showroom, assistenza, partnership)",
+qt_bannerLink:"Pagina Contatti Generali",
+qt_banner2:" — utilizza questa pagina."
+},
+ar:{
+pageTitle:"WOCS طلب عرض أسعار | تقدير أولي مجاني",
+pageDesc:"عروض أسعار مخصصة لمشاريع التخييم الفاخر والنزل. أدخل معلومات الموقع والميزانية والنموذج للحصول على الحل الأمثل بخبرة 16 عاماً من WOCS.",
+qt_bcContact:"اتصل بنا",
+qt_bcQuote:"طلب عرض أسعار",
+qt_kicker:"REQUEST A QUOTE",
+qt_heroH1:"البيانات الدقيقة تصنع<br><span class=\"gold-text\">مشروعاً ناجحاً.</span>",
+qt_heroLead:"قدّم معلوماتك وسيقترح WOCS<br>الحل الأمثل للوحدات المعيارية/التخييم الفاخر بخبرة 16 عاماً.",
+qt_trustFree:"مجاني",
+qt_trustFreeL:"تقدير أولي",
+qt_trust24hL:"رد مضمون",
+qt_trustYears:"16 سنة",
+qt_trustYearsL:"خبرة في البناء",
+qt_trustCostL:"مقارنة بالمنافسين",
+qt_sec1:"المعلومات الأساسية",
+qt_labelName:"الاسم *",
+qt_phName:"محمد أحمد",
+qt_labelPhone:"الهاتف *",
+qt_phPhone:"+966-00-000-0000",
+qt_labelCompany:"الشركة <span class=\"opt\">(اختياري)</span>",
+qt_phCompany:"اسم الشركة أو المؤسسة",
+qt_sec2:"معلومات الموقع",
+qt_labelRegion:"منطقة البناء المخطط لها *",
+qt_phRegion:"مثال: الرياض، السعودية",
+qt_labelArea:"مساحة الموقع (م²) *",
+qt_phArea:"مثال: 1000 م²",
+qt_sec3:"الميزانية والجدول الزمني",
+qt_labelBudget:"الميزانية الإجمالية المقدرة *",
+qt_optSelect:"يرجى الاختيار",
+qt_budgetUnder50:"أقل من 50 مليون وون",
+qt_budget50to100:"50 مليون ~ 100 مليون وون",
+qt_budget100to300:"100 مليون ~ 300 مليون وون",
+qt_budgetOver300:"أكثر من 300 مليون وون",
+qt_labelTarget:"تاريخ الافتتاح المستهدف",
+qt_phTarget:"مثال: يونيو 2026",
+qt_sec4:"النماذج المفضلة <span style=\"font-size:12px;color:rgba(240,235,224,0.35);margin-left:8px\">اختيار متعدد</span>",
+qt_modelDome:"قبة D-Series",
+qt_modelSafari:"جناح S-Series",
+qt_modelSignature:"صالة Signature",
+qt_modelModular:"وحدة معيارية",
+qt_sec5:"طلبات إضافية",
+qt_phAdditional:"صف بحرية مفهومك ومتطلباتك الخاصة وصور مرجعية وغيرها.",
+qt_submit:"طلب تقدير أولي مجاني",
+qt_footerNote1:"تُستخدم معلوماتك فقط لأغراض عرض الأسعار ولا تُشارك أبداً مع أطراف ثالثة.",
+qt_footerNote2:"سنرد بتقدير أولي خلال 24 ساعة عمل عبر الهاتف أو البريد الإلكتروني.",
+qt_banner1:"للاستفسارات العامة (زيارة المعرض، خدمة ما بعد البيع، الشراكات)",
+qt_bannerLink:"صفحة الاستفسارات العامة",
+qt_banner2:" — يرجى استخدام هذه الصفحة."
+},
+ru:{
+pageTitle:"WOCS Запрос Цены | Бесплатная Предварительная Оценка",
+pageDesc:"Индивидуальные расчёты для бизнеса глэмпинга и пансионов. Введите данные об участке, бюджете и модели, чтобы получить оптимальное решение с 16-летним опытом WOCS.",
+qt_bcContact:"Контакты",
+qt_bcQuote:"Запрос цены",
+qt_kicker:"REQUEST A QUOTE",
+qt_heroH1:"Точные данные создают<br><span class=\"gold-text\">успешный бизнес.</span>",
+qt_heroLead:"Предоставьте ваши данные, и WOCS предложит<br>оптимальное модульное/глэмпинг решение с 16-летним опытом.",
+qt_trustFree:"Бесплатно",
+qt_trustFreeL:"Предварительная оценка",
+qt_trust24hL:"Гарантия ответа",
+qt_trustYears:"16 лет",
+qt_trustYearsL:"Опыт строительства",
+qt_trustCostL:"vs. Конкуренты",
+qt_sec1:"Основная Информация",
+qt_labelName:"Имя *",
+qt_phName:"Иван Иванов",
+qt_labelPhone:"Телефон *",
+qt_phPhone:"+7-000-000-00-00",
+qt_labelCompany:"Компания <span class=\"opt\">(Необязательно)</span>",
+qt_phCompany:"Название компании или фирмы",
+qt_sec2:"Информация об Участке",
+qt_labelRegion:"Планируемый район строительства *",
+qt_phRegion:"напр. Московская область",
+qt_labelArea:"Площадь участка (м²) *",
+qt_phArea:"напр. 1000 м²",
+qt_sec3:"Бюджет и Сроки",
+qt_labelBudget:"Ожидаемый общий бюджет *",
+qt_optSelect:"Пожалуйста, выберите",
+qt_budgetUnder50:"Менее 50 млн вон",
+qt_budget50to100:"50 млн ~ 100 млн вон",
+qt_budget100to300:"100 млн ~ 300 млн вон",
+qt_budgetOver300:"Более 300 млн вон",
+qt_labelTarget:"Целевая дата открытия",
+qt_phTarget:"напр. Июнь 2026",
+qt_sec4:"Предпочитаемые модели <span style=\"font-size:12px;color:rgba(240,235,224,0.35);margin-left:8px\">Множественный выбор</span>",
+qt_modelDome:"Купол D-Series",
+qt_modelSafari:"Сьют S-Series",
+qt_modelSignature:"Лаунж Signature",
+qt_modelModular:"Модульный блок",
+qt_sec5:"Дополнительные Запросы",
+qt_phAdditional:"Свободно опишите вашу концепцию, особые требования, референсные изображения и т.д.",
+qt_submit:"Запросить Бесплатную Предварительную Оценку",
+qt_footerNote1:"Ваша информация используется исключительно для составления предложения и никогда не передаётся третьим лицам.",
+qt_footerNote2:"Мы ответим предварительной оценкой в течение 24 рабочих часов по телефону или электронной почте.",
+qt_banner1:"Для общих запросов (посещение шоурума, сервис, партнёрство)",
+qt_bannerLink:"Страница общих запросов",
+qt_banner2:" — пожалуйста, используйте эту страницу."
+},
+tr:{
+pageTitle:"WOCS Teklif Talebi | Ücretsiz Ön Tahmin",
+pageDesc:"Glamping ve pansiyon işletmeleri için özel teklifler. Arsa, bütçe ve model bilgilerinizi girerek 16 yıllık WOCS deneyimiyle en uygun çözümü alın.",
+qt_bcContact:"İletişim",
+qt_bcQuote:"Teklif Talebi",
+qt_kicker:"REQUEST A QUOTE",
+qt_heroH1:"Doğru veriler<br><span class=\"gold-text\">başarılı bir işletme</span> yaratır.",
+qt_heroLead:"Bilgilerinizi girin, WOCS 16 yıllık deneyimiyle<br>en uygun modüler/glamping çözümünü önersin.",
+qt_trustFree:"Ücretsiz",
+qt_trustFreeL:"Ön Tahmin",
+qt_trust24hL:"Yanıt Garantisi",
+qt_trustYears:"16 Yıl",
+qt_trustYearsL:"İnşaat Deneyimi",
+qt_trustCostL:"Rakiplere Kıyasla",
+qt_sec1:"Temel Bilgiler",
+qt_labelName:"İsim *",
+qt_phName:"Ahmet Yılmaz",
+qt_labelPhone:"Telefon *",
+qt_phPhone:"+90-000-000-0000",
+qt_labelCompany:"Şirket <span class=\"opt\">(İsteğe Bağlı)</span>",
+qt_phCompany:"Şirket veya ticaret adı",
+qt_sec2:"Arsa Bilgileri",
+qt_labelRegion:"Planlanan İnşaat Alanı *",
+qt_phRegion:"örn. Antalya, Türkiye",
+qt_labelArea:"Arsa Alanı (m²) *",
+qt_phArea:"örn. 1000 m²",
+qt_sec3:"Bütçe ve Zaman Çizelgesi",
+qt_labelBudget:"Tahmini Toplam Bütçe *",
+qt_optSelect:"Lütfen seçiniz",
+qt_budgetUnder50:"50M KRW altında",
+qt_budget50to100:"50M ~ 100M KRW",
+qt_budget100to300:"100M ~ 300M KRW",
+qt_budgetOver300:"300M KRW üzeri",
+qt_labelTarget:"Hedef Açılış Tarihi",
+qt_phTarget:"örn. Haziran 2026",
+qt_sec4:"Tercih Edilen Modeller <span style=\"font-size:12px;color:rgba(240,235,224,0.35);margin-left:8px\">Çoklu seçim</span>",
+qt_modelDome:"D-Series Kubbe",
+qt_modelSafari:"S-Series Süit",
+qt_modelSignature:"Signature Lounge",
+qt_modelModular:"Modüler Ünite",
+qt_sec5:"Ek Talepler",
+qt_phAdditional:"Konseptinizi, özel gereksinimlerinizi, referans görsellerinizi vb. serbestçe açıklayın.",
+qt_submit:"Ücretsiz Ön Tahmin Talep Et",
+qt_footerNote1:"Bilgileriniz yalnızca teklif amacıyla kullanılır ve asla üçüncü taraflarla paylaşılmaz.",
+qt_footerNote2:"24 iş saati içinde telefon veya e-posta ile ön tahminle yanıt vereceğiz.",
+qt_banner1:"Genel sorular için (showroom ziyareti, servis, ortaklıklar)",
+qt_bannerLink:"Genel İletişim Sayfası",
+qt_banner2:" — lütfen bu sayfayı kullanın."
+},
+tw:{
+pageTitle:"WOCS 報價請求 | 免費初步估價",
+pageDesc:"為露營和民宿創業提供客製報價。輸入您的場地、預算和型號資訊，WOCS將憑藉16年經驗為您提供最佳方案。",
+qt_bcContact:"聯繫",
+qt_bcQuote:"報價請求",
+qt_kicker:"REQUEST A QUOTE",
+qt_heroH1:"精準的數據<br><span class=\"gold-text\">成就成功的事業。</span>",
+qt_heroLead:"請輸入具體資訊，WOCS將憑藉16年的專業經驗<br>為您推薦最佳的模組化/露營解決方案。",
+qt_trustFree:"免費",
+qt_trustFreeL:"初步估價",
+qt_trust24hL:"保證回覆",
+qt_trustYears:"16年",
+qt_trustYearsL:"施工經驗",
+qt_trustCostL:"低於同業成本",
+qt_sec1:"基本資訊",
+qt_labelName:"姓名 *",
+qt_phName:"王大明",
+qt_labelPhone:"聯絡電話 *",
+qt_phPhone:"+886-0-0000-0000",
+qt_labelCompany:"公司名稱 <span class=\"opt\">(選填)</span>",
+qt_phCompany:"公司名稱或商號",
+qt_sec2:"場地資訊",
+qt_labelRegion:"計劃施工地區 *",
+qt_phRegion:"例：新北市三峽區",
+qt_labelArea:"場地面積 (坪) *",
+qt_phArea:"例：300坪",
+qt_sec3:"預算與時程",
+qt_labelBudget:"預計總預算 *",
+qt_optSelect:"請選擇",
+qt_budgetUnder50:"5000萬韓元以下",
+qt_budget50to100:"5000萬 ~ 1億韓元",
+qt_budget100to300:"1億 ~ 3億韓元",
+qt_budgetOver300:"3億韓元以上",
+qt_labelTarget:"目標開業日期",
+qt_phTarget:"例：2026年6月",
+qt_sec4:"意向型號 <span style=\"font-size:12px;color:rgba(240,235,224,0.35);margin-left:8px\">可多選</span>",
+qt_modelDome:"D系列穹頂",
+qt_modelSafari:"S系列套房",
+qt_modelSignature:"Signature 休息室",
+qt_modelModular:"模組單元",
+qt_sec5:"附加需求",
+qt_phAdditional:"請自由描述營運理念、特殊需求、參考圖片等。",
+qt_submit:"申請免費初步估價",
+qt_footerNote1:"您輸入的資訊僅用於報價建議，不會提供給第三方。",
+qt_footerNote2:"我們將在24個工作小時內透過電話或電子郵件回覆初步估價。",
+qt_banner1:"如有一般諮詢（展廳預約、售後、合作）",
+qt_bannerLink:"一般諮詢頁面",
+qt_banner2:"請前往此頁面。"
+},
+id:{
+pageTitle:"WOCS Permintaan Penawaran | Estimasi Awal Gratis",
+pageDesc:"Penawaran khusus untuk bisnis glamping dan penginapan. Masukkan informasi lahan, anggaran, dan model untuk menerima solusi optimal dengan pengalaman 16 tahun WOCS.",
+qt_bcContact:"Kontak",
+qt_bcQuote:"Permintaan Penawaran",
+qt_kicker:"REQUEST A QUOTE",
+qt_heroH1:"Data yang akurat menciptakan<br><span class=\"gold-text\">bisnis yang sukses.</span>",
+qt_heroLead:"Berikan informasi Anda dan WOCS akan mengusulkan<br>solusi modular/glamping optimal dengan pengalaman 16 tahun.",
+qt_trustFree:"Gratis",
+qt_trustFreeL:"Estimasi Awal",
+qt_trust24hL:"Balasan Terjamin",
+qt_trustYears:"16 Thn",
+qt_trustYearsL:"Pengalaman Konstruksi",
+qt_trustCostL:"vs. Kompetitor",
+qt_sec1:"Informasi Dasar",
+qt_labelName:"Nama *",
+qt_phName:"Budi Santoso",
+qt_labelPhone:"Telepon *",
+qt_phPhone:"+62-000-0000-0000",
+qt_labelCompany:"Perusahaan <span class=\"opt\">(Opsional)</span>",
+qt_phCompany:"Nama perusahaan atau usaha",
+qt_sec2:"Informasi Lahan",
+qt_labelRegion:"Area Konstruksi yang Direncanakan *",
+qt_phRegion:"cth. Bali, Indonesia",
+qt_labelArea:"Luas Lahan (m²) *",
+qt_phArea:"cth. 1000 m²",
+qt_sec3:"Anggaran & Jadwal",
+qt_labelBudget:"Estimasi Total Anggaran *",
+qt_optSelect:"Silakan pilih",
+qt_budgetUnder50:"Di bawah 50M KRW",
+qt_budget50to100:"50M ~ 100M KRW",
+qt_budget100to300:"100M ~ 300M KRW",
+qt_budgetOver300:"Di atas 300M KRW",
+qt_labelTarget:"Target Tanggal Pembukaan",
+qt_phTarget:"cth. Juni 2026",
+qt_sec4:"Model Pilihan <span style=\"font-size:12px;color:rgba(240,235,224,0.35);margin-left:8px\">Pilihan ganda</span>",
+qt_modelDome:"Kubah D-Series",
+qt_modelSafari:"Suite S-Series",
+qt_modelSignature:"Lounge Signature",
+qt_modelModular:"Unit Modular",
+qt_sec5:"Permintaan Tambahan",
+qt_phAdditional:"Jelaskan dengan bebas konsep Anda, persyaratan khusus, gambar referensi, dll.",
+qt_submit:"Minta Estimasi Awal Gratis",
+qt_footerNote1:"Informasi Anda hanya digunakan untuk tujuan penawaran dan tidak pernah dibagikan kepada pihak ketiga.",
+qt_footerNote2:"Kami akan membalas dengan estimasi awal dalam 24 jam kerja melalui telepon atau email.",
+qt_banner1:"Untuk pertanyaan umum (kunjungan showroom, layanan purna jual, kemitraan)",
+qt_bannerLink:"Halaman Pertanyaan Umum",
+qt_banner2:" — silakan gunakan halaman ini."
+},
+th:{
+pageTitle:"WOCS ขอใบเสนอราคา | ประเมินราคาเบื้องต้นฟรี",
+pageDesc:"ใบเสนอราคาเฉพาะสำหรับธุรกิจแกลมปิ้งและเพนชั่น ป้อนข้อมูลที่ดิน งบประมาณ และรุ่นเพื่อรับโซลูชันที่เหมาะสมที่สุดจากประสบการณ์ 16 ปีของ WOCS",
+qt_bcContact:"ติดต่อ",
+qt_bcQuote:"ขอใบเสนอราคา",
+qt_kicker:"REQUEST A QUOTE",
+qt_heroH1:"ข้อมูลที่แม่นยำสร้าง<br><span class=\"gold-text\">ธุรกิจที่ประสบความสำเร็จ</span>",
+qt_heroLead:"ให้ข้อมูลของคุณ แล้ว WOCS จะเสนอ<br>โซลูชันโมดูลาร์/แกลมปิ้งที่ดีที่สุดด้วยประสบการณ์ 16 ปี",
+qt_trustFree:"ฟรี",
+qt_trustFreeL:"ประเมินราคาเบื้องต้น",
+qt_trust24hL:"รับประกันการตอบกลับ",
+qt_trustYears:"16 ปี",
+qt_trustYearsL:"ประสบการณ์ก่อสร้าง",
+qt_trustCostL:"เทียบกับคู่แข่ง",
+qt_sec1:"ข้อมูลพื้นฐาน",
+qt_labelName:"ชื่อ *",
+qt_phName:"สมชาย ใจดี",
+qt_labelPhone:"โทรศัพท์ *",
+qt_phPhone:"+66-00-000-0000",
+qt_labelCompany:"บริษัท <span class=\"opt\">(ไม่บังคับ)</span>",
+qt_phCompany:"ชื่อบริษัทหรือชื่อร้าน",
+qt_sec2:"ข้อมูลที่ดิน",
+qt_labelRegion:"พื้นที่ก่อสร้างที่วางแผน *",
+qt_phRegion:"เช่น เชียงใหม่ ประเทศไทย",
+qt_labelArea:"พื้นที่ที่ดิน (ตร.ม.) *",
+qt_phArea:"เช่น 1000 ตร.ม.",
+qt_sec3:"งบประมาณและกำหนดการ",
+qt_labelBudget:"งบประมาณรวมโดยประมาณ *",
+qt_optSelect:"กรุณาเลือก",
+qt_budgetUnder50:"ต่ำกว่า 50 ล้านวอน",
+qt_budget50to100:"50 ล้าน ~ 100 ล้านวอน",
+qt_budget100to300:"100 ล้าน ~ 300 ล้านวอน",
+qt_budgetOver300:"มากกว่า 300 ล้านวอน",
+qt_labelTarget:"วันเป้าหมายเปิดกิจการ",
+qt_phTarget:"เช่น มิถุนายน 2026",
+qt_sec4:"รุ่นที่สนใจ <span style=\"font-size:12px;color:rgba(240,235,224,0.35);margin-left:8px\">เลือกได้หลายรายการ</span>",
+qt_modelDome:"โดม D-Series",
+qt_modelSafari:"สวีท S-Series",
+qt_modelSignature:"เลาจน์ Signature",
+qt_modelModular:"ยูนิตโมดูลาร์",
+qt_sec5:"คำขอเพิ่มเติม",
+qt_phAdditional:"อธิบายแนวคิด ความต้องการพิเศษ ภาพอ้างอิง ฯลฯ ได้อย่างอิสระ",
+qt_submit:"ขอประเมินราคาเบื้องต้นฟรี",
+qt_footerNote1:"ข้อมูลของคุณใช้เพื่อวัตถุประสงค์ในการเสนอราคาเท่านั้น และจะไม่ถูกแบ่งปันกับบุคคลที่สาม",
+qt_footerNote2:"เราจะตอบกลับพร้อมประเมินราคาเบื้องต้นภายใน 24 ชั่วโมงทำการทางโทรศัพท์หรืออีเมล",
+qt_banner1:"สำหรับคำถามทั่วไป (เยี่ยมชมโชว์รูม, บริการหลังการขาย, พันธมิตร)",
+qt_bannerLink:"หน้าสอบถามทั่วไป",
+qt_banner2:" — กรุณาใช้หน้านี้"
+}
+};
 </script>
 <script src="../assets/js/wocs-i18n.js"></script>
 <script src="../assets/js/wocs-header.js"></script>

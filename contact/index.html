@@ -53,10 +53,10 @@
 <!-- HERO -->
 <section class="ct-hero">
   <div class="container">
-    <div class="breadcrumb" style="margin-bottom:24px"><a href="../index.html" data-t="home">홈</a> <span>›</span> <span>문의하기</span></div>
-    <div class="kicker anim">CONTACT</div>
-    <h1 class="anim anim-delay-1">무엇이든 편하게<br><span class="gold-text">물어보세요.</span></h1>
-    <p class="lead anim anim-delay-2">화순 쇼룸 방문 예약, A/S 요청, B2B 제휴 등<br>어떤 문의든 24시간 내 회신 드립니다.</p>
+    <div class="breadcrumb" style="margin-bottom:24px"><a href="../index.html" data-t="home">홈</a> <span>›</span> <span data-t="ct_bcContact">문의하기</span></div>
+    <div class="kicker anim" data-t="ct_heroKicker">CONTACT</div>
+    <h1 class="anim anim-delay-1" data-t-html="ct_heroH1"><span data-t="ct_heroH1a">무엇이든 편하게</span><br><span class="gold-text" data-t="ct_heroH1b">물어보세요.</span></h1>
+    <p class="lead anim anim-delay-2" data-t-html="ct_heroLead">화순 쇼룸 방문 예약, A/S 요청, B2B 제휴 등<br>어떤 문의든 24시간 내 회신 드립니다.</p>
   </div>
 </section>
 
@@ -66,20 +66,20 @@
 
     <!-- LEFT: Contact Info -->
     <div class="ct-info anim">
-      <div class="ct-info-title">WOCS 연락처</div>
+      <div class="ct-info-title" data-t="ct_infoTitle">WOCS 연락처</div>
 
       <div class="ct-info-item">
         <div class="ct-info-icon">📍</div>
         <div>
-          <div class="ct-info-label">ADDRESS</div>
-          <div class="ct-info-value">전남 화순군 사평면 유마로 592<br>(O4O 쇼룸 · 연중 예약제)</div>
+          <div class="ct-info-label" data-t="ct_labelAddr">ADDRESS</div>
+          <div class="ct-info-value" data-t-html="ct_addr">전남 화순군 사평면 유마로 592<br>(O4O 쇼룸 · 연중 예약제)</div>
         </div>
       </div>
 
       <div class="ct-info-item">
         <div class="ct-info-icon">📞</div>
         <div>
-          <div class="ct-info-label">PHONE</div>
+          <div class="ct-info-label" data-t="ct_labelPhone">PHONE</div>
           <div class="ct-info-value"><a href="tel:010-4337-0582">010-4337-0582</a></div>
         </div>
       </div>
@@ -87,7 +87,7 @@
       <div class="ct-info-item">
         <div class="ct-info-icon">✉️</div>
         <div>
-          <div class="ct-info-label">EMAIL</div>
+          <div class="ct-info-label" data-t="ct_labelEmail">EMAIL</div>
           <div class="ct-info-value"><a href="mailto:candlejs6@gmail.com">candlejs6@gmail.com</a></div>
         </div>
       </div>
@@ -95,49 +95,49 @@
       <div class="ct-info-item">
         <div class="ct-info-icon">⏰</div>
         <div>
-          <div class="ct-info-label">BUSINESS HOURS</div>
-          <div class="ct-info-value">평일 09:00 – 18:00<br>쇼룸 방문은 사전 예약 필수</div>
+          <div class="ct-info-label" data-t="ct_labelHours">BUSINESS HOURS</div>
+          <div class="ct-info-value" data-t-html="ct_hours">평일 09:00 – 18:00<br>쇼룸 방문은 사전 예약 필수</div>
         </div>
       </div>
 
       <div style="margin-top:40px;padding-top:32px;border-top:1px solid rgba(201,169,110,0.1)">
-        <div style="font-family:var(--font-body);font-size:11px;letter-spacing:2px;color:var(--gold);margin-bottom:12px">QUICK LINKS</div>
-        <a href="quote.html" style="display:inline-block;padding:12px 28px;border:1px solid var(--gold);color:var(--gold);font-family:var(--font-body);font-size:12px;letter-spacing:2px;text-decoration:none;transition:all .3s">견적 요청 바로가기 →</a>
+        <div style="font-family:var(--font-body);font-size:11px;letter-spacing:2px;color:var(--gold);margin-bottom:12px" data-t="ct_quickLinks">QUICK LINKS</div>
+        <a href="quote.html" style="display:inline-block;padding:12px 28px;border:1px solid var(--gold);color:var(--gold);font-family:var(--font-body);font-size:12px;letter-spacing:2px;text-decoration:none;transition:all .3s" data-t="ct_quoteLink">견적 요청 바로가기 →</a>
       </div>
     </div>
 
     <!-- RIGHT: Simple Inquiry Form -->
     <div class="ct-form anim anim-delay-1">
-      <div class="ct-form-title">일반 문의</div>
-      <div class="ct-form-sub">* 표시 항목은 필수입니다. 24시간 내 회신 드리겠습니다.</div>
+      <div class="ct-form-title" data-t="ct_formTitle">일반 문의</div>
+      <div class="ct-form-sub" data-t="ct_formSub">* 표시 항목은 필수입니다. 24시간 내 회신 드리겠습니다.</div>
 
       <div class="form-group">
-        <label class="form-label">이름 *</label>
-        <input type="text" class="form-input" placeholder="홍길동" required>
+        <label class="form-label" data-t="ct_labelName">이름 *</label>
+        <input type="text" class="form-input" placeholder="홍길동" data-t-placeholder="ct_phName" required>
       </div>
 
       <div class="form-group">
-        <label class="form-label">연락처 *</label>
-        <input type="tel" class="form-input" placeholder="010-0000-0000" required>
+        <label class="form-label" data-t="ct_labelPhone2">연락처 *</label>
+        <input type="tel" class="form-input" placeholder="010-0000-0000" data-t-placeholder="ct_phPhone" required>
       </div>
 
       <div class="form-group">
-        <label class="form-label">문의 유형 *</label>
+        <label class="form-label" data-t="ct_labelType">문의 유형 *</label>
         <select class="form-select" required>
-          <option value="" disabled selected>선택해 주세요</option>
-          <option value="showroom">🏠 화순 쇼룸 방문 예약</option>
-          <option value="as">🔧 A/S 요청</option>
-          <option value="b2b">🤝 B2B 제휴 제안</option>
-          <option value="etc">💬 기타 문의</option>
+          <option value="" disabled selected data-t="ct_optSelect">선택해 주세요</option>
+          <option value="showroom" data-t="ct_optShowroom">🏠 화순 쇼룸 방문 예약</option>
+          <option value="as" data-t="ct_optAS">🔧 A/S 요청</option>
+          <option value="b2b" data-t="ct_optB2B">🤝 B2B 제휴 제안</option>
+          <option value="etc" data-t="ct_optEtc">💬 기타 문의</option>
         </select>
       </div>
 
       <div class="form-group">
-        <label class="form-label">문의 내용 *</label>
-        <textarea class="form-textarea" placeholder="문의하실 내용을 자유롭게 작성해 주세요." required></textarea>
+        <label class="form-label" data-t="ct_labelMsg">문의 내용 *</label>
+        <textarea class="form-textarea" placeholder="문의하실 내용을 자유롭게 작성해 주세요." data-t-placeholder="ct_phMsg" required></textarea>
       </div>
 
-      <button type="button" class="form-submit" onclick="alert('문의가 접수되었습니다. 24시간 내 회신 드리겠습니다.')">문의 남기기</button>
+      <button type="button" class="form-submit" data-t="ct_submit" onclick="alert('문의가 접수되었습니다. 24시간 내 회신 드리겠습니다.')">문의 남기기</button>
     </div>
 
   </div>
@@ -145,14 +145,585 @@
 
 <!-- Quote Banner -->
 <div class="ct-quote-banner">
-  <p>글램핑/펜션 창업을 준비 중이신가요? → <a href="quote.html">구체적인 견적 요청 페이지</a>에서 맞춤 솔루션을 받아보세요.</p>
+  <p data-t-html="ct_bannerFull"><span data-t="ct_banner1">글램핑/펜션 창업을 준비 중이신가요?</span> → <a href="quote.html" data-t="ct_bannerLink">구체적인 견적 요청 페이지</a><span data-t="ct_banner2">에서 맞춤 솔루션을 받아보세요.</span></p>
 </div>
 
 <div id="wocs-cta"></div>
 <div id="wocs-footer"></div>
 
 <script>
-var WOCS_PAGE_TR={ko:{},en:{},ja:{},zh:{},es:{},fr:{},de:{},pt:{},it:{},ar:{},ru:{},tr:{},tw:{},id:{},th:{}};
+var WOCS_PAGE_TR={
+ko:{
+pageTitle:"WOCS 일반 문의 | 010-4337-0582",
+pageDesc:"WOCS 일반 문의, 화순 쇼룸 방문 예약, A/S, B2B 제휴. 16년 경력의 전문가가 답합니다.",
+ct_heroKicker:"CONTACT",
+ct_heroH1a:"무엇이든 편하게",
+ct_heroH1b:"물어보세요.",
+ct_heroH1:"무엇이든 편하게<br><span class='gold-text'>물어보세요.</span>",
+ct_heroLead:"화순 쇼룸 방문 예약, A/S 요청, B2B 제휴 등<br>어떤 문의든 24시간 내 회신 드립니다.",
+ct_infoTitle:"WOCS 연락처",
+ct_labelAddr:"ADDRESS",
+ct_addr:"전남 화순군 사평면 유마로 592<br>(O4O 쇼룸 · 연중 예약제)",
+ct_labelPhone:"PHONE",
+ct_labelEmail:"EMAIL",
+ct_labelHours:"BUSINESS HOURS",
+ct_hours:"평일 09:00 – 18:00<br>쇼룸 방문은 사전 예약 필수",
+ct_quickLinks:"QUICK LINKS",
+ct_quoteLink:"견적 요청 바로가기 →",
+ct_formTitle:"일반 문의",
+ct_formSub:"* 표시 항목은 필수입니다. 24시간 내 회신 드리겠습니다.",
+ct_labelName:"이름 *",
+ct_phName:"홍길동",
+ct_labelPhone2:"연락처 *",
+ct_phPhone:"010-0000-0000",
+ct_labelType:"문의 유형 *",
+ct_optSelect:"선택해 주세요",
+ct_optShowroom:"🏠 화순 쇼룸 방문 예약",
+ct_optAS:"🔧 A/S 요청",
+ct_optB2B:"🤝 B2B 제휴 제안",
+ct_optEtc:"💬 기타 문의",
+ct_labelMsg:"문의 내용 *",
+ct_phMsg:"문의하실 내용을 자유롭게 작성해 주세요.",
+ct_submit:"문의 남기기",
+ct_banner1:"글램핑/펜션 창업을 준비 중이신가요?",
+ct_bannerLink:"구체적인 견적 요청 페이지",
+ct_banner2:"에서 맞춤 솔루션을 받아보세요.",
+ct_bannerFull:"글램핑/펜션 창업을 준비 중이신가요? → <a href='quote.html'>구체적인 견적 요청 페이지</a>에서 맞춤 솔루션을 받아보세요.",
+ct_bcContact:"문의하기"
+},
+en:{
+pageTitle:"WOCS General Inquiry | 010-4337-0582",
+pageDesc:"WOCS general inquiries, Hwasun showroom visits, A/S requests, B2B partnerships. Expert answers with 16 years of experience.",
+ct_heroKicker:"CONTACT",
+ct_heroH1a:"Feel free to ask",
+ct_heroH1b:"anything.",
+ct_heroH1:"Feel free to ask<br><span class='gold-text'>anything.</span>",
+ct_heroLead:"Showroom visits, A/S requests, B2B partnerships and more.<br>We respond to all inquiries within 24 hours.",
+ct_infoTitle:"WOCS Contact",
+ct_labelAddr:"ADDRESS",
+ct_addr:"592 Yuma-ro, Sapyeong-myeon, Hwasun-gun, Jeollanam-do<br>(O4O Showroom · By appointment year-round)",
+ct_labelPhone:"PHONE",
+ct_labelEmail:"EMAIL",
+ct_labelHours:"BUSINESS HOURS",
+ct_hours:"Weekdays 09:00 – 18:00<br>Showroom visits by appointment only",
+ct_quickLinks:"QUICK LINKS",
+ct_quoteLink:"Go to Quote Request →",
+ct_formTitle:"General Inquiry",
+ct_formSub:"* Required fields. We will respond within 24 hours.",
+ct_labelName:"Name *",
+ct_phName:"John Doe",
+ct_labelPhone2:"Phone *",
+ct_phPhone:"010-0000-0000",
+ct_labelType:"Inquiry Type *",
+ct_optSelect:"Please select",
+ct_optShowroom:"🏠 Showroom Visit Reservation",
+ct_optAS:"🔧 A/S Request",
+ct_optB2B:"🤝 B2B Partnership Proposal",
+ct_optEtc:"💬 Other Inquiry",
+ct_labelMsg:"Message *",
+ct_phMsg:"Please describe your inquiry freely.",
+ct_submit:"Submit Inquiry",
+ct_banner1:"Planning a glamping/pension startup?",
+ct_bannerLink:"Detailed Quote Request Page",
+ct_banner2:" for a customized solution.",
+ct_bannerFull:"Planning a glamping/pension startup? → <a href='quote.html'>Detailed Quote Request Page</a> for a customized solution.",
+ct_bcContact:"Contact"
+},
+ja:{
+pageTitle:"WOCS お問い合わせ | 010-4337-0582",
+pageDesc:"WOCS一般お問い合わせ、華順ショールーム訪問予約、A/Sリクエスト、B2B提携。16年の経験を持つ専門家がお答えします。",
+ct_heroKicker:"CONTACT",
+ct_heroH1a:"何でもお気軽に",
+ct_heroH1b:"ご相談ください。",
+ct_heroH1:"何でもお気軽に<br><span class='gold-text'>ご相談ください。</span>",
+ct_heroLead:"ショールーム訪問予約、A/Sリクエスト、B2B提携など<br>すべてのお問い合わせに24時間以内に返信いたします。",
+ct_infoTitle:"WOCS 連絡先",
+ct_labelAddr:"住所",
+ct_addr:"全南 華順郡 沙坪面 ユマロ 592<br>(O4Oショールーム · 年間予約制)",
+ct_labelPhone:"電話",
+ct_labelEmail:"メール",
+ct_labelHours:"営業時間",
+ct_hours:"平日 09:00 – 18:00<br>ショールーム訪問は事前予約必須",
+ct_quickLinks:"クイックリンク",
+ct_quoteLink:"見積もり依頼はこちら →",
+ct_formTitle:"一般お問い合わせ",
+ct_formSub:"* は必須項目です。24時間以内にご返信いたします。",
+ct_labelName:"お名前 *",
+ct_phName:"山田太郎",
+ct_labelPhone2:"電話番号 *",
+ct_phPhone:"010-0000-0000",
+ct_labelType:"お問い合わせ種別 *",
+ct_optSelect:"選択してください",
+ct_optShowroom:"🏠 ショールーム訪問予約",
+ct_optAS:"🔧 A/Sリクエスト",
+ct_optB2B:"🤝 B2B提携のご提案",
+ct_optEtc:"💬 その他のお問い合わせ",
+ct_labelMsg:"お問い合わせ内容 *",
+ct_phMsg:"お問い合わせ内容をご自由にお書きください。",
+ct_submit:"送信する",
+ct_banner1:"グランピング・ペンション創業をお考えですか？",
+ct_bannerLink:"詳細見積もり依頼ページ",
+ct_banner2:"でカスタムソリューションをご覧ください。",
+ct_bannerFull:"グランピング・ペンション創業をお考えですか？ → <a href='quote.html'>詳細見積もり依頼ページ</a>でカスタムソリューションをご覧ください。",
+ct_bcContact:"お問い合わせ"
+},
+zh:{
+pageTitle:"WOCS 一般咨询 | 010-4337-0582",
+pageDesc:"WOCS一般咨询、华顺展厅预约、售后请求、B2B合作。16年经验的专家为您解答。",
+ct_heroKicker:"联系我们",
+ct_heroH1a:"随时随地",
+ct_heroH1b:"欢迎咨询。",
+ct_heroH1:"随时随地<br><span class='gold-text'>欢迎咨询。</span>",
+ct_heroLead:"展厅参观预约、售后请求、B2B合作等<br>所有咨询将在24小时内回复。",
+ct_infoTitle:"WOCS 联系方式",
+ct_labelAddr:"地址",
+ct_addr:"全南 华顺郡 沙坪面 油麻路 592<br>(O4O展厅 · 全年预约制)",
+ct_labelPhone:"电话",
+ct_labelEmail:"邮箱",
+ct_labelHours:"营业时间",
+ct_hours:"工作日 09:00 – 18:00<br>展厅参观须提前预约",
+ct_quickLinks:"快速链接",
+ct_quoteLink:"前往报价申请 →",
+ct_formTitle:"一般咨询",
+ct_formSub:"* 为必填项。我们将在24小时内回复。",
+ct_labelName:"姓名 *",
+ct_phName:"张三",
+ct_labelPhone2:"联系电话 *",
+ct_phPhone:"010-0000-0000",
+ct_labelType:"咨询类型 *",
+ct_optSelect:"请选择",
+ct_optShowroom:"🏠 展厅参观预约",
+ct_optAS:"🔧 售后请求",
+ct_optB2B:"🤝 B2B合作提案",
+ct_optEtc:"💬 其他咨询",
+ct_labelMsg:"咨询内容 *",
+ct_phMsg:"请自由描述您的咨询内容。",
+ct_submit:"提交咨询",
+ct_banner1:"正在筹备露营/民宿创业？",
+ct_bannerLink:"详细报价申请页面",
+ct_banner2:"获取定制解决方案。",
+ct_bannerFull:"正在筹备露营/民宿创业？ → <a href='quote.html'>详细报价申请页面</a>获取定制解决方案。",
+ct_bcContact:"联系我们"
+},
+es:{
+pageTitle:"WOCS Consulta General | 010-4337-0582",
+pageDesc:"Consultas generales WOCS, visitas al showroom de Hwasun, solicitudes de servicio, alianzas B2B. Expertos con 16 años de experiencia.",
+ct_heroKicker:"CONTACTO",
+ct_heroH1a:"Siéntase libre de",
+ct_heroH1b:"preguntarnos.",
+ct_heroH1:"Siéntase libre de<br><span class='gold-text'>preguntarnos.</span>",
+ct_heroLead:"Reservas de showroom, solicitudes de servicio, alianzas B2B y más.<br>Respondemos a todas las consultas en 24 horas.",
+ct_infoTitle:"Contacto WOCS",
+ct_labelAddr:"DIRECCIÓN",
+ct_addr:"592 Yuma-ro, Sapyeong-myeon, Hwasun-gun, Jeollanam-do<br>(Showroom O4O · Con cita todo el año)",
+ct_labelPhone:"TELÉFONO",
+ct_labelEmail:"CORREO",
+ct_labelHours:"HORARIO",
+ct_hours:"Lunes a viernes 09:00 – 18:00<br>Visitas al showroom solo con cita previa",
+ct_quickLinks:"ENLACES RÁPIDOS",
+ct_quoteLink:"Ir a solicitud de cotización →",
+ct_formTitle:"Consulta General",
+ct_formSub:"* Campos obligatorios. Responderemos en 24 horas.",
+ct_labelName:"Nombre *",
+ct_phName:"Juan Pérez",
+ct_labelPhone2:"Teléfono *",
+ct_phPhone:"010-0000-0000",
+ct_labelType:"Tipo de consulta *",
+ct_optSelect:"Seleccione",
+ct_optShowroom:"🏠 Reserva de visita al showroom",
+ct_optAS:"🔧 Solicitud de servicio",
+ct_optB2B:"🤝 Propuesta de alianza B2B",
+ct_optEtc:"💬 Otra consulta",
+ct_labelMsg:"Mensaje *",
+ct_phMsg:"Describa libremente su consulta.",
+ct_submit:"Enviar consulta",
+ct_banner1:"¿Preparando un negocio de glamping/pensión?",
+ct_bannerLink:"Página de solicitud de cotización",
+ct_banner2:" para una solución personalizada.",
+ct_bannerFull:"¿Preparando un negocio de glamping/pensión? → <a href='quote.html'>Página de solicitud de cotización</a> para una solución personalizada.",
+ct_bcContact:"Contacto"
+},
+fr:{
+pageTitle:"WOCS Demande Générale | 010-4337-0582",
+pageDesc:"Demandes générales WOCS, visites du showroom Hwasun, demandes SAV, partenariats B2B. Experts avec 16 ans d'expérience.",
+ct_heroKicker:"CONTACT",
+ct_heroH1a:"N'hésitez pas à",
+ct_heroH1b:"nous contacter.",
+ct_heroH1:"N'hésitez pas à<br><span class='gold-text'>nous contacter.</span>",
+ct_heroLead:"Réservation de visite showroom, demandes SAV, partenariats B2B et plus.<br>Nous répondons à toutes les demandes sous 24 heures.",
+ct_infoTitle:"Contact WOCS",
+ct_labelAddr:"ADRESSE",
+ct_addr:"592 Yuma-ro, Sapyeong-myeon, Hwasun-gun, Jeollanam-do<br>(Showroom O4O · Sur rendez-vous toute l'année)",
+ct_labelPhone:"TÉLÉPHONE",
+ct_labelEmail:"E-MAIL",
+ct_labelHours:"HORAIRES",
+ct_hours:"Lundi – Vendredi 09:00 – 18:00<br>Visite du showroom sur rendez-vous uniquement",
+ct_quickLinks:"LIENS RAPIDES",
+ct_quoteLink:"Demander un devis →",
+ct_formTitle:"Demande Générale",
+ct_formSub:"* Champs obligatoires. Nous répondrons sous 24 heures.",
+ct_labelName:"Nom *",
+ct_phName:"Jean Dupont",
+ct_labelPhone2:"Téléphone *",
+ct_phPhone:"010-0000-0000",
+ct_labelType:"Type de demande *",
+ct_optSelect:"Veuillez sélectionner",
+ct_optShowroom:"🏠 Réservation visite showroom",
+ct_optAS:"🔧 Demande SAV",
+ct_optB2B:"🤝 Proposition partenariat B2B",
+ct_optEtc:"💬 Autre demande",
+ct_labelMsg:"Message *",
+ct_phMsg:"Décrivez librement votre demande.",
+ct_submit:"Envoyer la demande",
+ct_banner1:"Vous préparez un projet glamping/gîte ?",
+ct_bannerLink:"Page de demande de devis",
+ct_banner2:" pour une solution sur mesure.",
+ct_bannerFull:"Vous préparez un projet glamping/gîte ? → <a href='quote.html'>Page de demande de devis</a> pour une solution sur mesure.",
+ct_bcContact:"Contact"
+},
+de:{
+pageTitle:"WOCS Allgemeine Anfrage | 010-4337-0582",
+pageDesc:"WOCS allgemeine Anfragen, Hwasun Showroom-Besuche, Serviceanfragen, B2B-Partnerschaften. Experten mit 16 Jahren Erfahrung.",
+ct_heroKicker:"KONTAKT",
+ct_heroH1a:"Stellen Sie uns",
+ct_heroH1b:"gerne Ihre Fragen.",
+ct_heroH1:"Stellen Sie uns<br><span class='gold-text'>gerne Ihre Fragen.</span>",
+ct_heroLead:"Showroom-Besuche, Serviceanfragen, B2B-Partnerschaften und mehr.<br>Wir antworten auf alle Anfragen innerhalb von 24 Stunden.",
+ct_infoTitle:"WOCS Kontakt",
+ct_labelAddr:"ADRESSE",
+ct_addr:"592 Yuma-ro, Sapyeong-myeon, Hwasun-gun, Jeollanam-do<br>(O4O Showroom · Ganzjährig nach Vereinbarung)",
+ct_labelPhone:"TELEFON",
+ct_labelEmail:"E-MAIL",
+ct_labelHours:"ÖFFNUNGSZEITEN",
+ct_hours:"Mo – Fr 09:00 – 18:00<br>Showroom-Besuche nur nach Terminvereinbarung",
+ct_quickLinks:"SCHNELLLINKS",
+ct_quoteLink:"Zur Angebotsanfrage →",
+ct_formTitle:"Allgemeine Anfrage",
+ct_formSub:"* Pflichtfelder. Wir antworten innerhalb von 24 Stunden.",
+ct_labelName:"Name *",
+ct_phName:"Max Mustermann",
+ct_labelPhone2:"Telefon *",
+ct_phPhone:"010-0000-0000",
+ct_labelType:"Anfragetyp *",
+ct_optSelect:"Bitte wählen",
+ct_optShowroom:"🏠 Showroom-Besuch buchen",
+ct_optAS:"🔧 Serviceanfrage",
+ct_optB2B:"🤝 B2B-Partnerschaftsvorschlag",
+ct_optEtc:"💬 Sonstige Anfrage",
+ct_labelMsg:"Nachricht *",
+ct_phMsg:"Beschreiben Sie Ihre Anfrage frei.",
+ct_submit:"Anfrage senden",
+ct_banner1:"Planen Sie ein Glamping-/Pensionsgeschäft?",
+ct_bannerLink:"Detaillierte Angebotsseite",
+ct_banner2:" für eine maßgeschneiderte Lösung.",
+ct_bannerFull:"Planen Sie ein Glamping-/Pensionsgeschäft? → <a href='quote.html'>Detaillierte Angebotsseite</a> für eine maßgeschneiderte Lösung.",
+ct_bcContact:"Kontakt"
+},
+pt:{
+pageTitle:"WOCS Consulta Geral | 010-4337-0582",
+pageDesc:"Consultas gerais WOCS, visitas ao showroom Hwasun, solicitações de assistência, parcerias B2B. Especialistas com 16 anos de experiência.",
+ct_heroKicker:"CONTATO",
+ct_heroH1a:"Sinta-se à vontade para",
+ct_heroH1b:"perguntar.",
+ct_heroH1:"Sinta-se à vontade para<br><span class='gold-text'>perguntar.</span>",
+ct_heroLead:"Visitas ao showroom, solicitações de assistência, parcerias B2B e mais.<br>Respondemos a todas as consultas em 24 horas.",
+ct_infoTitle:"Contato WOCS",
+ct_labelAddr:"ENDEREÇO",
+ct_addr:"592 Yuma-ro, Sapyeong-myeon, Hwasun-gun, Jeollanam-do<br>(Showroom O4O · Com agendamento durante todo o ano)",
+ct_labelPhone:"TELEFONE",
+ct_labelEmail:"E-MAIL",
+ct_labelHours:"HORÁRIO",
+ct_hours:"Seg – Sex 09:00 – 18:00<br>Visitas ao showroom apenas com agendamento",
+ct_quickLinks:"LINKS RÁPIDOS",
+ct_quoteLink:"Ir para solicitação de orçamento →",
+ct_formTitle:"Consulta Geral",
+ct_formSub:"* Campos obrigatórios. Responderemos em 24 horas.",
+ct_labelName:"Nome *",
+ct_phName:"João Silva",
+ct_labelPhone2:"Telefone *",
+ct_phPhone:"010-0000-0000",
+ct_labelType:"Tipo de consulta *",
+ct_optSelect:"Selecione",
+ct_optShowroom:"🏠 Reserva de visita ao showroom",
+ct_optAS:"🔧 Solicitação de assistência",
+ct_optB2B:"🤝 Proposta de parceria B2B",
+ct_optEtc:"💬 Outra consulta",
+ct_labelMsg:"Mensagem *",
+ct_phMsg:"Descreva livremente sua consulta.",
+ct_submit:"Enviar consulta",
+ct_banner1:"Planejando um negócio de glamping/pousada?",
+ct_bannerLink:"Página de solicitação de orçamento",
+ct_banner2:" para uma solução personalizada.",
+ct_bannerFull:"Planejando um negócio de glamping/pousada? → <a href='quote.html'>Página de solicitação de orçamento</a> para uma solução personalizada.",
+ct_bcContact:"Contato"
+},
+it:{
+pageTitle:"WOCS Richiesta Generale | 010-4337-0582",
+pageDesc:"Richieste generali WOCS, visite showroom Hwasun, richieste assistenza, partnership B2B. Esperti con 16 anni di esperienza.",
+ct_heroKicker:"CONTATTI",
+ct_heroH1a:"Non esitare a",
+ct_heroH1b:"contattarci.",
+ct_heroH1:"Non esitare a<br><span class='gold-text'>contattarci.</span>",
+ct_heroLead:"Visite allo showroom, richieste di assistenza, partnership B2B e altro.<br>Rispondiamo a tutte le richieste entro 24 ore.",
+ct_infoTitle:"Contatti WOCS",
+ct_labelAddr:"INDIRIZZO",
+ct_addr:"592 Yuma-ro, Sapyeong-myeon, Hwasun-gun, Jeollanam-do<br>(Showroom O4O · Su appuntamento tutto l'anno)",
+ct_labelPhone:"TELEFONO",
+ct_labelEmail:"E-MAIL",
+ct_labelHours:"ORARI",
+ct_hours:"Lun – Ven 09:00 – 18:00<br>Visite allo showroom solo su appuntamento",
+ct_quickLinks:"LINK RAPIDI",
+ct_quoteLink:"Vai alla richiesta preventivo →",
+ct_formTitle:"Richiesta Generale",
+ct_formSub:"* Campi obbligatori. Risponderemo entro 24 ore.",
+ct_labelName:"Nome *",
+ct_phName:"Mario Rossi",
+ct_labelPhone2:"Telefono *",
+ct_phPhone:"010-0000-0000",
+ct_labelType:"Tipo di richiesta *",
+ct_optSelect:"Selezionare",
+ct_optShowroom:"🏠 Prenotazione visita showroom",
+ct_optAS:"🔧 Richiesta assistenza",
+ct_optB2B:"🤝 Proposta partnership B2B",
+ct_optEtc:"💬 Altra richiesta",
+ct_labelMsg:"Messaggio *",
+ct_phMsg:"Descrivi liberamente la tua richiesta.",
+ct_submit:"Invia richiesta",
+ct_banner1:"Stai pianificando un'attività di glamping/pensione?",
+ct_bannerLink:"Pagina richiesta preventivo",
+ct_banner2:" per una soluzione personalizzata.",
+ct_bannerFull:"Stai pianificando un'attività di glamping/pensione? → <a href='quote.html'>Pagina richiesta preventivo</a> per una soluzione personalizzata.",
+ct_bcContact:"Contatti"
+},
+ar:{
+pageTitle:"WOCS استفسار عام | 010-4337-0582",
+pageDesc:"استفسارات WOCS العامة، زيارات صالة عرض هواسون، طلبات الخدمة، شراكات B2B. خبراء بخبرة 16 عامًا.",
+ct_heroKicker:"اتصل بنا",
+ct_heroH1a:"لا تتردد في",
+ct_heroH1b:"سؤالنا.",
+ct_heroH1:"لا تتردد في<br><span class='gold-text'>سؤالنا.</span>",
+ct_heroLead:"حجز زيارة صالة العرض، طلبات الخدمة، شراكات B2B والمزيد.<br>نرد على جميع الاستفسارات خلال 24 ساعة.",
+ct_infoTitle:"معلومات الاتصال بـ WOCS",
+ct_labelAddr:"العنوان",
+ct_addr:"592 يوما-رو، سابيونغ-ميون، هواسون-غون، جولانام-دو<br>(صالة عرض O4O · بموعد مسبق طوال العام)",
+ct_labelPhone:"الهاتف",
+ct_labelEmail:"البريد الإلكتروني",
+ct_labelHours:"ساعات العمل",
+ct_hours:"الاثنين – الجمعة 09:00 – 18:00<br>زيارة صالة العرض بموعد مسبق فقط",
+ct_quickLinks:"روابط سريعة",
+ct_quoteLink:"انتقل لطلب عرض الأسعار →",
+ct_formTitle:"استفسار عام",
+ct_formSub:"* حقول مطلوبة. سنرد خلال 24 ساعة.",
+ct_labelName:"الاسم *",
+ct_phName:"محمد أحمد",
+ct_labelPhone2:"الهاتف *",
+ct_phPhone:"010-0000-0000",
+ct_labelType:"نوع الاستفسار *",
+ct_optSelect:"يرجى الاختيار",
+ct_optShowroom:"🏠 حجز زيارة صالة العرض",
+ct_optAS:"🔧 طلب خدمة ما بعد البيع",
+ct_optB2B:"🤝 اقتراح شراكة B2B",
+ct_optEtc:"💬 استفسار آخر",
+ct_labelMsg:"الرسالة *",
+ct_phMsg:"يرجى وصف استفسارك بحرية.",
+ct_submit:"إرسال الاستفسار",
+ct_banner1:"هل تخطط لمشروع تخييم فاخر؟",
+ct_bannerLink:"صفحة طلب عرض الأسعار",
+ct_banner2:" للحصول على حل مخصص.",
+ct_bannerFull:"هل تخطط لمشروع تخييم فاخر؟ → <a href='quote.html'>صفحة طلب عرض الأسعار</a> للحصول على حل مخصص.",
+ct_bcContact:"اتصل بنا"
+},
+ru:{
+pageTitle:"WOCS Общий запрос | 010-4337-0582",
+pageDesc:"Общие запросы WOCS, посещение шоурума Хвасун, запросы на обслуживание, партнёрства B2B. Эксперты с 16-летним опытом.",
+ct_heroKicker:"КОНТАКТЫ",
+ct_heroH1a:"Не стесняйтесь",
+ct_heroH1b:"спрашивать.",
+ct_heroH1:"Не стесняйтесь<br><span class='gold-text'>спрашивать.</span>",
+ct_heroLead:"Бронирование посещения шоурума, запросы на обслуживание, B2B-партнёрства и многое другое.<br>Мы отвечаем на все запросы в течение 24 часов.",
+ct_infoTitle:"Контакты WOCS",
+ct_labelAddr:"АДРЕС",
+ct_addr:"592 Юма-ро, Сапхён-мён, Хвасун-гун, Чолланам-до<br>(Шоурум O4O · Круглый год по записи)",
+ct_labelPhone:"ТЕЛЕФОН",
+ct_labelEmail:"ЭЛ. ПОЧТА",
+ct_labelHours:"ЧАСЫ РАБОТЫ",
+ct_hours:"Пн – Пт 09:00 – 18:00<br>Посещение шоурума только по записи",
+ct_quickLinks:"БЫСТРЫЕ ССЫЛКИ",
+ct_quoteLink:"Перейти к запросу цены →",
+ct_formTitle:"Общий запрос",
+ct_formSub:"* Обязательные поля. Мы ответим в течение 24 часов.",
+ct_labelName:"Имя *",
+ct_phName:"Иван Иванов",
+ct_labelPhone2:"Телефон *",
+ct_phPhone:"010-0000-0000",
+ct_labelType:"Тип запроса *",
+ct_optSelect:"Выберите",
+ct_optShowroom:"🏠 Бронирование посещения шоурума",
+ct_optAS:"🔧 Запрос на обслуживание",
+ct_optB2B:"🤝 Предложение B2B-партнёрства",
+ct_optEtc:"💬 Другой запрос",
+ct_labelMsg:"Сообщение *",
+ct_phMsg:"Свободно опишите ваш запрос.",
+ct_submit:"Отправить запрос",
+ct_banner1:"Планируете глэмпинг-бизнес?",
+ct_bannerLink:"Страница запроса ценового предложения",
+ct_banner2:" для индивидуального решения.",
+ct_bannerFull:"Планируете глэмпинг-бизнес? → <a href='quote.html'>Страница запроса ценового предложения</a> для индивидуального решения.",
+ct_bcContact:"Контакты"
+},
+tr:{
+pageTitle:"WOCS Genel Soru | 010-4337-0582",
+pageDesc:"WOCS genel sorular, Hwasun showroom ziyaretleri, servis talepleri, B2B ortaklıklar. 16 yıllık deneyimli uzmanlar.",
+ct_heroKicker:"İLETİŞİM",
+ct_heroH1a:"Her konuda rahatça",
+ct_heroH1b:"bize sorun.",
+ct_heroH1:"Her konuda rahatça<br><span class='gold-text'>bize sorun.</span>",
+ct_heroLead:"Showroom ziyaret rezervasyonu, servis talepleri, B2B ortaklıklar ve dahası.<br>Tüm sorulara 24 saat içinde yanıt veriyoruz.",
+ct_infoTitle:"WOCS İletişim",
+ct_labelAddr:"ADRES",
+ct_addr:"592 Yuma-ro, Sapyeong-myeon, Hwasun-gun, Jeollanam-do<br>(O4O Showroom · Yıl boyunca randevuyla)",
+ct_labelPhone:"TELEFON",
+ct_labelEmail:"E-POSTA",
+ct_labelHours:"ÇALIŞMA SAATLERİ",
+ct_hours:"Pzt – Cum 09:00 – 18:00<br>Showroom ziyaretleri sadece randevuyla",
+ct_quickLinks:"HIZLI BAĞLANTILAR",
+ct_quoteLink:"Teklif talebine git →",
+ct_formTitle:"Genel Soru",
+ct_formSub:"* Zorunlu alanlar. 24 saat içinde yanıt vereceğiz.",
+ct_labelName:"Ad *",
+ct_phName:"Ahmet Yılmaz",
+ct_labelPhone2:"Telefon *",
+ct_phPhone:"010-0000-0000",
+ct_labelType:"Soru türü *",
+ct_optSelect:"Lütfen seçin",
+ct_optShowroom:"🏠 Showroom ziyaret rezervasyonu",
+ct_optAS:"🔧 Servis talebi",
+ct_optB2B:"🤝 B2B ortaklık teklifi",
+ct_optEtc:"💬 Diğer sorular",
+ct_labelMsg:"Mesaj *",
+ct_phMsg:"Sorunuzu özgürce açıklayın.",
+ct_submit:"Soruyu gönder",
+ct_banner1:"Glamping/pansiyon işi mi planlıyorsunuz?",
+ct_bannerLink:"Detaylı teklif talebi sayfası",
+ct_banner2:" özel çözüm için.",
+ct_bannerFull:"Glamping/pansiyon işi mi planlıyorsunuz? → <a href='quote.html'>Detaylı teklif talebi sayfası</a> özel çözüm için.",
+ct_bcContact:"İletişim"
+},
+tw:{
+pageTitle:"WOCS 一般諮詢 | 010-4337-0582",
+pageDesc:"WOCS一般諮詢、華順展廳預約、售後請求、B2B合作。16年經驗的專家為您解答。",
+ct_heroKicker:"聯繫我們",
+ct_heroH1a:"任何問題",
+ct_heroH1b:"歡迎諮詢。",
+ct_heroH1:"任何問題<br><span class='gold-text'>歡迎諮詢。</span>",
+ct_heroLead:"展廳參觀預約、售後請求、B2B合作等<br>所有諮詢將在24小時內回覆。",
+ct_infoTitle:"WOCS 聯繫方式",
+ct_labelAddr:"地址",
+ct_addr:"全南 華順郡 沙坪面 油麻路 592<br>(O4O展廳 · 全年預約制)",
+ct_labelPhone:"電話",
+ct_labelEmail:"電子郵件",
+ct_labelHours:"營業時間",
+ct_hours:"週一至週五 09:00 – 18:00<br>展廳參觀須提前預約",
+ct_quickLinks:"快速連結",
+ct_quoteLink:"前往報價申請 →",
+ct_formTitle:"一般諮詢",
+ct_formSub:"* 為必填項。我們將在24小時內回覆。",
+ct_labelName:"姓名 *",
+ct_phName:"王小明",
+ct_labelPhone2:"聯繫電話 *",
+ct_phPhone:"010-0000-0000",
+ct_labelType:"諮詢類型 *",
+ct_optSelect:"請選擇",
+ct_optShowroom:"🏠 展廳參觀預約",
+ct_optAS:"🔧 售後請求",
+ct_optB2B:"🤝 B2B合作提案",
+ct_optEtc:"💬 其他諮詢",
+ct_labelMsg:"諮詢內容 *",
+ct_phMsg:"請自由描述您的諮詢內容。",
+ct_submit:"提交諮詢",
+ct_banner1:"正在籌備露營/民宿創業？",
+ct_bannerLink:"詳細報價申請頁面",
+ct_banner2:"獲取客製化解決方案。",
+ct_bannerFull:"正在籌備露營/民宿創業？ → <a href='quote.html'>詳細報價申請頁面</a>獲取客製化解決方案。",
+ct_bcContact:"聯繫我們"
+},
+id:{
+pageTitle:"WOCS Pertanyaan Umum | 010-4337-0582",
+pageDesc:"Pertanyaan umum WOCS, kunjungan showroom Hwasun, permintaan layanan, kemitraan B2B. Ahli dengan pengalaman 16 tahun.",
+ct_heroKicker:"KONTAK",
+ct_heroH1a:"Jangan ragu untuk",
+ct_heroH1b:"bertanya.",
+ct_heroH1:"Jangan ragu untuk<br><span class='gold-text'>bertanya.</span>",
+ct_heroLead:"Reservasi kunjungan showroom, permintaan layanan, kemitraan B2B dan lainnya.<br>Kami merespons semua pertanyaan dalam 24 jam.",
+ct_infoTitle:"Kontak WOCS",
+ct_labelAddr:"ALAMAT",
+ct_addr:"592 Yuma-ro, Sapyeong-myeon, Hwasun-gun, Jeollanam-do<br>(Showroom O4O · Dengan janji temu sepanjang tahun)",
+ct_labelPhone:"TELEPON",
+ct_labelEmail:"EMAIL",
+ct_labelHours:"JAM KERJA",
+ct_hours:"Senin – Jumat 09:00 – 18:00<br>Kunjungan showroom hanya dengan janji temu",
+ct_quickLinks:"TAUTAN CEPAT",
+ct_quoteLink:"Ke halaman permintaan penawaran →",
+ct_formTitle:"Pertanyaan Umum",
+ct_formSub:"* Kolom wajib. Kami akan merespons dalam 24 jam.",
+ct_labelName:"Nama *",
+ct_phName:"Budi Santoso",
+ct_labelPhone2:"Telepon *",
+ct_phPhone:"010-0000-0000",
+ct_labelType:"Jenis pertanyaan *",
+ct_optSelect:"Silakan pilih",
+ct_optShowroom:"🏠 Reservasi kunjungan showroom",
+ct_optAS:"🔧 Permintaan layanan",
+ct_optB2B:"🤝 Proposal kemitraan B2B",
+ct_optEtc:"💬 Pertanyaan lain",
+ct_labelMsg:"Pesan *",
+ct_phMsg:"Silakan jelaskan pertanyaan Anda dengan bebas.",
+ct_submit:"Kirim pertanyaan",
+ct_banner1:"Merencanakan bisnis glamping/penginapan?",
+ct_bannerLink:"Halaman permintaan penawaran",
+ct_banner2:" untuk solusi yang disesuaikan.",
+ct_bannerFull:"Merencanakan bisnis glamping/penginapan? → <a href='quote.html'>Halaman permintaan penawaran</a> untuk solusi yang disesuaikan.",
+ct_bcContact:"Kontak"
+},
+th:{
+pageTitle:"WOCS สอบถามทั่วไป | 010-4337-0582",
+pageDesc:"สอบถามทั่วไป WOCS, เยี่ยมชมโชว์รูมฮวาซุน, คำขอบริการ, พันธมิตร B2B ผู้เชี่ยวชาญประสบการณ์ 16 ปี",
+ct_heroKicker:"ติดต่อเรา",
+ct_heroH1a:"สอบถามได้",
+ct_heroH1b:"ทุกเรื่อง",
+ct_heroH1:"สอบถามได้<br><span class='gold-text'>ทุกเรื่อง</span>",
+ct_heroLead:"จองเยี่ยมชมโชว์รูม, คำขอบริการ, พันธมิตร B2B และอื่นๆ<br>เราตอบกลับทุกคำถามภายใน 24 ชั่วโมง",
+ct_infoTitle:"ติดต่อ WOCS",
+ct_labelAddr:"ที่อยู่",
+ct_addr:"592 ยูมา-โร, ซาเปียง-เมียน, ฮวาซุน-กุน, ชอลลานัม-โด<br>(โชว์รูม O4O · นัดหมายล่วงหน้าตลอดปี)",
+ct_labelPhone:"โทรศัพท์",
+ct_labelEmail:"อีเมล",
+ct_labelHours:"เวลาทำการ",
+ct_hours:"จันทร์ – ศุกร์ 09:00 – 18:00<br>เยี่ยมชมโชว์รูมต้องนัดหมายล่วงหน้า",
+ct_quickLinks:"ลิงก์ด่วน",
+ct_quoteLink:"ไปหน้าขอใบเสนอราคา →",
+ct_formTitle:"สอบถามทั่วไป",
+ct_formSub:"* ช่องที่จำเป็น เราจะตอบกลับภายใน 24 ชั่วโมง",
+ct_labelName:"ชื่อ *",
+ct_phName:"สมชาย ใจดี",
+ct_labelPhone2:"โทรศัพท์ *",
+ct_phPhone:"010-0000-0000",
+ct_labelType:"ประเภทคำถาม *",
+ct_optSelect:"กรุณาเลือก",
+ct_optShowroom:"🏠 จองเยี่ยมชมโชว์รูม",
+ct_optAS:"🔧 คำขอบริการหลังการขาย",
+ct_optB2B:"🤝 ข้อเสนอพันธมิตร B2B",
+ct_optEtc:"💬 คำถามอื่นๆ",
+ct_labelMsg:"ข้อความ *",
+ct_phMsg:"กรุณาอธิบายคำถามของคุณอย่างอิสระ",
+ct_submit:"ส่งคำถาม",
+ct_banner1:"กำลังวางแผนธุรกิจแกลมปิ้ง/เพนชั่น?",
+ct_bannerLink:"หน้าขอใบเสนอราคา",
+ct_banner2:" สำหรับโซลูชันเฉพาะ",
+ct_bannerFull:"กำลังวางแผนธุรกิจแกลมปิ้ง/เพนชั่น? → <a href='quote.html'>หน้าขอใบเสนอราคา</a> สำหรับโซลูชันเฉพาะ",
+ct_bcContact:"ติดต่อ"
+}
+};
 </script>
 <script src="../assets/js/wocs-i18n.js"></script>
 <script src="../assets/js/wocs-header.js"></script>

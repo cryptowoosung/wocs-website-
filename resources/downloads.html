@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title data-t="pageTitle">WOCS 다운로드</title>
-<meta name="description" content="카탈로그 PDF">
+<title data-t="pageTitle">WOCS 다운로드 — 카탈로그 & 브로셔</title>
+<meta name="description" content="WOCS 통합 카탈로그 PDF와 64종 모델별 브로셔를 무료로 다운로드하세요.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Lexend:wght@200;300;400;500;600&family=Noto+Sans+KR:wght@300;400;500;600&family=Noto+Serif+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/wocs-common.css">
@@ -27,6 +27,26 @@
 <link rel="alternate" hreflang="th" href="https://wocs.kr/resources/downloads.html?lang=th">
 <link rel="alternate" hreflang="x-default" href="https://wocs.kr/resources/downloads.html">
 <meta name="theme-color" content="#09090b">
+
+<style>
+.dl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:48px;margin-top:64px}
+.dl-card{background:var(--bg2);border:1px solid rgba(201,169,110,0.12);overflow:hidden;transition:all .4s}
+.dl-card:hover{border-color:rgba(201,169,110,0.3);transform:translateY(-6px);box-shadow:0 24px 48px rgba(0,0,0,0.3)}
+.dl-thumb{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:var(--bg3)}
+.dl-thumb img{width:100%;height:100%;object-fit:cover;filter:brightness(0.85);transition:filter .4s}
+.dl-card:hover .dl-thumb img{filter:brightness(1)}
+.dl-thumb-badge{position:absolute;top:16px;right:16px;font-family:var(--font-body);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;background:rgba(9,9,11,0.85);border:1px solid rgba(201,169,110,0.3);color:var(--gold);padding:6px 14px;backdrop-filter:blur(8px)}
+.dl-body{padding:36px 32px 40px}
+.dl-tag{font-family:var(--font-body);font-size:10px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.dl-title{font-size:clamp(22px,2.5vw,30px);font-weight:400;line-height:1.3;margin-bottom:16px}
+.dl-desc{font-family:var(--font-body);font-size:13px;color:rgba(240,235,224,0.6);line-height:1.8;margin-bottom:8px}
+.dl-meta{font-family:var(--font-body);font-size:11px;color:rgba(240,235,224,0.4);margin-top:16px;display:flex;gap:20px;flex-wrap:wrap}
+.dl-meta span::before{content:'';display:inline-block;width:4px;height:4px;background:var(--gold);border-radius:50%;margin-right:8px;vertical-align:middle}
+.dl-btn-wrap{margin-top:28px}
+.dl-btn{font-family:var(--font-body);font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;padding:16px 40px;border:1px solid var(--gold);color:var(--bg);background:var(--gold);cursor:pointer;transition:all .4s;display:inline-block;text-align:center;text-decoration:none}
+.dl-btn:hover{background:transparent;color:var(--gold)}
+.dl-btn svg{width:14px;height:14px;vertical-align:middle;margin-right:8px;fill:currentColor}
+</style>
 </head>
 <body>
 <script>var WOCS_BASE="../";</script>
@@ -36,33 +56,164 @@
   <div class="container">
     <div class="breadcrumb" style="text-align:left"><a href="../index.html" data-t="home">홈</a> <span>›</span> <a href="../resources/index.html" data-t="navResources">자료실</a> <span>›</span> <span data-t="bc_current">다운로드</span></div>
     <div class="slab anim" data-t="heroSlab">DOWNLOADS</div>
-    <h1 class="anim anim-delay-1"><span data-t="heroH1">다운로드</span><br><span class="gold-text" data-t="heroH1g"></span></h1>
-    <p class="anim anim-delay-2" style="max-width:600px;margin:24px auto 0" data-t="heroDesc">카탈로그 PDF</p>
+    <h1 class="anim anim-delay-1"><span data-t="heroH1">카탈로그 & 브로셔</span><br><span class="gold-text" data-t="heroH1g">무료 다운로드</span></h1>
+    <p class="anim anim-delay-2" style="max-width:600px;margin:24px auto 0" data-t="heroDesc">WOCS의 전체 제품 라인업, 기술 스펙, 인증 정보를 담은 자료를 다운로드하세요.</p>
   </div>
 </section>
 <section style="padding:0;overflow:hidden">
-  <img data-replace="true" src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&h=600&fit=crop" alt="WOCS 프리미엄 글램핑 시공 downloads" style="width:100%;height:clamp(300px,40vw,500px);object-fit:cover;filter:brightness(0.88)" loading="lazy">
+  <img data-replace="true" src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&h=600&fit=crop" alt="WOCS 프리미엄 글램핑 구조물 카탈로그" style="width:100%;height:clamp(300px,40vw,500px);object-fit:cover;filter:brightness(0.88)" loading="lazy">
+</section>
+
+<!-- ── Download Cards ── -->
+<section style="background:var(--bg);padding:100px 5%">
+  <div class="container">
+    <div class="text-center anim">
+      <div class="slab" data-t="dlSectionSlab">FREE RESOURCES</div>
+      <h2 style="font-size:clamp(28px,3.5vw,48px);font-weight:300;margin-top:16px" data-t="dlSectionTitle">다운로드 <span class="gold-text" data-t="dlSectionTitleG">자료실</span></h2>
+      <p class="font-body" style="font-size:14px;color:rgba(240,235,224,0.53);margin-top:16px;max-width:560px;margin-left:auto;margin-right:auto" data-t="dlSectionDesc">프로젝트 기획에 필요한 모든 자료를 한곳에서 받아보세요.</p>
+    </div>
+
+    <div class="dl-grid">
+      <!-- Card 1: Catalog -->
+      <div class="dl-card anim">
+        <div class="dl-thumb">
+          <img data-replace="true" src="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?w=800&h=500&fit=crop&q=85" alt="WOCS 통합 카탈로그" loading="lazy">
+          <div class="dl-thumb-badge">PDF</div>
+        </div>
+        <div class="dl-body">
+          <div class="dl-tag" data-t="dlCatalogTag">CATALOG 2026</div>
+          <h3 class="dl-title" data-t="dlCatalogTitle">WOCS 통합 카탈로그</h3>
+          <p class="dl-desc" data-t="dlCatalogDesc">D-시리즈 돔, S-시리즈, Signature 시리즈, 모듈러 시스템까지 — 전체 제품 라인업과 기술 스펙, FITI 인증 정보, 시공 프로세스를 24페이지에 담았습니다.</p>
+          <div class="dl-meta">
+            <span data-t="dlCatalogMeta1">24페이지 A4</span>
+            <span data-t="dlCatalogMeta2">전체 제품 라인업</span>
+            <span data-t="dlCatalogMeta3">FITI 인증 포함</span>
+          </div>
+          <div class="dl-btn-wrap">
+            <a class="dl-btn" href="../assets/downloads/WOCS_Catalog_2026.pdf" download data-t="dlCatalogBtn"><svg viewBox="0 0 24 24"><path d="M12 16l-6-6h4V4h4v6h4l-6 6zm-8 4h16v2H4v-2z"/></svg>카탈로그 다운로드</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Brochures -->
+      <div class="dl-card anim anim-delay-1">
+        <div class="dl-thumb">
+          <img data-replace="true" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=500&fit=crop&q=85" alt="WOCS 모델별 브로셔" loading="lazy">
+          <div class="dl-thumb-badge">ZIP</div>
+        </div>
+        <div class="dl-body">
+          <div class="dl-tag" data-t="dlBrochureTag">BROCHURES</div>
+          <h3 class="dl-title" data-t="dlBrochureTitle">WOCS 모델별 브로셔</h3>
+          <p class="dl-desc" data-t="dlBrochureDesc">16개 모델 × 4가지 배리언트, 총 64종의 개별 브로셔를 하나의 ZIP 파일로 제공합니다. 고객 미팅이나 투자 제안서에 바로 활용하세요.</p>
+          <div class="dl-meta">
+            <span data-t="dlBrochureMeta1">64개 브로셔</span>
+            <span data-t="dlBrochureMeta2">A3 랜드스케이프</span>
+            <span data-t="dlBrochureMeta3">16모델 × 4배리언트</span>
+          </div>
+          <div class="dl-btn-wrap">
+            <a class="dl-btn" href="../assets/downloads/WOCS_Brochures_Final_64.zip" download data-t="dlBrochureBtn"><svg viewBox="0 0 24 24"><path d="M12 16l-6-6h4V4h4v6h4l-6 6zm-8 4h16v2H4v-2z"/></svg>브로셔 다운로드</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <div id="wocs-cta"></div>
 <div id="wocs-footer"></div>
 
 <script>
-var WOCS_PAGE_TR={ko:{pageTitle:"WOCS 다운로드",heroSlab:"DOWNLOADS",heroH1:"다운로드",heroDesc:"카탈로그 PDF",bc_current:"다운로드"},
-en:{pageTitle:"WOCS Downloads",heroSlab:"DOWNLOADS",heroH1:"Downloads",heroDesc:"Catalog PDF",bc_current:"Downloads"},
-ja:{},
-zh:{},
-es:{},
-fr:{},
-de:{},
-pt:{},
-it:{},
-ar:{},
-ru:{},
-tr:{},
-tw:{},
-id:{},
-th:{}
+var WOCS_PAGE_TR={
+ko:{
+  pageTitle:"WOCS 다운로드 — 카탈로그 & 브로셔",heroSlab:"DOWNLOADS",heroH1:"카탈로그 & 브로셔",heroH1g:"무료 다운로드",heroDesc:"WOCS의 전체 제품 라인업, 기술 스펙, 인증 정보를 담은 자료를 다운로드하세요.",bc_current:"다운로드",
+  dlSectionSlab:"FREE RESOURCES",dlSectionTitle:"다운로드",dlSectionTitleG:"자료실",dlSectionDesc:"프로젝트 기획에 필요한 모든 자료를 한곳에서 받아보세요.",
+  dlCatalogTag:"CATALOG 2026",dlCatalogTitle:"WOCS 통합 카탈로그",dlCatalogDesc:"D-시리즈 돔, S-시리즈, Signature 시리즈, 모듈러 시스템까지 — 전체 제품 라인업과 기술 스펙, FITI 인증 정보, 시공 프로세스를 24페이지에 담았습니다.",dlCatalogMeta1:"24페이지 A4",dlCatalogMeta2:"전체 제품 라인업",dlCatalogMeta3:"FITI 인증 포함",dlCatalogBtn:"카탈로그 다운로드",
+  dlBrochureTag:"BROCHURES",dlBrochureTitle:"WOCS 모델별 브로셔",dlBrochureDesc:"16개 모델 × 4가지 배리언트, 총 64종의 개별 브로셔를 하나의 ZIP 파일로 제공합니다. 고객 미팅이나 투자 제안서에 바로 활용하세요.",dlBrochureMeta1:"64개 브로셔",dlBrochureMeta2:"A3 랜드스케이프",dlBrochureMeta3:"16모델 × 4배리언트",dlBrochureBtn:"브로셔 다운로드"
+},
+en:{
+  pageTitle:"WOCS Downloads — Catalog & Brochures",heroSlab:"DOWNLOADS",heroH1:"Catalog & Brochures",heroH1g:"Free Downloads",heroDesc:"Download our full product lineup, technical specs, and certification documents.",bc_current:"Downloads",
+  dlSectionSlab:"FREE RESOURCES",dlSectionTitle:"Download",dlSectionTitleG:"Center",dlSectionDesc:"All the materials you need for your project planning, in one place.",
+  dlCatalogTag:"CATALOG 2026",dlCatalogTitle:"WOCS Full Catalog",dlCatalogDesc:"D-Series domes, S-Series, Signature Series, and modular systems — complete product lineup, technical specs, FITI certifications, and construction process in 24 pages.",dlCatalogMeta1:"24 Pages A4",dlCatalogMeta2:"Full Product Lineup",dlCatalogMeta3:"FITI Certified",dlCatalogBtn:"Download Catalog",
+  dlBrochureTag:"BROCHURES",dlBrochureTitle:"WOCS Model Brochures",dlBrochureDesc:"16 models × 4 variants, a total of 64 individual brochures in one ZIP file. Ready to use for client meetings and investment proposals.",dlBrochureMeta1:"64 Brochures",dlBrochureMeta2:"A3 Landscape",dlBrochureMeta3:"16 Models × 4 Variants",dlBrochureBtn:"Download Brochures"
+},
+ja:{
+  pageTitle:"WOCS ダウンロード — カタログ＆パンフレット",heroSlab:"DOWNLOADS",heroH1:"カタログ＆パンフレット",heroH1g:"無料ダウンロード",heroDesc:"WOCS全製品ラインナップ、技術仕様、認証情報をダウンロードしてください。",bc_current:"ダウンロード",
+  dlSectionSlab:"FREE RESOURCES",dlSectionTitle:"ダウンロード",dlSectionTitleG:"センター",dlSectionDesc:"プロジェクト企画に必要なすべての資料をまとめてご覧ください。",
+  dlCatalogTag:"CATALOG 2026",dlCatalogTitle:"WOCS 統合カタログ",dlCatalogDesc:"D-シリーズドーム、S-シリーズ、Signatureシリーズ、モジュラーシステムまで — 全製品ラインナップと技術仕様、FITI認証情報、施工プロセスを24ページに収録。",dlCatalogMeta1:"24ページ A4",dlCatalogMeta2:"全製品ラインナップ",dlCatalogMeta3:"FITI認証収録",dlCatalogBtn:"カタログダウンロード",
+  dlBrochureTag:"BROCHURES",dlBrochureTitle:"WOCS モデル別パンフレット",dlBrochureDesc:"16モデル×4バリアント、計64種の個別パンフレットを1つのZIPファイルで提供。商談や投資提案にすぐ活用できます。",dlBrochureMeta1:"64部",dlBrochureMeta2:"A3ランドスケープ",dlBrochureMeta3:"16モデル×4バリアント",dlBrochureBtn:"パンフレットダウンロード"
+},
+zh:{
+  pageTitle:"WOCS 下载 — 产品目录与宣传册",heroSlab:"DOWNLOADS",heroH1:"产品目录与宣传册",heroH1g:"免费下载",heroDesc:"下载WOCS完整产品线、技术规格和认证信息资料。",bc_current:"下载",
+  dlSectionSlab:"FREE RESOURCES",dlSectionTitle:"下载",dlSectionTitleG:"中心",dlSectionDesc:"项目规划所需的所有资料，一站获取。",
+  dlCatalogTag:"CATALOG 2026",dlCatalogTitle:"WOCS 综合产品目录",dlCatalogDesc:"D系列穹顶、S系列、Signature系列和模块化系统 — 完整产品线、技术规格、FITI认证信息和施工流程，24页呈现。",dlCatalogMeta1:"24页 A4",dlCatalogMeta2:"完整产品线",dlCatalogMeta3:"含FITI认证",dlCatalogBtn:"下载产品目录",
+  dlBrochureTag:"BROCHURES",dlBrochureTitle:"WOCS 型号宣传册",dlBrochureDesc:"16个型号×4种配置，共64份独立宣传册，打包为ZIP文件。可直接用于客户会议和投资提案。",dlBrochureMeta1:"64份宣传册",dlBrochureMeta2:"A3横版",dlBrochureMeta3:"16型号×4配置",dlBrochureBtn:"下载宣传册"
+},
+es:{
+  pageTitle:"WOCS Descargas — Catálogo y Folletos",heroSlab:"DOWNLOADS",heroH1:"Catálogo y Folletos",heroH1g:"Descarga Gratuita",heroDesc:"Descargue nuestra línea completa de productos, especificaciones técnicas y documentos de certificación.",bc_current:"Descargas",
+  dlSectionSlab:"FREE RESOURCES",dlSectionTitle:"Centro de",dlSectionTitleG:"Descargas",dlSectionDesc:"Todos los materiales que necesita para planificar su proyecto, en un solo lugar.",
+  dlCatalogTag:"CATALOG 2026",dlCatalogTitle:"Catálogo Completo WOCS",dlCatalogDesc:"Domos Serie D, Serie S, Serie Signature y sistemas modulares — línea completa, especificaciones técnicas, certificaciones FITI y proceso constructivo en 24 páginas.",dlCatalogMeta1:"24 Páginas A4",dlCatalogMeta2:"Línea Completa",dlCatalogMeta3:"Certificación FITI",dlCatalogBtn:"Descargar Catálogo",
+  dlBrochureTag:"BROCHURES",dlBrochureTitle:"Folletos por Modelo WOCS",dlBrochureDesc:"16 modelos × 4 variantes, 64 folletos individuales en un archivo ZIP. Listos para reuniones con clientes y propuestas de inversión.",dlBrochureMeta1:"64 Folletos",dlBrochureMeta2:"A3 Horizontal",dlBrochureMeta3:"16 Modelos × 4 Variantes",dlBrochureBtn:"Descargar Folletos"
+},
+fr:{
+  pageTitle:"WOCS Téléchargements — Catalogue et Brochures",heroSlab:"DOWNLOADS",heroH1:"Catalogue et Brochures",heroH1g:"Téléchargement Gratuit",heroDesc:"Téléchargez notre gamme complète de produits, spécifications techniques et documents de certification.",bc_current:"Téléchargements",
+  dlSectionSlab:"FREE RESOURCES",dlSectionTitle:"Centre de",dlSectionTitleG:"Téléchargement",dlSectionDesc:"Tous les documents nécessaires à la planification de votre projet, au même endroit.",
+  dlCatalogTag:"CATALOG 2026",dlCatalogTitle:"Catalogue Complet WOCS",dlCatalogDesc:"Dômes Série D, Série S, Série Signature et systèmes modulaires — gamme complète, spécifications techniques, certifications FITI et processus de construction en 24 pages.",dlCatalogMeta1:"24 Pages A4",dlCatalogMeta2:"Gamme Complète",dlCatalogMeta3:"Certification FITI",dlCatalogBtn:"Télécharger le Catalogue",
+  dlBrochureTag:"BROCHURES",dlBrochureTitle:"Brochures par Modèle WOCS",dlBrochureDesc:"16 modèles × 4 variantes, 64 brochures individuelles dans un fichier ZIP. Prêtes pour vos réunions clients et propositions d'investissement.",dlBrochureMeta1:"64 Brochures",dlBrochureMeta2:"A3 Paysage",dlBrochureMeta3:"16 Modèles × 4 Variantes",dlBrochureBtn:"Télécharger les Brochures"
+},
+de:{
+  pageTitle:"WOCS Downloads — Katalog & Broschüren",heroSlab:"DOWNLOADS",heroH1:"Katalog & Broschüren",heroH1g:"Kostenloser Download",heroDesc:"Laden Sie unser vollständiges Produktsortiment, technische Spezifikationen und Zertifizierungsdokumente herunter.",bc_current:"Downloads",
+  dlSectionSlab:"FREE RESOURCES",dlSectionTitle:"Download-",dlSectionTitleG:"Center",dlSectionDesc:"Alle Materialien für Ihre Projektplanung an einem Ort.",
+  dlCatalogTag:"CATALOG 2026",dlCatalogTitle:"WOCS Gesamtkatalog",dlCatalogDesc:"D-Serie Domes, S-Serie, Signature Serie und Modularsysteme — komplettes Sortiment, technische Spezifikationen, FITI-Zertifizierungen und Bauprozess auf 24 Seiten.",dlCatalogMeta1:"24 Seiten A4",dlCatalogMeta2:"Komplettes Sortiment",dlCatalogMeta3:"FITI-Zertifiziert",dlCatalogBtn:"Katalog Herunterladen",
+  dlBrochureTag:"BROCHURES",dlBrochureTitle:"WOCS Modell-Broschüren",dlBrochureDesc:"16 Modelle × 4 Varianten, insgesamt 64 einzelne Broschüren in einer ZIP-Datei. Sofort einsatzbereit für Kundengespräche und Investitionsvorschläge.",dlBrochureMeta1:"64 Broschüren",dlBrochureMeta2:"A3 Querformat",dlBrochureMeta3:"16 Modelle × 4 Varianten",dlBrochureBtn:"Broschüren Herunterladen"
+},
+pt:{
+  pageTitle:"WOCS Downloads — Catálogo e Folhetos",heroSlab:"DOWNLOADS",heroH1:"Catálogo e Folhetos",heroH1g:"Download Gratuito",heroDesc:"Baixe nossa linha completa de produtos, especificações técnicas e documentos de certificação.",bc_current:"Downloads",
+  dlSectionSlab:"FREE RESOURCES",dlSectionTitle:"Central de",dlSectionTitleG:"Downloads",dlSectionDesc:"Todos os materiais necessários para o planejamento do seu projeto, em um só lugar.",
+  dlCatalogTag:"CATALOG 2026",dlCatalogTitle:"Catálogo Completo WOCS",dlCatalogDesc:"Domos Série D, Série S, Série Signature e sistemas modulares — linha completa, especificações técnicas, certificações FITI e processo construtivo em 24 páginas.",dlCatalogMeta1:"24 Páginas A4",dlCatalogMeta2:"Linha Completa",dlCatalogMeta3:"Certificação FITI",dlCatalogBtn:"Baixar Catálogo",
+  dlBrochureTag:"BROCHURES",dlBrochureTitle:"Folhetos por Modelo WOCS",dlBrochureDesc:"16 modelos × 4 variantes, 64 folhetos individuais em um arquivo ZIP. Prontos para reuniões com clientes e propostas de investimento.",dlBrochureMeta1:"64 Folhetos",dlBrochureMeta2:"A3 Paisagem",dlBrochureMeta3:"16 Modelos × 4 Variantes",dlBrochureBtn:"Baixar Folhetos"
+},
+it:{
+  pageTitle:"WOCS Download — Catalogo e Brochure",heroSlab:"DOWNLOADS",heroH1:"Catalogo e Brochure",heroH1g:"Download Gratuito",heroDesc:"Scarica la nostra gamma completa di prodotti, specifiche tecniche e documenti di certificazione.",bc_current:"Download",
+  dlSectionSlab:"FREE RESOURCES",dlSectionTitle:"Centro",dlSectionTitleG:"Download",dlSectionDesc:"Tutti i materiali necessari per la pianificazione del tuo progetto, in un unico posto.",
+  dlCatalogTag:"CATALOG 2026",dlCatalogTitle:"Catalogo Completo WOCS",dlCatalogDesc:"Cupole Serie D, Serie S, Serie Signature e sistemi modulari — gamma completa, specifiche tecniche, certificazioni FITI e processo costruttivo in 24 pagine.",dlCatalogMeta1:"24 Pagine A4",dlCatalogMeta2:"Gamma Completa",dlCatalogMeta3:"Certificazione FITI",dlCatalogBtn:"Scarica Catalogo",
+  dlBrochureTag:"BROCHURES",dlBrochureTitle:"Brochure per Modello WOCS",dlBrochureDesc:"16 modelli × 4 varianti, 64 brochure individuali in un file ZIP. Pronte per meeting con clienti e proposte di investimento.",dlBrochureMeta1:"64 Brochure",dlBrochureMeta2:"A3 Orizzontale",dlBrochureMeta3:"16 Modelli × 4 Varianti",dlBrochureBtn:"Scarica Brochure"
+},
+ar:{
+  pageTitle:"تحميلات WOCS — الكتالوج والكتيبات",heroSlab:"DOWNLOADS",heroH1:"الكتالوج والكتيبات",heroH1g:"تحميل مجاني",heroDesc:"قم بتحميل مجموعة منتجاتنا الكاملة والمواصفات الفنية ووثائق الاعتماد.",bc_current:"التحميلات",
+  dlSectionSlab:"FREE RESOURCES",dlSectionTitle:"مركز",dlSectionTitleG:"التحميلات",dlSectionDesc:"جميع المواد التي تحتاجها لتخطيط مشروعك في مكان واحد.",
+  dlCatalogTag:"CATALOG 2026",dlCatalogTitle:"كتالوج WOCS الشامل",dlCatalogDesc:"قباب سلسلة D وسلسلة S وسلسلة Signature والأنظمة المعيارية — المجموعة الكاملة والمواصفات الفنية وشهادات FITI وعملية البناء في 24 صفحة.",dlCatalogMeta1:"24 صفحة A4",dlCatalogMeta2:"المجموعة الكاملة",dlCatalogMeta3:"شهادة FITI",dlCatalogBtn:"تحميل الكتالوج",
+  dlBrochureTag:"BROCHURES",dlBrochureTitle:"كتيبات WOCS حسب الطراز",dlBrochureDesc:"16 طرازاً × 4 تكوينات، إجمالي 64 كتيباً فردياً في ملف ZIP واحد. جاهزة للاستخدام في اجتماعات العملاء ومقترحات الاستثمار.",dlBrochureMeta1:"64 كتيباً",dlBrochureMeta2:"A3 أفقي",dlBrochureMeta3:"16 طراز × 4 تكوينات",dlBrochureBtn:"تحميل الكتيبات"
+},
+ru:{
+  pageTitle:"WOCS Загрузки — Каталог и Брошюры",heroSlab:"DOWNLOADS",heroH1:"Каталог и Брошюры",heroH1g:"Бесплатная Загрузка",heroDesc:"Скачайте полную линейку продукции, технические характеристики и сертификационные документы.",bc_current:"Загрузки",
+  dlSectionSlab:"FREE RESOURCES",dlSectionTitle:"Центр",dlSectionTitleG:"Загрузок",dlSectionDesc:"Все материалы для планирования вашего проекта в одном месте.",
+  dlCatalogTag:"CATALOG 2026",dlCatalogTitle:"Полный Каталог WOCS",dlCatalogDesc:"Купола серии D, серия S, серия Signature и модульные системы — полная линейка, технические характеристики, сертификаты FITI и строительный процесс на 24 страницах.",dlCatalogMeta1:"24 Страницы A4",dlCatalogMeta2:"Полная Линейка",dlCatalogMeta3:"Сертификат FITI",dlCatalogBtn:"Скачать Каталог",
+  dlBrochureTag:"BROCHURES",dlBrochureTitle:"Брошюры по Моделям WOCS",dlBrochureDesc:"16 моделей × 4 варианта, всего 64 индивидуальных брошюры в одном ZIP-файле. Готовы для встреч с клиентами и инвестиционных предложений.",dlBrochureMeta1:"64 Брошюры",dlBrochureMeta2:"A3 Альбомная",dlBrochureMeta3:"16 Моделей × 4 Варианта",dlBrochureBtn:"Скачать Брошюры"
+},
+tr:{
+  pageTitle:"WOCS İndirmeler — Katalog ve Broşürler",heroSlab:"DOWNLOADS",heroH1:"Katalog ve Broşürler",heroH1g:"Ücretsiz İndirme",heroDesc:"Tüm ürün yelpazemizi, teknik özellikleri ve sertifika belgelerini indirin.",bc_current:"İndirmeler",
+  dlSectionSlab:"FREE RESOURCES",dlSectionTitle:"İndirme",dlSectionTitleG:"Merkezi",dlSectionDesc:"Proje planlamanız için gereken tüm materyaller tek bir yerde.",
+  dlCatalogTag:"CATALOG 2026",dlCatalogTitle:"WOCS Tam Katalog",dlCatalogDesc:"D-Serisi kubbeler, S-Serisi, Signature Serisi ve modüler sistemler — tam ürün yelpazesi, teknik özellikler, FITI sertifikaları ve inşaat süreci 24 sayfada.",dlCatalogMeta1:"24 Sayfa A4",dlCatalogMeta2:"Tam Ürün Yelpazesi",dlCatalogMeta3:"FITI Sertifikalı",dlCatalogBtn:"Katalog İndir",
+  dlBrochureTag:"BROCHURES",dlBrochureTitle:"WOCS Model Broşürleri",dlBrochureDesc:"16 model × 4 varyant, toplam 64 bireysel broşür tek bir ZIP dosyasında. Müşteri toplantıları ve yatırım teklifleri için kullanıma hazır.",dlBrochureMeta1:"64 Broşür",dlBrochureMeta2:"A3 Yatay",dlBrochureMeta3:"16 Model × 4 Varyant",dlBrochureBtn:"Broşürleri İndir"
+},
+tw:{
+  pageTitle:"WOCS 下載 — 產品目錄與宣傳冊",heroSlab:"DOWNLOADS",heroH1:"產品目錄與宣傳冊",heroH1g:"免費下載",heroDesc:"下載WOCS完整產品線、技術規格和認證資訊資料。",bc_current:"下載",
+  dlSectionSlab:"FREE RESOURCES",dlSectionTitle:"下載",dlSectionTitleG:"中心",dlSectionDesc:"專案規劃所需的所有資料，一站取得。",
+  dlCatalogTag:"CATALOG 2026",dlCatalogTitle:"WOCS 綜合產品目錄",dlCatalogDesc:"D系列穹頂、S系列、Signature系列和模組化系統 — 完整產品線、技術規格、FITI認證資訊和施工流程，24頁呈現。",dlCatalogMeta1:"24頁 A4",dlCatalogMeta2:"完整產品線",dlCatalogMeta3:"含FITI認證",dlCatalogBtn:"下載產品目錄",
+  dlBrochureTag:"BROCHURES",dlBrochureTitle:"WOCS 型號宣傳冊",dlBrochureDesc:"16個型號×4種配置，共64份獨立宣傳冊，打包為ZIP檔案。可直接用於客戶會議和投資提案。",dlBrochureMeta1:"64份宣傳冊",dlBrochureMeta2:"A3橫版",dlBrochureMeta3:"16型號×4配置",dlBrochureBtn:"下載宣傳冊"
+},
+id:{
+  pageTitle:"WOCS Unduhan — Katalog & Brosur",heroSlab:"DOWNLOADS",heroH1:"Katalog & Brosur",heroH1g:"Unduh Gratis",heroDesc:"Unduh seluruh lini produk, spesifikasi teknis, dan dokumen sertifikasi kami.",bc_current:"Unduhan",
+  dlSectionSlab:"FREE RESOURCES",dlSectionTitle:"Pusat",dlSectionTitleG:"Unduhan",dlSectionDesc:"Semua materi yang Anda butuhkan untuk perencanaan proyek, di satu tempat.",
+  dlCatalogTag:"CATALOG 2026",dlCatalogTitle:"Katalog Lengkap WOCS",dlCatalogDesc:"Dome Seri D, Seri S, Seri Signature, dan sistem modular — lini produk lengkap, spesifikasi teknis, sertifikasi FITI, dan proses konstruksi dalam 24 halaman.",dlCatalogMeta1:"24 Halaman A4",dlCatalogMeta2:"Lini Produk Lengkap",dlCatalogMeta3:"Bersertifikat FITI",dlCatalogBtn:"Unduh Katalog",
+  dlBrochureTag:"BROCHURES",dlBrochureTitle:"Brosur Model WOCS",dlBrochureDesc:"16 model × 4 varian, total 64 brosur individual dalam satu file ZIP. Siap digunakan untuk pertemuan klien dan proposal investasi.",dlBrochureMeta1:"64 Brosur",dlBrochureMeta2:"A3 Lanskap",dlBrochureMeta3:"16 Model × 4 Varian",dlBrochureBtn:"Unduh Brosur"
+},
+th:{
+  pageTitle:"WOCS ดาวน์โหลด — แคตตาล็อกและโบรชัวร์",heroSlab:"DOWNLOADS",heroH1:"แคตตาล็อกและโบรชัวร์",heroH1g:"ดาวน์โหลดฟรี",heroDesc:"ดาวน์โหลดไลน์อัพผลิตภัณฑ์ทั้งหมด สเปคเทคนิค และเอกสารรับรอง",bc_current:"ดาวน์โหลด",
+  dlSectionSlab:"FREE RESOURCES",dlSectionTitle:"ศูนย์",dlSectionTitleG:"ดาวน์โหลด",dlSectionDesc:"เอกสารทั้งหมดที่คุณต้องการสำหรับการวางแผนโครงการ รวมไว้ในที่เดียว",
+  dlCatalogTag:"CATALOG 2026",dlCatalogTitle:"แคตตาล็อกรวม WOCS",dlCatalogDesc:"โดม D-Series, S-Series, Signature Series และระบบโมดูลาร์ — ไลน์อัพผลิตภัณฑ์ทั้งหมด สเปคเทคนิค ใบรับรอง FITI และกระบวนการก่อสร้างใน 24 หน้า",dlCatalogMeta1:"24 หน้า A4",dlCatalogMeta2:"ไลน์อัพทั้งหมด",dlCatalogMeta3:"รับรอง FITI",dlCatalogBtn:"ดาวน์โหลดแคตตาล็อก",
+  dlBrochureTag:"BROCHURES",dlBrochureTitle:"โบรชัวร์รายรุ่น WOCS",dlBrochureDesc:"16 รุ่น × 4 แบบ รวม 64 โบรชัวร์ในไฟล์ ZIP เดียว พร้อมใช้สำหรับการประชุมลูกค้าและข้อเสนอการลงทุน",dlBrochureMeta1:"64 โบรชัวร์",dlBrochureMeta2:"A3 แนวนอน",dlBrochureMeta3:"16 รุ่น × 4 แบบ",dlBrochureBtn:"ดาวน์โหลดโบรชัวร์"
+}
 };
 </script>
 <script src="../assets/js/wocs-i18n.js"></script>
