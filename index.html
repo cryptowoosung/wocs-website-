@@ -1651,7 +1651,7 @@ function WOCSHomepage() {
         .btn-gold-fill { font-family:'Lexend',sans-serif; font-size:11px; font-weight:500; letter-spacing:3px; text-transform:uppercase; padding:16px 40px; border:1px solid ${GOLD}; color:${BG}; background:${GOLD}; cursor:pointer; transition:all .4s; }
         .btn-gold-fill:hover { background:transparent; color:${GOLD}; }
         .section-pad { padding:120px 5%; max-width:1400px; margin:0 auto; }
-        .noise-overlay { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:9999; opacity:.025; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+        .noise-overlay { display:none; }
       `}</style>
 
       {/* Noise overlay */}
@@ -1900,7 +1900,7 @@ function WOCSHomepage() {
             transition: "opacity 1.5s ease",
           }}>
             <img src={slide.img} alt="WOCS 프리미엄 글램핑 시공 index" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
-            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(9,9,11,0.78) 0%, rgba(9,9,11,0.5) 50%, rgba(9,9,11,0.3) 100%)" }} />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(9,9,11,0) 0%, rgba(9,9,11,0) 50%, rgba(9,9,11,0) 100%)" }} />
           </div>
         ))}
 
@@ -2534,7 +2534,7 @@ function WOCSHomepage() {
               onClick={() => window.location.href=blog.href+"?lang="+currentLang}
               >
                 <div style={{ height: 200, position: "relative", overflow: "hidden" }}>
-                  <img src={blog.img} alt={blog.title} style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.7)" }} loading="lazy" />
+                  <img src={blog.img} alt={blog.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
                   <span style={{ ...S.sf, fontSize: 10, letterSpacing: 3, color: GOLD, padding: "6px 16px", border: `1px solid ${GOLD}40`, position: "absolute", top: 16, left: 16, background: "rgba(9,9,11,0.7)" }}>{blog.tag}</span>
                 </div>
                 <div style={{ padding: "24px 28px" }}>

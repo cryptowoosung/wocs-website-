@@ -1,1244 +1,399 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://wocs.kr/about/index.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/about/index.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/about/index.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/about/index.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/about/index.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/about/index.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/about/index.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/about/index.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/about/index.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/about/index.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/about/index.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/about/index.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/about/index.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/about/index.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/about/index.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/about/index.html?lang=th"/>
+    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://wocs.kr/about/showroom.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/about/showroom.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/about/showroom.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/about/showroom.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/about/showroom.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/about/showroom.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/about/showroom.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/about/showroom.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/about/showroom.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/about/showroom.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/about/showroom.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/about/showroom.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/about/showroom.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/about/showroom.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/about/showroom.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/about/showroom.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/about/team.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/about/team.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/about/team.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/about/team.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/about/team.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/about/team.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/about/team.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/about/team.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/about/team.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/about/team.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/about/team.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/about/team.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/about/team.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/about/team.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/about/team.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/about/team.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/about/technology.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/about/technology.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/about/technology.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/about/technology.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/about/technology.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/about/technology.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/about/technology.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/about/technology.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/about/technology.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/about/technology.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/about/technology.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/about/technology.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/about/technology.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/about/technology.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/about/technology.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/about/technology.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/contact/index.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/contact/index.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/contact/index.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/contact/index.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/contact/index.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/contact/index.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/contact/index.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/contact/index.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/contact/index.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/contact/index.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/contact/index.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/contact/index.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/contact/index.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/contact/index.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/contact/index.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/contact/index.html?lang=th"/>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://wocs.kr/contact/quote.html</loc>
+    <lastmod>2026-03-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/contact/roi-calculator.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/contact/roi-calculator.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/contact/roi-calculator.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/contact/roi-calculator.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/contact/roi-calculator.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/contact/roi-calculator.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/contact/roi-calculator.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/contact/roi-calculator.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/contact/roi-calculator.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/contact/roi-calculator.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/contact/roi-calculator.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/contact/roi-calculator.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/contact/roi-calculator.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/contact/roi-calculator.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/contact/roi-calculator.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/contact/roi-calculator.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/gallery/index.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/gallery/index.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/gallery/index.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/gallery/index.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/gallery/index.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/gallery/index.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/gallery/index.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/gallery/index.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/gallery/index.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/gallery/index.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/gallery/index.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/gallery/index.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/gallery/index.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/gallery/index.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/gallery/index.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/gallery/index.html?lang=th"/>
+    <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://wocs.kr/</loc>
+    <loc>https://wocs.kr/index.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/?lang=th"/>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://wocs.kr/legal/cookies.html</loc>
+    <lastmod>2026-03-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/legal/privacy.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/legal/privacy.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/legal/privacy.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/legal/privacy.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/legal/privacy.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/legal/privacy.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/legal/privacy.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/legal/privacy.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/legal/privacy.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/legal/privacy.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/legal/privacy.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/legal/privacy.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/legal/privacy.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/legal/privacy.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/legal/privacy.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/legal/privacy.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/legal/terms.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/legal/terms.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/legal/terms.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/legal/terms.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/legal/terms.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/legal/terms.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/legal/terms.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/legal/terms.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/legal/terms.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/legal/terms.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/legal/terms.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/legal/terms.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/legal/terms.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/legal/terms.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/legal/terms.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/legal/terms.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/occasions/airbnb.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/occasions/airbnb.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/occasions/airbnb.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/occasions/airbnb.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/occasions/airbnb.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/occasions/airbnb.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/occasions/airbnb.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/occasions/airbnb.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/occasions/airbnb.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/occasions/airbnb.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/occasions/airbnb.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/occasions/airbnb.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/occasions/airbnb.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/occasions/airbnb.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/occasions/airbnb.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/occasions/airbnb.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/occasions/glamping-pod.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/occasions/glamping-pod.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/occasions/glamping-pod.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/occasions/glamping-pod.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/occasions/glamping-pod.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/occasions/glamping-pod.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/occasions/glamping-pod.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/occasions/glamping-pod.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/occasions/glamping-pod.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/occasions/glamping-pod.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/occasions/glamping-pod.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/occasions/glamping-pod.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/occasions/glamping-pod.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/occasions/glamping-pod.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/occasions/glamping-pod.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/occasions/glamping-pod.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/occasions/glamping.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/occasions/glamping.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/occasions/glamping.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/occasions/glamping.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/occasions/glamping.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/occasions/glamping.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/occasions/glamping.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/occasions/glamping.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/occasions/glamping.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/occasions/glamping.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/occasions/glamping.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/occasions/glamping.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/occasions/glamping.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/occasions/glamping.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/occasions/glamping.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/occasions/glamping.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/occasions/hotel.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/occasions/hotel.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/occasions/hotel.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/occasions/hotel.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/occasions/hotel.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/occasions/hotel.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/occasions/hotel.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/occasions/hotel.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/occasions/hotel.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/occasions/hotel.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/occasions/hotel.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/occasions/hotel.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/occasions/hotel.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/occasions/hotel.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/occasions/hotel.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/occasions/hotel.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/occasions/index.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/occasions/index.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/occasions/index.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/occasions/index.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/occasions/index.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/occasions/index.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/occasions/index.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/occasions/index.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/occasions/index.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/occasions/index.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/occasions/index.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/occasions/index.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/occasions/index.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/occasions/index.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/occasions/index.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/occasions/index.html?lang=th"/>
+    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://wocs.kr/occasions/permanent.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/occasions/permanent.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/occasions/permanent.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/occasions/permanent.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/occasions/permanent.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/occasions/permanent.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/occasions/permanent.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/occasions/permanent.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/occasions/permanent.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/occasions/permanent.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/occasions/permanent.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/occasions/permanent.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/occasions/permanent.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/occasions/permanent.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/occasions/permanent.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/occasions/permanent.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/occasions/resort.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/occasions/resort.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/occasions/resort.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/occasions/resort.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/occasions/resort.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/occasions/resort.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/occasions/resort.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/occasions/resort.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/occasions/resort.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/occasions/resort.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/occasions/resort.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/occasions/resort.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/occasions/resort.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/occasions/resort.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/occasions/resort.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/occasions/resort.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/occasions/sports.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/occasions/sports.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/occasions/sports.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/occasions/sports.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/occasions/sports.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/occasions/sports.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/occasions/sports.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/occasions/sports.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/occasions/sports.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/occasions/sports.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/occasions/sports.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/occasions/sports.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/occasions/sports.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/occasions/sports.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/occasions/sports.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/occasions/sports.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/occasions/wedding.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/occasions/wedding.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/occasions/wedding.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/occasions/wedding.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/occasions/wedding.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/occasions/wedding.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/occasions/wedding.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/occasions/wedding.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/occasions/wedding.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/occasions/wedding.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/occasions/wedding.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/occasions/wedding.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/occasions/wedding.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/occasions/wedding.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/occasions/wedding.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/occasions/wedding.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/occasions/winter.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/occasions/winter.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/occasions/winter.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/occasions/winter.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/occasions/winter.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/occasions/winter.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/occasions/winter.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/occasions/winter.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/occasions/winter.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/occasions/winter.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/occasions/winter.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/occasions/winter.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/occasions/winter.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/occasions/winter.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/occasions/winter.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/occasions/winter.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/portfolio/case-detail.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/portfolio/case-detail.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/portfolio/case-detail.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/portfolio/case-detail.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/portfolio/case-detail.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/portfolio/case-detail.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/portfolio/case-detail.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/portfolio/case-detail.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/portfolio/case-detail.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/portfolio/case-detail.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/portfolio/case-detail.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/portfolio/case-detail.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/portfolio/case-detail.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/portfolio/case-detail.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/portfolio/case-detail.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/portfolio/case-detail.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/portfolio/index.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/portfolio/index.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/portfolio/index.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/portfolio/index.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/portfolio/index.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/portfolio/index.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/portfolio/index.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/portfolio/index.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/portfolio/index.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/portfolio/index.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/portfolio/index.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/portfolio/index.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/portfolio/index.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/portfolio/index.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/portfolio/index.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/portfolio/index.html?lang=th"/>
+    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/addons.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/addons.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/addons.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/addons.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/addons.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/addons.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/addons.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/addons.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/addons.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/addons.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/addons.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/addons.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/addons.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/addons.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/addons.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/addons.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/bell-tent.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/bell-tent.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/bell-tent.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/bell-tent.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/bell-tent.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/bell-tent.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/bell-tent.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/bell-tent.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/bell-tent.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/bell-tent.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/bell-tent.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/bell-tent.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/bell-tent.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/bell-tent.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/bell-tent.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/bell-tent.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/birdcage.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/birdcage.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/birdcage.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/birdcage.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/birdcage.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/birdcage.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/birdcage.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/birdcage.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/birdcage.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/birdcage.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/birdcage.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/birdcage.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/birdcage.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/birdcage.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/birdcage.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/birdcage.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/cocoon-house.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/cocoon-house.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/cocoon-house.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/cocoon-house.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/cocoon-house.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/cocoon-house.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/cocoon-house.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/cocoon-house.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/cocoon-house.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/cocoon-house.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/cocoon-house.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/cocoon-house.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/cocoon-house.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/cocoon-house.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/cocoon-house.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/cocoon-house.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/cube-cabin.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/cube-cabin.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/cube-cabin.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/cube-cabin.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/cube-cabin.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/cube-cabin.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/cube-cabin.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/cube-cabin.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/cube-cabin.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/cube-cabin.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/cube-cabin.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/cube-cabin.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/cube-cabin.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/cube-cabin.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/cube-cabin.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/cube-cabin.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/dome-tent.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/dome-tent.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/dome-tent.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/dome-tent.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/dome-tent.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/dome-tent.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/dome-tent.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/dome-tent.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/dome-tent.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/dome-tent.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/dome-tent.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/dome-tent.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/dome-tent.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/dome-tent.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/dome-tent.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/dome-tent.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/geodesic-domes-custom.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/geodesic-domes-custom.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/geodesic-domes-custom.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/geodesic-domes-custom.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/geodesic-domes-custom.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/geodesic-domes-custom.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/geodesic-domes-custom.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/geodesic-domes-custom.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/geodesic-domes-custom.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/geodesic-domes-custom.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/geodesic-domes-custom.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/geodesic-domes-custom.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/geodesic-domes-custom.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/geodesic-domes-custom.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/geodesic-domes-custom.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/geodesic-domes-custom.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/geodesic-domes-preconfigured.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/geodesic-domes-preconfigured.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/geodesic-domes-preconfigured.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/geodesic-domes-preconfigured.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/geodesic-domes-preconfigured.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/geodesic-domes-preconfigured.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/geodesic-domes-preconfigured.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/geodesic-domes-preconfigured.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/geodesic-domes-preconfigured.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/geodesic-domes-preconfigured.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/geodesic-domes-preconfigured.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/geodesic-domes-preconfigured.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/geodesic-domes-preconfigured.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/geodesic-domes-preconfigured.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/geodesic-domes-preconfigured.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/geodesic-domes-preconfigured.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/geodesic-domes-ready.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/geodesic-domes-ready.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/geodesic-domes-ready.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/geodesic-domes-ready.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/geodesic-domes-ready.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/geodesic-domes-ready.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/geodesic-domes-ready.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/geodesic-domes-ready.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/geodesic-domes-ready.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/geodesic-domes-ready.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/geodesic-domes-ready.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/geodesic-domes-ready.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/geodesic-domes-ready.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/geodesic-domes-ready.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/geodesic-domes-ready.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/geodesic-domes-ready.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/geodesic-domes.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/geodesic-domes.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/geodesic-domes.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/geodesic-domes.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/geodesic-domes.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/geodesic-domes.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/geodesic-domes.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/geodesic-domes.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/geodesic-domes.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/geodesic-domes.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/geodesic-domes.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/geodesic-domes.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/geodesic-domes.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/geodesic-domes.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/geodesic-domes.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/geodesic-domes.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/index.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/index.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/index.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/index.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/index.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/index.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/index.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/index.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/index.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/index.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/index.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/index.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/index.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/index.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/index.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/index.html?lang=th"/>
+    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/luxury-tents.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/luxury-tents.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/luxury-tents.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/luxury-tents.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/luxury-tents.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/luxury-tents.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/luxury-tents.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/luxury-tents.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/luxury-tents.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/luxury-tents.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/luxury-tents.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/luxury-tents.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/luxury-tents.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/luxury-tents.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/luxury-tents.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/luxury-tents.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/modular-bath.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/modular-bath.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/modular-bath.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/modular-bath.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/modular-bath.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/modular-bath.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/modular-bath.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/modular-bath.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/modular-bath.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/modular-bath.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/modular-bath.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/modular-bath.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/modular-bath.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/modular-bath.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/modular-bath.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/modular-bath.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/modular-deck.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/modular-deck.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/modular-deck.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/modular-deck.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/modular-deck.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/modular-deck.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/modular-deck.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/modular-deck.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/modular-deck.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/modular-deck.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/modular-deck.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/modular-deck.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/modular-deck.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/modular-deck.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/modular-deck.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/modular-deck.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/modular-systems.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/modular-systems.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/modular-systems.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/modular-systems.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/modular-systems.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/modular-systems.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/modular-systems.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/modular-systems.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/modular-systems.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/modular-systems.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/modular-systems.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/modular-systems.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/modular-systems.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/modular-systems.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/modular-systems.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/modular-systems.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/modular-units.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/modular-units.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/modular-units.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/modular-units.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/modular-units.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/modular-units.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/modular-units.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/modular-units.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/modular-units.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/modular-units.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/modular-units.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/modular-units.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/modular-units.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/modular-units.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/modular-units.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/modular-units.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/nordic-tipi.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/nordic-tipi.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/nordic-tipi.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/nordic-tipi.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/nordic-tipi.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/nordic-tipi.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/nordic-tipi.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/nordic-tipi.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/nordic-tipi.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/nordic-tipi.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/nordic-tipi.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/nordic-tipi.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/nordic-tipi.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/nordic-tipi.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/nordic-tipi.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/nordic-tipi.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/peak-lodge.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/peak-lodge.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/peak-lodge.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/peak-lodge.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/peak-lodge.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/peak-lodge.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/peak-lodge.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/peak-lodge.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/peak-lodge.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/peak-lodge.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/peak-lodge.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/peak-lodge.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/peak-lodge.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/peak-lodge.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/peak-lodge.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/peak-lodge.html?lang=th"/>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://wocs.kr/products/product-template.html</loc>
+    <lastmod>2026-03-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/safari-basic.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/safari-basic.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/safari-basic.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/safari-basic.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/safari-basic.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/safari-basic.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/safari-basic.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/safari-basic.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/safari-basic.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/safari-basic.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/safari-basic.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/safari-basic.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/safari-basic.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/safari-basic.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/safari-basic.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/safari-basic.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/safari-cabin.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/safari-cabin.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/safari-cabin.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/safari-cabin.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/safari-cabin.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/safari-cabin.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/safari-cabin.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/safari-cabin.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/safari-cabin.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/safari-cabin.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/safari-cabin.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/safari-cabin.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/safari-cabin.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/safari-cabin.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/safari-cabin.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/safari-cabin.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/safari-elite.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/safari-elite.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/safari-elite.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/safari-elite.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/safari-elite.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/safari-elite.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/safari-elite.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/safari-elite.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/safari-elite.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/safari-elite.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/safari-elite.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/safari-elite.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/safari-elite.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/safari-elite.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/safari-elite.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/safari-elite.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/safari-extreme.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/safari-extreme.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/safari-extreme.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/safari-extreme.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/safari-extreme.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/safari-extreme.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/safari-extreme.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/safari-extreme.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/safari-extreme.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/safari-extreme.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/safari-extreme.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/safari-extreme.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/safari-extreme.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/safari-extreme.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/safari-extreme.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/safari-extreme.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/safari-luxury.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/safari-luxury.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/safari-luxury.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/safari-luxury.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/safari-luxury.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/safari-luxury.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/safari-luxury.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/safari-luxury.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/safari-luxury.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/safari-luxury.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/safari-luxury.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/safari-luxury.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/safari-luxury.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/safari-luxury.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/safari-luxury.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/safari-luxury.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/safari-tents.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/safari-tents.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/safari-tents.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/safari-tents.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/safari-tents.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/safari-tents.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/safari-tents.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/safari-tents.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/safari-tents.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/safari-tents.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/safari-tents.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/safari-tents.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/safari-tents.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/safari-tents.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/safari-tents.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/safari-tents.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/sailing-tent.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/sailing-tent.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/sailing-tent.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/sailing-tent.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/sailing-tent.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/sailing-tent.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/sailing-tent.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/sailing-tent.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/sailing-tent.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/sailing-tent.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/sailing-tent.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/sailing-tent.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/sailing-tent.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/sailing-tent.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/sailing-tent.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/sailing-tent.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/solar-system.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/solar-system.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/solar-system.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/solar-system.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/solar-system.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/solar-system.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/solar-system.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/solar-system.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/solar-system.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/solar-system.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/solar-system.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/solar-system.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/solar-system.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/solar-system.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/solar-system.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/solar-system.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/universal-joint.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/products/universal-joint.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/products/universal-joint.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/products/universal-joint.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/universal-joint.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/products/universal-joint.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/products/universal-joint.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/products/universal-joint.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/products/universal-joint.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/products/universal-joint.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/products/universal-joint.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/products/universal-joint.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/products/universal-joint.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/universal-joint.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/products/universal-joint.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/products/universal-joint.html?lang=th"/>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://wocs.kr/project/bulk-order.html</loc>
+    <lastmod>2026-03-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/project/buying-land.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/project/buying-land.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/project/buying-land.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/project/buying-land.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/project/buying-land.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/project/buying-land.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/project/buying-land.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/project/buying-land.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/project/buying-land.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/project/buying-land.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/project/buying-land.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/project/buying-land.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/project/buying-land.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/project/buying-land.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/project/buying-land.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/project/buying-land.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/project/financing.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/project/financing.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/project/financing.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/project/financing.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/project/financing.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/project/financing.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/project/financing.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/project/financing.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/project/financing.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/project/financing.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/project/financing.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/project/financing.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/project/financing.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/project/financing.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/project/financing.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/project/financing.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/project/index.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/project/index.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/project/index.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/project/index.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/project/index.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/project/index.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/project/index.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/project/index.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/project/index.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/project/index.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/project/index.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/project/index.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/project/index.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/project/index.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/project/index.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/project/index.html?lang=th"/>
+    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://wocs.kr/project/planning-cases.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/project/planning-cases.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/project/planning-cases.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/project/planning-cases.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/project/planning-cases.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/project/planning-cases.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/project/planning-cases.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/project/planning-cases.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/project/planning-cases.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/project/planning-cases.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/project/planning-cases.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/project/planning-cases.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/project/planning-cases.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/project/planning-cases.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/project/planning-cases.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/project/planning-cases.html?lang=th"/>
-  </url>
-  <url>
-    <loc>https://wocs.kr/project/planning.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/project/planning.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/project/planning.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/project/planning.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/project/planning.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/project/planning.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/project/planning.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/project/planning.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/project/planning.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/project/planning.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/project/planning.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/project/planning.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/project/planning.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/project/planning.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/project/planning.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/project/planning.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/project/revenue-sharing.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/project/revenue-sharing.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/project/revenue-sharing.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/project/revenue-sharing.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/project/revenue-sharing.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/project/revenue-sharing.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/project/revenue-sharing.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/project/revenue-sharing.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/project/revenue-sharing.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/project/revenue-sharing.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/project/revenue-sharing.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/project/revenue-sharing.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/project/revenue-sharing.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/project/revenue-sharing.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/project/revenue-sharing.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/project/revenue-sharing.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/project/start-business.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/project/start-business.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/project/start-business.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/project/start-business.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/project/start-business.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/project/start-business.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/project/start-business.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/project/start-business.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/project/start-business.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/project/start-business.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/project/start-business.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/project/start-business.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/project/start-business.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/project/start-business.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/project/start-business.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/project/start-business.html?lang=th"/>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://wocs.kr/resources/blog-post.html</loc>
+    <lastmod>2026-03-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/resources/blog.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/resources/blog.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/resources/blog.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/resources/blog.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/resources/blog.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/resources/blog.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/resources/blog.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/resources/blog.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/resources/blog.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/resources/blog.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/resources/blog.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/resources/blog.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/resources/blog.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/resources/blog.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/resources/blog.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/resources/blog.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/resources/dealer.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/resources/dealer.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/resources/dealer.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/resources/dealer.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/resources/dealer.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/resources/dealer.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/resources/dealer.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/resources/dealer.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/resources/dealer.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/resources/dealer.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/resources/dealer.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/resources/dealer.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/resources/dealer.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/resources/dealer.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/resources/dealer.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/resources/dealer.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/resources/downloads.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/resources/downloads.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/resources/downloads.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/resources/downloads.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/resources/downloads.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/resources/downloads.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/resources/downloads.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/resources/downloads.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/resources/downloads.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/resources/downloads.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/resources/downloads.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/resources/downloads.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/resources/downloads.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/resources/downloads.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/resources/downloads.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/resources/downloads.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/resources/faq.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/resources/faq.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/resources/faq.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/resources/faq.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/resources/faq.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/resources/faq.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/resources/faq.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/resources/faq.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/resources/faq.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/resources/faq.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/resources/faq.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/resources/faq.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/resources/faq.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/resources/faq.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/resources/faq.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/resources/faq.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/resources/index.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/resources/index.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/resources/index.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/resources/index.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/resources/index.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/resources/index.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/resources/index.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/resources/index.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/resources/index.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/resources/index.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/resources/index.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/resources/index.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/resources/index.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/resources/index.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/resources/index.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/resources/index.html?lang=th"/>
+    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://wocs.kr/resources/reviews.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://wocs.kr/resources/reviews.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wocs.kr/resources/reviews.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://wocs.kr/resources/reviews.html?lang=ja"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/resources/reviews.html?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://wocs.kr/resources/reviews.html?lang=es"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://wocs.kr/resources/reviews.html?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://wocs.kr/resources/reviews.html?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://wocs.kr/resources/reviews.html?lang=pt"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://wocs.kr/resources/reviews.html?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://wocs.kr/resources/reviews.html?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://wocs.kr/resources/reviews.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://wocs.kr/resources/reviews.html?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/resources/reviews.html?lang=tw"/>
-    <xhtml:link rel="alternate" hreflang="id" href="https://wocs.kr/resources/reviews.html?lang=id"/>
-    <xhtml:link rel="alternate" hreflang="th" href="https://wocs.kr/resources/reviews.html?lang=th"/>
+    <priority>0.6</priority>
   </url>
 </urlset>

@@ -26,6 +26,20 @@
 <link rel="alternate" hreflang="id" href="https://wocs.kr/gallery/index.html?lang=id">
 <link rel="alternate" hreflang="th" href="https://wocs.kr/gallery/index.html?lang=th">
 <link rel="alternate" hreflang="x-default" href="https://wocs.kr/gallery/index.html">
+<link rel="canonical" href="https://wocs.kr/gallery/index.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="WOCS 갤러리">
+<meta property="og:description" content="WOCS 시공 사례 갤러리">
+<meta property="og:image" content="https://wocs.kr/assets/images/50-resort-mountain.png">
+<meta property="og:url" content="https://wocs.kr/gallery/index.html">
+<meta property="og:site_name" content="WOCS">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="WOCS 갤러리">
+<meta name="twitter:description" content="WOCS 시공 사례 갤러리">
+<meta name="twitter:image" content="https://wocs.kr/assets/images/50-resort-mountain.png">
 <meta name="theme-color" content="#09090b">
 </head>
 <body>
@@ -64,32 +78,33 @@
 <section style="background:linear-gradient(135deg,rgba(201,169,110,0.12),rgba(9,9,11,1));padding:60px 5%;border-top:1px solid rgba(201,169,110,0.14)">
   <div class="container text-center">
     <div class="anim"><h3 style="font-size:20px;font-weight:300" data-t="p1">최신 소식을 받아보세요</h3><p class="font-body" style="font-size:12px;color:rgba(240,235,224,0.65);margin-top:8px" data-t="p2">글램핑 트렌드, 신제품, 특별 할인 정보를 이메일로 보내드립니다.</p></div>
-    <div class="newsletter-bar anim anim-delay-1" style="margin-top:24px"><input class="newsletter-input" type="email" placeholder="이메일 주소 입력"><button class="newsletter-btn" data-t="p3">구독하기</button></div>
+    <div class="newsletter-bar anim anim-delay-1" style="margin-top:24px"><input class="newsletter-input" type="email" placeholder="이메일 주소 입력" data-t-placeholder="h_ph1"><button class="newsletter-btn" data-t="p3">구독하기</button></div>
   </div>
 </section>
 <div id="wocs-cta"></div>
 <div id="wocs-footer"></div>
 
 <script>
-var WOCS_PAGE_TR={ko:{p1:"최신 소식을 받아보세요",p2:"글램핑 트렌드, 신제품, 특별 할인 정보를 이메일로 보내드립니다.",p3:"구독하기"},
-en:{p1:"Stay Updated",p2:"glamping trend, new, special discount information daysvia we will send",p3:"Subscribe"},
-ja:{p1:"最新情報",p3:"購読"},
-zh:{p1:"获取最新消息",p3:"订阅"},
-es:{p1:"Manténgase Informado",p3:"Suscribirse"},
-fr:{p1:"Restez Informé",p3:"S'abonner"},
-de:{p1:"Bleiben Sie Informiert",p3:"Abonnieren"},
-pt:{p1:"Fique Atualizado",p3:"Assinar"},
-it:{p1:"Resta Aggiornato",p3:"Iscriviti"},
-ar:{p1:"ابق على اطلاع",p3:"اشترك"},
-ru:{p1:"Будьте в Курсе",p3:"Подписаться"},
-tr:{p1:"Güncel Kalın",p3:"Abone Ol"},
-tw:{p1:"獲取最新消息",p3:"訂閱"},
-id:{p1:"Tetap Update",p3:"Berlangganan"},
-th:{p1:"อัปเดตข่าวสาร",p3:"สมัครรับข่าว"}
+var WOCS_PAGE_TR={ko:{pageTitle:"WOCS 갤러리",heroH1:"갤러리",heroH1g:"WOCS",heroSlab:"GALLERY",heroDesc:"프리미엄 글램핑 구조물의 아름다움",bc_current:"갤러리",p1:"최신 소식을 받아보세요",p2:"글램핑 트렌드, 신제품, 특별 할인 정보를 이메일로 보내드립니다.",p3:"구독하기",h_ph1:"h_ph1"},
+en:{pageTitle:"WOCS Gallery",heroH1:"Gallery",heroH1g:"WOCS",heroSlab:"GALLERY",heroDesc:"The beauty of premium glamping structures",bc_current:"Gallery",p1:"Get the latest news",p2:"We will send you glamping trends, new products, and special discount information via email.",p3:"Subscribe",h_ph1:"h_ph1"},
+ja:{pageTitle:"WOCSギャラリー",heroH1:"ギャラリー",heroSlab:"ギャラリー",heroDesc:"プレミアムグランピング構造物の美しさ",bc_current:"ギャラリー",p1:"最新情報を受け取る",p2:"グランピングのトレンド、新製品、特別割引情報をメールでお送りします。",p3:"購読する"},
+zh:{pageTitle:"WOCS 画廊",heroH1:"画廊",heroSlab:"画廊",heroDesc:"高端豪华露营结构之美",bc_current:"画廊",p1:"获取最新消息",p2:"我们将通过电子邮件向您发送豪华露营趋势、新产品和特别折扣信息。",p3:"订阅"},
+es:{pageTitle:"Galería WOCS",heroH1:"Galería",heroSlab:"GALERÍA",heroDesc:"La belleza de las estructuras de glamping premium",bc_current:"Galería",p1:"Reciba las últimas noticias",p2:"Le enviaremos por correo electrónico información sobre tendencias de glamping, nuevos productos y descuentos especiales.",p3:"Suscribirse"},
+fr:{pageTitle:"Galerie WOCS",heroH1:"Galerie",heroSlab:"GALERIE",heroDesc:"La beauté des structures de glamping premium",bc_current:"Galerie",p1:"Recevez les dernières actualités",p2:"Nous vous enverrons par e-mail les tendances du glamping, les nouveaux produits et les informations sur les offres spéciales.",p3:"S'abonner"},
+de:{pageTitle:"WOCS Galerie",heroH1:"Galerie",heroSlab:"GALERIE",heroDesc:"Die Schönheit von Premium-Glamping-Strukturen",bc_current:"Galerie",p1:"Erhalten Sie die neuesten Nachrichten",p2:"Wir senden Ihnen Glamping-Trends, neue Produkte und Informationen zu Sonderrabatten per E-Mail zu.",p3:"Abonnieren"},
+pt:{pageTitle:"Galeria WOCS",heroH1:"Galeria",heroSlab:"GALERIA",heroDesc:"A beleza das estruturas de glamping premium",bc_current:"Galeria",p1:"Receba as últimas notícias",p2:"Enviaremos a você tendências de glamping, novos produtos e informações sobre descontos especiais por e-mail.",p3:"Assinar"},
+it:{pageTitle:"Galleria WOCS",heroH1:"Galleria",heroSlab:"GALLERIA",heroDesc:"La bellezza delle strutture glamping premium",bc_current:"Galleria",p1:"Ricevi le ultime notizie",p2:"Ti invieremo via email informazioni su tendenze glamping, nuovi prodotti e sconti speciali.",p3:"Iscriviti"},
+ar:{pageTitle:"معرض WOCS",heroH1:"معرض الصور",heroSlab:"معرض",heroDesc:"جمال هياكل التخييم الفاخرة الممتازة",bc_current:"معرض الصور",p1:"احصل على آخر الأخبار",p2:"سنرسل لك عبر البريد الإلكتروني اتجاهات التخييم الفاخر، والمنتجات الجديدة، ومعلومات الخصومات الخاصة.",p3:"اشترك"},
+ru:{pageTitle:"Галерея WOCS",heroH1:"Галерея",heroSlab:"ГАЛЕРЕЯ",heroDesc:"Красота премиальных глэмпинг-конструкций",bc_current:"Галерея",p1:"Получайте последние новости",p2:"Мы отправим вам информацию о трендах глэмпинга, новых продуктах и специальных скидках по электронной почте.",p3:"Подписаться"},
+tr:{pageTitle:"WOCS Galeri",heroH1:"Galeri",heroSlab:"GALERİ",heroDesc:"Premium glamping yapılarının güzelliği",bc_current:"Galeri",p1:"En son haberleri alın",p2:"Glamping trendleri, yeni ürünler ve özel indirim bilgilerini e-posta ile size göndereceğiz.",p3:"Abone Ol"},
+tw:{pageTitle:"WOCS 畫廊",heroH1:"畫廊",heroSlab:"藝廊",heroDesc:"高端豪華露營結構之美",bc_current:"畫廊",p1:"獲取最新消息",p2:"我們將通過電子郵件向您發送豪華露營趨勢、新產品和特別折扣資訊。",p3:"訂閱"},
+id:{pageTitle:"Galeri WOCS",heroH1:"Galeri",heroSlab:"GALERI",heroDesc:"Keindahan struktur glamping premium",bc_current:"Galeri",p1:"Dapatkan berita terbaru",p2:"Kami akan mengirimkan tren glamping, produk baru, dan informasi diskon khusus melalui email.",p3:"Berlangganan"},
+th:{pageTitle:"แกลเลอรี WOCS",heroH1:"แกลเลอรี",heroSlab:"แกลเลอรี่",heroDesc:"ความงามของโครงสร้างแกลมปิ้งระดับพรีเมียม",bc_current:"แกลเลอรี",p1:"รับข่าวสารล่าสุด",p2:"เราจะส่งข้อมูลเกี่ยวกับเทรนด์แกลมปิ้ง สินค้าใหม่ และส่วนลดพิเศษทางอีเมลให้คุณ",p3:"สมัครสมาชิก"}
 };
 </script>
 <script src="../assets/js/wocs-i18n.js"></script>
 <script src="../assets/js/wocs-header.js"></script>
 <script src="../assets/js/wocs-footer.js"></script>
+<script src="../assets/js/wocs-leads.js"></script>
 </body>
 </html>
