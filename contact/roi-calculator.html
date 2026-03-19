@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>글램핑 ROI 계산기 | WOCS 수익성 분석 시뮬레이션</title>
+<meta name="description" content="글램핑 투자 수익률 계산기. 유닛 수, 1박 요금, 가동률로 수익 자동 계산.">
+<link rel="canonical" href="https://wocs.kr/contact/roi-calculator.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Lexend:wght@200;300;400;500;600&family=Noto+Sans+KR:wght@300;400;500;600&family=Noto+Serif+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/wocs-common.css">
+<style>
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;max-width:1100px;margin:0 auto}
+.calc-label{font-family:var(--font-body);font-size:12px;font-weight:500;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:10px;display:block}
+.calc-input{width:100%;padding:16px 20px;background:var(--bg);border:1px solid rgba(201,169,110,0.15);color:var(--ivory);font-family:var(--font-body);font-size:16px;outline:none;transition:border-color .3s}
+.calc-input:focus{border-color:rgba(201,169,110,0.5)}
+.calc-range{width:100%;-webkit-appearance:none;height:4px;background:rgba(201,169,110,0.2);outline:none;margin-top:8px}
+.calc-range::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;background:var(--gold);border-radius:50%;cursor:pointer}
+.calc-value{font-family:var(--font-body);font-size:14px;color:var(--ivory);margin-top:8px;text-align:right}
+.rc{padding:32px;border:1px solid rgba(201,169,110,0.15);background:var(--bg);margin-bottom:16px;transition:border-color .3s}
+.rc:hover{border-color:rgba(201,169,110,0.3)}
+.rc-l{font-family:var(--font-body);font-size:11px;letter-spacing:2px;color:rgba(240,235,224,0.65);text-transform:uppercase;margin-bottom:8px}
+.rc-v{font-size:32px;font-weight:300}
+.rc-s{font-family:var(--font-body);font-size:12px;color:rgba(240,235,224,0.65);margin-top:4px}
+.hl{border-color:var(--gold)!important}
+.hl .rc-v{color:var(--gold)}
+@media(max-width:768px){.calc-grid{grid-template-columns:1fr;gap:40px}}
+</style>
+
+<!-- SEO: hreflang -->
+<link rel="alternate" hreflang="ko" href="https://wocs.kr/contact/roi-calculator.html">
+<link rel="alternate" hreflang="en" href="https://wocs.kr/contact/roi-calculator.html?lang=en">
+<link rel="alternate" hreflang="ja" href="https://wocs.kr/contact/roi-calculator.html?lang=ja">
+<link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/contact/roi-calculator.html?lang=zh">
+<link rel="alternate" hreflang="es" href="https://wocs.kr/contact/roi-calculator.html?lang=es">
+<link rel="alternate" hreflang="fr" href="https://wocs.kr/contact/roi-calculator.html?lang=fr">
+<link rel="alternate" hreflang="de" href="https://wocs.kr/contact/roi-calculator.html?lang=de">
+<link rel="alternate" hreflang="pt" href="https://wocs.kr/contact/roi-calculator.html?lang=pt">
+<link rel="alternate" hreflang="it" href="https://wocs.kr/contact/roi-calculator.html?lang=it">
+<link rel="alternate" hreflang="ar" href="https://wocs.kr/contact/roi-calculator.html?lang=ar">
+<link rel="alternate" hreflang="ru" href="https://wocs.kr/contact/roi-calculator.html?lang=ru">
+<link rel="alternate" hreflang="tr" href="https://wocs.kr/contact/roi-calculator.html?lang=tr">
+<link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/contact/roi-calculator.html?lang=tw">
+<link rel="alternate" hreflang="id" href="https://wocs.kr/contact/roi-calculator.html?lang=id">
+<link rel="alternate" hreflang="th" href="https://wocs.kr/contact/roi-calculator.html?lang=th">
+<link rel="alternate" hreflang="x-default" href="https://wocs.kr/contact/roi-calculator.html">
+<meta name="theme-color" content="#09090b">
+</head>
+<body>
+<script>const WOCS_BASE="../";</script>
+<div id="wocs-header"></div>
+
+<section class="page-hero" style="text-align:center">
+  <div class="container">
+    <div class="breadcrumb" style="text-align:left"><a href="../index.html">홈</a> <span>›</span> <a href="../contact/index.html" data-t="p1">문의</a> <span>›</span> <span data-t="p2">ROI 계산기</span></div>
+    <div class="slab anim">ROI CALCULATOR</div>
+    <h1 class="anim anim-delay-1" data-t="p3">글램핑 <span class="gold-text" data-t="p4">수익성 분석</span></h1>
+    <p class="anim anim-delay-2" style="max-width:600px;margin:24px auto 0" data-t="p5">투자 금액, 유닛 수, 1박 요금, 가동률을 입력하면 예상 수익과 투자 회수 기간을 자동 계산합니다.</p>
+  </div>
+</section>
+
+<section style="background:var(--bg2);padding:80px 5%">
+  <div class="calc-grid">
+    <div class="anim">
+      <h2 style="font-size:24px;font-weight:400;margin-bottom:40px" data-t="p6">투자 <span class="gold-text" data-t="p7">정보 입력</span></h2>
+      <div style="margin-bottom:28px"><label class="calc-label" data-t="p8">총 투자 금액 (만원)</label><input class="calc-input" type="number" id="investment" value="10000" min="1000" step="500" oninput="calc()"><div class="font-body" style="font-size:11px;color:rgba(240,235,224,0.45);margin-top:6px" data-t="p9">글램핑+데크+욕실+인프라 포함</div></div>
+      <div style="margin-bottom:28px"><label class="calc-label" data-t="p10">글램핑 유닛 수</label><input class="calc-range" type="range" id="units" min="1" max="20" value="5" oninput="calc()"><div class="calc-value" id="uv" data-t="p11">5개</div></div>
+      <div style="margin-bottom:28px"><label class="calc-label" data-t="p12">1박 평균 요금 (만원)</label><input class="calc-range" type="range" id="price" min="5" max="50" value="15" step="1" oninput="calc()"><div class="calc-value" id="pv" data-t="p13">15만원</div></div>
+      <div style="margin-bottom:28px"><label class="calc-label" data-t="p14">연평균 가동률 (%)</label><input class="calc-range" type="range" id="occ" min="10" max="90" value="45" step="5" oninput="calc()"><div class="calc-value" id="ov">45%</div></div>
+      <div style="margin-bottom:28px"><label class="calc-label" data-t="p15">월 운영비 (만원)</label><input class="calc-input" type="number" id="opex" value="300" min="50" step="50" oninput="calc()"><div class="font-body" style="font-size:11px;color:rgba(240,235,224,0.45);margin-top:6px" data-t="p16">인건비,전기,수도,소모품,마케팅</div></div>
+    </div>
+    <div class="anim anim-delay-1">
+      <h2 style="font-size:24px;font-weight:400;margin-bottom:40px" data-t="p17">예상 <span class="gold-text" data-t="p18">수익 결과</span></h2>
+      <div class="rc"><div class="rc-l" data-t="p19">연간 매출</div><div class="rc-v gold-text" id="rr" data-t="p20">0원</div><div class="rc-s" id="rrs" data-t="p21">월 0원</div></div>
+      <div class="rc"><div class="rc-l" data-t="p22">연간 운영비</div><div class="rc-v" id="ro" style="color:rgba(240,235,224,0.8)" data-t="p20">0원</div></div>
+      <div class="rc hl"><div class="rc-l" data-t="p23">연간 순이익</div><div class="rc-v" id="rp" data-t="p20">0원</div><div class="rc-s" id="rps" data-t="p21">월 0원</div></div>
+      <div class="rc hl"><div class="rc-l" data-t="p24">투자 회수 기간</div><div class="rc-v" id="rb" data-t="p25">0년</div><div class="rc-s" id="rbs">-</div></div>
+      <div class="rc"><div class="rc-l" data-t="p26">연간 ROI</div><div class="rc-v gold-text" id="ri">0%</div></div>
+      <div style="margin-top:24px;text-align:center"><a class="btn-gold-fill" href="#lead-form" style="display:inline-block;width:100%" onclick="document.getElementById('lead-form').scrollIntoView({behavior:'smooth'});return false;" data-t="p27">↓ 이 결과로 상세 견적 받기</a></div>
+      <p class="font-body" style="font-size:10px;color:rgba(240,235,224,0.2);margin-top:16px;text-align:center;line-height:1.7" data-t="p28">* 참고용 시뮬레이션입니다. 실제 수익은 위치·시즌·마케팅에 따라 달라집니다.</p>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--bg);padding:80px 5%">
+  <div class="container" style="max-width:800px">
+    <div class="text-center anim"><div class="slab">BENCHMARK</div><h2 style="font-size:clamp(24px,3vw,36px);font-weight:300;margin-top:16px" data-t="p29">글램핑 사업 <span class="gold-text" data-t="p30">평균 지표</span></h2></div>
+    <div style="overflow-x:auto;margin-top:40px" class="anim anim-delay-1">
+      <table class="spec-table">
+        <thead><tr><th data-t="p31">항목</th><th data-t="p32">보수적</th><th data-t="p33">평균</th><th data-t="p34">낙관적</th></tr></thead>
+        <tbody>
+          <tr><td data-t="p35">1박 요금</td><td data-t="p36">8~12만원</td><td style="color:var(--gold)" data-t="p37">13~20만원</td><td data-t="p38">25~50만원</td></tr>
+          <tr><td data-t="p39">연평균 가동률</td><td>25~35%</td><td style="color:var(--gold)">40~55%</td><td>60~80%</td></tr>
+          <tr><td data-t="p40">유닛당 월 매출</td><td data-t="p41">80~130만원</td><td style="color:var(--gold)" data-t="p42">150~300만원</td><td data-t="p43">350~600만원</td></tr>
+          <tr><td data-t="p24">투자 회수 기간</td><td data-t="p44">3~5년</td><td style="color:var(--gold)" data-t="p45">1.5~3년</td><td data-t="p46">1년 이내</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LEAD CAPTURE ===== -->
+<section style="background:var(--bg2);padding:80px 5%">
+  <div class="container" style="max-width:700px">
+    <div class="text-center anim" style="margin-bottom:40px">
+      <div class="slab" style="color:var(--gold)">GET DETAILED QUOTE</div>
+      <h2 style="font-size:clamp(22px,3vw,36px);font-weight:300;margin-top:12px" data-t="p47">위 시뮬레이션 결과를<br><span class="gold-text" data-t="p48">상세 견적서로 받아보세요</span></h2>
+      <p class="font-body" style="font-size:13px;color:rgba(240,235,224,0.55);margin-top:8px" data-t="p49">이름과 연락처만 입력하면, 시뮬레이션 결과 + 맞춤 상세 견적을 카카오톡/문자로 발송합니다.</p>
+    </div>
+
+    <div id="lead-form" class="anim anim-delay-1" style="padding:40px;border:1px solid rgba(201,169,110,0.2);background:rgba(201,169,110,0.03)">
+      <div class="form-row">
+        <div><label class="form-label" data-t="p50">이름 *</label><input class="form-input" id="lead-name" placeholder="홍길동" required></div>
+        <div><label class="form-label" data-t="p51">연락처 *</label><input class="form-input" id="lead-phone" type="tel" placeholder="010-0000-0000" required></div>
+      </div>
+      <div class="form-row">
+        <div><label class="form-label" data-t="p52">부지 면적 (평)</label><input class="form-input" id="lead-area" type="number" placeholder="500"></div>
+        <div><label class="form-label" data-t="p53">관심 타입</label>
+          <select class="form-input" id="lead-type" style="cursor:pointer">
+            <option value="미정" data-t="p54">아직 잘 모르겠어요</option>
+            <option value="A-마이크로" data-t="p55">A타입 · 마이크로 펜션 (100~300평)</option>
+            <option value="B-표준수익" data-t="p56">B타입 · 표준 수익형 (300~1,000평)</option>
+            <option value="C-하이엔드" data-t="p57">C타입 · 하이엔드 리조트 (1,000~3,000평)</option>
+            <option value="D-대단지" data-t="p58">D타입 · 대단지/지자체 (3,000평+)</option>
+            <option value="E-파트너십" data-t="p59">E타입 · 수익 공유 파트너십</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-top:8px;margin-bottom:20px"><label class="form-label" data-t="p60">추가 메모</label><textarea class="form-input" id="lead-memo" rows="2" placeholder="궁금한 점을 자유롭게 적어주세요 (선택)"></textarea></div>
+
+      <!-- 시뮬레이션 결과 자동 포함 (hidden) -->
+      <div style="padding:16px 20px;background:rgba(201,169,110,0.06);border-left:3px solid var(--gold);margin-bottom:24px;font-family:var(--font-body);font-size:12px;color:rgba(240,235,224,0.6);line-height:1.8" data-t="p61">
+        💡 위에서 입력한 시뮬레이션 결과가 <strong style="color:var(--ivory)" data-t="p62">자동으로 함께 전송</strong data-t="p63">됩니다.
+        <span id="lead-preview" style="display:block;margin-top:6px;color:var(--gold)"></span>
+      </div>
+
+      <div class="text-center">
+        <button onclick="submitLead()" class="btn-gold-fill" style="padding:16px 60px;letter-spacing:2px;font-size:13px;cursor:pointer;border:none;width:100%" data-t="p64">
+          📩 상세 견적 무료 발송 요청
+        </button>
+      </div>
+
+      <!-- 전송 상태 -->
+      <div id="lead-status" style="display:none;margin-top:20px;text-align:center;font-family:var(--font-body);font-size:13px;padding:16px"></div>
+    </div>
+
+    <!-- 성공 화면 (폼 대체) -->
+    <div id="lead-success" style="display:none;text-align:center;padding:60px 40px;border:1px solid rgba(201,169,110,0.3);background:rgba(201,169,110,0.04)">
+      <div style="font-size:48px;margin-bottom:16px">✅</div>
+      <h3 style="font-size:24px;font-weight:300;color:var(--ivory)" data-t="p65">접수 완료!</h3>
+      <p class="font-body" style="font-size:14px;color:rgba(240,235,224,0.7);margin-top:12px;line-height:1.8" data-t="p66">입력하신 연락처로 상세 견적을 발송해 드리겠습니다.<br data-t="p67">빠른 상담을 원하시면 <strong style="color:var(--gold)">010-4337-0582</strong data-t="p68">로 전화 주세요.</p>
+      <a href="../about/showroom.html" class="btn-gold-fill" style="display:inline-block;margin-top:24px;padding:14px 40px;font-size:12px" data-t="p69">화순 쇼룸 방문 예약 →</a>
+    </div>
+  </div>
+</section>
+
+<div id="wocs-cta"></div>
+<div id="wocs-footer"></div>
+<script>
+/* ========================================
+   GAS 웹앱 URL — 배포 후 여기에 붙여넣기
+   ======================================== */
+var GAS_URL = 'YOUR_GAS_WEB_APP_URL_HERE';
+
+function fmt(n){if(n>=10000)return(n/10000).toFixed(1)+'억원';return Math.round(n).toLocaleString()+'만원'}
+function calc(){
+  var inv=parseFloat(document.getElementById('investment').value)||0;
+  var u=parseInt(document.getElementById('units').value)||1;
+  var p=parseInt(document.getElementById('price').value)||10;
+  var o=parseInt(document.getElementById('occ').value)||30;
+  var op=parseFloat(document.getElementById('opex').value)||0;
+  document.getElementById('uv').textContent=u+'개';
+  document.getElementById('pv').textContent=p+'만원';
+  document.getElementById('ov').textContent=o+'%';
+  var rev=u*p*(o/100)*365,aop=op*12,prof=rev-aop;
+  var pb=prof>0?inv/prof:999,roi=inv>0?(prof/inv*100):0;
+  document.getElementById('rr').textContent=fmt(rev);
+  document.getElementById('rrs').textContent='월 '+fmt(rev/12);
+  document.getElementById('ro').textContent=fmt(aop);
+  document.getElementById('rp').textContent=fmt(prof);
+  document.getElementById('rps').textContent='월 '+fmt(prof/12);
+  if(prof<=0){document.getElementById('rb').textContent='적자';document.getElementById('rbs').textContent='운영비 줄이거나 가동률 높이세요';document.getElementById('rp').style.color='#e74c3c'}
+  else{document.getElementById('rp').style.color='#c9a96e';document.getElementById('rb').textContent=pb<1?Math.round(pb*12)+'개월':pb.toFixed(1)+'년';document.getElementById('rbs').textContent=pb<=2?'우수한 투자 효율!':pb<=3?'양호한 수준':'장기 투자 관점 필요'}
+  document.getElementById('ri').textContent=roi.toFixed(0)+'%';
+  // 리드 미리보기 업데이트
+  var preview = document.getElementById('lead-preview');
+  if(preview) preview.textContent = u+'동 · 1박 '+p+'만원 · 가동률 '+o+'% → 연 매출 '+fmt(rev)+' / 순이익 '+fmt(prof);
+}
+document.addEventListener('DOMContentLoaded',calc);
+
+/* ========================================
+   리드 전송 함수
+   ======================================== */
+function submitLead(){
+  var name = document.getElementById('lead-name').value.trim();
+  var phone = document.getElementById('lead-phone').value.trim();
+  if(!name){alert('이름을 입력해주세요.');return}
+  if(!phone||phone.length<10){alert('연락처를 정확히 입력해주세요.');return}
+
+  var statusEl = document.getElementById('lead-status');
+  statusEl.style.display = 'block';
+  statusEl.style.color = 'var(--gold)';
+  statusEl.textContent = '⏳ 전송 중...';
+
+  // 시뮬레이션 데이터 수집
+  var u=document.getElementById('units').value;
+  var p=document.getElementById('price').value;
+  var o=document.getElementById('occ').value;
+  var inv=document.getElementById('investment').value;
+  var rev=u*p*(o/100)*365;
+
+  var payload = {
+    name: name,
+    phone: phone,
+    area: document.getElementById('lead-area').value || '미입력',
+    type: document.getElementById('lead-type').value,
+    memo: document.getElementById('lead-memo').value || '',
+    units: u,
+    price: p,
+    occupancy: o,
+    investment: inv,
+    annualRevenue: Math.round(rev),
+    annualProfit: Math.round(rev - document.getElementById('opex').value*12),
+    timestamp: new Date().toLocaleString('ko-KR')
+  };
+
+  // GAS URL 체크
+  if(GAS_URL === 'YOUR_GAS_WEB_APP_URL_HERE'){
+    // GAS 미설정 — 로컬 테스트 모드
+    console.log('📩 Lead Data (GAS 미설정, 콘솔 출력):', payload);
+    statusEl.style.color = '#4CAF50';
+    statusEl.textContent = '✅ 테스트 모드: 데이터가 콘솔에 기록되었습니다. GAS URL을 설정하면 실제 전송됩니다.';
+    setTimeout(function(){ showSuccess(); }, 1500);
+    return;
+  }
+
+  /* hidden form + iframe 방식 (CORS 완전 우회) */
+  var iframe = document.createElement('iframe');
+  iframe.name = 'gas_roi_' + Date.now();
+  iframe.style.display = 'none';
+  document.body.appendChild(iframe);
+
+  var form = document.createElement('form');
+  form.method = 'POST';
+  form.action = GAS_URL;
+  form.target = iframe.name;
+  form.style.display = 'none';
+
+  var input = document.createElement('input');
+  input.type = 'hidden';
+  input.name = 'data';
+  input.value = JSON.stringify(payload);
+  form.appendChild(input);
+
+  document.body.appendChild(form);
+  form.submit();
+
+  setTimeout(function(){
+    statusEl.style.color = '#4CAF50';
+    statusEl.textContent = '✅ 전송 완료! 곧 연락드리겠습니다.';
+    setTimeout(function(){ showSuccess(); }, 1000);
+    try { document.body.removeChild(form); document.body.removeChild(iframe); } catch(e){}
+  }, 2000);
+}
+
+function showSuccess(){
+  document.getElementById('lead-form').style.display = 'none';
+  document.getElementById('lead-success').style.display = 'block';
+}
+var WOCS_PAGE_TR={ko:{p1:"문의",p2:"ROI 계산기",p3:"글램핑",p4:"수익성 분석",p5:"투자 금액, 유닛 수, 1박 요금, 가동률을 입력하면 예상 수익과 투자 회수 기간을 자동 계산합니다.",p6:"투자",p7:"정보 입력",p8:"총 투자 금액 (만원)",p9:"글램핑+데크+욕실+인프라 포함",p10:"글램핑 유닛 수",p11:"5개",p12:"1박 평균 요금 (만원)",p13:"15만원",p14:"연평균 가동률 (%)",p15:"월 운영비 (만원)",p16:"인건비,전기,수도,소모품,마케팅",p17:"예상",p18:"수익 결과",p19:"연간 매출",p20:"0원",p21:"월 0원",p22:"연간 운영비",p23:"연간 순이익",p24:"투자 회수 기간",p25:"0년",p26:"연간 ROI",p27:"↓ 이 결과로 상세 견적 받기",p28:"* 참고용 시뮬레이션입니다. 실제 수익은 위치·시즌·마케팅에 따라 달라집니다.",p29:"글램핑 사업",p30:"평균 지표",p31:"항목",p32:"보수적",p33:"평균",p34:"낙관적",p35:"1박 요금",p36:"8~12만원",p37:"13~20만원",p38:"25~50만원",p39:"연평균 가동률",p40:"유닛당 월 매출",p41:"80~130만원",p42:"150~300만원",p43:"350~600만원",p44:"3~5년",p45:"1.5~3년",p46:"1년 이내",p47:"위 시뮬레이션 결과를",p48:"상세 견적서로 받아보세요",p49:"이름과 연락처만 입력하면, 시뮬레이션 결과 + 맞춤 상세 견적을 카카오톡/문자로 발송합니다.",p50:"이름 *",p51:"연락처 *",p52:"부지 면적 (평)",p53:"관심 타입",p54:"아직 잘 모르겠어요",p55:"A타입 · 마이크로 펜션 (100~300평)",p56:"B타입 · 표준 수익형 (300~1,000평)",p57:"C타입 · 하이엔드 리조트 (1,000~3,000평)",p58:"D타입 · 대단지/지자체 (3,000평+)",p59:"E타입 · 수익 공유 파트너십",p60:"추가 메모",p61:"💡 위에서 입력한 시뮬레이션 결과가",p62:"자동으로 함께 전송",p63:"됩니다.",p64:"📩 상세 견적 무료 발송 요청",p65:"접수 완료!",p66:"입력하신 연락처로 상세 견적을 발송해 드리겠습니다.",p67:"빠른 상담을 원하시면",p68:"로 전화 주세요.",p69:"화순 쇼룸 방문 예약 →"},
+en:{p1:"Inquiry",p2:"ROI mountain",p3:"Glamping",p4:"profitability minutes",p5:"investment, unit can, nightly rate, units estimated revenueand investment recovery period units mountain",p6:"investment",p7:"information",p8:"investment ((10K KRW))",p9:"글램핑+데크+욕실+인프라 포함",p10:"glamping unit can",p11:"5 items",p12:"nightly pyeong rate ((10K KRW))",p13:"15(10K KRW)",p14:"pyeong units (%)",p15:"operationfee ((10K KRW))",p16:"인건비,전기,수도,소모품,마케팅",p17:"Estimated",p18:"revenue and",p19:"Annual Revenue",p20:"0member",p21:"0member",p22:"annual operationfee",p23:"Annual Net Profit",p24:"investment recovery period",p25:"0years",p26:"Annual ROI",p27:"↓ andvia three quote",p28:"* use. actual revenue top·season·marketingat depending on",p29:"glamping business",p30:"Average Metrics",p31:"Items",p32:"beamcan",p33:"Average",p34:"Optimistic",p35:"Rate per Night",p36:"8~12(10K KRW)",p37:"13~20(10K KRW)",p38:"25~50(10K KRW)",p39:"pyeong units",p40:"unitper sales",p41:"80~130(10K KRW)",p42:"150~300(10K KRW)",p43:"350~600(10K KRW)",p44:"3~5years",p45:"1.5~3years",p46:"1years",p47:"top and",p48:"three quotevia beam",p49:"and contact(10K), and + custom three quote KakaoTalk/via",p50:"Name *",p51:"contact *",p52:"site area (pyeong)",p53:"type",p54:"well unsure",p55:"Atype · via pension (100~300pyeong)",p56:"Btype · standard revenuetype (300~1,000pyeong)",p57:"Ctype · resort (1,000~3,000pyeong)",p58:"Dtype · vs./municipality (3,000pyeong+)",p59:"Etype · revenue sharing partner",p60:"Additional Notes",p61:"💡 topfrom one and",p62:"unitswith before",p63:"됩니다.",p64:"📩 three quote free request",p65:"can complete!",p66:"new contactvia three quote",p67:"quick consultation member",p68:"via before weeks",p69:"Hwasun showroom room reservation →"},
+ja:{p1:"お問い合わせ",p17:"予想",p19:"年間売上",p23:"年間純利益",p26:"年間ROI",p33:"平均",p34:"楽観的",p50:"お名前 *",p60:"追加メモ"},
+zh:{p1:"咨询",p17:"预估",p19:"年收入",p23:"年净利润",p26:"年ROI",p33:"平均",p34:"乐观",p50:"姓名 *",p60:"补充说明"},
+es:{p1:"Consulta",p17:"Estimado",p19:"Ingresos Anuales",p23:"Beneficio Neto Anual",p26:"ROI Anual",p33:"Promedio",p34:"Optimista",p50:"Nombre *",p60:"Notas"},
+fr:{p1:"Demande",p17:"Estimé",p19:"Revenus Annuels",p23:"Bénéfice Net Annuel",p26:"ROI Annuel",p33:"Moyenne",p34:"Optimiste",p50:"Nom *",p60:"Notes"},
+de:{p1:"Anfrage",p17:"Geschätzt",p19:"Jahresumsatz",p23:"Jahresnettogewinn",p26:"Jährlicher ROI",p33:"Durchschnitt",p34:"Optimistisch",p60:"Anmerkungen"},
+pt:{p1:"Consulta",p17:"Estimado",p19:"Receita Anual",p23:"Lucro Líquido Anual",p26:"ROI Anual",p33:"Média",p34:"Otimista",p50:"Nome *",p60:"Notas"},
+it:{p1:"Richiesta",p17:"Stimato",p19:"Ricavi Annuali",p23:"Utile Netto Annuale",p26:"ROI Annuale",p33:"Media",p34:"Ottimistico",p50:"Nome *",p60:"Note"},
+ar:{p1:"استفسار",p17:"متوقع",p19:"الإيرادات السنوية",p23:"صافي الربح السنوي",p26:"العائد السنوي",p33:"متوسط",p34:"متفائل",p50:"الاسم *",p60:"ملاحظات"},
+ru:{p1:"Запрос",p17:"Ожидаемый",p19:"Годовой Доход",p23:"Годовая Чистая Прибыль",p26:"Годовой ROI",p33:"Средний",p34:"Оптимистичный",p50:"Имя *",p60:"Примечания"},
+tr:{p1:"Sorgu",p17:"Tahmini",p19:"Yıllık Gelir",p23:"Yıllık Net Kâr",p26:"Yıllık ROI",p33:"Ortalama",p34:"İyimser",p50:"İsim *",p60:"Notlar"},
+tw:{p1:"諮詢",p17:"預估",p19:"年收入",p23:"年淨利潤",p26:"年ROI",p33:"平均",p34:"樂觀",p50:"姓名 *",p60:"補充說明"},
+id:{p1:"Permintaan",p17:"Estimasi",p19:"Pendapatan Tahunan",p23:"Laba Bersih Tahunan",p26:"ROI Tahunan",p33:"Rata-rata",p34:"Optimis",p50:"Nama *",p60:"Catatan"},
+th:{p1:"สอบถาม",p17:"ประมาณการ",p19:"รายได้ต่อปี",p23:"กำไรสุทธิต่อปี",p26:"ROI ต่อปี",p33:"เฉลี่ย",p34:"มองในแง่ดี",p50:"ชื่อ *",p60:"หมายเหตุ"}
+};
+</script>
+<script src="../assets/js/wocs-i18n.js"></script>
+<script src="../assets/js/wocs-header.js"></script>
+<script src="../assets/js/wocs-footer.js"></script>
+</body>
+</html>

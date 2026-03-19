@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-t="pageTitle">WOCS S-시리즈 | 5가지 스타일 11가지 모델</title>
+<meta name="description" content="WOCS 프리미엄 S-시리즈. 베이직부터 럭셔리까지 5가지 스타일.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Lexend:wght@200;300;400;500;600&family=Noto+Sans+KR:wght@300;400;500;600&family=Noto+Serif+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/wocs-common.css">
+<style>
+.hero-slider{position:relative;min-height:580px;overflow:hidden}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
+.hero-slide.active{opacity:1}
+.hero-slide img{width:100%;height:100%;object-fit:cover}
+.hero-slide .overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(9,9,11,0.8) 0%,rgba(9,9,11,0.45) 60%,rgba(9,9,11,0.25) 100%)}
+.hero-dots{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:10}
+.hero-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.3);cursor:pointer;transition:all .3s}
+.hero-dot.active{background:var(--gold);transform:scale(1.3)}
+
+.feat-carousel{position:relative;overflow:hidden;max-width:1100px;margin:0 auto}
+.feat-track{display:flex;transition:transform .5s ease}
+.feat-card{min-width:25%;padding:0 12px;box-sizing:border-box}
+.feat-card-inner{background:rgba(240,235,224,0.04);border:1px solid rgba(201,169,110,0.12);padding:36px 20px;text-align:center;transition:all .3s;height:100%}
+.feat-card-inner:hover{border-color:rgba(201,169,110,0.4);background:rgba(201,169,110,0.14)}
+.feat-icon{font-size:40px;margin-bottom:14px}
+.feat-title{font-size:16px;color:var(--ivory);font-weight:400;margin-bottom:8px}
+.feat-desc{font-family:var(--font-body);font-size:12px;color:rgba(240,235,224,0.8);line-height:1.7}
+.feat-dots{display:flex;justify-content:center;gap:8px;margin-top:20px}
+.feat-dot{width:8px;height:8px;border-radius:50%;background:rgba(240,235,224,0.15);cursor:pointer;transition:background .3s}
+.feat-dot.active{background:var(--gold)}
+@media(max-width:768px){.feat-card{min-width:50%}}
+
+.collab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.collab-card{position:relative;overflow:hidden;height:280px}
+.collab-card img{width:100%;height:100%;object-fit:cover;filter:brightness(0.85);transition:all .5s}
+.collab-card:hover img{filter:brightness(0.9);transform:scale(1.05)}
+.collab-card .collab-info{position:absolute;bottom:0;left:0;right:0;padding:20px;background:linear-gradient(transparent,rgba(0,0,0,0.7))}
+.collab-card .collab-title{font-size:14px;color:#fff;font-weight:400}
+.collab-card .collab-desc{font-family:var(--font-body);font-size:11px;color:rgba(255,255,255,0.75);margin-top:4px}
+
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:500px}
+.why-text{padding:60px 5%;display:flex;flex-direction:column;justify-content:center;background:var(--bg)}
+.why-img{overflow:hidden}
+.why-img img{width:100%;height:100%;object-fit:cover;min-height:500px}
+.why-features{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:32px}
+.why-feat{display:flex;gap:14px;align-items:flex-start}
+.why-feat-icon{width:44px;height:44px;border:1px solid rgba(201,169,110,0.2);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.why-feat-title{font-size:14px;color:var(--ivory);margin-bottom:4px}
+.why-feat-desc{font-family:var(--font-body);font-size:11px;color:rgba(240,235,224,0.65);line-height:1.6}
+@media(max-width:768px){.why-grid{grid-template-columns:1fr}.why-features{grid-template-columns:1fr}}
+</style>
+
+<!-- SEO: hreflang -->
+<link rel="alternate" hreflang="ko" href="https://wocs.kr/products/safari-tents.html">
+<link rel="alternate" hreflang="en" href="https://wocs.kr/products/safari-tents.html?lang=en">
+<link rel="alternate" hreflang="ja" href="https://wocs.kr/products/safari-tents.html?lang=ja">
+<link rel="alternate" hreflang="zh-CN" href="https://wocs.kr/products/safari-tents.html?lang=zh">
+<link rel="alternate" hreflang="es" href="https://wocs.kr/products/safari-tents.html?lang=es">
+<link rel="alternate" hreflang="fr" href="https://wocs.kr/products/safari-tents.html?lang=fr">
+<link rel="alternate" hreflang="de" href="https://wocs.kr/products/safari-tents.html?lang=de">
+<link rel="alternate" hreflang="pt" href="https://wocs.kr/products/safari-tents.html?lang=pt">
+<link rel="alternate" hreflang="it" href="https://wocs.kr/products/safari-tents.html?lang=it">
+<link rel="alternate" hreflang="ar" href="https://wocs.kr/products/safari-tents.html?lang=ar">
+<link rel="alternate" hreflang="ru" href="https://wocs.kr/products/safari-tents.html?lang=ru">
+<link rel="alternate" hreflang="tr" href="https://wocs.kr/products/safari-tents.html?lang=tr">
+<link rel="alternate" hreflang="zh-TW" href="https://wocs.kr/products/safari-tents.html?lang=tw">
+<link rel="alternate" hreflang="id" href="https://wocs.kr/products/safari-tents.html?lang=id">
+<link rel="alternate" hreflang="th" href="https://wocs.kr/products/safari-tents.html?lang=th">
+<link rel="alternate" hreflang="x-default" href="https://wocs.kr/products/safari-tents.html">
+<meta name="theme-color" content="#09090b">
+
+<style>
+}
+
+.map-container{position:relative;max-width:800px;margin:0 auto}
+.map-pin{position:absolute;width:12px;height:12px;border-radius:50%;transform:translate(-50%,-50%);z-index:10}
+.map-pin::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;border-radius:50%;animation:pulse 2s infinite;box-shadow:inherit}
+@keyframes pulse{0%{transform:scale(1);opacity:0.8}70%{transform:scale(3);opacity:0}100%{transform:scale(3);opacity:0}}
+.pin-asia{top:38%;left:83%;background-color:#C9A96E;box-shadow:0 0 10px #C9A96E}
+.pin-europe{top:32%;left:50%;background-color:#4A90E2;box-shadow:0 0 10px #4A90E2}
+.pin-americas{top:36%;left:22%;background-color:#E74C3C;box-shadow:0 0 10px #E74C3C}
+.pin-mea{top:46%;left:61%;background-color:#2ECC71;box-shadow:0 0 10px #2ECC71}
+.pin-oceania{top:76%;left:85%;background-color:#9B59B6;box-shadow:0 0 10px #9B59B6}
+</style>
+</head>
+<body>
+<script>var WOCS_BASE="../";</script>
+<div id="wocs-header"></div>
+
+<!-- ═══ 1. AUTOPLAY HERO SLIDER ═══ -->
+<section class="hero-slider" style="padding-top:80px">
+  <div class="hero-slide active">
+    <img data-replace="true" src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?q=80&w=1600&fit=crop" alt="WOCS S-시리즈 국내제작 표준 수익형 사파리 글램핑 시공">
+    <div class="overlay"></div>
+  </div>
+  <div class="hero-slide">
+    <img data-replace="true" src="https://images.unsplash.com/photo-1533575770077-052fa2c609fc?w=1600&h=800&fit=crop" alt="WOCS 프리미엄 글램핑 시공 S-시리즈">
+    <div class="overlay"></div>
+  </div>
+  <div class="hero-slide">
+    <img data-replace="true" src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1600&h=800&fit=crop" alt="WOCS 프리미엄 글램핑 시공 S-시리즈">
+    <div class="overlay"></div>
+  </div>
+  <div class="hero-slide">
+    <img data-replace="true" src="https://images.pexels.com/photos/803975/pexels-photo-803975.jpeg?auto=compress&w=1600&h=800&fit=crop" alt="WOCS 프리미엄 글램핑 시공 S-시리즈">
+    <div class="overlay"></div>
+  </div>
+  <div class="container" style="position:absolute;inset:0;z-index:5;display:flex;align-items:center;padding:0 5%">
+    <div>
+      <div class="breadcrumb"><a href="../index.html" data-t="home">홈</a> <span>›</span> <a href="../products/index.html" data-t="navProducts">제품</a> <span>›</span> <span data-t="heroH1">S-시리즈</span></div>
+      <div class="slab anim" data-t="heroSlab">S-SERIES</div>
+      <h1 class="anim anim-delay-1" style="font-size:clamp(42px,6vw,76px);line-height:1.05" data-t="heroH1">S-시리즈</h1>
+      <p class="font-body anim anim-delay-2" style="max-width:560px;margin-top:20px;font-size:15px;color:rgba(240,235,224,0.8);line-height:1.8" data-t="heroDesc">캠프장과 리조트에 비교할 수 없는 사치를 가져다주도록 설계된<br>고급 글램핑 로지 시리즈.<br>가족·연인·소규모 그룹 객실에 최적화된,<br>가장 보편적이면서도 안정적인 구조입니다.</p>
+      <div class="anim anim-delay-3" style="margin-top:32px;display:flex;gap:16px"><a class="btn-gold-fill" href="../contact/index.html" data-t="freeConsult">무료 상담 신청</a><a class="btn-gold" href="#lineup" data-t="viewProducts">제품 보기</a></div>
+    </div>
+  </div>
+  <div class="hero-dots"></div>
+</section>
+
+<!-- ═══ 2. FEATURE CARD CAROUSEL ═══ -->
+<section style="background:var(--bg);padding:60px 5%;border-bottom:1px solid rgba(201,169,110,0.12)">
+  <div class="feat-carousel">
+    <div class="feat-track">
+      <div class="feat-card"><div class="feat-card-inner"><div class="feat-icon">🏕</div><div class="feat-title" data-t="p1">여러 스타일</div><div class="feat-desc" data-t="p2">다양한 계층의 사람들의 요구를 충족할 수 있습니다.</div></div></div>
+      <div class="feat-card"><div class="feat-card-inner"><div class="feat-icon">🔩</div><div class="feat-title" data-t="p3">내구성</div><div class="feat-desc" data-t="p4">글램핑의 수명은 보통 10~15년입니다.</div></div></div>
+      <div class="feat-card"><div class="feat-card-inner"><div class="feat-icon">🛋</div><div class="feat-title" data-t="p5">다재</div><div class="feat-desc" data-t="p6">숙박, 식사, 라운지, 이벤트 공간으로 이용 가능합니다.</div></div></div>
+      <div class="feat-card"><div class="feat-card-inner"><div class="feat-icon">📦</div><div class="feat-title" data-t="p7">편안한 디자인</div><div class="feat-desc" data-t="p8">침구류와 현대적인 가구를 갖추고 있습니다.</div></div></div>
+      <div class="feat-card"><div class="feat-card-inner"><div class="feat-icon">🌿</div><div class="feat-title" data-t="p9">친환경</div><div class="feat-desc" data-t="p10">글램핑는 재활용 가능한 재료로 만들어졌습니다.</div></div></div>
+      <div class="feat-card"><div class="feat-card-inner"><div class="feat-icon">❄️</div><div class="feat-title" data-t="p11">사계절</div><div class="feat-desc" data-t="p12">-20°C ~ 40°C 쾌적한 실내 환경 유지.</div></div></div>
+    </div>
+    <div class="feat-dots"></div>
+  </div>
+</section>
+
+<!-- ═══ 3. PRODUCT LINEUP ═══ -->
+<section id="lineup" style="background:var(--bg2);padding:80px 5%">
+  <div class="container">
+    <div class="split-section anim" style="margin-bottom:32px;border:1px solid rgba(201,169,110,0.12);background:var(--bg)">
+      <div class="split-img"><img data-replace="true" data-lightbox src="https://images.unsplash.com/photo-1533575770077-052fa2c609fc?w=1100&h=680&fit=crop&q=85" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" loading="lazy"></div>
+      <div class="split-text"><div class="slab" style="color:var(--gold)">S-CLASSIC</div><h3 style="font-size:clamp(22px,2.5vw,32px);font-weight:300;margin-top:10px" data-t="st_b">기본 S-시리즈</h3><p class="font-body" style="font-size:13px;color:rgba(240,235,224,0.65);line-height:1.9;margin-top:14px" data-t="st_bd">가벼운 구조와 합리적인 가격. 2~4인용 컴팩트 사이즈로 가성비 최고의 글램핑 글램핑. 좁은 부지에도 다수 유닛 배치 가능합니다.</p><a class="prod-card-link" href="../products/safari-basic.html" data-t="explore" style="margin-top:20px">자세히 보기 →</a></div>
+    </div>
+    <div class="split-section reverse anim" style="margin-bottom:32px;border:1px solid rgba(201,169,110,0.12);background:var(--bg)">
+      <div class="split-img"><img data-replace="true" data-lightbox src="https://images.unsplash.com/photo-1517299321609-52687d1bc55a?w=1100&h=680&fit=crop&q=85" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" loading="lazy"></div>
+      <div class="split-text"><div class="slab" style="color:var(--gold)">EXTREME S-SERIES</div><h3 style="font-size:clamp(22px,2.5vw,32px);font-weight:300;margin-top:10px" data-t="st_e">익스트림 S-시리즈</h3><p class="font-body" style="font-size:13px;color:rgba(240,235,224,0.65);line-height:1.9;margin-top:14px" data-t="st_ed">태풍, 폭설, 폭우. 극한 환경 대응 강화 프레임과 특수 내후성 캔버스. 풍속 160km/h 대응.</p><a class="prod-card-link" href="../products/safari-extreme.html" data-t="explore" style="margin-top:20px">자세히 보기 →</a></div>
+    </div>
+    <div class="split-section anim" style="margin-bottom:32px;border:1px solid rgba(201,169,110,0.12);background:var(--bg)">
+      <div class="split-img"><img data-replace="true" data-lightbox src="https://images.pexels.com/photos/803975/pexels-photo-803975.jpeg?auto=compress&w=1100&h=680&fit=crop&q=85" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" loading="lazy"></div>
+      <div class="split-text"><div class="slab" style="color:var(--gold)">S-SUITE</div><h3 style="font-size:clamp(22px,2.5vw,32px);font-weight:300;margin-top:10px" data-t="st_c">S-Suite 글램핑</h3><p class="font-body" style="font-size:13px;color:rgba(240,235,224,0.65);line-height:1.9;margin-top:14px" data-t="st_cd">원목 프레임과 캔버스의 조화. 자연스러운 우드톤으로 ROI가 빠른 수익형 모듈. 숲속 캠프장에 최적화된 디자인.</p><a class="prod-card-link" href="../products/safari-cabin.html" data-t="explore" style="margin-top:20px">자세히 보기 →</a></div>
+    </div>
+    <div class="split-section reverse anim" style="margin-bottom:32px;border:1px solid rgba(201,169,110,0.12);background:var(--bg)">
+      <div class="split-img"><img data-replace="true" data-lightbox src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1100&h=680&fit=crop&q=85" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" loading="lazy"></div>
+      <div class="split-text"><div class="slab" style="color:var(--gold)">ELITE S-SERIES</div><h3 style="font-size:clamp(22px,2.5vw,32px);font-weight:300;margin-top:10px" data-t="st_el">엘리트 S-시리즈</h3><p class="font-body" style="font-size:13px;color:rgba(240,235,224,0.65);line-height:1.9;margin-top:14px" data-t="st_eld">프리미엄 소재와 부티크 마감. 고급 리조트에 어울리는 세련된 디자인. 맞춤 인테리어 풀 옵션.</p><a class="prod-card-link" href="../products/safari-elite.html" data-t="explore" style="margin-top:20px">자세히 보기 →</a></div>
+    </div>
+    <div class="split-section anim" style="border:1px solid rgba(201,169,110,0.12);background:var(--bg)">
+      <div class="split-img"><img data-replace="true" data-lightbox src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1100&h=680&fit=crop&q=85" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" loading="lazy"></div>
+      <div class="split-text"><div class="slab" style="color:var(--gold)">LUXURY S-SERIES</div><h3 style="font-size:clamp(22px,2.5vw,32px);font-weight:300;margin-top:10px" data-t="st_l">럭셔리 S-시리즈</h3><p class="font-body" style="font-size:13px;color:rgba(240,235,224,0.65);line-height:1.9;margin-top:14px" data-t="st_ld">다실 빌라형 풀 글라스월. 침실, 거실, 욕실 분리. 호텔을 뛰어넘는 최고급 숙박 경험.</p><a class="prod-card-link" href="../products/safari-luxury.html" data-t="explore" style="margin-top:20px">자세히 보기 →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 4. COMPONENT PARTS ═══ -->
+<section style="position:relative;padding:80px 5%;overflow:hidden">
+  <img data-replace="true" src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=1600&h=600&fit=crop" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;filter:brightness(0.35)">
+  <div style="position:absolute;inset:0;background:rgba(9,9,11,0.45);z-index:1"></div>
+  <div class="container" style="position:relative;z-index:2;max-width:900px">
+    <div class="parts-grid">
+      <div class="part-item anim" style="background:rgba(9,9,11,0.5);backdrop-filter:blur(8px)"><div class="part-icon">🔩</div><div class="part-title">Poles</div><div class="part-desc" data-t="p13">아연 도금 스틸<br>Ø48~60mm</div></div>
+      <div class="part-item anim anim-delay-1" style="background:rgba(9,9,11,0.5);backdrop-filter:blur(8px)"><div class="part-icon">⚙️</div><div class="part-title">Connectors</div><div class="part-desc" data-t="p14">WOCS 특허<br data-t="p15">무용접 조인트</div></div>
+      <div class="part-item anim anim-delay-2" style="background:rgba(9,9,11,0.5);backdrop-filter:blur(8px)"><div class="part-icon">🏕</div><div class="part-title">Coverings</div><div class="part-desc">650g PVC<br data-t="p16">방수 캔버스</div></div>
+      <div class="part-item anim anim-delay-3" style="background:rgba(9,9,11,0.5);backdrop-filter:blur(8px)"><div class="part-icon">🧵</div><div class="part-title">Inner Linings</div><div class="part-desc" data-t="p17">이중 단열 이너<br data-t="p18">장식 라이닝</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 5. WORLD MAP (brighter) ═══ -->
+<section style="background:var(--bg2);padding:80px 5%">
+  <div class="container">
+    <div class="text-center anim"><div class="slab">GLOBAL PRESENCE</div><h2 style="font-size:clamp(24px,3vw,42px);font-weight:300;margin-top:12px" data-t="p19">전 세계 <span class="gold-text" data-t="p20">120개국</span data-t="p21"> 수출</h2></div>
+    <div style="margin-top:40px;text-align:center;position:relative" class="anim anim-delay-1">
+      <div class="map-container anim anim-delay-1" style="margin-top:40px;text-align:center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/World_map_blank_without_borders.svg/1280px-World_map_blank_without_borders.svg.png" alt="World Map" style="width:100%;filter:invert(0.9) sepia(0.1) hue-rotate(10deg) brightness(1.1) opacity(0.8);" loading="lazy">
+  <div class="map-pin pin-asia" title="아시아"></div>
+  <div class="map-pin pin-europe" title="유럽"></div>
+  <div class="map-pin pin-americas" title="아메리카"></div>
+  <div class="map-pin pin-mea" title="중동/아프리카"></div>
+  <div class="map-pin pin-oceania" title="오세아니아"></div>
+</div>
+      <svg style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:900px;height:100%" viewBox="0 0 900 450">
+        <!-- Asia (red) — Korea, Japan, China, Thailand, Vietnam, India, Malaysia -->
+        <circle cx="735" cy="175" r="5" fill="#e74c3c" opacity="0.9"><animate attributeName="r" values="5;7;5" dur="2s" repeatCount="indefinite"/></circle>
+        <circle cx="755" cy="170" r="4" fill="#e74c3c" opacity="0.8"/>
+        <circle cx="710" cy="185" r="4" fill="#e74c3c" opacity="0.8"/>
+        <circle cx="700" cy="240" r="3.5" fill="#e74c3c" opacity="0.7"/>
+        <circle cx="715" cy="250" r="3" fill="#e74c3c" opacity="0.6"/>
+        <circle cx="635" cy="215" r="3.5" fill="#e74c3c" opacity="0.7"/>
+        <circle cx="720" cy="265" r="3" fill="#e74c3c" opacity="0.6"/>
+        <circle cx="680" cy="195" r="3" fill="#e74c3c" opacity="0.6"/>
+        <!-- Europe (blue) — UK, France, Germany, Spain, Italy, Netherlands, Sweden -->
+        <circle cx="430" cy="120" r="5" fill="#3498db" opacity="0.9"><animate attributeName="r" values="5;7;5" dur="2.5s" repeatCount="indefinite"/></circle>
+        <circle cx="445" cy="135" r="4" fill="#3498db" opacity="0.8"/>
+        <circle cx="455" cy="125" r="4" fill="#3498db" opacity="0.8"/>
+        <circle cx="425" cy="145" r="3.5" fill="#3498db" opacity="0.7"/>
+        <circle cx="460" cy="140" r="3" fill="#3498db" opacity="0.7"/>
+        <circle cx="440" cy="115" r="3" fill="#3498db" opacity="0.6"/>
+        <circle cx="450" cy="105" r="3" fill="#3498db" opacity="0.6"/>
+        <!-- Americas (green) — USA East, USA West, Canada, Mexico, Brazil, Colombia -->
+        <circle cx="210" cy="155" r="5" fill="#2ecc71" opacity="0.9"><animate attributeName="r" values="5;7;5" dur="3s" repeatCount="indefinite"/></circle>
+        <circle cx="165" cy="155" r="4" fill="#2ecc71" opacity="0.8"/>
+        <circle cx="195" cy="130" r="3.5" fill="#2ecc71" opacity="0.7"/>
+        <circle cx="195" cy="195" r="3" fill="#2ecc71" opacity="0.6"/>
+        <circle cx="265" cy="310" r="4" fill="#2ecc71" opacity="0.7"/>
+        <circle cx="235" cy="265" r="3" fill="#2ecc71" opacity="0.6"/>
+        <!-- Middle East / Africa (gold) — UAE, Saudi, South Africa, Kenya, Morocco -->
+        <circle cx="545" cy="195" r="5" fill="#c9a96e" opacity="0.9"><animate attributeName="r" values="5;7;5" dur="2.2s" repeatCount="indefinite"/></circle>
+        <circle cx="530" cy="205" r="4" fill="#c9a96e" opacity="0.8"/>
+        <circle cx="510" cy="340" r="4" fill="#c9a96e" opacity="0.7"/>
+        <circle cx="540" cy="270" r="3" fill="#c9a96e" opacity="0.6"/>
+        <circle cx="430" cy="165" r="3" fill="#c9a96e" opacity="0.6"/>
+        <!-- Oceania (purple) — Australia Sydney, Melbourne, New Zealand -->
+        <circle cx="785" cy="345" r="4" fill="#9b59b6" opacity="0.8"><animate attributeName="r" values="4;6;4" dur="2.8s" repeatCount="indefinite"/></circle>
+        <circle cx="770" cy="355" r="3" fill="#9b59b6" opacity="0.7"/>
+        <circle cx="810" cy="370" r="3" fill="#9b59b6" opacity="0.6"/>
+      </svg>
+    </div>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:32px;margin-top:40px;text-align:center">
+      <div class="anim">
+        <div style="font-size:22px;color:#C9A96E;font-weight:500" data-t="gAsia">🌏 아시아</div>
+        <div class="font-body" style="font-size:12px;color:rgba(240,235,224,0.65);margin-top:6px" data-t="gAsiaD">한국·일본·동남아</div>
+      </div>
+      <div class="anim anim-delay-1">
+        <div style="font-size:22px;color:#4A90E2;font-weight:500" data-t="gEurope">🌍 유럽</div>
+        <div class="font-body" style="font-size:12px;color:rgba(240,235,224,0.65);margin-top:6px" data-t="gEuropeD">영국·독일·프랑스·스페인</div>
+      </div>
+      <div class="anim anim-delay-2">
+        <div style="font-size:22px;color:#E74C3C;font-weight:500" data-t="gAmericas">🌎 아메리카</div>
+        <div class="font-body" style="font-size:12px;color:rgba(240,235,224,0.65);margin-top:6px" data-t="gAmericasD">미국·캐나다·브라질</div>
+      </div>
+      <div class="anim anim-delay-3">
+        <div style="font-size:22px;color:#2ECC71;font-weight:500" data-t="gMEA">🌍 중동·아프리카</div>
+        <div class="font-body" style="font-size:12px;color:rgba(240,235,224,0.65);margin-top:6px" data-t="gMEAD">UAE·사우디·남아공</div>
+      </div>
+      <div class="anim">
+        <div style="font-size:22px;color:#9B59B6;font-weight:500" data-t="gOceania">🗺️ 오세아니아</div>
+        <div class="font-body" style="font-size:12px;color:rgba(240,235,224,0.65);margin-top:6px" data-t="gOceaniaD">호주·뉴질랜드</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 6. CASE GALLERY + COLLABORATION (Glitzcamp style) ═══ -->
+<section style="background:var(--bg);padding:80px 5%">
+  <div class="container">
+    <div class="text-center anim"><div class="slab">GLAMPING CASE</div><h2 style="font-size:clamp(24px,3vw,42px);font-weight:300;margin-top:12px" data-t="p32">글램핑 <span class="gold-text" data-t="p33">시공 사례</span></h2></div>
+    <div style="display:flex;gap:12px;overflow-x:auto;scroll-behavior:smooth;padding:48px 0 20px;-ms-overflow-style:none;scrollbar-width:none" class="case-scroll">
+      <div style="min-width:350px;height:280px;flex-shrink:0"><img data-replace="true" data-lightbox src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=700&h=500&fit=crop" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.92)" loading="lazy"></div>
+      <div style="min-width:350px;height:280px;flex-shrink:0"><img data-replace="true" data-lightbox src="https://images.unsplash.com/photo-1533575770077-052fa2c609fc?w=700&h=500&fit=crop" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.92)" loading="lazy"></div>
+      <div style="min-width:350px;height:280px;flex-shrink:0"><img data-replace="true" data-lightbox src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=700&h=500&fit=crop" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.92)" loading="lazy"></div>
+      <div style="min-width:350px;height:280px;flex-shrink:0"><img data-replace="true" data-lightbox src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=700&h=500&fit=crop" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.92)" loading="lazy"></div>
+      <div style="min-width:350px;height:280px;flex-shrink:0"><img data-replace="true" data-lightbox src="https://images.pexels.com/photos/803975/pexels-photo-803975.jpeg?auto=compress&w=700&h=500&fit=crop" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.92)" loading="lazy"></div>
+      <div style="min-width:350px;height:280px;flex-shrink:0"><img data-replace="true" data-lightbox src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=700&h=500&fit=crop" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.92)" loading="lazy"></div>
+      <div style="min-width:350px;height:280px;flex-shrink:0"><img data-replace="true" data-lightbox src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=700&h=500&fit=crop" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.92)" loading="lazy"></div>
+      <div style="min-width:350px;height:280px;flex-shrink:0"><img data-replace="true" data-lightbox src="https://images.unsplash.com/photo-1587061949409-02df41d5e562?w=700&h=500&fit=crop" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.92)" loading="lazy"></div>
+    </div>
+    <div style="display:flex;justify-content:center;gap:8px;margin-top:16px">
+      <button onclick="this.parentElement.previousElementSibling.scrollBy({left:-370,behavior:'smooth'})" style="width:36px;height:36px;border-radius:50%;background:var(--gold);color:var(--bg);border:none;font-size:16px;cursor:pointer">❮</button>
+      <button onclick="this.parentElement.previousElementSibling.scrollBy({left:370,behavior:'smooth'})" style="width:36px;height:36px;border-radius:50%;background:var(--gold);color:var(--bg);border:none;font-size:16px;cursor:pointer">❯</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 7. COLLABORATION CASES (Glitzcamp style) ═══ -->
+<section style="background:var(--bg2);padding:80px 5%">
+  <div class="container">
+    <div class="text-center anim"><div class="slab">COLLABORATION</div><h2 style="font-size:clamp(24px,3vw,42px);font-weight:300;margin-top:12px" data-t="p34">협력 <span class="gold-text" data-t="p35">사례</span></h2></div>
+    <div style="display:flex;gap:20px;overflow-x:auto;scroll-behavior:smooth;padding:48px 0 20px;-ms-overflow-style:none;scrollbar-width:none" class="collab-scroll">
+      <div style="min-width:280px;flex-shrink:0;perspective:800px" class="anim"><div class="collab-card" style="height:340px"><img data-replace="true" src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=700&h=560&fit=crop&q=85" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" loading="lazy"><div class="collab-info"><div class="collab-title" data-t="p36">설원 글램핑 글램핑 시티</div><div class="collab-desc" data-t="p37">WOCS 내한 S-시리즈로 눈 덮인 풍경을 Signature 시리즈 시티로 탈바꿈. 20유닛 동시 시공.</div></div></div></div>
+      <div style="min-width:280px;flex-shrink:0" class="anim anim-delay-1"><div class="collab-card" style="height:340px"><img data-replace="true" src="https://images.unsplash.com/photo-1587061949409-02df41d5e562?w=700&h=560&fit=crop&q=85" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" loading="lazy"><div class="collab-info"><div class="collab-title" data-t="p38">제주 D-시리즈 돔 리조트</div><div class="collab-desc" data-t="p39">7m 스타게이저 돔 3세트로 반려동물 동반 가능 에코 캠핑장 조성. 첫 달 풀 예약 달성.</div></div></div></div>
+      <div style="min-width:280px;flex-shrink:0" class="anim anim-delay-2"><div class="collab-card" style="height:340px"><img data-replace="true" src="https://images.pexels.com/photos/803975/pexels-photo-803975.jpeg?auto=compress&w=700&h=560&fit=crop&q=85" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" loading="lazy"><div class="collab-info"><div class="collab-title" data-t="p40">강원도 캐빈 글램핑 호텔</div><div class="collab-desc" data-t="p41">미윤 와이너리 인근 럭셔리 캐빈 글램핑 숙박 호텔 조성. 부티크 인테리어 풀 커스텀.</div></div></div></div>
+      <div style="min-width:280px;flex-shrink:0" class="anim anim-delay-3"><div class="collab-card" style="height:340px"><img data-replace="true" src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=700&h=560&fit=crop&q=85" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" loading="lazy"><div class="collab-info"><div class="collab-title" data-t="p42">필리핀 해변 글램핑 하우스</div><div class="collab-desc" data-t="p43">열대 기후 도전을 극복한 해변 B2B 리조트·호텔 확장형 시공. 내식성 표면 처리 + 방염 PVC.</div></div></div></div>
+      <div style="min-width:280px;flex-shrink:0"><div class="collab-card" style="height:340px"><img data-replace="true" src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=700&h=560&fit=crop&q=85" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" loading="lazy"><div class="collab-info"><div class="collab-title" data-t="p44">일본 해안 로맨틱 리조트</div><div class="collab-desc" data-t="p45">해안가 글램핑 리조트 시공. 내구성과 부식 방지 처리된 프리미엄 S-시리즈.</div></div></div></div>
+      <div style="min-width:280px;flex-shrink:0"><div class="collab-card" style="height:340px"><img data-replace="true" src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=700&h=560&fit=crop&q=85" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" loading="lazy"><div class="collab-info"><div class="collab-title" data-t="p46">미국 노스캐롤라이나 돔파크</div><div class="collab-desc" data-t="p47">반려동물 친화 캠핑장. 7m 돔 3세트 + S-시리즈 10유닛 통합 시공.</div></div></div></div>
+      <div style="min-width:280px;flex-shrink:0"><div class="collab-card" style="height:340px"><img data-replace="true" src="https://images.unsplash.com/photo-1533575770077-052fa2c609fc?w=700&h=560&fit=crop&q=85" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" loading="lazy"><div class="collab-info"><div class="collab-title" data-t="p48">호주 아웃백 글램핑</div><div class="collab-desc" data-t="p49">사막 기후 대응 특수 단열 S-시리즈. 태양광 시스템 통합 오프그리드 운영.</div></div></div></div>
+    </div>
+    <div style="display:flex;justify-content:center;gap:8px;margin-top:16px">
+      <button onclick="this.parentElement.previousElementSibling.scrollBy({left:-300,behavior:'smooth'})" style="width:36px;height:36px;border-radius:50%;background:var(--gold);color:var(--bg);border:none;font-size:16px;cursor:pointer">❮</button>
+      <button onclick="this.parentElement.previousElementSibling.scrollBy({left:300,behavior:'smooth'})" style="width:36px;height:36px;border-radius:50%;background:var(--gold);color:var(--bg);border:none;font-size:16px;cursor:pointer">❯</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 8. WHY CHOOSE WOCS (Glitzcamp layout) ═══ -->
+<section style="background:var(--bg);padding:0;overflow:hidden">
+  <div class="why-grid">
+    <div class="why-text">
+      <div class="slab anim" style="color:var(--gold)">WHY WOCS?</div>
+      <h2 class="anim anim-delay-1" style="font-size:clamp(24px,3vw,40px);font-weight:300;margin-top:12px;line-height:1.2" data-t="p50">왜 WOCS의<br><span class="gold-text" data-t="p51">S-시리즈</span data-t="p52">를 선택하시나요?</h2>
+      <p class="font-body anim anim-delay-2" style="font-size:13px;color:rgba(240,235,224,0.65);line-height:1.9;margin-top:16px" data-t="p53">WOCS는 세계적인 글램핑 글램핑 제조업체로서 중간상인을 배제하고 경쟁력 있는 가격을 제공합니다. 초기 상담부터 최종 설치까지 1:1 맞춤 서비스를 제공합니다.</p>
+      <div class="why-features anim anim-delay-3">
+        <div class="why-feat"><div class="why-feat-icon">🏭</div><div><div class="why-feat-title" data-t="p54">자체 공장 생산</div><div class="why-feat-desc" data-t="p55">중간상인 없이 직접 제조. 경쟁력 있는 가격.</div></div></div>
+        <div class="why-feat"><div class="why-feat-icon">🎨</div><div><div class="why-feat-title" data-t="p56">맞춤 서비스</div><div class="why-feat-desc" data-t="p57">초기 상담부터 설치까지 1:1 전담.</div></div></div>
+        <div class="why-feat"><div class="why-feat-icon">🌿</div><div><div class="why-feat-title" data-t="p58">친환경 소재</div><div class="why-feat-desc" data-t="p59">재활용 가능한 친환경 소재 사용.</div></div></div>
+        <div class="why-feat"><div class="why-feat-icon">📜</div><div><div class="why-feat-title" data-t="p60">인증 지원</div><div class="why-feat-desc" data-t="p61">필요한 라이선스 인증서 지원 제공.</div></div></div>
+      </div>
+    </div>
+    <div class="why-img"><img data-replace="true" src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=1000&h=750&fit=crop&q=85" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- ═══ 9. TESTIMONIALS ═══ -->
+<section style="background:var(--bg2);padding:80px 5%">
+  <div class="container">
+    <div class="text-center anim"><div class="slab">TESTIMONIALS</div><h2 style="font-size:clamp(24px,3vw,42px);font-weight:300;margin-top:12px" data-t="p62">고객 <span class="gold-text" data-t="p63">후기</span></h2></div>
+    <div class="testimonial-grid" style="margin-top:48px">
+      <div class="testimonial-card anim"><div class="testimonial-stars">★★★★★</div><div class="testimonial-text" data-t="p64">"S-시리즈 설치 후 손님들이 '호텔보다 낫다'고 말합니다. 시공 품질과 속도 모두 만족합니다."</div><div class="testimonial-author" data-t="p65">김OO 대표</div><div class="testimonial-role" data-t="p66">글램핑장 | 강원도</div></div>
+      <div class="testimonial-card anim anim-delay-1"><div class="testimonial-stars">★★★★★</div><div class="testimonial-text" data-t="p67">"글램핑 설치가 정말 쉬웠습니다. 몇 시간 만에 완성할 수 있었습니다. 맞춤 로고도 선명하게 나왔습니다."</div><div class="testimonial-author">Ella</div><div class="testimonial-role" data-t="p68">리조트 오너</div></div>
+      <div class="testimonial-card anim anim-delay-2"><div class="testimonial-stars">★★★★★</div><div class="testimonial-text" data-t="p69">"WOCS의 A/S가 놀랍습니다! 초보자도 쉽게 시작할 수 있도록 상세한 설명서와 영상을 제공합니다."</div><div class="testimonial-author">John</div><div class="testimonial-role" data-t="p70">Airbnb 호스트</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 10. FAQ (Glitzcamp style) ═══ -->
+<section style="background:var(--bg);padding:80px 5%">
+  <div class="container" style="max-width:900px">
+    <div class="text-center anim"><div class="slab">FAQ</div><h2 style="font-size:clamp(24px,3vw,42px);font-weight:300;margin-top:12px" data-t="p71">자주 묻는 <span class="gold-text" data-t="p72">질문</span></h2></div>
+    <div style="margin-top:48px">
+
+      
+    <!-- 📐 [PLACEHOLDER] 실제 시공 사진 또는 3D 도면 삽입 위치 -->
+    <!-- <img src="실제이미지경로.jpg" alt="WOCS 실제 시공 현장 사진" style="width:100%;margin:32px 0"> -->
+    <div class="faq-item"><div class="faq-q" data-t="p73">S-시리즈에 난방 장비를 설치할 수 있나요? <span class="faq-icon">+</span></div><div class="faq-a" data-t="p74">네, 글램핑 글램핑에 난방 장비를 설치할 수 있습니다. 에너지 효율적인 전기 히터, 가스 스토브, 오일 히터 또는 장작 스토브를 사용할 수 있습니다. 대형 S-시리즈는 에어컨도 설치하여 가장 더운 기후에서도 최대한의 편안함을 제공합니다. WOCS 이중 단열 이너 라이닝과 함께 사용하면 겨울에도 쾌적한 환경을 유지할 수 있습니다.</div></div>
+      <div class="faq-item"><div class="faq-q" data-t="p75">S-시리즈의 수명은 어느 정도인가요? <span class="faq-icon">+</span></div><div class="faq-a" data-t="p76">프레임(알루미늄 합금 또는 아연 도금 스틸)의 수명은 10~15년입니다. PVC 커버 등 기타 부속품은 환경의 영향을 받아 1~3년 주기로 교체가 필요합니다. 적절한 관리를 하면 글램핑는 내구성 있고 오래 지속되도록 설계되었습니다. 정기적인 관리와 부속품 교체를 통해 반영구적으로 사용할 수 있습니다.</div></div>
+      <div class="faq-item"><div class="faq-q" data-t="p77">S-시리즈는 사계절 사용이 가능한가요? <span class="faq-icon">+</span></div><div class="faq-a" data-t="p78">네, WOCS S-시리즈는 사계절 모두 편안하고 즐거운 경험을 제공하도록 설계되었습니다. 내구성 있는 알루미늄 합금 프레임과 고품질 캔버스 커버의 조합으로 다양한 기후에서 활용할 수 있습니다. 여름에는 통기성 있는 캔버스가 공기 순환을 유지하고, 겨울에는 소형 히터나 단열 바닥재와 결합하면 내부 온기를 유지합니다.</div></div>
+      <div class="faq-item"><div class="faq-q" data-t="p79">S-시리즈 설치는 어렵나요? <span class="faq-icon">+</span></div><div class="faq-a" data-t="p80">WOCS S-시리즈 설치는 사용자 친화적인 과정입니다. 각 글램핑에는 상세한 설치 설명서가 제공되며, 비디오 튜토리얼도 보유하고 있습니다. 전문 팀의 도움이 필요하시면 WOCS에서 전문 팀을 파견하여 설치를 지원할 수 있습니다. WOCS 특허 무용접 조인트로 전문 용접공 없이도 1~3일 내 시공이 완료됩니다.</div></div>
+      <div class="faq-item"><div class="faq-q" data-t="p81">S-시리즈를 개인 취향에 맞게 커스터마이징할 수 있나요? <span class="faq-icon">+</span></div><div class="faq-a" data-t="p82">물론입니다! 글램핑의 색상, 패턴 및 추가 기능을 선택하여 취향에 맞게 맞춤 제작할 수 있습니다. 글램핑 크기와 형태부터 인테리어 장식 스타일까지 모든 것을 커스터마이징 가능합니다. 맞춤형 지원을 위해 영업 팀에 문의하세요.</div></div>
+      <div class="faq-item"><div class="faq-q" data-t="p83">S-시리즈의 내풍 성능은 어떤가요? <span class="faq-icon">+</span></div><div class="faq-a" data-t="p84">WOCS S-시리즈의 주요 구조는 고강도 Q235 강재로 만들어졌으며, 정밀 계산과 엄격한 테스트를 거쳤습니다. 풍속 120km/h의 표준 풍하중과 0.3KN/㎡의 적설 하중을 견딜 수 있습니다. 익스트림 모델의 경우 160km/h까지 대응 가능합니다.</div></div>
+      <div class="faq-item"><div class="faq-q" data-t="p85">글램핑 내부에는 어떤 시설이 갖춰져 있나요? <span class="faq-icon">+</span></div><div class="faq-a" data-t="p86">WOCS S-시리즈는 편안한 매트리스, 정교한 가구와 장식, 독립된 화장실 및 샤워 시설을 갖출 수 있습니다. 전통 건축물에 비해 설치 비용이 적게 들고 분해 및 운반이 쉬워 합리적인 숙박 솔루션을 제공합니다.</div></div>
+      <div class="faq-item"><div class="faq-q" data-t="p87">S-시리즈의 유지보수는 어떻게 하나요? <span class="faq-icon">+</span></div><div class="faq-a" data-t="p88">보관 전 완전히 건조시키고, 오물을 씻어내고, 방수 제품으로 처리하고, 건조한 곳에 보관하세요. 정기적인 관리가 수명을 연장합니다. 교체 부품도 별도로 제공됩니다.</div></div>
+      <div class="faq-item"><div class="faq-q" data-t="p89">배송 및 결제 조건은 어떻게 되나요? <span class="faq-icon">+</span></div><div class="faq-a" data-t="p90">전 세계 어디든 배송 가능하며, 크기와 포함된 액세서리에 따라 비용이 달라집니다. 재고 모델은 1주일 내 출하, 맞춤 옵션은 4~6주 생산 후 배송됩니다. 리조트 운영자 및 다수 유닛 주문에 대해서는 맞춤 대출 및 수익 분배 계약이 가능합니다.</div></div>
+      <div class="faq-item"><div class="faq-q" data-t="p91">극한 기상 조건에서도 사용 가능한가요? <span class="faq-icon">+</span></div><div class="faq-a" data-t="p92">WOCS 글램핑는 다양한 기상 조건을 견디도록 설계되었지만, 극한 조건에서는 적절한 설치와 추가 예방 조치가 필요할 수 있습니다. 특정 기상 시나리오에서의 사용에 대한 안내는 고객 지원팀에 문의하세요. 익스트림 모델은 태풍급 바람에도 대응 가능합니다.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 11. BLOG (Glitzcamp 4-card + 모두보기) ═══ -->
+<section style="background:var(--bg2);padding:80px 5%">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px" class="anim">
+      <h2 style="font-size:clamp(24px,3vw,42px);font-weight:300" data-t="p93">더 자세히 알아보기 <span class="gold-text">WOCS</span data-t="p94"> 블로그</h2>
+      <a href="../resources/blog.html" class="btn-gold" style="font-size:11px;letter-spacing:2px;padding:10px 28px" data-t="p95">모두 보기</a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px">
+      <a class="blog-card anim" href="../resources/blog.html" style="border:none"><img data-replace="true" src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600&h=450&fit=crop&q=85" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" loading="lazy" style="height:180px"><div class="blog-card-body" style="padding:16px 0"><div class="blog-card-title" style="font-size:14px" data-t="p96">글램핑장 부지 선정 완벽 가이드</div><div style="margin-top:8px;color:var(--gold);font-size:12px">→</div></div></a>
+      <a class="blog-card anim anim-delay-1" href="../resources/blog.html" style="border:none"><img data-replace="true" src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=600&h=450&fit=crop&q=85" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" loading="lazy" style="height:180px"><div class="blog-card-body" style="padding:16px 0"><div class="blog-card-title" style="font-size:14px" data-t="p97">아웃도어 웨딩 공간 기획: 이벤트 파빌리온 활용 가이드</div><div style="margin-top:8px;color:var(--gold);font-size:12px">→</div></div></a>
+      <a class="blog-card anim anim-delay-2" href="../resources/blog.html" style="border:none"><img data-replace="true" src="https://images.unsplash.com/photo-1537905569824-f89f14cceb68?w=600&h=450&fit=crop&q=85" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" loading="lazy" style="height:180px"><div class="blog-card-body" style="padding:16px 0"><div class="blog-card-title" style="font-size:14px" data-t="p98">럭셔리한 야외 생활 공간: 디자인 아이디어</div><div style="margin-top:8px;color:var(--gold);font-size:12px">→</div></div></a>
+      <a class="blog-card anim anim-delay-3" href="../resources/blog.html" style="border:none"><img data-replace="true" src="https://images.unsplash.com/photo-1587061949409-02df41d5e562?w=600&h=450&fit=crop&q=85" alt="WOCS 프리미엄 글램핑 시공 S-시리즈" loading="lazy" style="height:180px"><div class="blog-card-body" style="padding:16px 0"><div class="blog-card-title" style="font-size:14px" data-t="p99">레스토랑 창업 가이드 (단계별 안내)</div><div style="margin-top:8px;color:var(--gold);font-size:12px">→</div></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 12. NEWSLETTER ═══ -->
+<section style="background:linear-gradient(135deg,rgba(201,169,110,0.12),rgba(9,9,11,1));padding:60px 5%;border-top:1px solid rgba(201,169,110,0.14)">
+  <div class="container text-center">
+    <div class="anim"><h3 style="font-size:20px;font-weight:300" data-t="p100">최신 소식을 받아보세요</h3><p class="font-body" style="font-size:12px;color:rgba(240,235,224,0.65);margin-top:8px" data-t="p101">매주 글램핑 트렌드와 업계 브로셔를 이메일로 보내드립니다.</p></div>
+    <div class="newsletter-bar anim anim-delay-1" style="margin-top:24px"><input class="newsletter-input" type="email" placeholder="이메일 주소 입력"><button class="newsletter-btn" data-t="p102">구독하기</button></div>
+  </div>
+</section>
+
+<!-- ═══ 13. CONTACT FORM ═══ -->
+<section style="background:var(--bg2);padding:80px 5%">
+  <div class="container">
+    <div class="text-center anim"><div class="slab">GET IN TOUCH</div><h2 style="font-size:clamp(24px,3vw,42px);font-weight:300;margin-top:12px" data-t="p103">견적 문의를 <span class="gold-text" data-t="p104">남겨주세요</span></h2><p class="font-body" style="color:rgba(240,235,224,0.65);margin-top:12px" data-t="p105">WOCS 전문가가 빠르게 견적서를 보내드립니다.</p></div>
+    <div class="contact-form anim anim-delay-1" style="margin-top:40px">
+      <div class="form-row"><div><label class="form-label" data-t="p106">이름 *</label><input class="form-input" placeholder="홍길동"></div><div><label class="form-label" data-t="p107">국가 *</label><input class="form-input" placeholder="대한민국"></div></div>
+      <div class="form-row"><div><label class="form-label" data-t="p108">이메일 *</label><input class="form-input" type="email" placeholder="email@example.com"></div><div><label class="form-label" data-t="p109">연락처</label><input class="form-input" type="tel" placeholder="010-0000-0000"></div></div>
+      <div class="form-row"><div><label class="form-label" data-t="p110">설치 장소</label><input class="form-input" placeholder="도시 / 지역"></div><div><label class="form-label" data-t="p111">희망 수량</label><input class="form-input" type="number" placeholder="5"></div></div>
+      <div style="margin-bottom:16px"><label class="form-label" data-t="p112">메시지</label><textarea class="form-input" placeholder="문의 내용을 자유롭게 적어주세요..."></textarea></div>
+      <div class="text-center"><button class="btn-gold-fill" style="padding:16px 60px;letter-spacing:2px" data-t="p113">견적 요청</button></div>
+    </div>
+  </div>
+</section>
+
+<div id="wocs-cta"></div>
+<div id="wocs-footer"></div>
+
+<script>
+// Hero Slider
+(function(){
+  var slides=document.querySelectorAll('.hero-slide');
+  var dotsDiv=document.querySelector('.hero-dots');
+  if(!slides.length)return;
+  var idx=0;
+  slides.forEach(function(_,i){
+    var d=document.createElement('div');
+    d.className='hero-dot'+(i===0?' active':'');
+    d.addEventListener('click',function(){go(i)});
+    dotsDiv.appendChild(d);
+  });
+  function go(i){
+    slides[idx].classList.remove('active');
+    dotsDiv.children[idx].classList.remove('active');
+    idx=i%slides.length;
+    slides[idx].classList.add('active');
+    dotsDiv.children[idx].classList.add('active');
+  }
+  setInterval(function(){go(idx+1)},4000);
+})();
+
+// Feature Carousel
+(function(){
+  var track=document.querySelector('.feat-track');
+  var cards=document.querySelectorAll('.feat-card');
+  var dotsDiv=document.querySelector('.feat-dots');
+  if(!track||cards.length<5)return;
+  var perView=4;
+  if(window.innerWidth<768)perView=2;
+  var maxIdx=cards.length-perView;
+  var idx=0;
+  for(var i=0;i<=maxIdx;i++){
+    var d=document.createElement('div');
+    d.className='feat-dot'+(i===0?' active':'');
+    d.dataset.i=i;
+    d.addEventListener('click',function(){go(parseInt(this.dataset.i))});
+    dotsDiv.appendChild(d);
+  }
+  function go(i){
+    idx=Math.max(0,Math.min(i,maxIdx));
+    track.style.transform='translateX(-'+(idx*(100/perView))+'%)';
+    dotsDiv.querySelectorAll('.feat-dot').forEach(function(d,j){d.classList.toggle('active',j===idx)});
+  }
+  setInterval(function(){go((idx+1)%(maxIdx+1))},5000);
+})();
+
+var WOCS_PAGE_TR={ko:{p1:"여러 스타일",p2:"다양한 계층의 사람들의 요구를 충족할 수 있습니다.",p3:"내구성",p4:"글램핑의 수명은 보통 10~15년입니다.",p5:"다재",p6:"숙박, 식사, 라운지, 이벤트 공간으로 이용 가능합니다.",p7:"편안한 디자인",p8:"침구류와 현대적인 가구를 갖추고 있습니다.",p9:"친환경",p10:"글램핑는 재활용 가능한 재료로 만들어졌습니다.",p11:"사계절",p12:"-20°C ~ 40°C 쾌적한 실내 환경 유지.",p13:"아연 도금 스틸",p14:"WOCS 특허",p15:"무용접 조인트",p16:"방수 캔버스",p17:"이중 단열 이너",p18:"장식 라이닝",p19:"전 세계",p20:"120개국",p21:"수출",p22:"아시아",p23:"한국·일본·중국·동남아",p24:"유럽",p25:"영국·독일·프랑스",p26:"아메리카",p27:"미국·캐나다·브라질",p28:"중동·아프리카",p29:"UAE·사우디·남아공",p30:"오세아니아",p31:"호주·뉴질랜드",p32:"글램핑",p33:"시공 사례",p34:"협력",p35:"사례",p36:"설원 글램핑 글램핑 시티",p37:"WOCS 내한 S-시리즈로 눈 덮인 풍경을 Signature 시리즈 시티로 탈바꿈. 20유닛 동시 시공.",p38:"제주 D-시리즈 돔 리조트",p39:"7m 스타게이저 돔 3세트로 반려동물 동반 가능 에코 캠핑장 조성. 첫 달 풀 예약 달성.",p40:"강원도 캐빈 글램핑 호텔",p41:"미윤 와이너리 인근 럭셔리 캐빈 글램핑 숙박 호텔 조성. 부티크 인테리어 풀 커스텀.",p42:"필리핀 해변 글램핑 하우스",p43:"열대 기후 도전을 극복한 해변 B2B 리조트·호텔 확장형 시공. 내식성 표면 처리 + 방염 PVC.",p44:"일본 해안 로맨틱 리조트",p45:"해안가 글램핑 리조트 시공. 내구성과 부식 방지 처리된 프리미엄 S-시리즈.",p46:"미국 노스캐롤라이나 돔파크",p47:"반려동물 친화 캠핑장. 7m 돔 3세트 + S-시리즈 10유닛 통합 시공.",p48:"호주 아웃백 글램핑",p49:"사막 기후 대응 특수 단열 S-시리즈. 태양광 시스템 통합 오프그리드 운영.",p50:"왜 WOCS의",p51:"S-시리즈",p52:"를 선택하시나요?",p53:"WOCS는 세계적인 글램핑 글램핑 제조업체로서 중간상인을 배제하고 경쟁력 있는 가격을 제공합니다. 초기 상담부터 최종 설치까지 1:1 맞춤 서비스를 제공합니다.",p54:"자체 공장 생산",p55:"중간상인 없이 직접 제조. 경쟁력 있는 가격.",p56:"맞춤 서비스",p57:"초기 상담부터 설치까지 1:1 전담.",p58:"친환경 소재",p59:"재활용 가능한 친환경 소재 사용.",p60:"인증 지원",p61:"필요한 라이선스 인증서 지원 제공.",p62:"고객",p63:"후기",p64:"",p65:"김OO 대표",p66:"글램핑장 | 강원도",p67:"",p68:"리조트 오너",p69:"",p70:"Airbnb 호스트",p71:"자주 묻는",p72:"질문",p73:"S-시리즈에 난방 장비를 설치할 수 있나요?",p74:"네, 글램핑 글램핑에 난방 장비를 설치할 수 있습니다. 에너지 효율적인 전기 히터, 가스 스토브, 오일 히터 또는 장작 스토브를 사용할 수 있습니다. 대형 S-시리즈는 에어컨도 설치하여 가장 더운 기후에서도 최대한의 편안함을 제공합니다. WOCS 이중 단열 이너 라이닝과 함께 사용하면 겨울에도 쾌적한 환경을 유지할 수 있습니다.",p75:"S-시리즈의 수명은 어느 정도인가요?",p76:"프레임(알루미늄 합금 또는 아연 도금 스틸)의 수명은 10~15년입니다. PVC 커버 등 기타 부속품은 환경의 영향을 받아 1~3년 주기로 교체가 필요합니다. 적절한 관리를 하면 글램핑는 내구성 있고 오래 지속되도록 설계되었습니다. 정기적인 관리와 부속품 교체를 통해 반영구적으로 사용할 수 있습니다.",p77:"S-시리즈는 사계절 사용이 가능한가요?",p78:"네, WOCS S-시리즈는 사계절 모두 편안하고 즐거운 경험을 제공하도록 설계되었습니다. 내구성 있는 알루미늄 합금 프레임과 고품질 캔버스 커버의 조합으로 다양한 기후에서 활용할 수 있습니다. 여름에는 통기성 있는 캔버스가 공기 순환을 유지하고, 겨울에는 소형 히터나 단열 바닥재와 결합하면 내부 온기를 유지합니다.",p79:"S-시리즈 설치는 어렵나요?",p80:"WOCS S-시리즈 설치는 사용자 친화적인 과정입니다. 각 글램핑에는 상세한 설치 설명서가 제공되며, 비디오 튜토리얼도 보유하고 있습니다. 전문 팀의 도움이 필요하시면 WOCS에서 전문 팀을 파견하여 설치를 지원할 수 있습니다. WOCS 특허 무용접 조인트로 전문 용접공 없이도 1~3일 내 시공이 완료됩니다.",p81:"S-시리즈를 개인 취향에 맞게 커스터마이징할 수 있나요?",p82:"물론입니다! 글램핑의 색상, 패턴 및 추가 기능을 선택하여 취향에 맞게 맞춤 제작할 수 있습니다. 글램핑 크기와 형태부터 인테리어 장식 스타일까지 모든 것을 커스터마이징 가능합니다. 맞춤형 지원을 위해 영업 팀에 문의하세요.",p83:"S-시리즈의 내풍 성능은 어떤가요?",p84:"WOCS S-시리즈의 주요 구조는 고강도 Q235 강재로 만들어졌으며, 정밀 계산과 엄격한 테스트를 거쳤습니다. 풍속 120km/h의 표준 풍하중과 0.3KN/㎡의 적설 하중을 견딜 수 있습니다. 익스트림 모델의 경우 160km/h까지 대응 가능합니다.",p85:"글램핑 내부에는 어떤 시설이 갖춰져 있나요?",p86:"WOCS S-시리즈는 편안한 매트리스, 정교한 가구와 장식, 독립된 화장실 및 샤워 시설을 갖출 수 있습니다. 전통 건축물에 비해 설치 비용이 적게 들고 분해 및 운반이 쉬워 합리적인 숙박 솔루션을 제공합니다.",p87:"S-시리즈의 유지보수는 어떻게 하나요?",p88:"보관 전 완전히 건조시키고, 오물을 씻어내고, 방수 제품으로 처리하고, 건조한 곳에 보관하세요. 정기적인 관리가 수명을 연장합니다. 교체 부품도 별도로 제공됩니다.",p89:"배송 및 결제 조건은 어떻게 되나요?",p90:"전 세계 어디든 배송 가능하며, 크기와 포함된 액세서리에 따라 비용이 달라집니다. 재고 모델은 1주일 내 출하, 맞춤 옵션은 4~6주 생산 후 배송됩니다. 리조트 운영자 및 다수 유닛 주문에 대해서는 맞춤 대출 및 수익 분배 계약이 가능합니다.",p91:"극한 기상 조건에서도 사용 가능한가요?",p92:"WOCS 글램핑는 다양한 기상 조건을 견디도록 설계되었지만, 극한 조건에서는 적절한 설치와 추가 예방 조치가 필요할 수 있습니다. 특정 기상 시나리오에서의 사용에 대한 안내는 고객 지원팀에 문의하세요. 익스트림 모델은 태풍급 바람에도 대응 가능합니다.",p93:"더 자세히 알아보기",p94:"블로그",p95:"모두 보기",p96:"글램핑장 부지 선정 완벽 가이드",p97:"아웃도어 웨딩 공간 기획: 이벤트 파빌리온 활용 가이드",p98:"럭셔리한 야외 생활 공간: 디자인 아이디어",p99:"레스토랑 창업 가이드 (단계별 안내)",p100:"최신 소식을 받아보세요",p101:"매주 글램핑 트렌드와 업계 브로셔를 이메일로 보내드립니다.",p102:"구독하기",p103:"견적 문의를",p104:"남겨주세요",p105:"WOCS 전문가가 빠르게 견적서를 보내드립니다.",p106:"이름 *",p107:"국가 *",p108:"이메일 *",p109:"연락처",p110:"설치 장소",p111:"희망 수량",p112:"메시지",p113:"견적 요청"},
+en:{p1:"days",p2:"various 's people's requirement can",p3:"durable",p4:"glamping's canpeople beam 10~15years",p5:"versatile",p6:"accommodation,, lounge, spacewith usage available",p7:"편안한 디자인",p8:"침구류와 현대적인 가구를 갖추고 있습니다.",p9:"Eco-Friendly",p10:"glamping recyclable one via (10K)",p11:"season",p12:"20°C ~ 40°C one indoor environment",p13:"Galvanized Steel",p14:"WOCS patent",p15:"Weldless Joint",p16:"waterproof canvas",p17:"double insulation",p18:"site",p19:"before world",p20:"120",p21:"export",p22:"Asia",p23:"Korea·Japan·China·units",p24:"Europe",p25:"UK·Germany·France",p26:"Americas",p27:"USA·Canada·Brazil",p28:"Middle East·Africa",p29:"UAE·Saudi Arabia·S.Africa",p30:"Oceania",p31:"Australia·New Zealand",p32:"Glamping",p33:"construction cases",p34:"cooperation",p35:"Cases",p36:"member glamping glamping",p37:"WOCS 내한 S-시리즈로 눈 덮인 풍경을 Signature 시리즈 시티로 탈바꿈. 20유닛 동시 시공.",p38:"Jeju D-Series dome resort",p39:"7m dome 3setvia units units at campingsite. first reservation",p40:"Gangwon glamping hotel",p41:"미윤 와이너리 인근 럭셔리 캐빈 글램핑 숙박 호텔 조성. 부티크 인테리어 풀 커스텀.",p42:"beach glamping",p43:"vs. after before one beach B2B resort·hotel expandable construction. corrosion-resistant processing + fireproof PVC",p44:"Japan inside via resort",p45:"inside glamping resort construction. durableand room processing premium S-Series",p46:"USA dome",p47:"units campingsite. 7m dome 3set + S-Series 10unit integrated construction",p48:"Australia glamping",p49:"desert after resistance can insulation S-Series. solar system integrated off-grid operation",p50:"WOCS's",p51:"S-Series",p52:"?",p53:"WOCS는 세계적인 글램핑 글램핑 제조업체로서 중간상인을 배제하고 경쟁력 있는 가격을 제공합니다. 초기 상담부터 최종 설치까지 1:1 맞춤 서비스를 제공합니다.",p54:"factory production",p55:"Direct manufacturing, no middlemen. Competitive pricing.",p56:"custom service",p57:"initial consultationfrom installationup to 1:1 before",p58:"Eco-Friendly Materials",p59:"recyclable one eco-friendly material use",p60:"certified support",p61:"necessaryone certified support provide",p62:"Customer",p63:"Reviews",p64:"",p65:"OO CEO",p66:"glampingsite | Gangwon",p67:"",p68:"resort",p69:"",p70:"Airbnb host",p71:"weeks",p72:"questions",p73:"S-Seriesat heating sitefee installation can??",p74:"네, 글램핑 글램핑에 난방 장비를 설치할 수 있습니다. 에너지 효율적인 전기 히터, 가스 스토브, 오일 히터 또는 장작 스토브를 사용할 수 있습니다. 대형 S-시리즈는 에어컨도 설치하여 가장 더운 기후에서도 최대한의 편안함을 제공합니다. WOCS 이중 단열 이너 라이닝과 함께 사용하면 겨울에도 쾌적한 환경을 유지할 수 있습니다.",p75:"S-Series's canpeople permit?",p76:"프레임(알루미늄 합금 또는 아연 도금 스틸)의 수명은 10~15년입니다. PVC 커버 등 기타 부속품은 환경의 영향을 받아 1~3년 주기로 교체가 필요합니다. 적절한 관리를 하면 글램핑는 내구성 있고 오래 지속되도록 설계되었습니다. 정기적인 관리와 부속품 교체를 통해 반영구적으로 사용할 수 있습니다.",p77:"S-Series season use possible??",p78:"four, WOCS S-Series season two inside experience provide design. durable aluminum alloy frameand high-quality canvas cover's with various afterfrom utilize can. summerat canvas, winterat type heater insulation floorand interior",p79:"S-Series installation difficult??",p80:"WOCS S-시리즈 설치는 사용자 친화적인 과정입니다. 각 글램핑에는 상세한 설치 설명서가 제공되며, 비디오 튜토리얼도 보유하고 있습니다. 전문 팀의 도움이 필요하시면 WOCS에서 전문 팀을 파견하여 설치를 지원할 수 있습니다. WOCS 특허 무용접 조인트로 전문 용접공 없이도 1~3일 내 시공이 완료됩니다.",p81:"S-시리즈를 개인 취향에 맞게 커스터마이징할 수 있나요?",p82:"물론입니다! 글램핑의 색상, 패턴 및 추가 기능을 선택하여 취향에 맞게 맞춤 제작할 수 있습니다. 글램핑 크기와 형태부터 인테리어 장식 스타일까지 모든 것을 커스터마이징 가능합니다. 맞춤형 지원을 위해 영업 팀에 문의하세요.",p83:"S-Series's wind-resistant performance what?",p84:"WOCS S-Series's weeks structure strength Q235 via (10K), mountainand one. wind speed 120km/h's standard wind loadand 0.3KN/㎡'s snow load load can. extreme model's case 160km/hup to resistance available",p85:"glamping interiorat what facilities??",p86:"WOCS S-시리즈는 편안한 매트리스, 정교한 가구와 장식, 독립된 화장실 및 샤워 시설을 갖출 수 있습니다. 전통 건축물에 비해 설치 비용이 적게 들고 분해 및 운반이 쉬워 합리적인 숙박 솔루션을 제공합니다.",p87:"S-Series's maintenance how??",p88:"보관 전 완전히 건조시키고, 오물을 씻어내고, 방수 제품으로 처리하고, 건조한 곳에 보관하세요. 정기적인 관리가 수명을 연장합니다. 교체 부품도 별도로 제공됩니다.",p89:"delivery and payment conditions how??",p90:"before world delivery, sizeand including threeat depending on cost. stock model 1weeksdays shipment, custom option 4~6weeks production after delivery. resort operation and can unit weeksat about custom vs. and revenue minutes approx. available",p91:"one weather conditionsfrom use possible??",p92:"WOCS glamping various weather conditions design(10K), one conditionsfrom one installationand room necessary can. weather scenariofrom's useat about guide customer supportteamat 's. extreme model grade wayat resistance available",p93:"Learn More in Detail",p94:"Blog",p95:"View All",p96:"glampingsite site",p97:"door space planning: pavilion utilize",p98:"럭셔리한 야외 생활 공간: 디자인 아이디어",p99:"restaurant startup (stepstar guide)",p100:"Stay Updated",p101:"weeks glamping trendand brochure daysvia we will send",p102:"Subscribe",p103:"quote 's",p104:"weeks",p105:"WOCS professional quickly quote we will send",p106:"Name *",p107:"Country *",p108:"Email *",p109:"Phone",p110:"Installation Site",p111:"Desired Quantity",p112:"Message",p113:"Request Quote"},
+ja:{p15:"無溶接ジョイント",p35:"事例",p51:"S-シリーズ",p52:"？",p62:"お客様",p63:"レビュー",p93:"もっと詳しく",p94:"ブログ",p95:"すべて見る",p100:"最新情報",p102:"購読",p106:"お名前 *",p107:"国 *",p108:"メール *",p109:"電話",p110:"設置場所",p111:"希望数量",p112:"メッセージ",p113:"見積もり依頼"},
+zh:{p15:"无焊接接头",p35:"案例",p51:"S系列",p52:"？",p62:"客户",p63:"评价",p93:"详细了解",p94:"博客",p95:"查看全部",p100:"获取最新消息",p102:"订阅",p106:"姓名 *",p107:"国家 *",p108:"邮箱 *",p109:"电话",p110:"安装地点",p111:"期望数量",p112:"留言",p113:"获取报价"},
+es:{p15:"Junta sin Soldadura",p35:"Casos",p51:"Serie S",p62:"Cliente",p63:"Reseñas",p93:"Más Detalles",p95:"Ver Todo",p100:"Manténgase Informado",p102:"Suscribirse",p106:"Nombre *",p107:"País *",p109:"Teléfono",p110:"Ubicación",p111:"Cantidad",p112:"Mensaje",p113:"Solicitar Cotización"},
+fr:{p15:"Joint sans Soudure",p35:"Études de Cas",p51:"Série S",p52:" ?",p62:"Client",p63:"Avis",p93:"Plus de Détails",p95:"Voir Tout",p100:"Restez Informé",p102:"S'abonner",p106:"Nom *",p107:"Pays *",p109:"Téléphone",p110:"Lieu",p111:"Quantité",p113:"Demander un Devis"},
+de:{p15:"Schweißfreies Gelenk",p35:"Fallstudien",p51:"S-Serie",p62:"Kunde",p63:"Bewertungen",p93:"Mehr Details",p95:"Alle Ansehen",p100:"Bleiben Sie Informiert",p102:"Abonnieren",p107:"Land *",p108:"E-Mail *",p109:"Telefon",p110:"Standort",p111:"Menge",p112:"Nachricht",p113:"Angebot Anfordern"},
+pt:{p15:"Junta sem Solda",p35:"Casos",p51:"Série S",p62:"Cliente",p63:"Avaliações",p93:"Mais Detalhes",p95:"Ver Tudo",p100:"Fique Atualizado",p102:"Assinar",p106:"Nome *",p107:"País *",p109:"Telefone",p110:"Local",p111:"Quantidade",p112:"Mensagem",p113:"Solicitar Orçamento"},
+it:{p15:"Giunto senza Saldatura",p35:"Casi",p51:"Serie S",p62:"Cliente",p63:"Recensioni",p93:"Più Dettagli",p95:"Vedi Tutto",p100:"Resta Aggiornato",p102:"Iscriviti",p106:"Nome *",p107:"Paese *",p109:"Telefono",p110:"Luogo",p111:"Quantità",p112:"Messaggio",p113:"Richiedi Preventivo"},
+ar:{p15:"وصلة بدون لحام",p35:"حالات",p51:"السلسلة S",p52:"؟",p62:"عميل",p63:"تقييمات",p93:"تفاصيل أكثر",p94:"مدونة",p95:"عرض الكل",p100:"ابق على اطلاع",p102:"اشترك",p106:"الاسم *",p107:"البلد *",p108:"البريد *",p109:"هاتف",p110:"الموقع",p111:"الكمية",p112:"رسالة",p113:"طلب عرض سعر"},
+ru:{p15:"Безсварное Соединение",p35:"Кейсы",p51:"Серия S",p62:"Клиент",p63:"Отзывы",p93:"Подробнее",p94:"Блог",p95:"Показать Все",p100:"Будьте в Курсе",p102:"Подписаться",p106:"Имя *",p107:"Страна *",p109:"Телефон",p110:"Место",p111:"Количество",p112:"Сообщение",p113:"Запросить Цену"},
+tr:{p15:"Kaynaksız Bağlantı",p35:"Vakalar",p51:"S Serisi",p62:"Müşteri",p63:"Yorumlar",p93:"Daha Detaylı",p95:"Tümünü Gör",p100:"Güncel Kalın",p102:"Abone Ol",p106:"İsim *",p107:"Ülke *",p108:"E-posta *",p109:"Telefon",p110:"Konum",p111:"Miktar",p112:"Mesaj",p113:"Teklif İste"},
+tw:{p15:"無焊接接頭",p35:"案例",p51:"S系列",p52:"？",p62:"客戶",p63:"評價",p93:"詳細了解",p94:"部落格",p95:"查看全部",p100:"獲取最新消息",p102:"訂閱",p106:"姓名 *",p107:"國家 *",p108:"電郵 *",p109:"電話",p110:"安裝地點",p111:"數量",p112:"留言",p113:"索取報價"},
+id:{p15:"Sambungan Tanpa Las",p35:"Kasus",p51:"Seri S",p62:"Pelanggan",p63:"Ulasan",p93:"Lebih Detail",p95:"Lihat Semua",p100:"Tetap Update",p102:"Berlangganan",p106:"Nama *",p107:"Negara *",p109:"Telepon",p110:"Lokasi",p111:"Jumlah",p112:"Pesan",p113:"Minta Penawaran"},
+th:{p15:"ข้อต่อไร้เชื่อม",p35:"กรณีศึกษา",p51:"ซีรีส์ S",p62:"ลูกค้า",p63:"รีวิว",p93:"เรียนรู้เพิ่มเติม",p94:"บล็อก",p95:"ดูทั้งหมด",p100:"อัปเดตข่าวสาร",p102:"สมัครรับข่าว",p106:"ชื่อ *",p107:"ประเทศ *",p108:"อีเมล *",p109:"โทรศัพท์",p110:"สถานที่",p111:"จำนวน",p112:"ข้อความ",p113:"ขอใบเสนอราคา"}
+};
+</script>
+<script src="../assets/js/wocs-i18n.js"></script>
+<script src="../assets/js/wocs-header.js"></script>
+<script src="../assets/js/wocs-footer.js"></script>
+</body>
+</html>

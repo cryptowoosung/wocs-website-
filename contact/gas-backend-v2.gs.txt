@@ -1,0 +1,166 @@
+/* ============================================================
+   WOCS 견적 문의 + ROI 계산기 통합 GAS 백엔드
+   
+   [기능]
+   1. contact/index.html 견적 폼 데이터 수신 → 시트 기록
+   2. contact/roi-calculator.html 리드 데이터 수신 → 시트 기록
+   3. 내 폰으로 "신규 프로젝트 검토 요청" 알림 문자 자동 발송
+   
+   [세팅]
+   1. 구글 시트 생성 → 확장 프로그램 → Apps Script
+   2. 이 코드 전체 복사-붙여넣기
+   3. CONFIG 값 수정
+   4. 배포 → 웹앱
+   ============================================================ */
+
+// ======== 여기만 수정 ========
+var CONFIG = {
+  SHEET_ID: '여기에_구글시트_ID_붙여넣기',
+  
+  // 알리고 문자 API (나중에 설정해도 됨)
+  ALIGO_API_KEY: '여기에_알리고_API키',
+  ALIGO_USER_ID: '여기에_알리고_아이디',
+  ALIGO_SENDER: '01043370582',
+  
+  // 내 폰번호
+  MY_PHONE: '01043370582',
+  
+  // 문자 ON/OFF (나중에 true로 바꾸면 됨)
+  SMS_ENABLED: false
+};
+
+// ======== 메인 ========
+function doPost(e) {
+  try {
+    var d = JSON.parse(e.parameter.data);
+    
+    if (d.source === 'contact') {
+      saveContact(d);
+    } else {
+      saveROILead(d);
+    }
+    
+    if (CONFIG.SMS_ENABLED) {
+      sendOwnerAlert(d);
+    }
+    
+    return ok();
+  } catch (err) {
+    Logger.log('ERROR: ' + err);
+    return ok();
+  }
+}
+
+function doGet(e) {
+  return ContentService.createTextOutput(JSON.stringify({status:'WOCS API running'}))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+function ok() {
+  return ContentService.createTextOutput(JSON.stringify({result:'ok'}))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+// ======== 견적 문의 저장 ========
+function saveContact(d) {
+  var ss = SpreadsheetApp.openById(CONFIG.SHEET_ID);
+  var sheet = ss.getSheetByName('견적문의');
+  
+  if (!sheet) {
+    sheet = ss.insertSheet('견적문의');
+    sheet.appendRow([
+      '접수일시','이름/회사','연락처','이메일','부지면적(평)',
+      '부지위치','관심모델','예상예산','희망오픈','상세문의','처리상태'
+    ]);
+    sheet.getRange(1,1,1,11).setFontWeight('bold').setBackground('#C9A96E');
+  }
+  
+  sheet.appendRow([
+    d.timestamp || new Date().toLocaleString('ko-KR'),
+    d.name || '', d.phone || '', d.email || '', d.area || '',
+    d.location || '', d.model || '', d.budget || '', d.timeline || '',
+    d.message || '', '미처리'
+  ]);
+}
+
+// ======== ROI 리드 저장 ========
+function saveROILead(d) {
+  var ss = SpreadsheetApp.openById(CONFIG.SHEET_ID);
+  var sheet = ss.getSheetByName('ROI리드');
+  
+  if (!sheet) {
+    sheet = ss.insertSheet('ROI리드');
+    sheet.appendRow([
+      '접수일시','이름','연락처','부지면적','관심타입','메모',
+      '유닛수','1박요금','가동률','투자금','예상연매출','예상연순이익','처리상태'
+    ]);
+    sheet.getRange(1,1,1,13).setFontWeight('bold').setBackground('#C9A96E');
+  }
+  
+  sheet.appendRow([
+    d.timestamp || new Date().toLocaleString('ko-KR'),
+    d.name || '', d.phone || '', d.area || '', d.type || '', d.memo || '',
+    d.units || '', d.price || '', d.occupancy || '', d.investment || '',
+    d.annualRevenue || '', d.annualProfit || '', '미처리'
+  ]);
+}
+
+// ======== 내 폰 알림 ========
+function sendOwnerAlert(d) {
+  var src = d.source === 'contact' ? '견적문의' : 'ROI계산기';
+  var msg = '🔔 [WOCS 신규 프로젝트 검토 요청]\n'
+    + '출처: ' + src + '\n'
+    + '이름: ' + (d.name || '-') + '\n'
+    + '연락처: ' + (d.phone || '-') + '\n';
+  
+  if (d.source === 'contact') {
+    msg += '모델: ' + (d.model || '-') + '\n'
+         + '예산: ' + (d.budget || '-') + '\n'
+         + '면적: ' + (d.area || '-') + '평\n'
+         + '위치: ' + (d.location || '-');
+  } else {
+    msg += '면적: ' + (d.area || '-') + '평\n'
+         + '타입: ' + (d.type || '-');
+  }
+  
+  sendAligo(CONFIG.MY_PHONE, msg);
+}
+
+// ======== 알리고 ========
+function sendAligo(receiver, msg) {
+  var payload = {
+    'key': CONFIG.ALIGO_API_KEY,
+    'userid': CONFIG.ALIGO_USER_ID,
+    'sender': CONFIG.ALIGO_SENDER,
+    'receiver': receiver,
+    'msg': msg,
+    'testmode_yn': 'N'
+  };
+  
+  try {
+    var resp = UrlFetchApp.fetch('https://apis.aligo.in/send/', {
+      method: 'post', payload: payload, muteHttpExceptions: true
+    });
+    Logger.log('알리고: ' + resp.getContentText());
+  } catch (err) {
+    Logger.log('알리고 에러: ' + err);
+  }
+}
+
+// ======== 테스트 ========
+function testContact() {
+  doPost({parameter:{data:JSON.stringify({
+    source:'contact', name:'테스트회사', phone:'010-1234-5678',
+    email:'test@test.com', area:'500', location:'강원도 춘천',
+    model:'S-Lodge', budget:'1억~3억', timeline:'3~6개월',
+    message:'테스트 문의입니다', timestamp:new Date().toLocaleString('ko-KR')
+  })}});
+}
+
+function testROI() {
+  doPost({parameter:{data:JSON.stringify({
+    name:'테스트', phone:'010-9876-5432', area:'300', type:'B-표준수익',
+    units:'5', price:'15', occupancy:'45', investment:'10000',
+    annualRevenue:12338, annualProfit:8738, timestamp:new Date().toLocaleString('ko-KR')
+  })}});
+}
