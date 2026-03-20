@@ -1615,6 +1615,10 @@ function WOCSHomepage() {
         .btn-gold-fill:hover { background:transparent; color:${GOLD}; }
         .section-pad { padding:120px 5%; max-width:1400px; margin:0 auto; }
         .noise-overlay { display:none; }
+        @media(max-width:768px){
+          .section-pad{padding:60px 4% !important}
+          #root{overflow-x:hidden}
+        }
       `}</style>
 
       {/* Noise overlay */}
