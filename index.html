@@ -1727,12 +1727,23 @@ function WOCSHomepage() {
                   <div
                     onMouseEnter={() => setMegaNav(i)}
                     onMouseLeave={() => setMegaNav(null)}
+                    className="mega-menu"
                     style={{
-                      position: "absolute", top: "100%", left: "50%", transform: "translateX(-50%)",
-                      background: `${BG}f5`, backdropFilter: "blur(30px)",
-                      border: `1px solid ${GOLD}20`, padding: 32,
-                      minWidth: item.mega.length > 1 ? 600 : 280,
-                      display: "flex", gap: 40, animation: "slideUp .3s ease forwards",
+                      position: mobileOpen ? "static" : "absolute",
+                      top: mobileOpen ? "auto" : "100%",
+                      left: mobileOpen ? "auto" : "50%",
+                      transform: mobileOpen ? "none" : "translateX(-50%)",
+                      background: mobileOpen ? "rgba(201,169,110,0.04)" : `${BG}f5`,
+                      backdropFilter: mobileOpen ? "none" : "blur(30px)",
+                      border: mobileOpen ? "none" : `1px solid ${GOLD}20`,
+                      borderLeft: mobileOpen ? `2px solid ${GOLD}33` : "none",
+                      padding: mobileOpen ? "8px 0 8px 16px" : 32,
+                      minWidth: mobileOpen ? 0 : (item.mega.length > 1 ? 600 : 280),
+                      width: mobileOpen ? "100%" : "auto",
+                      display: "flex",
+                      flexDirection: mobileOpen ? "column" : "row",
+                      gap: mobileOpen ? 4 : 40,
+                      animation: mobileOpen ? "none" : "slideUp .3s ease forwards",
                     }}
                   >
                     {item.mega.map((col, ci) => (

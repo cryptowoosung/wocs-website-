@@ -799,3 +799,18 @@ body { padding-bottom: 5rem; }
   #mobile-hamburger { display: none !important; }
   .nav-list { display: flex !important; flex-direction: row !important; position: static !important; background: transparent !important; padding: 0 !important; }
 }
+
+/* mega-menu multi column → 모바일 1열 강제 */
+@media (max-width: 767px) {
+  .mega-menu, .mega-menu.multi {
+    flex-direction: column !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+  .mega-menu.multi > div, .mega-menu > div {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
