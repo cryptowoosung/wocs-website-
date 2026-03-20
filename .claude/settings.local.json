@@ -124,7 +124,9 @@
       "Bash(ls *.html *.xml *.txt)",
       "Bash(ls *.py *.md)",
       "Bash(cp /tmp/base.css assets/css/wocs-common.css)",
-      "Bash(rm mobile-first.css)"
+      "Bash(rm mobile-first.css)",
+      "Bash(node fix-inline.js)",
+      "Bash(rm fix-inline.js)"
     ]
   }
 }
