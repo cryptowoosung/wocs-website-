@@ -117,7 +117,12 @@
       "Bash(pip show:*)",
       "Bash(python optimize-images.py)",
       "Bash(PYTHONIOENCODING=utf-8 python optimize-images.py)",
-      "Bash(ls assets/images/*.png)"
+      "Bash(ls assets/images/*.png)",
+      "Bash(mkdir -p ~/Desktop/wocs-deploy-tools)",
+      "Bash(ls ~/Desktop/wocs-site/*.py ~/Desktop/wocs-site/*.md ~/Desktop/wocs-site/gas-*.js ~/Desktop/wocs-site/config.json)",
+      "Bash(ls -d */)",
+      "Bash(ls *.html *.xml *.txt)",
+      "Bash(ls *.py *.md)"
     ]
   }
 }
