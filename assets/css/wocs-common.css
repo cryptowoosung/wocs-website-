@@ -69,7 +69,7 @@ button { cursor: pointer; font-family: inherit; }
 /* Mega Menu */
 .mega-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: rgba(9,9,11,0.96); backdrop-filter: blur(30px); border: 1px solid rgba(201,169,110,0.12); padding: 32px; min-width: 600px; display: none; flex-direction: row; gap: 40px; animation: slideUp .3s ease forwards; }
 .mega-menu.multi { min-width: 600px; display: none; flex-direction: row; gap: 40px; }
-.nav-item:hover .mega-menu { display: flex; flex-direction: row; gap: 40px; }
+.nav-item:hover .mega-menu { display: flex !important; flex-direction: row !important; gap: 40px !important; }
 .mega-title { font-family: var(--font-body); font-size: 11px; font-weight: 600; letter-spacing: 3px; color: var(--gold); margin-bottom: 16px; text-transform: uppercase; }
 .mega-link { font-family: var(--font-body); font-size: 13px; color: rgba(240,235,224,0.73); padding: 7px 0; cursor: pointer; transition: all .2s; border-bottom: 1px solid rgba(201,169,110,0.03); display: block; }
 .mega-link:hover { color: var(--gold); padding-left: 8px; }
@@ -553,9 +553,7 @@ section { padding: 2rem 1rem; }
 .nav-list.mobile-open .mega-menu { display: none !important; }
 .nav-list .nav-item { width: 100%; border-bottom: 1px solid rgba(201,169,110,0.08); }
 .nav-list .nav-link { padding: 0.875rem 0; display: block; width: 100%; }
-.mega-menu { position: static !important; display: none; background: rgba(201,169,110,0.04); padding: 0.75rem 1rem; }
-.nav-item:hover .mega-menu, .nav-item:focus-within .mega-menu { display: block; }
-.mega-menu.multi { grid-template-columns: 1fr !important; }
+/* mega-menu 모바일 기본 규칙은 @media 블록 안으로 이동됨 */
 #mobile-hamburger { display: block !important; }
 #lang-dropdown { min-width: 280px; grid-template-columns: repeat(3, 1fr); padding: 0.75rem; }
 
