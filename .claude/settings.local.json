@@ -99,7 +99,19 @@
       "Bash(sed -i '58s|44-modular-deck.png\"\" alt=\"\"WOCS 프리미엄 글램핑 시공 WOCS 모듈러 시스템\"\"|63-furniture-deck1.png\"\" alt=\"\"WOCS 모듈러 데크\"\"|' products/modular-deck.html)",
       "Bash(sed -i '59s|44-modular-deck.png\"\" alt=\"\"WOCS 프리미엄 글램핑 시공 WOCS 모듈러 시스템\"\"|wocs_deck4.png\"\" alt=\"\"WOCS 모듈러 데크\"\"|' products/modular-deck.html)",
       "Bash(sed -i '60s|50-resort-mountain.png\"\" alt=\"\"WOCS 프리미엄 글램핑 시공 WOCS 모듈러 시스템\"\"|63-furniture-deck.png\"\" alt=\"\"WOCS 모듈러 데크\"\"|' products/modular-deck.html)",
-      "Bash(sed -i '73s|44-modular-deck.png\"\" alt=\"\"WOCS 프리미엄 글램핑 시공 WOCS 모듈러 시스템\"\"|wocs_deck4.png\"\" alt=\"\"WOCS 모듈러 데크\"\"|' products/modular-deck.html)"
+      "Bash(sed -i '73s|44-modular-deck.png\"\" alt=\"\"WOCS 프리미엄 글램핑 시공 WOCS 모듈러 시스템\"\"|wocs_deck4.png\"\" alt=\"\"WOCS 모듈러 데크\"\"|' products/modular-deck.html)",
+      "Bash(sed -i 's/p2:\"\"개인정보\"\"/p2:\"\"개인정보 처리방침\"\"/g' legal/privacy.html)",
+      "Bash(sed -i 's/p2:\"\"Privacy\"\"/p2:\"\"Privacy Policy\"\"/g' legal/privacy.html)",
+      "Bash(sed -i 's/p2:\"\"個人情報\"\"/p2:\"\"個人情報処理方針\"\"/g' legal/privacy.html)",
+      "Bash(sed -i 's/p2:\"\"个人信息\"\"/p2:\"\"隐私政策\"\"/g' legal/privacy.html)",
+      "Bash(sed -i 's/p2:\"\"Información Personal\"\"/p2:\"\"Política de Privacidad\"\"/g' legal/privacy.html)",
+      "Bash(sed -i 's/p2:\"\"\"\"쿠키\"\"\"\"/p2:\"\"\"\"쿠키 정책\"\"\"\"/g' legal/cookies.html)",
+      "Bash(sed -i 's/p2:\"\"\"\"Cookies\"\"\"\"/p2:\"\"\"\"Cookie Policy\"\"\"\"/g' legal/cookies.html)",
+      "Bash(sed -i 's/p2:\"\"\"\"クッキー\"\"\"\"/p2:\"\"\"\"クッキーポリシー\"\"\"\"/g' legal/cookies.html)",
+      "Bash(sed -i 's/p2:\"\"\"\"Cookie\"\"\"\"/p2:\"\"\"\"Cookie政策\"\"\"\"/g' legal/cookies.html)",
+      "Bash(sed -i 's/p2:\"\"\"\"Cookies\"\"\"\"/p2:\"\"\"\"Política de Cookies\"\"\"\"/g' legal/cookies.html)",
+      "Bash(node add-popup.js)",
+      "Bash(rm add-popup.js)"
     ]
   }
 }

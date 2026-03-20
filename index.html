@@ -1470,10 +1470,10 @@ function WOCSHomepage() {
   };
 
   const productCards = [
-    { name: t("pcName1"), sub: t("pcSub1"), icon: "⛺", href: "products/safari-tents.html" },
-    { name: t("pcName2"), sub: t("pcSub2"), icon: "🔮", href: "products/geodesic-domes.html" },
-    { name: t("pcName3"), sub: t("pcSub3"), icon: "✦", href: "products/luxury-tents.html" },
-    { name: t("pcName4"), sub: t("pcSub4"), icon: "⚙", href: "products/modular-systems.html" },
+    { name: t("pcName1"), sub: t("pcSub1"), img: "assets/images/s-classic.png", href: "products/safari-tents.html" },
+    { name: t("pcName2"), sub: t("pcSub2"), img: "assets/images/19-d800-ext.png", href: "products/geodesic-domes.html" },
+    { name: t("pcName3"), sub: t("pcSub3"), img: "assets/images/22-sig-o-ext.png", href: "products/luxury-tents.html" },
+    { name: t("pcName4"), sub: t("pcSub4"), img: "assets/images/42-modular-unit.png", href: "products/modular-systems.html" },
   ];
 
   const domeSizes = [
@@ -2005,12 +2005,8 @@ function WOCSHomepage() {
               onClick={() => window.location.href=card.href+"?lang="+currentLang}
               >
                 {/* Card image area */}
-                <div style={{
-                  height: 200, display: "flex", alignItems: "center", justifyContent: "center",
-                  background: `radial-gradient(circle at 50% 50%, ${GOLD}08, transparent 70%)`,
-                  fontSize: 64,
-                }}>
-                  {card.icon}
+                <div style={{ height: 200, overflow: "hidden" }}>
+                  <img src={card.img} alt={card.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
                 </div>
                 {/* Card info */}
                 <div style={{ padding: "24px 28px 28px" }}>
@@ -2246,14 +2242,8 @@ function WOCSHomepage() {
 
             {/* Visual side */}
             <div style={{ order: pi % 2 === 0 ? 2 : 1 }} {...anim(`prodv-${pi}`, "fs")}>
-              <div style={{
-                aspectRatio: "4/3",
-                background: `radial-gradient(circle at ${pi % 2 === 0 ? "60% 40%" : "40% 40%"}, ${GOLD}10, transparent 60%)`,
-                border: `1px solid ${GOLD}12`,
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: 100, opacity: 0.25,
-              }}>
-                {pi === 0 ? "🔮" : pi === 1 ? "⛺" : pi === 2 ? "✦" : "🔔"}
+              <div style={{ aspectRatio: "4/3", overflow: "hidden", border: `1px solid ${GOLD}12` }}>
+                <img src={pi === 0 ? "assets/images/19-d800-ext.png" : pi === 1 ? "assets/images/15-lodge-lx-ext.png" : pi === 2 ? "assets/images/22-sig-o-ext.png" : "assets/images/37-sig-m-s60-ext.png"} alt={prod.label} style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
               </div>
             </div>
           </div>
@@ -2776,5 +2766,6 @@ try {
   document.getElementById('root').innerHTML = '<div style="color:#c9a96e;text-align:center;padding:100px;font-family:sans-serif"><h1>WOCS</h1><p>Loading...</p></div>';
 }
 </script>
+<script src="assets/js/wocs-lead-popup.js"></script>
 </body>
 </html>
