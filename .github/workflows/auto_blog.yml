@@ -1,0 +1,35 @@
+name: WOCS Auto Blog Writer
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 매일 오전 9시 (한국시간 = UTC+9, 즉 UTC 0시)
+  workflow_dispatch:       # 수동 실행 버튼
+
+jobs:
+  write-blog:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 레포 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Python 설치
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 패키지 설치
+        run: pip install google-generativeai
+
+      - name: 블로그 글 자동 생성
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python auto_writer.py
+
+      - name: 변경사항 커밋 & 푸시
+        run: |
+          git config user.name "WOCS Auto Writer"
+          git config user.email "candlejs6@gmail.com"
+          git add -A
+          git diff --staged --quiet || git commit -m "auto: 블로그 글 자동 추가 $(date '+%Y-%m-%d')"
+          git push
