@@ -1895,7 +1895,7 @@ function WOCSHomepage() {
           <button
             id="mobile-hamburger"
             onClick={() => setMobileOpen(!mobileOpen)}
-            style={{ background: "none", border: "1px solid " + GOLD + "60", color: GOLD, fontSize: 24, cursor: "pointer", padding: "8px 12px", lineHeight: 1 }}
+            style={{ background: "none", border: "1px solid " + GOLD + "60", color: GOLD, fontSize: 24, cursor: "pointer", padding: "8px 12px", lineHeight: 1, zIndex: 10001, position: "relative" }}
           >
             {mobileOpen ? "✕" : "☰"}
           </button>
