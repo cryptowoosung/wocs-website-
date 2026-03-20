@@ -111,7 +111,9 @@
       "Bash(sed -i 's/p2:\"\"\"\"Cookie\"\"\"\"/p2:\"\"\"\"Cookie政策\"\"\"\"/g' legal/cookies.html)",
       "Bash(sed -i 's/p2:\"\"\"\"Cookies\"\"\"\"/p2:\"\"\"\"Política de Cookies\"\"\"\"/g' legal/cookies.html)",
       "Bash(node add-popup.js)",
-      "Bash(rm add-popup.js)"
+      "Bash(rm add-popup.js)",
+      "Bash(node seo-complete.js)",
+      "Bash(rm seo-complete.js)"
     ]
   }
 }
