@@ -485,20 +485,48 @@ img { max-width: 100%; height: auto; }
 @media (max-width: 768px) {
   /* Typography */
   body { font-size: 16px; line-height: 1.6; }
-  h1 { font-size: clamp(28px, 6vw, 40px) !important; }
-  h2 { font-size: clamp(22px, 5vw, 32px) !important; }
-  h3 { font-size: clamp(18px, 4vw, 26px) !important; }
+  p { font-size: 16px; line-height: 1.6; }
+  h1 { font-size: clamp(24px, 6vw, 42px) !important; }
+  h2 { font-size: clamp(20px, 5vw, 32px) !important; }
+  h3 { font-size: clamp(18px, 4vw, 24px) !important; }
 
   /* Layout */
   .container { padding: 0 16px; }
   .grid-2, .grid-4 { grid-template-columns: 1fr !important; }
-  section { padding: 60px 4% !important; }
-  .section-pad { padding: 60px 4% !important; }
+  section { padding: 40px 16px !important; }
+  .section-pad { padding: 40px 16px !important; }
 
-  /* Page hero */
-  .page-hero { padding: 100px 16px 40px !important; min-height: auto !important; }
-  .page-hero h1 { font-size: clamp(26px, 7vw, 36px) !important; }
-  .page-hero p { font-size: 14px !important; }
+  /* Images — 비율 유지 */
+  img { max-width: 100%; height: auto !important; }
+  .gallery-5 img, .collab-card img, .blog-card img, .furn-card img,
+  .spec-card img, .occ-rel-card img, .occ-prod-item img {
+    width: 100% !important; height: 200px !important; object-fit: cover !important;
+  }
+
+  /* Page hero — 모바일 최적화 */
+  .page-hero {
+    padding: 80px 16px 32px !important;
+    min-height: 60vh !important;
+    max-height: 70vh;
+    display: flex; align-items: center;
+  }
+  .page-hero > div { width: 100%; }
+  .page-hero h1 { font-size: clamp(24px, 7vw, 36px) !important; }
+  .page-hero p { font-size: 14px !important; line-height: 1.6; }
+  .page-hero img { object-fit: cover !important; object-position: center !important; }
+
+  /* Floating CTA buttons */
+  .floating-cta .float-btn, .floating-cta .chat-float,
+  a[style*="position:fixed"][style*="bottom"],
+  button[style*="position:fixed"][style*="bottom"] {
+    width: 40px !important; height: 40px !important;
+    font-size: 16px !important;
+    bottom: 20px !important;
+    right: 16px !important;
+    z-index: 998;
+  }
+  a[style*="right:84px"] { right: 64px !important; }
+  a[style*="right:144px"] { right: 112px !important; }
 
   /* Header */
   .header-main { padding: 0 12px; }
@@ -608,8 +636,10 @@ img { max-width: 100%; height: auto; }
 
 /* ── Small mobile (≤480px) ── */
 @media (max-width: 480px) {
-  h1 { font-size: clamp(24px, 7vw, 32px) !important; }
-  .page-hero { padding: 80px 12px 30px !important; }
+  h1 { font-size: clamp(22px, 7vw, 30px) !important; }
+  h2 { font-size: clamp(18px, 5vw, 26px) !important; }
+  section { padding: 32px 12px !important; }
+  .page-hero { padding: 70px 12px 24px !important; min-height: 50vh !important; }
   .slab { font-size: 9px !important; letter-spacing: 4px !important; }
   .breadcrumb { font-size: 11px !important; }
   .furn-grid { grid-template-columns: 1fr !important; }
