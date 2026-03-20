@@ -1,15 +1,7 @@
 #!/usr/bin/env python3
-"""
-WOCS AI 블로그 자동 작성기 (GitHub Actions용)
-"""
-
-import os
-import json
-import random
-import re
+import os, json, random, re
 from datetime import datetime
-
-import google.generativeai as genai
+from google import genai
 
 API_KEY = os.environ.get("GEMINI_API_KEY") or ""
 if not API_KEY:
@@ -20,12 +12,11 @@ if not API_KEY:
         pass
 
 if not API_KEY:
-    print("GEMINI_API_KEY가 설정되지 않았습니다.")
+    print("GEMINI_API_KEY 없음")
     exit(1)
 
-genai.configure(api_key=API_KEY)
-model = genai.GenerativeModel("gemini-2.0-flash")
-print("Gemini 2.0 Flash 연결됨")
+client = genai.Client(api_key=API_KEY)
+print("Gemini 연결됨")
 
 TOPICS = [
     {"keyword": "글램핑 창업", "title_hint": "글램핑 창업 완전 가이드"},
@@ -57,8 +48,7 @@ def get_used_topics():
     used = set()
     try:
         with open(BLOG_DATA_PATH, "r", encoding="utf-8") as f:
-            content = f.read()
-            keywords = re.findall(r'"keyword"\s*:\s*"([^"]+)"', content)
+            keywords = re.findall(r'"keyword"\s*:\s*"([^"]+)"', f.read())
             used.update(keywords)
     except:
         pass
@@ -67,9 +57,7 @@ def get_used_topics():
 def pick_topic():
     used = get_used_topics()
     available = [t for t in TOPICS if t["keyword"] not in used]
-    if not available:
-        available = TOPICS
-    return random.choice(available)
+    return random.choice(available if available else TOPICS)
 
 def get_next_id():
     try:
@@ -85,21 +73,14 @@ def generate_content(topic):
         "주제: " + topic["title_hint"] + "\n"
         "키워드: " + topic["keyword"] + "\n"
         "회사: WOCS (우성어닝천막공사캠프시스템) - 전남 화순 기반 글램핑 구조물 제조시공 전문\n\n"
-        "형식:\n"
-        "TITLE: (제목)\n"
-        "EXCERPT: (2줄 요약)\n"
-        "CONTENT: (본문 800~1200자, 소제목 포함)\n\n"
-        "조건:\n"
-        "- 실용적이고 전문적인 내용\n"
-        "- WOCS 브랜드 자연스럽게 1~2회 언급\n"
-        "- 태풍, 풍속 수치, 시공기간 보장 등 법적 문구 금지\n"
-        "- 구어체 아닌 블로그 문체"
+        "형식:\nTITLE: (제목)\nEXCERPT: (2줄 요약)\nCONTENT: (본문 800~1200자, 소제목 포함)\n\n"
+        "조건: 실용적이고 전문적, WOCS 1~2회 언급, 태풍/풍속/시공기간 보장 문구 금지, 블로그 문체"
     )
     try:
-        response = model.generate_content(prompt)
+        response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
         return response.text
     except Exception as e:
-        print("Gemini 오류: " + str(e))
+        print("오류: " + str(e))
         return None
 
 def parse_output(raw):
@@ -114,33 +95,28 @@ def parse_output(raw):
 
 def save_to_blog_data(post_id, title, excerpt, content, topic):
     today = datetime.now().strftime("%Y-%m-%d")
-    safe_title = title.replace('\\', '').replace('"', "'")
-    safe_excerpt = excerpt[:100].replace('\\', '').replace('"', "'")
-    safe_content = content[:2000].replace('\\', '').replace('"', "'").replace('\n', ' ')
-    safe_keyword = topic['keyword']
-
+    safe = lambda s: s.replace('\\', '').replace('"', "'")
     new_entry = (
         '  {\n'
         '    "id": ' + str(post_id) + ',\n'
-        '    "title": "' + safe_title + '",\n'
-        '    "excerpt": "' + safe_excerpt + '",\n'
-        '    "content": "' + safe_content + '",\n'
+        '    "title": "' + safe(title) + '",\n'
+        '    "excerpt": "' + safe(excerpt[:100]) + '",\n'
+        '    "content": "' + safe(content[:2000]).replace('\n', ' ') + '",\n'
         '    "category": "글램핑창업",\n'
-        '    "keyword": "' + safe_keyword + '",\n'
+        '    "keyword": "' + topic['keyword'] + '",\n'
         '    "date": "' + today + '",\n'
         '    "image": "assets/images/blog/default.jpg"\n'
         '  }'
     )
-
     try:
         with open(BLOG_DATA_PATH, "r", encoding="utf-8") as f:
             data = f.read()
         data = data.replace("const blogPosts = [", "const blogPosts = [\n" + new_entry + ",", 1)
         with open(BLOG_DATA_PATH, "w", encoding="utf-8") as f:
             f.write(data)
-        print("blog-data.js에 id:" + str(post_id) + " 추가 완료")
+        print("blog-data.js 저장 완료 (id:" + str(post_id) + ")")
     except Exception as e:
-        print("blog-data.js 저장 실패: " + str(e))
+        print("저장 실패: " + str(e))
 
 def save_to_txt(post_id, title, content, topic):
     os.makedirs(CONTENT_DIR, exist_ok=True)
@@ -153,12 +129,8 @@ def save_to_txt(post_id, title, content, topic):
 def main():
     topic = pick_topic()
     post_id = get_next_id()
-
-    print("=" * 50)
     print("주제: " + topic['title_hint'])
     print("키워드: " + topic['keyword'])
-    print("ID: " + str(post_id))
-    print("=" * 50)
     print("AI 글 생성 중...")
 
     raw = generate_content(topic)
@@ -172,8 +144,6 @@ def main():
         exit(1)
 
     print("제목: " + title)
-    print("본문: " + str(len(content)) + "자")
-
     save_to_blog_data(post_id, title, excerpt, content, topic)
     save_to_txt(post_id, title, content, topic)
     print("완료!")
