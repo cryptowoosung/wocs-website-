@@ -311,10 +311,10 @@ function initMobileMenu() {
   function checkMobile() {
     if (window.innerWidth <= 768) {
       hamburger.style.display = 'block';
-      if (navList) { navList.classList.remove('mobile-open'); navList.style.display = ''; }
+      if (navList) { navList.classList.remove('mobile-open'); navList.removeAttribute('style'); }
     } else {
       hamburger.style.display = 'none';
-      if (navList) { navList.classList.remove('mobile-open'); navList.style.display = 'flex'; }
+      if (navList) { navList.classList.remove('mobile-open'); navList.removeAttribute('style'); }
     }
   }
   

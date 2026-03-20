@@ -1960,7 +1960,7 @@ function WOCSHomepage() {
             </h2>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 24 }}>
             {productCards.map((card, i) => (
               <div key={i} {...anim(`pc-${i}`, "fu", i * 0.12)} style={{
                 ...anim(`pc-${i}`, "fu", i * 0.12).style,
@@ -2302,7 +2302,7 @@ function WOCSHomepage() {
             </h2>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16 }}>
             {steps.map((step, i) => (
               <div key={i}
                 {...anim(`step-${i}`, "fu", i * 0.1)}
@@ -2345,7 +2345,7 @@ function WOCSHomepage() {
             </h2>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 24 }}>
             {features.map((f, i) => (
               <div key={i} {...anim(`feat-${i}`, "fu", i * 0.12)} style={{
                 ...anim(`feat-${i}`, "fu", i * 0.12).style,
@@ -2367,7 +2367,7 @@ function WOCSHomepage() {
 
       {/* ═══════════ 12. STATS (Glitzcamp Style) ═══════════ */}
       <section data-s="stats" style={{ background: `linear-gradient(135deg, ${BG2}, ${BG})`, padding: "100px 5%", borderTop: `1px solid ${GOLD}10`, borderBottom: `1px solid ${GOLD}10` }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 40, textAlign: "center" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 40, textAlign: "center" }}>
           {statsData.map((stat, i) => (
             <div key={i} style={{ padding: "20px 0" }}>
               <div style={{ fontSize: "clamp(48px, 5vw, 72px)", fontWeight: 300, lineHeight: 1 }}>

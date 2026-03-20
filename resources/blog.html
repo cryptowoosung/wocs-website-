@@ -29,7 +29,7 @@
 .blog-filter button:hover,.blog-filter button.active{background:var(--gold);color:var(--bg);border-color:var(--gold)}
 
 /* Blog Grid */
-.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
 .bg-card{text-decoration:none;display:block;overflow:hidden;border:1px solid rgba(201,169,110,0.1);transition:all .3s}
 .bg-card:hover{border-color:rgba(201,169,110,0.3);transform:translateY(-4px)}
 .bg-card img{width:100%;height:200px;object-fit:cover;filter:brightness(0.85);transition:filter .4s,transform .5s}
