@@ -627,3 +627,102 @@ img { max-width: 100%; height: auto; }
     font-size: 16px !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════
+   MOBILE 2차 수정 — 네비게이션 + 인라인 레이아웃
+   ═══════════════════════════════════════════════════ */
+
+/* 1. 네비게이션: 768px 이하에서 nav-list 기본 숨김, 햄버거로 토글 */
+@media (max-width: 768px) {
+  .header-main { position: relative; }
+  .header-main nav { width: 100%; }
+  .nav-list {
+    display: none !important;
+    flex-direction: column !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    background: rgba(9,9,11,0.98) !important;
+    backdrop-filter: blur(20px);
+    padding: 20px 16px !important;
+    border-top: 1px solid rgba(201,169,110,0.14);
+    z-index: 1001 !important;
+    gap: 0 !important;
+  }
+  .nav-list.mobile-open { display: flex !important; }
+  .nav-list .nav-item { width: 100%; border-bottom: 1px solid rgba(201,169,110,0.08); }
+  .nav-list .nav-link { padding: 14px 0 !important; display: block; width: 100%; }
+  .nav-list .mega-menu {
+    position: static !important;
+    display: none;
+    border: none !important;
+    background: rgba(201,169,110,0.04) !important;
+    padding: 12px 16px !important;
+    margin: 0 !important;
+  }
+  .nav-list .nav-item:hover .mega-menu,
+  .nav-list .nav-item:focus-within .mega-menu { display: block; }
+  .nav-list .mega-menu.multi { grid-template-columns: 1fr !important; gap: 16px !important; }
+  .nav-list .mega-title { font-size: 12px !important; margin-bottom: 8px; }
+  .nav-list .mega-link { padding: 8px 0 !important; font-size: 13px !important; }
+  #mobile-hamburger { display: block !important; }
+
+  /* 2. 인라인 style 가로 배치 오버라이드 — 세로로 변환 */
+  [style*="grid-template-columns: 1fr 1fr"],
+  [style*="grid-template-columns:1fr 1fr"],
+  [style*="grid-template-columns: repeat(2"],
+  [style*="grid-template-columns:repeat(2"],
+  [style*="grid-template-columns: repeat(3"],
+  [style*="grid-template-columns:repeat(3"],
+  [style*="grid-template-columns: repeat(4"],
+  [style*="grid-template-columns:repeat(4"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* display:flex 가로 배치 → 세로 */
+  [style*="display:flex"][style*="gap"] {
+    flex-wrap: wrap !important;
+  }
+
+  /* 3. 아이콘/feature 카드: 인라인 4열 → 2열 */
+  [style*="grid-template-columns: repeat(4, 1fr)"],
+  [style*="grid-template-columns:repeat(4,1fr)"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* 4. 모든 섹션 좌우 최소 16px */
+  section > div, .container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    box-sizing: border-box;
+  }
+
+  /* 이미지+텍스트 split: 이미지 먼저 */
+  .split-section .split-img { order: -1 !important; }
+  .split-section .split-text { order: 1 !important; }
+
+  /* inline style grid 강제 1열 */
+  .grid-2[style], .grid-4[style] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* 인라인 flex gap 큰 것 축소 */
+  [style*="gap:40px"], [style*="gap: 40px"] { gap: 16px !important; }
+  [style*="gap:32px"], [style*="gap: 32px"] { gap: 12px !important; }
+}
+
+@media (max-width: 480px) {
+  /* 아이콘 카드 1열 */
+  [style*="grid-template-columns: repeat(4, 1fr)"],
+  [style*="grid-template-columns:repeat(4,1fr)"],
+  [style*="grid-template-columns: repeat(2, 1fr)"],
+  [style*="grid-template-columns:repeat(2,1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  section > div, .container {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+}
