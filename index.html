@@ -1514,16 +1514,16 @@ function WOCSHomepage() {
   ];
 
   const occasions = [
-    { icon: "⛺", name: t("occ1"), href: "occasions/glamping.html" },
-    { icon: "🏨", name: t("occ2"), href: "occasions/resort.html" },
-    { icon: "🏡", name: t("occ3"), href: "occasions/airbnb.html" },
-    { icon: "💒", name: t("occ4"), href: "occasions/wedding.html" },
-    { icon: "🏟", name: t("occ5"), href: "occasions/sports.html" },
-    { icon: "🌊", name: t("occ6"), href: "occasions/glamping-pod.html" },
-    { icon: "🏠", name: t("occ7"), href: "occasions/permanent.html" },
-    { icon: "❄️", name: t("occ8"), href: "occasions/winter.html" },
-    { icon: "🌲", name: t("occ9"), href: "occasions/index.html" },
-    { icon: "🎪", name: t("occ10"), href: "occasions/index.html" },
+    { img: "assets/images/15-lodge-lx-ext.png", name: t("occ1"), href: "occasions/glamping.html" },
+    { img: "assets/images/50-resort-mountain.png", name: t("occ2"), href: "occasions/resort.html" },
+    { img: "assets/images/s-classic.png", name: t("occ3"), href: "occasions/airbnb.html" },
+    { img: "assets/images/26-sig-p-ext.png", name: t("occ4"), href: "occasions/wedding.html" },
+    { img: "assets/images/19-d800-ext.png", name: t("occ5"), href: "occasions/sports.html" },
+    { img: "assets/images/17-d600-ext.png", name: t("occ6"), href: "occasions/glamping-pod.html" },
+    { img: "assets/images/35-sig-q-ext.png", name: t("occ7"), href: "occasions/permanent.html" },
+    { img: "assets/images/02-ex25-ext.png", name: t("occ8"), href: "occasions/winter.html" },
+    { img: "assets/images/50-resort-mountain3.png", name: t("occ9"), href: "occasions/index.html" },
+    { img: "assets/images/28-sig-h-ext.png", name: t("occ10"), href: "occasions/index.html" },
   ];
 
   const features = [
@@ -2276,7 +2276,7 @@ function WOCSHomepage() {
                   transform: `${anim(`occ-${i}`, "fu", i * 0.06).style.transform} ${hovOccasion === i ? "translateY(-6px)" : ""}`,
                 }}
               >
-                <div style={{ fontSize: 36, marginBottom: 14, transition: "transform .3s", transform: hovOccasion === i ? "scale(1.2)" : "scale(1)" }}>{occ.icon}</div>
+                <div style={{ marginBottom: 14, transition: "transform .3s", transform: hovOccasion === i ? "scale(1.1)" : "scale(1)" }}><img src={occ.img} alt={occ.name} style={{width:"80px",height:"80px",objectFit:"cover",borderRadius:"8px"}} /></div>
                 <div style={{ ...S.sf, fontSize: 13, fontWeight: 500, color: IVORY }}>{occ.name}</div>
               </div>
             ))}
