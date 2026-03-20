@@ -1700,16 +1700,17 @@ function WOCSHomepage() {
           <nav className={`nav-list ${mobileOpen ? "mobile-open" : ""}`} style={{ gap: 0, alignItems: "center" }}>
             {navItems.map((item, i) => (
               <div key={i}
+                className="nav-item"
                 onMouseEnter={() => item.mega && setMegaNav(i)}
                 onMouseLeave={() => setMegaNav(null)}
                 style={{ position: "relative" }}
               >
-                <button onClick={() => { 
-                  setMegaNav(null); 
-                  if (item.href && !item.mega) { 
-                    window.location.href = item.href + (item.href.indexOf("?")>=0?"&":"?") + "lang=" + currentLang; 
-                  } else if (item.scrollTo) { 
-                    scrollToSection(item.scrollTo); 
+                <button className="nav-link" onClick={() => {
+                  setMegaNav(null); setMobileOpen(false);
+                  if (item.href && !item.mega) {
+                    window.location.href = item.href + (item.href.indexOf("?")>=0?"&":"?") + "lang=" + currentLang;
+                  } else if (item.scrollTo) {
+                    scrollToSection(item.scrollTo);
                   }
                 }} style={{
                   ...S.sf, fontSize: 12, fontWeight: 400, letterSpacing: 2, textTransform: "uppercase",
