@@ -301,20 +301,17 @@ function initMobileMenu() {
   var hamburger = document.createElement('button');
   hamburger.id = 'mobile-hamburger';
   hamburger.innerHTML = '☰';
-  hamburger.style.cssText = 'display:none;background:none;border:1px solid rgba(201,169,110,0.3);color:#c9a96e;font-size:24px;padding:8px 12px;cursor:pointer;font-family:sans-serif';
+  hamburger.style.cssText = 'background:none;border:1px solid rgba(201,169,110,0.3);color:#c9a96e;font-size:24px;padding:8px 12px;cursor:pointer;font-family:sans-serif;z-index:10001;position:relative';
   main.appendChild(hamburger);
   
   var nav = header.querySelector('nav');
   var navList = header.querySelector('.nav-list');
   
-  // Show hamburger on mobile
+  // CSS handles show/hide via #mobile-hamburger media queries
   function checkMobile() {
-    if (window.innerWidth <= 768) {
-      hamburger.style.display = 'block';
-      if (navList) { navList.classList.remove('mobile-open'); navList.removeAttribute('style'); }
-    } else {
-      hamburger.style.display = 'none';
-      if (navList) { navList.classList.remove('mobile-open'); navList.removeAttribute('style'); }
+    if (window.innerWidth > 768) {
+      if (navList) navList.classList.remove('mobile-open');
+      hamburger.innerHTML = '☰';
     }
   }
   
@@ -332,6 +329,32 @@ function initMobileMenu() {
   
   checkMobile();
   window.addEventListener('resize', checkMobile);
+
+  // Mobile mega-menu click toggle
+  var navItems = navList ? navList.querySelectorAll('.nav-item') : [];
+  navItems.forEach(function(item) {
+    var link = item.querySelector('.nav-link');
+    var mega = item.querySelector('.mega-menu');
+    if (!mega || !link) return;
+    link.addEventListener('click', function(e) {
+      if (window.innerWidth > 768) return;
+      e.preventDefault();
+      e.stopPropagation();
+      navItems.forEach(function(other) {
+        if (other !== item) { var om = other.querySelector('.mega-menu'); if (om) om.style.display = 'none'; }
+      });
+      mega.style.display = (mega.style.display === 'block') ? 'none' : 'block';
+    });
+  });
+
+  // Close menu on mega-link click
+  var megaLinks = navList ? navList.querySelectorAll('.mega-link') : [];
+  megaLinks.forEach(function(ml) {
+    ml.addEventListener('click', function() {
+      if (navList) navList.classList.remove('mobile-open');
+      hamburger.innerHTML = '☰';
+    });
+  });
 }
 
 document.addEventListener('DOMContentLoaded', function() {

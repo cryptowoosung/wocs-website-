@@ -1697,15 +1697,16 @@ function WOCSHomepage() {
           </div>
 
           {/* Desktop Nav */}
-          <nav className={`nav-list ${mobileOpen ? "mobile-open" : ""}`} style={{ gap: 0, alignItems: "center" }}>
+          <nav className={`nav-list ${mobileOpen ? "mobile-open" : ""}`}>
             {navItems.map((item, i) => (
               <div key={i}
                 className="nav-item"
-                onMouseEnter={() => item.mega && setMegaNav(i)}
-                onMouseLeave={() => setMegaNav(null)}
+                onMouseEnter={() => !mobileOpen && item.mega && setMegaNav(i)}
+                onMouseLeave={() => !mobileOpen && setMegaNav(null)}
                 style={{ position: "relative" }}
               >
                 <button className="nav-link" onClick={() => {
+                  if (mobileOpen && item.mega) { setMegaNav(megaNav === i ? null : i); return; }
                   setMegaNav(null); setMobileOpen(false);
                   if (item.href && !item.mega) {
                     window.location.href = item.href + (item.href.indexOf("?")>=0?"&":"?") + "lang=" + currentLang;
@@ -1752,6 +1753,7 @@ function WOCSHomepage() {
                             }}
                             onMouseEnter={e => { e.currentTarget.style.color = GOLD; e.currentTarget.style.paddingLeft = "8px"; }}
                             onMouseLeave={e => { e.currentTarget.style.color = `${IVORY}bb`; e.currentTarget.style.paddingLeft = "0"; }}
+                            onClick={() => { setMobileOpen(false); setMegaNav(null); }}
                             >{inner}</a>
                           ) : (
                             <div key={li} style={{
