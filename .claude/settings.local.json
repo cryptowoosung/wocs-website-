@@ -122,7 +122,9 @@
       "Bash(ls ~/Desktop/wocs-site/*.py ~/Desktop/wocs-site/*.md ~/Desktop/wocs-site/gas-*.js ~/Desktop/wocs-site/config.json)",
       "Bash(ls -d */)",
       "Bash(ls *.html *.xml *.txt)",
-      "Bash(ls *.py *.md)"
+      "Bash(ls *.py *.md)",
+      "Bash(cp /tmp/base.css assets/css/wocs-common.css)",
+      "Bash(rm mobile-first.css)"
     ]
   }
 }
