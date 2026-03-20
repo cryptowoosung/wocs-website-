@@ -113,7 +113,11 @@
       "Bash(node add-popup.js)",
       "Bash(rm add-popup.js)",
       "Bash(node seo-complete.js)",
-      "Bash(rm seo-complete.js)"
+      "Bash(rm seo-complete.js)",
+      "Bash(pip show:*)",
+      "Bash(python optimize-images.py)",
+      "Bash(PYTHONIOENCODING=utf-8 python optimize-images.py)",
+      "Bash(ls assets/images/*.png)"
     ]
   }
 }
