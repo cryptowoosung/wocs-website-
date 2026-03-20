@@ -79,6 +79,7 @@ function buildWocsFooter() {
       </div>
     </div>
     <div class="footer-bottom">
+      <div style="font-size:11px;color:rgba(240,235,224,0.3);margin-bottom:8px">${tc('footArea')}</div>
       <div class="footer-copy">${tc('footCopy')}
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-top:40px;padding-top:30px;border-top:1px solid rgba(201,169,110,0.12)">

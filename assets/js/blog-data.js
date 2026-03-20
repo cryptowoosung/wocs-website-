@@ -6,6 +6,18 @@
    ============================================================ */
 var BLOG_POSTS = [
 {
+  id:11, title:"bt11", excerpt:"be11",
+  date:"2026-03-18", category:"cat_startup", featured:false,
+  image:"https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=800&h=500&fit=crop&q=85",
+  content:'bc11'
+},
+{
+  id:12, title:"bt12", excerpt:"be12",
+  date:"2026-03-15", category:"cat_case", featured:false,
+  image:"https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&h=500&fit=crop&q=85",
+  content:'bc12'
+},
+{
   id:10, title:"bt10", excerpt:"be10",
   date:"2026-03-05", category:"cat_construction", featured:true,
   image:"https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=500&fit=crop&q=85",
