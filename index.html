@@ -275,6 +275,22 @@ function WOCSHomepage() {
     return () => clearInterval(t);
   }, []);
 
+  // Mobile menu: body scroll lock
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
+
+  // Mobile menu: close on outside click
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const handleClick = (e) => {
+      if (!e.target.closest("header")) setMobileOpen(false);
+    };
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, [mobileOpen]);
+
   // Counter animation
   useEffect(() => {
     if (!vis.has("stats") || counting) return;
@@ -1681,7 +1697,7 @@ function WOCSHomepage() {
           </div>
 
           {/* Desktop Nav */}
-          <nav style={{ display: "flex", gap: 0, alignItems: "center" }}>
+          <nav className={`nav-list ${mobileOpen ? "mobile-open" : ""}`} style={{ gap: 0, alignItems: "center" }}>
             {navItems.map((item, i) => (
               <div key={i}
                 onMouseEnter={() => item.mega && setMegaNav(i)}
@@ -1876,10 +1892,11 @@ function WOCSHomepage() {
 
           {/* Mobile hamburger */}
           <button
+            id="mobile-hamburger"
             onClick={() => setMobileOpen(!mobileOpen)}
-            style={{ display: "none", background: "none", border: "none", color: GOLD, fontSize: 24, cursor: "pointer" }}
+            style={{ background: "none", border: "1px solid " + GOLD + "60", color: GOLD, fontSize: 24, cursor: "pointer", padding: "8px 12px", lineHeight: 1 }}
           >
-            ☰
+            {mobileOpen ? "✕" : "☰"}
           </button>
         </div>
       </header>

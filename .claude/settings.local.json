@@ -126,7 +126,8 @@
       "Bash(cp /tmp/base.css assets/css/wocs-common.css)",
       "Bash(rm mobile-first.css)",
       "Bash(node fix-inline.js)",
-      "Bash(rm fix-inline.js)"
+      "Bash(rm fix-inline.js)",
+      "Bash(grep -n 'display: \"\"none\"\".*background: \"\"none\"\".*border: \"\"none\"\".*GOLD.*fontSize: 24' index.html)"
     ]
   }
 }
