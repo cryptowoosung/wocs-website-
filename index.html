@@ -1379,10 +1379,10 @@ function WOCSHomepage() {
   // DATA ARRAYS — All using t() for full i18n
   // ═══════════════════════════════════════════════════════
   const heroSlides = [
-    { tag: t("heroTag1"), title: t("heroTitle1"), sub: t("heroSub1"), cta: t("heroCta1"), img: "assets/images/17-d600-ext.png" },
-    { tag: t("heroTag2"), title: t("heroTitle2"), sub: t("heroSub2"), cta: t("heroCta2"), img: "assets/images/01-ex15-ext.png" },
-    { tag: t("heroTag3"), title: t("heroTitle3"), sub: t("heroSub3"), cta: t("heroCta3"), img: "assets/images/22-sig-o-ext.png" },
-    { tag: t("heroTag4"), title: t("heroTitle4"), sub: t("heroSub4"), cta: t("heroCta4"), img: "assets/images/50-resort-mountain.png" },
+    { tag: t("heroTag1"), title: t("heroTitle1"), sub: t("heroSub1"), cta: t("heroCta1"), img: "assets/images/17-d600-ext.png", href: "products/geodesic-domes.html" },
+    { tag: t("heroTag2"), title: t("heroTitle2"), sub: t("heroSub2"), cta: t("heroCta2"), img: "assets/images/01-ex15-ext.png", href: "products/safari-tents.html" },
+    { tag: t("heroTag3"), title: t("heroTitle3"), sub: t("heroSub3"), cta: t("heroCta3"), img: "assets/images/22-sig-o-ext.png", href: "products/luxury-tents.html" },
+    { tag: t("heroTag4"), title: t("heroTitle4"), sub: t("heroSub4"), cta: t("heroCta4"), img: "assets/images/50-resort-mountain.png", href: "products/modular-systems.html" },
   ];
 
   const navItems = [
@@ -1400,21 +1400,21 @@ function WOCSHomepage() {
         {text: t("megaLuxury"), href: "products/safari-luxury.html"},
       ]},
       { title: t("megaLuxuryTents"), titleHref: "products/luxury-tents.html", links: [
-        {text: t("megaSignature_O"), href: "products/luxury-tents.html#signature-o"},
-        {text: t("megaSignature_A"), href: "products/luxury-tents.html#signature-a"},
-        {text: t("megaSignature_P"), href: "products/luxury-tents.html#signature-p"},
-        {text: t("megaPeakLodge"), href: "products/luxury-tents.html#peak"},
-        {text: t("megaNordicTipi"), href: "products/luxury-tents.html#tipi"},
-        {text: t("megaCubeCabin"), href: "products/luxury-tents.html#cube"},
-        {text: t("megaBellTents"), href: "products/luxury-tents.html#bell"},
-        {text: t("megaDomeTents"), href: "products/luxury-tents.html#dome"},
+        {text: t("megaSignature_O"), href: "products/cocoon-house.html"},
+        {text: t("megaSignature_A"), href: "products/sailing-tent.html"},
+        {text: t("megaSignature_P"), href: "products/birdcage.html"},
+        {text: t("megaPeakLodge"), href: "products/peak-lodge.html"},
+        {text: t("megaNordicTipi"), href: "products/nordic-tipi.html"},
+        {text: t("megaCubeCabin"), href: "products/cube-cabin.html"},
+        {text: t("megaBellTents"), href: "products/bell-tent.html"},
+        {text: t("megaDomeTents"), href: "products/dome-tent.html"},
       ]},
       { title: t("megaAccessories"), titleHref: "products/modular-systems.html", links: [
-        {text: t("megaModUnits"), href: "products/modular-systems.html#units"},
-        {text: t("megaModBath"), href: "products/modular-systems.html#bath"},
-        {text: t("megaModDeck"), href: "products/modular-systems.html#deck"},
-        {text: t("megaSolar"), href: "products/modular-systems.html#solar"},
-        {text: t("megaAddons"), href: "products/modular-systems.html#addons"},
+        {text: t("megaModUnits"), href: "products/modular-units.html"},
+        {text: t("megaModBath"), href: "products/modular-bath.html"},
+        {text: t("megaModDeck"), href: "products/modular-deck.html"},
+        {text: t("megaSolar"), href: "products/solar-system.html"},
+        {text: t("megaAddons"), href: "products/addons.html"},
       ]},
     ]},
     { label: t("navOccasions"), scrollTo: "occasions", href: "occasions/index.html", mega: [
@@ -1470,8 +1470,8 @@ function WOCSHomepage() {
   };
 
   const productCards = [
-    { name: t("pcName1"), sub: t("pcSub1"), icon: "⛺", href: "products/geodesic-domes.html" },
-    { name: t("pcName2"), sub: t("pcSub2"), icon: "🔮", href: "products/safari-tents.html" },
+    { name: t("pcName1"), sub: t("pcSub1"), icon: "⛺", href: "products/safari-tents.html" },
+    { name: t("pcName2"), sub: t("pcSub2"), icon: "🔮", href: "products/geodesic-domes.html" },
     { name: t("pcName3"), sub: t("pcSub3"), icon: "✦", href: "products/luxury-tents.html" },
     { name: t("pcName4"), sub: t("pcSub4"), icon: "⚙", href: "products/modular-systems.html" },
   ];
@@ -1956,7 +1956,7 @@ function WOCSHomepage() {
           <div key={`cta-${heroIdx}`} style={{
             display: "flex", gap: 16, animation: "slideUp 1.1s ease forwards",
           }}>
-            <a href={"products/index.html?lang="+currentLang} className="btn-gold-fill" style={{textDecoration:"none"}}>{heroSlides[heroIdx].cta}</a>
+            <a href={heroSlides[heroIdx].href+"?lang="+currentLang} className="btn-gold-fill" style={{textDecoration:"none"}}>{heroSlides[heroIdx].cta}</a>
             <a href={"contact/index.html?lang="+currentLang} className="btn-gold" style={{textDecoration:"none"}}>{t("contactUs")}</a>
           </div>
 
@@ -2241,7 +2241,7 @@ function WOCSHomepage() {
                 ))}
               </div>
 
-              <a href={"products/" + (activeProduct===0?"geodesic-domes.html":activeProduct===1?"safari-tents.html":activeProduct===2?"luxury-tents.html":"modular-systems.html")} className="btn-gold" style={{marginTop:36,textDecoration:"none",display:"inline-block"}}>{prod.cta}</a>
+              <a href={"products/" + (pi===0?"geodesic-domes.html":pi===1?"safari-tents.html":pi===2?"luxury-tents.html":"bell-tent.html")} className="btn-gold" style={{marginTop:36,textDecoration:"none",display:"inline-block"}}>{prod.cta}</a>
             </div>
 
             {/* Visual side */}

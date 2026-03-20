@@ -46,14 +46,15 @@
 }
 
 .map-container{position:relative;max-width:800px;margin:0 auto}
-.map-pin{position:absolute;width:12px;height:12px;border-radius:50%;transform:translate(-50%,-50%);z-index:10}
-.map-pin::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;border-radius:50%;animation:pulse 2s infinite;box-shadow:inherit}
+.map-pin{position:absolute;width:10px;height:10px;border-radius:50%;transform:translate(-50%,-50%);z-index:10;background-color:var(--gold);box-shadow:0 0 6px var(--gold);animation:blink 1.5s ease-in-out infinite}
+.map-pin::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;border-radius:50%;animation:pulse 2s infinite;box-shadow:0 0 6px var(--gold)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
 @keyframes pulse{0%{transform:scale(1);opacity:0.8}70%{transform:scale(3);opacity:0}100%{transform:scale(3);opacity:0}}
-.pin-asia{top:38%;left:83%;background-color:#C9A96E;box-shadow:0 0 10px #C9A96E}
-.pin-europe{top:32%;left:50%;background-color:#4A90E2;box-shadow:0 0 10px #4A90E2}
-.pin-americas{top:36%;left:22%;background-color:#E74C3C;box-shadow:0 0 10px #E74C3C}
-.pin-mea{top:46%;left:61%;background-color:#2ECC71;box-shadow:0 0 10px #2ECC71}
-.pin-oceania{top:76%;left:85%;background-color:#9B59B6;box-shadow:0 0 10px #9B59B6}
+.pin-asia{top:38%;left:83%;animation-delay:0s}
+.pin-europe{top:32%;left:50%;animation-delay:0.3s}
+.pin-americas{top:36%;left:22%;animation-delay:0.6s}
+.pin-mea{top:46%;left:61%;animation-delay:0.9s}
+.pin-oceania{top:76%;left:85%;animation-delay:1.2s}
 </style>
 </head>
 <body>
@@ -210,22 +211,7 @@
     </div>
   </div>
 </section>
-<section style="background:var(--bg2);padding:80px 5%">
-  <div class="container">
-    <div class="text-center anim"><div class="slab" data-t="h_slab9">COLLABORATION</div><h2 style="font-size:clamp(24px,3vw,42px);font-weight:300;margin-top:12px" data-t="p25">협력 <span class="gold-text" data-t="p26">사례</span></h2></div>
-    <div style="display:flex;gap:20px;overflow-x:auto;scroll-behavior:smooth;padding:48px 0 20px;-ms-overflow-style:none;scrollbar-width:none" class="collab-scroll">
-      <div style="min-width:280px;flex-shrink:0"><div class="collab-card" style="height:340px"><img data-replace="true" src="../assets/images/43-modular-bath.png" alt="WOCS 모듈러 욕실" loading="lazy"><div class="collab-info"><div class="collab-title" data-t="p39">제주 리조트 모듈러 욕실</div><div class="collab-desc" data-t="p40">5성급 호텔 수준 모듈러 욕실 20세트 시공. 레인샤워+양변기+세면대 일체형.</div></div></div></div>
-      <div style="min-width:280px;flex-shrink:0"><div class="collab-card" style="height:340px"><img data-replace="true" src="../assets/images/50-resort-mountain.png" alt="WOCS 프리미엄 글램핑 시공 WOCS 모듈러 시스템" loading="lazy"><div class="collab-info"><div class="collab-title" data-t="p29">강원도 오프그리드 태양광</div><div class="collab-desc" data-t="p41">10kW 태양광 시스템으로 글램핑 유닛 5개 자립 운영. 리튬 배터리 48V.</div></div></div></div>
-      <div style="min-width:280px;flex-shrink:0"><div class="collab-card" style="height:340px"><img data-replace="true" src="../assets/images/44-modular-deck.png" alt="WOCS 모듈러 데크" loading="lazy"><div class="collab-info"><div class="collab-title" data-t="p42">화순 캠프장 모듈러 유닛</div><div class="collab-desc" data-t="p43">리셉션+레스토랑+라운지 3개 모듈러 유닛 통합 시공.</div></div></div></div>
-      <div style="min-width:280px;flex-shrink:0"><div class="collab-card" style="height:340px"><img data-replace="true" src="https://images.pexels.com/photos/1525041/pexels-photo-1525041.jpeg?auto=compress&w=700&h=560&fit=crop&q=85" alt="WOCS 프리미엄 글램핑 시공 WOCS 모듈러 시스템" loading="lazy"><div class="collab-info"><div class="collab-title" data-t="p44">호수 캠프 방부 데크</div><div class="collab-desc" data-t="p45">호수변 3m×3m 모듈 데크 40장 설치. 높이 조절 방부 처리.</div></div></div></div>
-      <div style="min-width:280px;flex-shrink:0"><div class="collab-card" style="height:340px"><img data-replace="true" src="../assets/images/50-resort-mountain2.png" alt="WOCS 프리미엄 글램핑 시공 WOCS 모듈러 시스템" loading="lazy"><div class="collab-info"><div class="collab-title" data-t="p46">필리핀 리조트 풀 패키지</div><div class="collab-desc" data-t="p47">글램핑+욕실+데크+태양광+가구 턴키 패키지 시공.</div></div></div></div>
-    </div>
-    <div style="display:flex;justify-content:center;gap:8px;margin-top:16px">
-      <button onclick="this.parentElement.previousElementSibling.scrollBy({left:-300,behavior:'smooth'})" style="width:36px;height:36px;border-radius:50%;background:var(--gold);color:var(--bg);border:none;font-size:16px;cursor:pointer">❮</button>
-      <button onclick="this.parentElement.previousElementSibling.scrollBy({left:300,behavior:'smooth'})" style="width:36px;height:36px;border-radius:50%;background:var(--gold);color:var(--bg);border:none;font-size:16px;cursor:pointer">❯</button>
-    </div>
-  </div>
-</section>
+
 
 <section style="background:var(--bg2);padding:80px 5%">
   <div class="container">

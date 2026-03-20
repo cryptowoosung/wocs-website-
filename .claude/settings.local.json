@@ -65,7 +65,15 @@
       "Bash(node fix-dome-tr.js)",
       "Bash(rm fix-dome-tr.js)",
       "Bash(node scan-hardcoded.js)",
-      "Bash(node fix-all-hardcoded.js)"
+      "Bash(node fix-all-hardcoded.js)",
+      "Bash(node fix-portfolio.js)",
+      "Bash(rm fix-portfolio.js)",
+      "Bash(node final-scan.js)",
+      "Bash(rm final-scan.js)",
+      "Bash(node fix-luxury.js)",
+      "Bash(rm fix-luxury.js)",
+      "Bash(node fix-dupes.js)",
+      "Bash(rm fix-dupes.js)"
     ]
   }
 }
