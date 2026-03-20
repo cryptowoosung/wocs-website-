@@ -130,7 +130,7 @@ function buildWocsHeader() {
         const title = col.titleKey ? (col.titleHref ? `<a class="mega-title" href="${href(col.titleHref)}" style="text-decoration:none;display:block">${tc(col.titleKey)}</a>` : `<div class="mega-title">${tc(col.titleKey)}</div>`) : '';
         cols += `<div>${title}${links}</div>`;
       });
-      megaHTML = `<div class="mega-menu ${isMul ? 'multi' : ''}">${cols}</div>`;
+      megaHTML = `<div class="mega-menu ${isMul ? 'multi' : ''}" style="display:none;flex-direction:row;gap:40px">${cols}</div>`;
     }
     navHTML += `
       <li class="nav-item">
