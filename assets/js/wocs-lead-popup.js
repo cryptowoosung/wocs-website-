@@ -143,11 +143,12 @@ function submitPopup() {
 
   fetch(POPUP_GAS_URL, {
     method: 'POST',
+    mode: 'no-cors',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
-  })
-  .then(function() { showSuccess(); })
-  .catch(function() { showSuccess(); });
+  }).catch(function() {});
+
+  showSuccess();
 }
 
 // ── 팝업 트리거 ──
