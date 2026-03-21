@@ -113,7 +113,7 @@
       </div>
       <div class="form-group">
         <label class="form-label" data-t-html="qt_labelCompany">회사명 <span class="opt">(선택)</span></label>
-        <input type="text" class="form-input" placeholder="회사명 또는 상호" data-t-placeholder="qt_phCompany" required>
+        <input type="text" id="qt-company" class="form-input" placeholder="회사명 또는 상호" data-t-placeholder="qt_phCompany">
       </div>
     </div>
 
@@ -126,11 +126,11 @@
       <div class="form-row">
         <div class="form-group">
           <label class="form-label" data-t="qt_labelRegion">시공 예정 지역 *</label>
-          <input type="text" class="form-input" placeholder="예: 강원도 평창군" data-t-placeholder="qt_phRegion" required>
+          <input type="text" id="qt-region" class="form-input" placeholder="예: 강원도 평창군" data-t-placeholder="qt_phRegion" required>
         </div>
         <div class="form-group">
           <label class="form-label" data-t="qt_labelArea">부지 면적 (평) *</label>
-          <input type="text" class="form-input" placeholder="예: 300평" data-t-placeholder="qt_phArea" required>
+          <input type="text" id="qt-area" class="form-input" placeholder="예: 300평" data-t-placeholder="qt_phArea" required>
         </div>
       </div>
     </div>
@@ -144,7 +144,7 @@
       <div class="form-row">
         <div class="form-group">
           <label class="form-label" data-t="qt_labelBudget">총 예상 예산 *</label>
-          <select class="form-select" required>
+          <select id="qt-budget" class="form-select" required>
             <option value="" disabled selected data-t="qt_optSelect">선택해 주세요</option>
             <option value="under50" data-t="qt_budgetUnder50">5천만 원 이하</option>
             <option value="50to100" data-t="qt_budget50to100">5천만 원 ~ 1억</option>
@@ -154,7 +154,7 @@
         </div>
         <div class="form-group">
           <label class="form-label" data-t="qt_labelTarget">오픈 목표일</label>
-          <input type="text" class="form-input" placeholder="예: 2026년 6월" data-t-placeholder="qt_phTarget">
+          <input type="text" id="qt-target" class="form-input" placeholder="예: 2026년 6월" data-t-placeholder="qt_phTarget">
         </div>
       </div>
     </div>
@@ -244,10 +244,32 @@ window.submitQuoteForm = function() {
   console.log('[WOCS] submitQuoteForm 호출됨');
   var name = document.getElementById('qt-name').value.trim();
   var phone = document.getElementById('qt-phone').value.trim();
+  var company = document.getElementById('qt-company').value.trim();
+  var region = document.getElementById('qt-region').value.trim();
+  var area = document.getElementById('qt-area').value.trim();
+  var budget = document.getElementById('qt-budget').value;
+  var target = document.getElementById('qt-target').value.trim();
+  var models = [];
+  document.querySelectorAll('input[name="model"]:checked').forEach(function(cb) {
+    models.push(cb.value);
+  });
+  var model = models.join(', ');
   var message = document.getElementById('qt-message').value.trim();
-  console.log('[WOCS] name:', name, 'phone:', phone, 'message:', message);
+  console.log('[WOCS] name:', name, 'phone:', phone, 'company:', company, 'region:', region, 'area:', area, 'budget:', budget, 'target:', target, 'model:', model, 'message:', message);
   if (!name || !phone) { alert('필수 항목을 입력해 주세요.'); return; }
-  var data = { name: name, phone: phone, message: message, page: window.location.href };
+  var data = {
+    type: 'quote',
+    name: name,
+    phone: phone,
+    company: company,
+    region: region,
+    area: area,
+    budget: budget,
+    target: target,
+    model: model,
+    message: message,
+    page: window.location.href
+  };
   console.log('[WOCS] 전송 데이터:', JSON.stringify(data));
   fetch('https://script.google.com/macros/s/AKfycby7cq4Krqif_h0A059Rz4ip0KOJb3uJv8XU8fdHZRknNW-Zsmlsz8C2DQ_oQ2eHideE/exec', {
     method: 'POST',
