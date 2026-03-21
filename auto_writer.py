@@ -48,21 +48,24 @@ def get_used_topics():
     used = set()
     try:
         with open(BLOG_DATA_PATH, "r", encoding="utf-8") as f:
-            keywords = re.findall(r'"keyword"\s*:\s*"([^"]+)"', f.read())
-            used.update(keywords)
+            data = f.read()
+            # 새 포맷: title:'...' 에서 제목 추출
+            titles = re.findall(r"title:'([^']+)'", data)
+            used.update(titles)
     except:
         pass
     return used
 
 def pick_topic():
-    used = get_used_topics()
-    available = [t for t in TOPICS if t["keyword"] not in used]
+    used_titles = get_used_topics()
+    joined = " ".join(used_titles)
+    available = [t for t in TOPICS if t["keyword"] not in joined]
     return random.choice(available if available else TOPICS)
 
 def get_next_id():
     try:
         with open(BLOG_DATA_PATH, "r", encoding="utf-8") as f:
-            ids = re.findall(r'"id"\s*:\s*(\d+)', f.read())
+            ids = re.findall(r'id:(\d+)', f.read())
             return max([int(i) for i in ids], default=99) + 1
     except:
         return 100
@@ -104,26 +107,19 @@ def parse_output(raw):
 
 def save_to_blog_data(post_id, title, excerpt, content, topic, seo_title, meta_desc, focus_kw):
     today = datetime.now().strftime("%Y-%m-%d")
-    safe = lambda s: s.replace('\\', '').replace('"', "'")
+    safe = lambda s: s.replace('\\', '\\\\').replace("'", "\\'").replace('\n', ' ')
     new_entry = (
-        '  {\n'
-        '    "id": ' + str(post_id) + ',\n'
-        '    "title": "' + safe(title) + '",\n'
-        '    "excerpt": "' + safe(excerpt[:100]) + '",\n'
-        '    "content": "' + safe(content[:2000]).replace('\n', ' ') + '",\n'
-        '    "category": "글램핑창업",\n'
-        '    "keyword": "' + topic['keyword'] + '",\n'
-        '    "date": "' + today + '",\n'
-        '    "image": "assets/images/blog/default.jpg",\n'
-        '    "seo_title": "' + safe(seo_title[:60]) + '",\n'
-        '    "meta_description": "' + safe(meta_desc[:155]) + '",\n'
-        '    "focus_keyword": "' + safe(focus_kw) + '"\n'
-        '  }'
+        '{\n'
+        "  id:" + str(post_id) + ", title:'" + safe(title) + "', excerpt:'" + safe(excerpt[:100]) + "',\n"
+        "  date:'" + today + "', category:'cat_startup', featured:false,\n"
+        "  image:'https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=800&h=500&fit=crop&q=85',\n"
+        "  content:'" + safe(content[:2000]) + "'\n"
+        '}'
     )
     try:
         with open(BLOG_DATA_PATH, "r", encoding="utf-8") as f:
             data = f.read()
-        data = data.replace("const blogPosts = [", "const blogPosts = [\n" + new_entry + ",", 1)
+        data = data.replace("var BLOG_POSTS = [", "var BLOG_POSTS = [\n" + new_entry + ",", 1)
         with open(BLOG_DATA_PATH, "w", encoding="utf-8") as f:
             f.write(data)
         print("blog-data.js 저장 완료 (id:" + str(post_id) + ")")
