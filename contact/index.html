@@ -167,7 +167,7 @@ function submitContactForm() {
   var data = { name: name, phone: phone, message: message, page: window.location.href };
   fetch('https://script.google.com/macros/s/AKfycby7cq4Krqif_h0A059Rz4ip0KOJb3uJv8XU8fdHZRknNW-Zsmlsz8C2DQ_oQ2eHideE/exec', {
     method: 'POST', mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'text/plain' },
     body: JSON.stringify(data)
   }).catch(function(){});
   alert('문의가 접수되었습니다');

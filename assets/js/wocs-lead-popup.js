@@ -144,7 +144,7 @@ function submitPopup() {
   fetch(POPUP_GAS_URL, {
     method: 'POST',
     mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'text/plain' },
     body: JSON.stringify(data)
   }).catch(function() {});
 
