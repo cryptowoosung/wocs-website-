@@ -40,31 +40,44 @@ def _check_response(resp: requests.Response, action: str) -> dict:
 # ─── Categories ──────────────────────────────────────────
 
 
-def get_or_create_category(name: str) -> int:
-    """카테고리 이름으로 조회, 없으면 생성 후 ID 반환"""
-    # 조회
-    resp = requests.get(
-        _api_url("categories"),
-        params={"search": name, "per_page": 10},
-        auth=_auth(),
-        timeout=15,
-    )
-    data = _check_response(resp, f"search category '{name}'")
-    for cat in data:
-        if cat["name"] == name:
-            logger.info("Category found: %s (id=%d)", name, cat["id"])
-            return cat["id"]
+def get_or_create_category(name: str) -> Optional[int]:
+    """카테고리 이름으로 조회, 없으면 생성. 실패 시 None 반환."""
+    try:
+        # 조회
+        resp = requests.get(
+            _api_url("categories"),
+            params={"search": name, "per_page": 10},
+            auth=_auth(),
+            timeout=15,
+        )
+        if resp.status_code not in (200, 201):
+            logger.warning("Category search failed (%s), skipping: %s", resp.status_code, name)
+            return None
+        data = resp.json()
+        if not isinstance(data, list):
+            logger.warning("Category search returned non-list, skipping: %s", name)
+            return None
+        for cat in data:
+            if cat.get("name") == name:
+                logger.info("Category found: %s (id=%d)", name, cat["id"])
+                return cat["id"]
 
-    # 생성
-    resp = requests.post(
-        _api_url("categories"),
-        json={"name": name},
-        auth=_auth(),
-        timeout=15,
-    )
-    cat = _check_response(resp, f"create category '{name}'")
-    logger.info("Category created: %s (id=%d)", name, cat["id"])
-    return cat["id"]
+        # 생성
+        resp = requests.post(
+            _api_url("categories"),
+            json={"name": name},
+            auth=_auth(),
+            timeout=15,
+        )
+        if resp.status_code not in (200, 201):
+            logger.warning("Category create failed (%s), skipping: %s", resp.status_code, name)
+            return None
+        cat = resp.json()
+        logger.info("Category created: %s (id=%d)", name, cat["id"])
+        return cat["id"]
+    except Exception as e:
+        logger.warning("Category API error for '%s': %s", name, e)
+        return None
 
 
 # ─── Posts ───────────────────────────────────────────────
@@ -84,25 +97,31 @@ def create_post(
     - categories: 카테고리 이름 리스트 → 자동 생성/조회
     - tags: 태그 이름 리스트 (WP가 자동 생성)
     """
-    # 카테고리 ID 확보
+    # 카테고리 ID 확보 (실패 시 None → 필터링)
     cat_ids = []
     if categories:
         for name in categories:
-            cat_ids.append(get_or_create_category(name))
+            cid = get_or_create_category(name)
+            if cid is not None:
+                cat_ids.append(cid)
 
-    # 태그 ID 확보 (이름으로 전달하면 WP가 자동 생성)
+    # 태그 ID 확보 (실패 시 None → 필터링)
     tag_ids = []
     if tags:
         for tag_name in tags:
-            tag_ids.append(_get_or_create_tag(tag_name))
+            tid = _get_or_create_tag(tag_name)
+            if tid is not None:
+                tag_ids.append(tid)
 
     payload = {
         "title": title,
         "content": content_html,
         "status": "publish",
-        "categories": cat_ids,
-        "tags": tag_ids,
     }
+    if cat_ids:
+        payload["categories"] = cat_ids
+    if tag_ids:
+        payload["tags"] = tag_ids
 
     resp = requests.post(
         _api_url("posts"),
@@ -122,28 +141,40 @@ def create_post(
     return post_id, post_url
 
 
-def _get_or_create_tag(name: str) -> int:
-    """태그 이름으로 조회, 없으면 생성 후 ID 반환"""
-    resp = requests.get(
-        _api_url("tags"),
-        params={"search": name, "per_page": 10},
-        auth=_auth(),
-        timeout=15,
-    )
-    data = _check_response(resp, f"search tag '{name}'")
-    for tag in data:
-        if tag["name"] == name:
-            return tag["id"]
+def _get_or_create_tag(name: str) -> Optional[int]:
+    """태그 이름으로 조회, 없으면 생성. 실패 시 None 반환."""
+    try:
+        resp = requests.get(
+            _api_url("tags"),
+            params={"search": name, "per_page": 10},
+            auth=_auth(),
+            timeout=15,
+        )
+        if resp.status_code not in (200, 201):
+            logger.warning("Tag search failed (%s), skipping: %s", resp.status_code, name)
+            return None
+        data = resp.json()
+        if not isinstance(data, list):
+            return None
+        for tag in data:
+            if tag.get("name") == name:
+                return tag["id"]
 
-    resp = requests.post(
-        _api_url("tags"),
-        json={"name": name},
-        auth=_auth(),
-        timeout=15,
-    )
-    tag = _check_response(resp, f"create tag '{name}'")
-    logger.info("Tag created: %s (id=%d)", name, tag["id"])
-    return tag["id"]
+        resp = requests.post(
+            _api_url("tags"),
+            json={"name": name},
+            auth=_auth(),
+            timeout=15,
+        )
+        if resp.status_code not in (200, 201):
+            logger.warning("Tag create failed (%s), skipping: %s", resp.status_code, name)
+            return None
+        tag = resp.json()
+        logger.info("Tag created: %s (id=%d)", name, tag["id"])
+        return tag["id"]
+    except Exception as e:
+        logger.warning("Tag API error for '%s': %s", name, e)
+        return None
 
 
 # ─── Yoast SEO (스텁) ───────────────────────────────────
