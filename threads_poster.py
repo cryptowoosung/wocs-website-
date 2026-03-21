@@ -4,12 +4,14 @@ import json
 import random
 import time
 import requests
+import urllib.parse
 from datetime import datetime
 import google.generativeai as genai
 
 THREADS_USER_ID = os.environ.get("THREADS_USER_ID")
 THREADS_TOKEN = os.environ.get("THREADS_TOKEN")
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+UNSPLASH_ACCESS_KEY = os.environ.get("UNSPLASH_ACCESS_KEY", "")
 
 TOPICS = [
     {"text": "글램핑 창업 준비할 때 가장 먼저 해야 할 것", "region": "광주·전남"},
@@ -25,6 +27,57 @@ TOPICS = [
     {"text": "구례 보성 장흥 글램핑 수요 분석", "region": "전남"},
     {"text": "글램핑 단지 조성 절차 완전 정리", "region": "전남·전북"},
 ]
+
+IMAGE_KEYWORDS = {
+    "글램핑": "glamping tent nature",
+    "사파리": "safari tent outdoor",
+    "돔": "dome tent glamping",
+    "창업": "glamping resort",
+    "수익": "glamping business",
+    "부지": "nature camping site",
+    "구조물": "glamping structure",
+    "겨울": "winter glamping snow",
+    "여수": "korean nature coast",
+    "담양": "bamboo forest korea",
+    "default": "glamping korea nature",
+}
+
+FALLBACK_IMAGES = {
+    "glamping tent nature": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=1080&q=80",
+    "safari tent outdoor": "https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=1080&q=80",
+    "dome tent glamping": "https://images.unsplash.com/photo-1533575770077-052fa2c609fc?w=1080&q=80",
+    "glamping resort": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1080&q=80",
+    "glamping business": "https://images.unsplash.com/photo-1496545672447-f699b503d270?w=1080&q=80",
+    "nature camping site": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1080&q=80",
+    "glamping structure": "https://images.unsplash.com/photo-1487730116645-74489c95b41b?w=1080&q=80",
+    "winter glamping snow": "https://images.unsplash.com/photo-1517824806704-9040b037703b?w=1080&q=80",
+    "korean nature coast": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1080&q=80",
+    "bamboo forest korea": "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1080&q=80",
+    "glamping korea nature": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=1080&q=80",
+}
+
+
+def get_image_url(topic_text):
+    keyword = "default"
+    for k in IMAGE_KEYWORDS:
+        if k in topic_text:
+            keyword = k
+            break
+    search_query = IMAGE_KEYWORDS[keyword]
+
+    if UNSPLASH_ACCESS_KEY:
+        try:
+            encoded = urllib.parse.quote(search_query)
+            url = "https://api.unsplash.com/photos/random?query=" + encoded + "&orientation=landscape&client_id=" + UNSPLASH_ACCESS_KEY
+            res = requests.get(url, timeout=10)
+            if res.status_code == 200:
+                img = res.json()["urls"]["regular"]
+                print("Unsplash API 이미지: " + img[:60] + "...")
+                return img
+        except Exception as e:
+            print("Unsplash API 오류: " + str(e))
+
+    return FALLBACK_IMAGES.get(search_query, FALLBACK_IMAGES["glamping korea nature"])
 
 
 def generate_content(topic):
@@ -56,29 +109,41 @@ def generate_content(topic):
     return response.text.strip()
 
 
-def post_to_threads(text):
-    # Step 1: 컨테이너 생성
+def post_to_threads(text, image_url=None):
     container_url = f"https://graph.threads.net/v1.0/{THREADS_USER_ID}/threads"
-    container_res = requests.post(container_url, data={
-        "media_type": "TEXT",
-        "text": text,
-        "access_token": THREADS_TOKEN
-    })
+
+    if image_url:
+        data = {
+            "media_type": "IMAGE",
+            "image_url": image_url,
+            "text": text,
+            "access_token": THREADS_TOKEN,
+        }
+    else:
+        data = {
+            "media_type": "TEXT",
+            "text": text,
+            "access_token": THREADS_TOKEN,
+        }
+
+    container_res = requests.post(container_url, data=data)
     container_data = container_res.json()
 
     if "id" not in container_data:
         print("컨테이너 생성 실패: " + json.dumps(container_data, ensure_ascii=False))
+        if image_url:
+            print("이미지 없이 텍스트만 재시도...")
+            return post_to_threads(text, image_url=None)
         return False
 
     creation_id = container_data["id"]
     print("컨테이너 생성: " + creation_id)
     time.sleep(5)
 
-    # Step 2: 게시
     publish_url = f"https://graph.threads.net/v1.0/{THREADS_USER_ID}/threads_publish"
     publish_res = requests.post(publish_url, data={
         "creation_id": creation_id,
-        "access_token": THREADS_TOKEN
+        "access_token": THREADS_TOKEN,
     })
     publish_data = publish_res.json()
 
@@ -114,7 +179,10 @@ if __name__ == "__main__":
         content = content[:490]
         print("글자수 초과 -> 490자로 자름")
 
-    result = post_to_threads(content)
+    image_url = get_image_url(topic["text"])
+    print("이미지 URL: " + image_url[:80] + "...")
+
+    result = post_to_threads(content, image_url=image_url)
     if result:
         print("Threads 자동 포스팅 완료!")
     else:
