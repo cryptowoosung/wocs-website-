@@ -142,6 +142,37 @@ def save_to_txt(post_id, title, content, topic, seo_title, meta_desc, focus_kw):
         f.write("FOCUS_KEYWORD: " + focus_kw + "\n")
     print(path + " 저장 완료")
 
+def generate_linkedin_post(title, content, keyword):
+    prompt = (
+        "아래 블로그 글을 LinkedIn 포스트용으로 요약하세요.\n\n"
+        "제목: " + title + "\n"
+        "키워드: " + keyword + "\n"
+        "본문: " + content[:1000] + "\n\n"
+        "조건:\n"
+        "- 300자 이내 한국어 포스트\n"
+        "- 첫 줄에 제목을 임팩트 있게\n"
+        "- 핵심 내용 2~3줄 요약\n"
+        "- 마지막에 '자세히 보기: https://wocs.kr' 포함\n"
+        "- 문의: 010-4337-0582 포함\n"
+        "- 해시태그 3~5개 포함 (#WOCS 필수)\n"
+        "- LinkedIn 전문가 톤\n\n"
+        "포스트 텍스트만 출력하세요."
+    )
+    try:
+        response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
+        return response.text.strip()
+    except Exception as e:
+        print("LinkedIn 포스트 생성 오류: " + str(e))
+        return None
+
+
+def save_linkedin_data(title, li_text):
+    data = {"title": title, "text": li_text}
+    with open("linkedin_post.json", "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    print("linkedin_post.json 저장 완료")
+
+
 def main():
     topic = pick_topic()
     post_id = get_next_id()
@@ -163,6 +194,15 @@ def main():
     print("SEO: " + seo_title + " | " + focus_kw)
     save_to_blog_data(post_id, title, excerpt, content, topic, seo_title, meta_desc, focus_kw)
     save_to_txt(post_id, title, content, topic, seo_title, meta_desc, focus_kw)
+
+    print("LinkedIn 포스트 생성 중...")
+    li_text = generate_linkedin_post(title, content, topic['keyword'])
+    if li_text:
+        save_linkedin_data(title, li_text)
+        print("LinkedIn 포스트:\n" + li_text[:100] + "...")
+    else:
+        print("LinkedIn 포스트 생성 실패 (블로그 글은 정상 저장)")
+
     print("완료!")
 
 if __name__ == "__main__":
