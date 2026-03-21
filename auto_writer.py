@@ -130,16 +130,116 @@ def save_to_blog_data(post_id, title, excerpt, content, topic, seo_title, meta_d
     except Exception as e:
         print("저장 실패: " + str(e))
 
-def save_to_txt(post_id, title, content, topic, seo_title, meta_desc, focus_kw):
+def markdown_to_html(text):
+    lines = text.split("\n")
+    html_lines = []
+    for line in lines:
+        stripped = line.strip()
+        if not stripped:
+            continue
+        if stripped.startswith("### "):
+            html_lines.append("<h3>" + stripped[4:] + "</h3>")
+        elif stripped.startswith("## "):
+            html_lines.append("<h2>" + stripped[3:] + "</h2>")
+        elif stripped.startswith("# "):
+            html_lines.append("<h2>" + stripped[2:] + "</h2>")
+        elif stripped.startswith("- ") or stripped.startswith("* "):
+            html_lines.append("<li>" + stripped[2:] + "</li>")
+        elif stripped.startswith("**") and stripped.endswith("**"):
+            html_lines.append("<p><strong>" + stripped[2:-2] + "</strong></p>")
+        else:
+            bold = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', stripped)
+            html_lines.append("<p>" + bold + "</p>")
+    result = []
+    in_list = False
+    for line in html_lines:
+        if line.startswith("<li>"):
+            if not in_list:
+                result.append("<ul>")
+                in_list = True
+            result.append(line)
+        else:
+            if in_list:
+                result.append("</ul>")
+                in_list = False
+            result.append(line)
+    if in_list:
+        result.append("</ul>")
+    return "\n".join(result)
+
+
+def save_to_html(post_id, title, content, topic, seo_title, meta_desc, focus_kw):
     os.makedirs(CONTENT_DIR, exist_ok=True)
     today = datetime.now().strftime("%Y-%m-%d")
-    path = CONTENT_DIR + "/auto_post_" + today + "_" + str(post_id) + ".txt"
+    path = CONTENT_DIR + "/auto_post_" + today + ".html"
+    esc = lambda s: s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+    body_html = markdown_to_html(content)
+    url = "https://wocs.kr/content/auto_post_" + today + ".html"
+    html = (
+        '<!DOCTYPE html>\n'
+        '<html lang="ko">\n'
+        '<head>\n'
+        '<meta charset="UTF-8">\n'
+        '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
+        '<title>' + esc(seo_title or title) + '</title>\n'
+        '<meta name="description" content="' + esc(meta_desc) + '">\n'
+        '<meta name="keywords" content="' + esc(focus_kw) + ', WOCS, 글램핑">\n'
+        '<link rel="canonical" href="' + url + '">\n'
+        '<!-- Open Graph -->\n'
+        '<meta property="og:type" content="article">\n'
+        '<meta property="og:title" content="' + esc(seo_title or title) + '">\n'
+        '<meta property="og:description" content="' + esc(meta_desc) + '">\n'
+        '<meta property="og:url" content="' + url + '">\n'
+        '<meta property="og:site_name" content="WOCS">\n'
+        '<meta property="og:locale" content="ko_KR">\n'
+        '<meta property="og:image" content="https://wocs.kr/assets/images/50-resort-mountain.webp">\n'
+        '<!-- Twitter Card -->\n'
+        '<meta name="twitter:card" content="summary_large_image">\n'
+        '<meta name="twitter:title" content="' + esc(seo_title or title) + '">\n'
+        '<meta name="twitter:description" content="' + esc(meta_desc) + '">\n'
+        '<link rel="preconnect" href="https://fonts.googleapis.com">\n'
+        '<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Lexend:wght@200;300;400;500;600&family=Noto+Sans+KR:wght@300;400;500;600&family=Noto+Serif+KR:wght@300;400;500;600&display=swap" rel="stylesheet">\n'
+        '<link rel="stylesheet" href="../assets/css/wocs-common.css">\n'
+        '<style>\n'
+        '.post-wrap{max-width:800px;margin:0 auto;padding:120px 24px 80px}\n'
+        '.post-title{font-family:var(--font-serif);font-size:clamp(28px,4vw,42px);font-weight:400;color:var(--ivory);line-height:1.3;margin-bottom:16px}\n'
+        '.post-meta{font-family:var(--font-body);font-size:12px;color:rgba(240,235,224,0.4);margin-bottom:40px;padding-bottom:20px;border-bottom:1px solid rgba(201,169,110,0.1)}\n'
+        '.post-meta span{margin-right:16px}\n'
+        '.post-body{font-family:var(--font-body);font-size:16px;color:rgba(240,235,224,0.85);line-height:2.2}\n'
+        '.post-body h2{font-family:var(--font-serif);font-size:clamp(22px,2.5vw,30px);font-weight:400;color:var(--ivory);margin:48px 0 16px;padding-bottom:12px;border-bottom:1px solid rgba(201,169,110,0.12)}\n'
+        '.post-body h3{font-size:clamp(18px,2vw,24px);font-weight:400;color:var(--gold);margin:36px 0 12px}\n'
+        '.post-body p{margin-bottom:20px}\n'
+        '.post-body strong{color:var(--gold);font-weight:600}\n'
+        '.post-body ul{margin:16px 0 24px 20px}\n'
+        '.post-body li{margin-bottom:8px}\n'
+        '.post-cta{margin-top:60px;padding:32px;border:2px solid rgba(201,169,110,0.25);background:rgba(201,169,110,0.03);text-align:center}\n'
+        '.post-cta h4{font-size:17px;font-weight:400;color:var(--ivory);margin-bottom:12px}\n'
+        '.post-cta p{font-family:var(--font-body);font-size:13px;color:rgba(240,235,224,0.55)}\n'
+        '.post-cta a{display:inline-block;margin-top:16px;padding:12px 40px;background:var(--gold);color:var(--bg);font-family:var(--font-body);font-size:12px;letter-spacing:1px;text-decoration:none;transition:background .3s}\n'
+        '.post-cta a:hover{background:var(--ivory)}\n'
+        '</style>\n'
+        '</head>\n'
+        '<body>\n'
+        '<div class="post-wrap">\n'
+        '  <h1 class="post-title">' + esc(title) + '</h1>\n'
+        '  <div class="post-meta">\n'
+        '    <span>' + today + '</span>\n'
+        '    <span>' + esc(topic["keyword"]) + '</span>\n'
+        '  </div>\n'
+        '  <div class="post-body">\n'
+        + body_html + '\n'
+        '  </div>\n'
+        '  <div class="post-cta">\n'
+        '    <h4>WOCS 글램핑 구조물 전문 상담</h4>\n'
+        '    <p>전남 화순 기반 글램핑 구조물 제조·시공 전문</p>\n'
+        '    <a href="https://wocs.kr/contact/index.html">무료 상담 신청</a>\n'
+        '  </div>\n'
+        '</div>\n'
+        '</body>\n'
+        '</html>'
+    )
     with open(path, "w", encoding="utf-8") as f:
-        f.write(title + "\n" + today + "\n" + topic['keyword'] + "\n\n" + content)
-        f.write("\n\n--- SEO META ---\n")
-        f.write("SEO_TITLE: " + seo_title + "\n")
-        f.write("META_DESCRIPTION: " + meta_desc + "\n")
-        f.write("FOCUS_KEYWORD: " + focus_kw + "\n")
+        f.write(html)
     print(path + " 저장 완료")
 
 def generate_linkedin_post(title, content, keyword):
@@ -193,7 +293,7 @@ def main():
     print("제목: " + title)
     print("SEO: " + seo_title + " | " + focus_kw)
     save_to_blog_data(post_id, title, excerpt, content, topic, seo_title, meta_desc, focus_kw)
-    save_to_txt(post_id, title, content, topic, seo_title, meta_desc, focus_kw)
+    save_to_html(post_id, title, content, topic, seo_title, meta_desc, focus_kw)
 
     print("LinkedIn 포스트 생성 중...")
     li_text = generate_linkedin_post(title, content, topic['keyword'])
