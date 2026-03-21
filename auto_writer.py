@@ -73,7 +73,10 @@ def generate_content(topic):
         "주제: " + topic["title_hint"] + "\n"
         "키워드: " + topic["keyword"] + "\n"
         "회사: WOCS (우성어닝천막공사캠프시스템) - 전남 화순 기반 글램핑 구조물 제조시공 전문\n\n"
-        "형식:\nTITLE: (제목)\nEXCERPT: (2줄 요약)\nCONTENT: (본문 800~1200자, 소제목 포함)\n\n"
+        "형식:\nTITLE: (제목)\nEXCERPT: (2줄 요약)\nCONTENT: (본문 800~1200자, 소제목 포함)\n"
+        "SEO_TITLE: (SEO 제목, 60자 이내, 키워드 포함)\n"
+        "META_DESCRIPTION: (메타 설명, 155자 이내, 핵심 내용 요약)\n"
+        "FOCUS_KEYWORD: (핵심 키워드 1개, 예: 글램핑 창업)\n\n"
         "조건: 실용적이고 전문적, WOCS 1~2회 언급, 태풍/풍속/시공기간 보장 문구 금지, 블로그 문체"
     )
     try:
@@ -86,14 +89,20 @@ def generate_content(topic):
 def parse_output(raw):
     title = re.search(r'TITLE:\s*(.+)', raw)
     excerpt = re.search(r'EXCERPT:\s*(.+?)(?=CONTENT:|$)', raw, re.DOTALL)
-    content = re.search(r'CONTENT:\s*(.+)', raw, re.DOTALL)
+    content = re.search(r'CONTENT:\s*(.+?)(?=SEO_TITLE:|$)', raw, re.DOTALL)
+    seo_title = re.search(r'SEO_TITLE:\s*(.+)', raw)
+    meta_desc = re.search(r'META_DESCRIPTION:\s*(.+)', raw)
+    focus_kw = re.search(r'FOCUS_KEYWORD:\s*(.+)', raw)
     return (
         title.group(1).strip() if title else "",
         excerpt.group(1).strip().replace('\n', ' ') if excerpt else "",
-        content.group(1).strip() if content else ""
+        content.group(1).strip() if content else "",
+        seo_title.group(1).strip() if seo_title else "",
+        meta_desc.group(1).strip() if meta_desc else "",
+        focus_kw.group(1).strip() if focus_kw else ""
     )
 
-def save_to_blog_data(post_id, title, excerpt, content, topic):
+def save_to_blog_data(post_id, title, excerpt, content, topic, seo_title, meta_desc, focus_kw):
     today = datetime.now().strftime("%Y-%m-%d")
     safe = lambda s: s.replace('\\', '').replace('"', "'")
     new_entry = (
@@ -105,7 +114,10 @@ def save_to_blog_data(post_id, title, excerpt, content, topic):
         '    "category": "글램핑창업",\n'
         '    "keyword": "' + topic['keyword'] + '",\n'
         '    "date": "' + today + '",\n'
-        '    "image": "assets/images/blog/default.jpg"\n'
+        '    "image": "assets/images/blog/default.jpg",\n'
+        '    "seo_title": "' + safe(seo_title[:60]) + '",\n'
+        '    "meta_description": "' + safe(meta_desc[:155]) + '",\n'
+        '    "focus_keyword": "' + safe(focus_kw) + '"\n'
         '  }'
     )
     try:
@@ -118,12 +130,16 @@ def save_to_blog_data(post_id, title, excerpt, content, topic):
     except Exception as e:
         print("저장 실패: " + str(e))
 
-def save_to_txt(post_id, title, content, topic):
+def save_to_txt(post_id, title, content, topic, seo_title, meta_desc, focus_kw):
     os.makedirs(CONTENT_DIR, exist_ok=True)
     today = datetime.now().strftime("%Y-%m-%d")
     path = CONTENT_DIR + "/auto_post_" + today + "_" + str(post_id) + ".txt"
     with open(path, "w", encoding="utf-8") as f:
         f.write(title + "\n" + today + "\n" + topic['keyword'] + "\n\n" + content)
+        f.write("\n\n--- SEO META ---\n")
+        f.write("SEO_TITLE: " + seo_title + "\n")
+        f.write("META_DESCRIPTION: " + meta_desc + "\n")
+        f.write("FOCUS_KEYWORD: " + focus_kw + "\n")
     print(path + " 저장 완료")
 
 def main():
@@ -138,14 +154,15 @@ def main():
         print("생성 실패")
         exit(1)
 
-    title, excerpt, content = parse_output(raw)
+    title, excerpt, content, seo_title, meta_desc, focus_kw = parse_output(raw)
     if not title or not content:
         print("파싱 실패")
         exit(1)
 
     print("제목: " + title)
-    save_to_blog_data(post_id, title, excerpt, content, topic)
-    save_to_txt(post_id, title, content, topic)
+    print("SEO: " + seo_title + " | " + focus_kw)
+    save_to_blog_data(post_id, title, excerpt, content, topic, seo_title, meta_desc, focus_kw)
+    save_to_txt(post_id, title, content, topic, seo_title, meta_desc, focus_kw)
     print("완료!")
 
 if __name__ == "__main__":
