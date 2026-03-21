@@ -202,22 +202,6 @@
 
     <button type="button" class="form-submit" data-t="qt_submit" onclick="submitQuoteForm()">무료 1차 가견적 요청하기</button>
 
-    <script>
-    function submitQuoteForm() {
-      var name = document.getElementById('qt-name').value.trim();
-      var phone = document.getElementById('qt-phone').value.trim();
-      var message = document.getElementById('qt-message').value.trim();
-      if (!name || !phone) { alert('필수 항목을 입력해 주세요.'); return; }
-      var data = { name: name, phone: phone, message: message, page: window.location.href };
-      fetch('https://script.google.com/macros/s/AKfycby7cq4Krqif_h0A059Rz4ip0KOJb3uJv8XU8fdHZRknNW-Zsmlsz8C2DQ_oQ2eHideE/exec', {
-        method: 'POST', mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify(data)
-      }).catch(function(){});
-      alert('문의가 접수되었습니다');
-    }
-    </script>
-
     <div class="qt-footer-note">
       <span data-t="qt_footerNote1">입력하신 정보는 견적 제안 목적으로만 사용되며, 제3자에게 제공되지 않습니다.</span><br>
       <span data-t="qt_footerNote2">영업일 기준 24시간 내 전화 또는 이메일로 1차 가견적을 회신 드립니다.</span>
@@ -255,5 +239,28 @@ th:{pageTitle:"ขอใบเสนอราคา WOCS | ประเมิน
 <script src="../assets/js/wocs-footer.js"></script>
 <script src="../assets/js/wocs-leads.js"></script>
 <script src="../assets/js/wocs-lead-popup.js"></script>
+<script>
+function submitQuoteForm() {
+  console.log('[WOCS] submitQuoteForm 호출됨');
+  var name = document.getElementById('qt-name').value.trim();
+  var phone = document.getElementById('qt-phone').value.trim();
+  var message = document.getElementById('qt-message').value.trim();
+  console.log('[WOCS] name:', name, 'phone:', phone, 'message:', message);
+  if (!name || !phone) { alert('필수 항목을 입력해 주세요.'); return; }
+  var data = { name: name, phone: phone, message: message, page: window.location.href };
+  console.log('[WOCS] 전송 데이터:', JSON.stringify(data));
+  fetch('https://script.google.com/macros/s/AKfycby7cq4Krqif_h0A059Rz4ip0KOJb3uJv8XU8fdHZRknNW-Zsmlsz8C2DQ_oQ2eHideE/exec', {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify(data)
+  }).then(function() {
+    console.log('[WOCS] fetch 완료 (no-cors opaque response)');
+  }).catch(function(err) {
+    console.error('[WOCS] fetch 에러:', err);
+  });
+  alert('문의가 접수되었습니다');
+}
+</script>
 </body>
 </html>

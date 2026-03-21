@@ -160,16 +160,24 @@
 
 <script>
 function submitContactForm() {
+  console.log('[WOCS] submitContactForm 호출됨');
   var name = document.getElementById('ct-name').value.trim();
   var phone = document.getElementById('ct-phone').value.trim();
   var message = document.getElementById('ct-message').value.trim();
+  console.log('[WOCS] name:', name, 'phone:', phone, 'message:', message);
   if (!name || !phone || !message) { alert('필수 항목을 입력해 주세요.'); return; }
   var data = { name: name, phone: phone, message: message, page: window.location.href };
+  console.log('[WOCS] 전송 데이터:', JSON.stringify(data));
   fetch('https://script.google.com/macros/s/AKfycby7cq4Krqif_h0A059Rz4ip0KOJb3uJv8XU8fdHZRknNW-Zsmlsz8C2DQ_oQ2eHideE/exec', {
-    method: 'POST', mode: 'no-cors',
+    method: 'POST',
+    mode: 'no-cors',
     headers: { 'Content-Type': 'text/plain' },
     body: JSON.stringify(data)
-  }).catch(function(){});
+  }).then(function() {
+    console.log('[WOCS] fetch 완료 (no-cors opaque response)');
+  }).catch(function(err) {
+    console.error('[WOCS] fetch 에러:', err);
+  });
   alert('문의가 접수되었습니다');
 }
 </script>
