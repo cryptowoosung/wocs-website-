@@ -200,7 +200,7 @@
       </div>
     </div>
 
-    <button type="button" class="form-submit" data-t="qt_submit" onclick="submitQuoteForm()">무료 1차 가견적 요청하기</button>
+    <button type="button" id="qt-submit" class="form-submit" data-t="qt_submit">무료 1차 가견적 요청하기</button>
 
     <div class="qt-footer-note">
       <span data-t="qt_footerNote1">입력하신 정보는 견적 제안 목적으로만 사용되며, 제3자에게 제공되지 않습니다.</span><br>
@@ -240,7 +240,7 @@ th:{pageTitle:"ขอใบเสนอราคา WOCS | ประเมิน
 <script src="../assets/js/wocs-leads.js"></script>
 <script src="../assets/js/wocs-lead-popup.js"></script>
 <script>
-function submitQuoteForm() {
+window.submitQuoteForm = function() {
   console.log('[WOCS] submitQuoteForm 호출됨');
   var name = document.getElementById('qt-name').value.trim();
   var phone = document.getElementById('qt-phone').value.trim();
@@ -260,7 +260,11 @@ function submitQuoteForm() {
     console.error('[WOCS] fetch 에러:', err);
   });
   alert('문의가 접수되었습니다');
-}
+};
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('qt-submit').addEventListener('click', window.submitQuoteForm);
+  console.log('[WOCS] qt-submit 버튼 이벤트 리스너 등록 완료');
+});
 </script>
 </body>
 </html>
