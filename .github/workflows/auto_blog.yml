@@ -24,6 +24,8 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python auto_writer.py
+      - name: sitemap.xml 갱신
+        run: python update_sitemap.py
       - name: 워드프레스 자동 포스팅
         env:
           WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
