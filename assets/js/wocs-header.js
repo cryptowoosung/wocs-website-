@@ -141,7 +141,7 @@ function buildWocsHeader() {
 
   const html = `
     <div class="header-bar">
-      <span>✆ ${tc('phone')}</span>
+      <span><a href="tel:${tc('phone').replace(/-/g,'')}" style="color:inherit;text-decoration:none">✆ ${tc('phone')}</a></span>
       <span><a href="mailto:${tc('email')}" style="color:inherit;text-decoration:none">${tc('email')}</a></span>
     </div>
     <div class="header-main">
