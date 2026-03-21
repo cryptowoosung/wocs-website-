@@ -7,26 +7,25 @@ WOCS WordPress Auto Publisher
 import os
 import sys
 import glob
-import base64
 import re
 from datetime import datetime
 
 import requests
 
 # ── 설정 ──
-WP_URLS = [
-    "https://glampingtentgo.com",
-    "https://candlejs6.mycafe24.com",
-]
+WP_URL = "https://glampingtentgo.com"
 WP_USER = "candlejs6"
 WP_APP_PASSWORD = os.environ.get("WP_APP_PASSWORD", "5LxV PK7F SdZ4 nf1X r83l QB9d")
 
 CATEGORY_NAME = "글램핑창업"
 
 
-def get_auth_header():
-    token = base64.b64encode(f"{WP_USER}:{WP_APP_PASSWORD}".encode()).decode()
-    return {"Authorization": f"Basic {token}"}
+def get_session():
+    """Basic Auth가 설정된 requests.Session 반환"""
+    s = requests.Session()
+    s.auth = (WP_USER, WP_APP_PASSWORD)
+    s.headers.update({"Content-Type": "application/json"})
+    return s
 
 
 def safe_json(res):
@@ -42,70 +41,81 @@ def safe_json(res):
         return None
 
 
-def check_rest_api(base_url, headers):
-    """REST API 활성화 여부 확인"""
+def test_auth(session):
+    """인증 테스트: GET /wp-json/wp/v2/users/me"""
+    print("\n🔐 인증 테스트...")
+    print(f"  URL: {WP_URL}")
+    print(f"  사용자: {WP_USER}")
+    print(f"  앱 비밀번호: {WP_APP_PASSWORD[:8]}{'*' * (len(WP_APP_PASSWORD) - 8)}")
+
     try:
-        res = requests.get(
-            f"{base_url}/wp-json/",
-            headers=headers,
-            timeout=15,
-        )
-        print(f"  REST API 체크 ({base_url}): HTTP {res.status_code}")
+        res = session.get(f"{WP_URL}/wp-json/wp/v2/users/me", timeout=30)
+        print(f"  응답 코드: HTTP {res.status_code}")
+
         if res.status_code == 200:
             data = safe_json(res)
-            if data and "name" in data:
-                print(f"  사이트 이름: {data['name']}")
+            if data:
+                print(f"  ✅ 인증 성공! 사용자: {data.get('name', '?')} (ID: {data.get('id', '?')})")
+                roles = data.get("roles", [])
+                print(f"  역할: {', '.join(roles)}")
                 return True
             else:
-                print(f"  ⚠️ REST API 응답이 비정상입니다")
+                print(f"  ⚠️ 인증 응답 파싱 불가")
                 return False
-        else:
-            print(f"  ⚠️ REST API 비활성화 또는 접근 불가")
+        elif res.status_code == 401:
+            print(f"  ❌ 인증 실패 (401 Unauthorized)")
+            data = safe_json(res)
+            if data:
+                print(f"  에러 코드: {data.get('code', '?')}")
+                print(f"  에러 메시지: {data.get('message', '?')}")
+            print()
+            print("  확인사항:")
+            print("  1. 워드프레스 관리자 > 사용자 > 프로필 > 애플리케이션 비밀번호 확인")
+            print("  2. WP_APP_PASSWORD 환경변수가 GitHub Secrets에 설정되었는지 확인")
+            print("  3. 보안 플러그인이 REST API 인증을 차단하는지 확인")
+            return False
+        elif res.status_code == 403:
+            print(f"  ❌ 권한 부족 (403 Forbidden)")
             print(f"  응답: {res.text[:300]}")
             return False
+        else:
+            print(f"  ❌ 예상치 못한 응답: HTTP {res.status_code}")
+            print(f"  응답: {res.text[:300]}")
+            return False
+
     except requests.exceptions.RequestException as e:
-        print(f"  ❌ 연결 실패 ({base_url}): {e}")
+        print(f"  ❌ 연결 실패: {e}")
         return False
 
 
-def find_working_url(headers):
-    """작동하는 WP URL 찾기"""
-    for url in WP_URLS:
-        print(f"\n🔍 URL 시도: {url}")
-        if check_rest_api(url, headers):
-            print(f"  ✅ 사용 가능: {url}")
-            return url
-    return None
-
-
-def get_category_id(base_url, headers):
+def get_category_id(session):
     """카테고리 이름으로 ID 조회, 없으면 생성"""
     try:
-        res = requests.get(
-            f"{base_url}/wp-json/wp/v2/categories",
-            headers=headers,
+        res = session.get(
+            f"{WP_URL}/wp-json/wp/v2/categories",
             params={"search": CATEGORY_NAME},
             timeout=30,
         )
-        print(f"  카테고리 조회: HTTP {res.status_code}")
         data = safe_json(res)
         if res.status_code == 200 and data and isinstance(data, list) and len(data) > 0:
-            return data[0]["id"]
+            cat_id = data[0]["id"]
+            print(f"  카테고리 '{CATEGORY_NAME}' 찾음 (ID: {cat_id})")
+            return cat_id
     except requests.exceptions.RequestException as e:
         print(f"  ⚠️ 카테고리 조회 실패: {e}")
 
     # 카테고리 생성 시도
     try:
-        res = requests.post(
-            f"{base_url}/wp-json/wp/v2/categories",
-            headers={**headers, "Content-Type": "application/json"},
+        res = session.post(
+            f"{WP_URL}/wp-json/wp/v2/categories",
             json={"name": CATEGORY_NAME},
             timeout=30,
         )
-        print(f"  카테고리 생성: HTTP {res.status_code}")
         data = safe_json(res)
         if res.status_code == 201 and data:
-            return data.get("id")
+            cat_id = data.get("id")
+            print(f"  카테고리 '{CATEGORY_NAME}' 생성 (ID: {cat_id})")
+            return cat_id
     except requests.exceptions.RequestException as e:
         print(f"  ⚠️ 카테고리 생성 실패: {e}")
 
@@ -168,7 +178,7 @@ def markdown_to_html(text):
     return "\n".join(html_lines)
 
 
-def publish_to_wordpress(base_url, post_data, headers, category_id):
+def publish_to_wordpress(session, post_data, category_id):
     """워드프레스 REST API로 포스팅"""
     payload = {
         "title": post_data["title"],
@@ -178,9 +188,8 @@ def publish_to_wordpress(base_url, post_data, headers, category_id):
     }
 
     try:
-        res = requests.post(
-            f"{base_url}/wp-json/wp/v2/posts",
-            headers={**headers, "Content-Type": "application/json"},
+        res = session.post(
+            f"{WP_URL}/wp-json/wp/v2/posts",
             json=payload,
             timeout=60,
         )
@@ -199,21 +208,18 @@ def main():
         print(f"⚠️ 오늘({today}) 생성된 포스트 파일이 없습니다.")
         sys.exit(0)
 
-    headers = get_auth_header()
+    print(f"📄 오늘({today}) 포스트 파일 {len(files)}개 발견")
 
-    # 작동하는 URL 찾기
-    wp_url = find_working_url(headers)
-    if not wp_url:
-        print("\n❌ 모든 워드프레스 URL 접속 실패. 포스팅을 건너뜁니다.")
-        print("  시도한 URL:")
-        for url in WP_URLS:
-            print(f"    - {url}")
+    session = get_session()
+
+    # 인증 테스트
+    if not test_auth(session):
+        print("\n❌ 인증 실패. 포스팅을 건너뜁니다.")
         sys.exit(0)
 
-    print(f"\n📡 사용 URL: {wp_url}")
-
-    category_id = get_category_id(wp_url, headers)
-    print(f"📂 카테고리 '{CATEGORY_NAME}' ID: {category_id}")
+    # 카테고리 조회
+    print("\n📂 카테고리 설정...")
+    category_id = get_category_id(session)
 
     success_count = 0
     fail_count = 0
@@ -229,8 +235,9 @@ def main():
             continue
 
         print(f"  제목: {post_data['title']}")
+        print(f"  본문 길이: {len(post_data['content'])}자")
 
-        res = publish_to_wordpress(wp_url, post_data, headers, category_id)
+        res = publish_to_wordpress(session, post_data, category_id)
         if res is None:
             fail_count += 1
             continue
@@ -238,12 +245,18 @@ def main():
         if res.status_code == 201:
             data = safe_json(res)
             post_url = data.get("link", "(URL 확인 불가)") if data else "(응답 파싱 불가)"
-            print(f"  ✅ 워드프레스 포스팅 완료: {post_url}")
+            post_id = data.get("id", "?") if data else "?"
+            print(f"  ✅ 워드프레스 포스팅 완료 (ID: {post_id})")
+            print(f"  URL: {post_url}")
             success_count += 1
         else:
             print(f"  ❌ 포스팅 실패 (HTTP {res.status_code})")
-            print(f"  응답 헤더: {dict(res.headers)}")
-            print(f"  응답 내용: {res.text[:500]}")
+            data = safe_json(res)
+            if data:
+                print(f"  에러 코드: {data.get('code', '?')}")
+                print(f"  에러 메시지: {data.get('message', '?')}")
+            else:
+                print(f"  응답: {res.text[:500]}")
             fail_count += 1
 
     print(f"\n📊 결과: 성공 {success_count}건, 실패 {fail_count}건")
