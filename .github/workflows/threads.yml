@@ -2,7 +2,7 @@ name: WOCS Threads Auto Post
 
 on:
   schedule:
-    - cron: '0 2 * * *'
+    - cron: '30 2 * * *'
   workflow_dispatch:
 
 jobs:
