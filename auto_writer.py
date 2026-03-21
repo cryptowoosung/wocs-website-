@@ -44,6 +44,26 @@ TOPICS = [
 BLOG_DATA_PATH = "assets/js/blog-data.js"
 CONTENT_DIR = "content"
 
+UNSPLASH_TAGS = {
+    "글램핑": "glamping,tent",
+    "사파리텐트": "safari,tent,camping",
+    "돔텐트": "dome,tent,geodesic",
+    "어닝": "awning,outdoor",
+    "천막": "tent,canopy",
+    "캠핑": "camping,nature",
+    "인테리어": "interior,glamping",
+    "모듈러": "modular,cabin",
+    "부지": "land,nature,mountain",
+}
+
+def get_unsplash_image(keyword):
+    tags = "glamping,tent"
+    for k, v in UNSPLASH_TAGS.items():
+        if k in keyword:
+            tags = v
+            break
+    return "https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=800&h=500&fit=crop&q=85&" + tags
+
 def get_used_topics():
     used = set()
     try:
@@ -72,15 +92,27 @@ def get_next_id():
 
 def generate_content(topic):
     prompt = (
-        "당신은 글램핑 시공 전문가입니다. 아래 주제로 SEO 최적화된 블로그 글을 작성하세요.\n\n"
+        "당신은 16년 경력의 글램핑 시공 전문가입니다. 아래 주제로 SEO 최적화된 블로그 글을 작성하세요.\n\n"
         "주제: " + topic["title_hint"] + "\n"
         "키워드: " + topic["keyword"] + "\n"
         "회사: WOCS (우성어닝천막공사캠프시스템) - 전남 화순 기반 글램핑 구조물 제조시공 전문\n\n"
-        "형식:\nTITLE: (제목)\nEXCERPT: (2줄 요약)\nCONTENT: (본문 800~1200자, 소제목 포함)\n"
+        "=== 본문 작성 규칙 ===\n"
+        "1. 반드시 1000~1500자 이상 작성 (짧으면 안 됨)\n"
+        "2. 마크다운 형식으로 작성\n"
+        "3. ## 소제목을 3~4개 포함 (각 섹션마다 2~3문단씩)\n"
+        "4. 실용적이고 구체적인 정보 위주 (숫자, 비용, 절차 등)\n"
+        "5. WOCS를 본문 중 자연스럽게 2~3회 언급\n"
+        "6. 첫 문단에서 독자의 관심을 끄는 도입부 작성\n"
+        "7. 마지막에 정리 또는 행동 유도 문단 포함\n"
+        "8. 태풍/풍속/시공기간 보장 문구 금지\n"
+        "9. 친근하지만 전문적인 블로그 문체\n\n"
+        "=== 출력 형식 (반드시 준수) ===\n"
+        "TITLE: (매력적인 제목, 30자 이내)\n"
+        "EXCERPT: (2줄 요약, 핵심 가치 전달)\n"
+        "CONTENT: (본문 1000~1500자, ## 소제목 3~4개 포함, 마크다운)\n"
         "SEO_TITLE: (SEO 제목, 60자 이내, 키워드 포함)\n"
         "META_DESCRIPTION: (메타 설명, 155자 이내, 핵심 내용 요약)\n"
-        "FOCUS_KEYWORD: (핵심 키워드 1개, 예: 글램핑 창업)\n\n"
-        "조건: 실용적이고 전문적, WOCS 1~2회 언급, 태풍/풍속/시공기간 보장 문구 금지, 블로그 문체"
+        "FOCUS_KEYWORD: (핵심 키워드 1개)\n"
     )
     try:
         response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
@@ -108,12 +140,13 @@ def parse_output(raw):
 def save_to_blog_data(post_id, title, excerpt, content, topic, seo_title, meta_desc, focus_kw):
     today = datetime.now().strftime("%Y-%m-%d")
     safe = lambda s: s.replace('\\', '\\\\').replace("'", "\\'").replace('\n', ' ')
+    image_url = get_unsplash_image(topic['keyword'])
     new_entry = (
         '{\n'
         "  id:" + str(post_id) + ", title:'" + safe(title) + "', excerpt:'" + safe(excerpt[:100]) + "',\n"
         "  date:'" + today + "', category:'cat_startup', featured:false,\n"
-        "  image:'https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=800&h=500&fit=crop&q=85',\n"
-        "  content:'" + safe(content[:2000]) + "'\n"
+        "  image:'" + image_url + "',\n"
+        "  content:'" + safe(content[:3000]) + "'\n"
         '}'
     )
     try:
@@ -171,6 +204,7 @@ def save_to_html(post_id, title, content, topic, seo_title, meta_desc, focus_kw)
     esc = lambda s: s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
     body_html = markdown_to_html(content)
     url = "https://wocs.kr/content/auto_post_" + today + ".html"
+    image_url = get_unsplash_image(topic['keyword'])
     html = (
         '<!DOCTYPE html>\n'
         '<html lang="ko">\n'
@@ -188,7 +222,7 @@ def save_to_html(post_id, title, content, topic, seo_title, meta_desc, focus_kw)
         '<meta property="og:url" content="' + url + '">\n'
         '<meta property="og:site_name" content="WOCS">\n'
         '<meta property="og:locale" content="ko_KR">\n'
-        '<meta property="og:image" content="https://wocs.kr/assets/images/50-resort-mountain.webp">\n'
+        '<meta property="og:image" content="' + image_url + '">\n'
         '<!-- Twitter Card -->\n'
         '<meta name="twitter:card" content="summary_large_image">\n'
         '<meta name="twitter:title" content="' + esc(seo_title or title) + '">\n'
@@ -222,6 +256,7 @@ def save_to_html(post_id, title, content, topic, seo_title, meta_desc, focus_kw)
         '    <span>' + today + '</span>\n'
         '    <span>' + esc(topic["keyword"]) + '</span>\n'
         '  </div>\n'
+        '  <img src="' + image_url + '" alt="' + esc(title) + '" style="width:100%;height:auto;margin-bottom:40px;border-radius:4px;filter:brightness(0.9)" loading="lazy">\n'
         '  <div class="post-body">\n'
         + body_html + '\n'
         '  </div>\n'
