@@ -1,0 +1,285 @@
+{
+  "version": "3.0",
+  "lastUpdated": "2026-03-21T16:04:32.271Z",
+  "activeFeatures": [
+    "user",
+    "wordpress_auto",
+    "wocs-site",
+    "js"
+  ],
+  "primaryFeature": "user",
+  "features": {
+    "user": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-21T11:04:36.221Z",
+        "lastUpdated": "2026-03-21T11:32:48.490Z"
+      },
+      "lastFile": "C:/Users/user/page-service-detail.php"
+    },
+    "wordpress_auto": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-21T12:16:21.358Z",
+        "lastUpdated": "2026-03-21T12:32:46.582Z"
+      },
+      "lastFile": "C:/Users/user/Desktop/wocs-site/wordpress_auto/wordpress.py"
+    },
+    "wocs-site": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-21T12:54:12.905Z",
+        "lastUpdated": "2026-03-21T15:54:55.621Z"
+      },
+      "lastFile": "C:\\Users\\user\\Desktop\\wocs-site\\auto_writer.py"
+    },
+    "js": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-21T16:02:40.794Z",
+        "lastUpdated": "2026-03-21T16:04:32.270Z"
+      },
+      "lastFile": "C:\\Users\\user\\Desktop\\wocs-site\\assets\\js\\blog-data.js"
+    }
+  },
+  "pipeline": {
+    "currentPhase": 1,
+    "level": "Dynamic",
+    "phaseHistory": []
+  },
+  "session": {
+    "startedAt": "2026-03-21T10:51:01.343Z",
+    "onboardingCompleted": false,
+    "lastActivity": "2026-03-21T16:04:32.271Z"
+  },
+  "history": [
+    {
+      "timestamp": "2026-03-21T11:04:36.221Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T11:22:05.472Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T11:24:34.089Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T11:25:32.390Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T11:26:58.643Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T11:30:33.308Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T11:32:48.490Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T12:16:21.358Z",
+      "feature": "wordpress_auto",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T12:16:47.485Z",
+      "feature": "wordpress_auto",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T12:17:16.367Z",
+      "feature": "wordpress_auto",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T12:32:24.430Z",
+      "feature": "wordpress_auto",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T12:32:34.731Z",
+      "feature": "wordpress_auto",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T12:32:46.582Z",
+      "feature": "wordpress_auto",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T12:54:12.905Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T12:54:25.478Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T12:54:34.104Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T12:54:42.616Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T12:54:49.199Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T13:34:45.589Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T14:19:32.407Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T15:03:23.783Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T15:31:12.010Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T15:31:23.686Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T15:42:42.933Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T15:42:52.469Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T15:43:08.103Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T15:54:21.094Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T15:54:38.776Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T15:54:48.565Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T15:54:55.621Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T16:02:40.794Z",
+      "feature": "js",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T16:04:32.270Z",
+      "feature": "js",
+      "phase": "do",
+      "action": "updated"
+    }
+  ],
+  "stateMachine": {
+    "defaultWorkflow": "default",
+    "activeWorkflows": {},
+    "totalTransitions": 0
+  },
+  "automation": {
+    "globalLevel": 2,
+    "trustScore": 40,
+    "pendingApprovals": 0,
+    "lastGateResult": null
+  },
+  "team": {
+    "enabled": true,
+    "stateFile": ".bkit/runtime/agent-state.json",
+    "eventsFile": ".bkit/runtime/agent-events.jsonl"
+  }
+}

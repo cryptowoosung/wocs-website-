@@ -128,7 +128,10 @@
       "Bash(node fix-inline.js)",
       "Bash(rm fix-inline.js)",
       "Bash(grep -n 'display: \"\"none\"\".*background: \"\"none\"\".*border: \"\"none\"\".*GOLD.*fontSize: 24' index.html)",
-      "Bash(grep -n 'id=\"\"\"\"mobile-hamburger\"\"\"\"\\\\|display: \"\"\"\"none\"\"\"\".*background: \"\"\"\"none\"\"\"\"' index.html)"
+      "Bash(grep -n 'id=\"\"\"\"mobile-hamburger\"\"\"\"\\\\|display: \"\"\"\"none\"\"\"\".*background: \"\"\"\"none\"\"\"\"' index.html)",
+      "Bash(node:*)",
+      "Bash(git add:*)",
+      "Bash(git rebase:*)"
     ]
   }
 }

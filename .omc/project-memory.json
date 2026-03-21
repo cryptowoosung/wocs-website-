@@ -1,0 +1,240 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1774097632130,
+  "projectRoot": "C:\\Users\\user\\Desktop\\wocs-site",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "assets"
+    ],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "about": {
+      "path": "about",
+      "purpose": null,
+      "fileCount": 4,
+      "lastAccessed": 1774097632077,
+      "keyFiles": [
+        "index.html",
+        "showroom.html",
+        "team.html",
+        "technology.html"
+      ]
+    },
+    "assets": {
+      "path": "assets",
+      "purpose": "Static assets",
+      "fileCount": 0,
+      "lastAccessed": 1774097632079,
+      "keyFiles": []
+    },
+    "contact": {
+      "path": "contact",
+      "purpose": null,
+      "fileCount": 6,
+      "lastAccessed": 1774097632079,
+      "keyFiles": [
+        "gas-backend-v2.gs.txt",
+        "gas-backend.gs.txt",
+        "index.html",
+        "quote.html",
+        "roi-calculator.html"
+      ]
+    },
+    "content": {
+      "path": "content",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1774097632080,
+      "keyFiles": [
+        "auto_post_2026-03-20_100.txt",
+        "auto_post_2026-03-21_100.txt"
+      ]
+    },
+    "gallery": {
+      "path": "gallery",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1774097632081,
+      "keyFiles": [
+        "index.html"
+      ]
+    },
+    "legal": {
+      "path": "legal",
+      "purpose": null,
+      "fileCount": 3,
+      "lastAccessed": 1774097632081,
+      "keyFiles": [
+        "cookies.html",
+        "privacy.html",
+        "terms.html"
+      ]
+    },
+    "occasions": {
+      "path": "occasions",
+      "purpose": null,
+      "fileCount": 10,
+      "lastAccessed": 1774097632082,
+      "keyFiles": [
+        "airbnb.html",
+        "glamping-pod.html",
+        "glamping.html",
+        "hotel.html",
+        "index.html"
+      ]
+    },
+    "portfolio": {
+      "path": "portfolio",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1774097632082,
+      "keyFiles": [
+        "case-detail.html",
+        "index.html"
+      ]
+    },
+    "products": {
+      "path": "products",
+      "purpose": null,
+      "fileCount": 28,
+      "lastAccessed": 1774097632083,
+      "keyFiles": [
+        "addons.html",
+        "bell-tent.html",
+        "birdcage.html",
+        "cocoon-house.html",
+        "cube-cabin.html"
+      ]
+    },
+    "project": {
+      "path": "project",
+      "purpose": null,
+      "fileCount": 7,
+      "lastAccessed": 1774097632083,
+      "keyFiles": [
+        "bulk-order.html",
+        "buying-land.html",
+        "financing.html",
+        "index.html",
+        "planning-cases.html"
+      ]
+    },
+    "resources": {
+      "path": "resources",
+      "purpose": null,
+      "fileCount": 7,
+      "lastAccessed": 1774097632084,
+      "keyFiles": [
+        "blog-post.html",
+        "blog.html",
+        "dealer.html",
+        "downloads.html",
+        "faq.html"
+      ]
+    },
+    "wordpress_auto": {
+      "path": "wordpress_auto",
+      "purpose": null,
+      "fileCount": 4,
+      "lastAccessed": 1774097632084,
+      "keyFiles": [
+        "content_source.py",
+        "main.py",
+        "requirements.txt",
+        "wordpress.py"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "auto_writer.py",
+      "accessCount": 19,
+      "lastAccessed": 1774108967115,
+      "type": "file"
+    },
+    {
+      "path": "assets\\js\\blog-data.js",
+      "accessCount": 8,
+      "lastAccessed": 1774109116061,
+      "type": "file"
+    },
+    {
+      "path": "resources\\blog.html",
+      "accessCount": 7,
+      "lastAccessed": 1774108439092,
+      "type": "file"
+    },
+    {
+      "path": "linkedin_poster.py",
+      "accessCount": 3,
+      "lastAccessed": 1774107084026,
+      "type": "file"
+    },
+    {
+      "path": "update_sitemap.py",
+      "accessCount": 3,
+      "lastAccessed": 1774107788553,
+      "type": "file"
+    },
+    {
+      "path": "resources\\blog-post.html",
+      "accessCount": 2,
+      "lastAccessed": 1774107721916,
+      "type": "file"
+    },
+    {
+      "path": "gbp_poster.py",
+      "accessCount": 1,
+      "lastAccessed": 1774100085978,
+      "type": "file"
+    },
+    {
+      "path": "sitemap.xml",
+      "accessCount": 1,
+      "lastAccessed": 1774102755946,
+      "type": "file"
+    },
+    {
+      "path": "contact\\roi-calculator.html",
+      "accessCount": 1,
+      "lastAccessed": 1774109116810,
+      "type": "directory"
+    },
+    {
+      "path": "contact\\gas-backend-v2.gs.txt",
+      "accessCount": 1,
+      "lastAccessed": 1774109117609,
+      "type": "directory"
+    },
+    {
+      "path": "contact\\gas-backend.gs.txt",
+      "accessCount": 1,
+      "lastAccessed": 1774109117887,
+      "type": "directory"
+    }
+  ],
+  "userDirectives": []
+}
