@@ -104,11 +104,11 @@
       <div class="form-row">
         <div class="form-group">
           <label class="form-label" data-t="qt_labelName">이름 *</label>
-          <input type="text" class="form-input" placeholder="홍길동" data-t-placeholder="qt_phName" required>
+          <input type="text" id="qt-name" class="form-input" placeholder="홍길동" data-t-placeholder="qt_phName" required>
         </div>
         <div class="form-group">
           <label class="form-label" data-t="qt_labelPhone">연락처 *</label>
-          <input type="tel" class="form-input" placeholder="010-0000-0000" data-t-placeholder="qt_phPhone" required>
+          <input type="tel" id="qt-phone" class="form-input" placeholder="010-0000-0000" data-t-placeholder="qt_phPhone" required>
         </div>
       </div>
       <div class="form-group">
@@ -196,11 +196,27 @@
         <div class="qt-section-title" data-t="qt_sec5">추가 요청사항</div>
       </div>
       <div class="form-group" style="margin-bottom:0">
-        <textarea class="form-textarea" placeholder="운영 콘셉트, 특별 요구사항, 참고 이미지 등을 자유롭게 작성해 주세요." data-t-placeholder="qt_phAdditional"></textarea>
+        <textarea id="qt-message" class="form-textarea" placeholder="운영 콘셉트, 특별 요구사항, 참고 이미지 등을 자유롭게 작성해 주세요." data-t-placeholder="qt_phAdditional"></textarea>
       </div>
     </div>
 
-    <button type="button" class="form-submit" data-t="qt_submit" onclick="alert('견적 요청이 접수되었습니다.\n영업일 기준 24시간 내 1차 가견적을 회신 드리겠습니다.\n감사합니다!')">무료 1차 가견적 요청하기</button>
+    <button type="button" class="form-submit" data-t="qt_submit" onclick="submitQuoteForm()">무료 1차 가견적 요청하기</button>
+
+    <script>
+    function submitQuoteForm() {
+      var name = document.getElementById('qt-name').value.trim();
+      var phone = document.getElementById('qt-phone').value.trim();
+      var message = document.getElementById('qt-message').value.trim();
+      if (!name || !phone) { alert('필수 항목을 입력해 주세요.'); return; }
+      var data = { name: name, phone: phone, message: message, page: window.location.href };
+      fetch('https://script.google.com/macros/s/AKfycby7cq4Krqif_h0A059Rz4ip0KOJb3uJv8XU8fdHZRknNW-Zsmlsz8C2DQ_oQ2eHideE/exec', {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).catch(function(){});
+      alert('문의가 접수되었습니다');
+    }
+    </script>
 
     <div class="qt-footer-note">
       <span data-t="qt_footerNote1">입력하신 정보는 견적 제안 목적으로만 사용되며, 제3자에게 제공되지 않습니다.</span><br>

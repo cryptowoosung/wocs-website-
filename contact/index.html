@@ -128,12 +128,12 @@
 
       <div class="form-group">
         <label class="form-label" data-t="ct_labelName">이름 *</label>
-        <input type="text" class="form-input" placeholder="홍길동" data-t-placeholder="ct_phName" required>
+        <input type="text" id="ct-name" class="form-input" placeholder="홍길동" data-t-placeholder="ct_phName" required>
       </div>
 
       <div class="form-group">
         <label class="form-label" data-t="ct_labelPhone2">연락처 *</label>
-        <input type="tel" class="form-input" placeholder="010-0000-0000" data-t-placeholder="ct_phPhone" required>
+        <input type="tel" id="ct-phone" class="form-input" placeholder="010-0000-0000" data-t-placeholder="ct_phPhone" required>
       </div>
 
       <div class="form-group">
@@ -149,14 +149,30 @@
 
       <div class="form-group">
         <label class="form-label" data-t="ct_labelMsg">문의 내용 *</label>
-        <textarea class="form-textarea" placeholder="문의하실 내용을 자유롭게 작성해 주세요." data-t-placeholder="ct_phMsg" required></textarea>
+        <textarea id="ct-message" class="form-textarea" placeholder="문의하실 내용을 자유롭게 작성해 주세요." data-t-placeholder="ct_phMsg" required></textarea>
       </div>
 
-      <button type="button" class="form-submit" data-t="ct_submit" onclick="alert('문의가 접수되었습니다. 24시간 내 회신 드리겠습니다.')">문의 남기기</button>
+      <button type="button" class="form-submit" data-t="ct_submit" onclick="submitContactForm()">문의 남기기</button>
     </div>
 
   </div>
 </section>
+
+<script>
+function submitContactForm() {
+  var name = document.getElementById('ct-name').value.trim();
+  var phone = document.getElementById('ct-phone').value.trim();
+  var message = document.getElementById('ct-message').value.trim();
+  if (!name || !phone || !message) { alert('필수 항목을 입력해 주세요.'); return; }
+  var data = { name: name, phone: phone, message: message, page: window.location.href };
+  fetch('https://script.google.com/macros/s/AKfycby7cq4Krqif_h0A059Rz4ip0KOJb3uJv8XU8fdHZRknNW-Zsmlsz8C2DQ_oQ2eHideE/exec', {
+    method: 'POST', mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }).catch(function(){});
+  alert('문의가 접수되었습니다');
+}
+</script>
 
 <!-- Quote Banner -->
 <div class="ct-quote-banner">
