@@ -8,8 +8,7 @@
    ═══════════════════════════════════════════════════ */
 
 // ★ 배포 후 아래 URL을 교체하세요
-const POPUP_GAS_URL = "여기에_GAS_웹앱_URL_붙여넣기";
-const POPUP_API_URL = "여기에_백엔드_API_URL_붙여넣기";
+const POPUP_GAS_URL = "https://script.google.com/macros/s/AKfycby7cq4Krqif_h0A059Rz4ip0KOJb3uJv8XU8fdHZRknNW-Zsmlsz8C2DQ_oQ2eHideE/exec";
 
 // ── 15개 언어 번역 ──
 const POPUP_TR = {
@@ -125,30 +124,30 @@ function submitPopup() {
   if (!phone) { document.getElementById('popup-phone').style.borderColor = '#e74c3c'; return; }
 
   var data = {
-    name: name, phone: phone, location: location, product: product,
-    page: window.location.pathname, lang: getPopupLang(), source: 'popup'
+    name: name,
+    phone: phone,
+    message: location + (product ? ' [' + product + ']' : ''),
+    page: window.location.href
   };
 
   btn.disabled = true;
   btn.textContent = pt('sending');
   btn.style.opacity = '0.6';
 
-  // Send to GAS
-  if (POPUP_GAS_URL !== "여기에_GAS_웹앱_URL_붙여넣기") {
-    fetch(POPUP_GAS_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }).catch(function(){});
-  }
-
-  // Send to Backend API
-  if (POPUP_API_URL !== "여기에_백엔드_API_URL_붙여넣기") {
-    fetch(POPUP_API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }).catch(function(){});
-  }
-
-  // Show success (always, since no-cors doesn't return readable response)
-  setTimeout(function() {
+  function showSuccess() {
     document.getElementById('popup-form').style.display = 'none';
     document.getElementById('popup-success').style.display = 'block';
     localStorage.setItem('wocs-lead-submitted', 'true');
-  }, 1000);
+    alert('문의가 접수되었습니다');
+  }
+
+  fetch(POPUP_GAS_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(function() { showSuccess(); })
+  .catch(function() { showSuccess(); });
 }
 
 // ── 팝업 트리거 ──
