@@ -7,9 +7,10 @@ Author: WOCS
 */
 defined('ABSPATH') || exit;
 
-add_action('admin_menu', function() {
+add_action('admin_menu', 'wocs_register_menu');
+function wocs_register_menu() {
     add_submenu_page('tools.php', 'WOCS 임포터', 'WOCS 임포터', 'manage_options', 'wocs-importer', 'wocs_importer_page');
-});
+}
 
 function wocs_importer_page() {
     echo '<div class="wrap"><h1>WOCS 자동 임포터</h1>';
