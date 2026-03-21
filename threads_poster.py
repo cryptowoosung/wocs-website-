@@ -41,7 +41,7 @@ def generate_content(topic):
 아래 규칙으로 Threads 포스팅 작성:
 
 [규칙]
-- 500~650자 이내
+- 350~450자 이내 (공백 포함 절대 500자 초과 금지)
 - 첫 줄: 강한 훅 (질문 또는 반전 사실) — "안녕하세요" 절대 금지
 - 중간: 실용 정보 3~4줄 (수치 또는 현장 경험 포함)
 - {topic['region']} 지역명 1~2회 자연스럽게 포함
@@ -109,6 +109,10 @@ if __name__ == "__main__":
 
     content = generate_content(topic)
     print("\n생성된 콘텐츠:\n" + content + "\n")
+
+    if len(content) > 490:
+        content = content[:490]
+        print("글자수 초과 -> 490자로 자름")
 
     result = post_to_threads(content)
     if result:
