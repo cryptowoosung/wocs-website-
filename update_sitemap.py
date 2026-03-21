@@ -5,7 +5,7 @@ from datetime import datetime
 
 SITE_URL = "https://wocs.kr"
 SITEMAP_PATH = "sitemap.xml"
-EXCLUDE_DIRS = {".github", "node_modules", ".git", "content", "assets", ".omc", ".bkit"}
+EXCLUDE_DIRS = {".github", "node_modules", ".git", "assets", ".omc", ".bkit"}
 
 # index.html이 있는 섹션 메인 페이지는 priority 1.0
 MAIN_PAGES = {"index.html"}
