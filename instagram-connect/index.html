@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WOCS - Instagram 계정 연결</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #0a1a0f;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .container {
+    text-align: center;
+    padding: 60px 40px;
+    max-width: 480px;
+    border: 1px solid rgba(180,145,60,0.3);
+    border-radius: 12px;
+    background: rgba(255,255,255,0.03);
+  }
+  .logo { font-size: 32px; font-weight: 700; color: #b4913c; margin-bottom: 8px; }
+  .subtitle { font-size: 14px; color: #888; margin-bottom: 40px; }
+  h1 { font-size: 22px; margin-bottom: 16px; }
+  p { font-size: 14px; color: #aaa; line-height: 1.7; margin-bottom: 40px; }
+  .btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #b4913c, #d4b060);
+    color: #0a1a0f;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 16px 48px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .btn:hover { opacity: 0.85; }
+  .info { margin-top: 32px; font-size: 12px; color: #666; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="logo">WOCS</div>
+  <div class="subtitle">글램핑 구조물 제조·시공 전문기업</div>
+  <h1>Instagram 계정 연결</h1>
+  <p>WOCS 자동 포스팅 시스템과 Instagram 비즈니스 계정을 연결합니다.<br>
+  연결 후 글램핑 관련 콘텐츠가 자동으로 게시됩니다.</p>
+  <a href="https://www.instagram.com/oauth/authorize?enable_fb_login=0&force_authentication=1&client_id=1429061285379214&redirect_uri=https://wocs.kr/instagram-connect/callback.html&response_type=code&scope=instagram_business_basic,instagram_business_content_publish" class="btn">
+    Instagram 계정 연결하기
+  </a>
+  <div class="info">wocs.kr · 010-4337-0582 · 전남 화순</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>WOCS - 연결 완료</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #0a1a0f;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .container { text-align: center; padding: 60px 40px; max-width: 480px; }
+  .logo { font-size: 32px; font-weight: 700; color: #b4913c; margin-bottom: 40px; }
+  .icon { font-size: 64px; margin-bottom: 24px; }
+  h1 { font-size: 24px; margin-bottom: 16px; }
+  p { font-size: 14px; color: #aaa; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="logo">WOCS</div>
+  <div class="icon">&#x2705;</div>
+  <h1>연결이 완료되었습니다</h1>
+  <p>Instagram 계정이 WOCS 자동 포스팅 시스템과 성공적으로 연결되었습니다.</p>
+</div>
+<script>
+  // URL에서 code 파라미터 추출 (심사관 테스트용)
+  var params = new URLSearchParams(window.location.search);
+  var code = params.get('code');
+  if (code) {
+    console.log('Authorization code received:', code);
+  }
+</script>
+</body>
+</html>
