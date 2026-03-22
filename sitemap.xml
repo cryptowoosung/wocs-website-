@@ -2,403 +2,427 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://wocs.kr/about/index.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://wocs.kr/about/showroom.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/about/team.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/about/technology.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/contact/index.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://wocs.kr/contact/quote.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/contact/roi-calculator.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/content/auto_post_2026-03-21.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://wocs.kr/content/auto_post_2026-03-22.html</loc>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/gallery/index.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://wocs.kr/index.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://wocs.kr/instagram-connect/callback.html</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://wocs.kr/instagram-connect/index.html</loc>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://wocs.kr/legal/cookies.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/legal/privacy.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/legal/terms.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/occasions/airbnb.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/occasions/glamping-pod.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/occasions/glamping.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/occasions/hotel.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/occasions/index.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://wocs.kr/occasions/permanent.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/occasions/resort.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/occasions/sports.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/occasions/wedding.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/occasions/winter.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/portfolio/case-detail.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/portfolio/index.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://wocs.kr/privacy.html</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://wocs.kr/products/addons.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/bell-tent.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/birdcage.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/cocoon-house.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/cube-cabin.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/dome-tent.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/geodesic-domes-custom.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/geodesic-domes-preconfigured.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/geodesic-domes-ready.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/geodesic-domes.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/index.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/luxury-tents.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/modular-bath.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/modular-deck.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/modular-systems.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/modular-units.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/nordic-tipi.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/peak-lodge.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/product-template.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/safari-basic.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/safari-cabin.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/safari-elite.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/safari-extreme.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/safari-luxury.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/safari-tents.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/sailing-tent.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/solar-system.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/products/universal-joint.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/project/bulk-order.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/project/buying-land.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/project/financing.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/project/index.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://wocs.kr/project/planning-cases.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/project/revenue-sharing.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/project/start-business.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/resources/blog-post.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/resources/blog.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/resources/dealer.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/resources/downloads.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/resources/faq.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://wocs.kr/resources/index.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://wocs.kr/resources/reviews.html</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
