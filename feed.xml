@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>WOCS 블로그 | 글램핑 인사이트</title>
+  <link>https://wocs.kr/resources/blog.html</link>
+  <description>16년 현장 전문가가 쓰는 글램핑 창업, 시공, 트렌드 블로그. 수익 분석, 인허가, 시공 기술까지.</description>
+  <language>ko</language>
+  <managingEditor>candlejs6@gmail.com (김우성)</managingEditor>
+  <webMaster>candlejs6@gmail.com (김우성)</webMaster>
+  <lastBuildDate>Wed, 05 Mar 2026 00:00:00 +0900</lastBuildDate>
+  <atom:link href="https://wocs.kr/feed.xml" rel="self" type="application/rss+xml"/>
+  <image>
+    <url>https://wocs.kr/assets/images/wocs-logo.png</url>
+    <title>WOCS 블로그 | 글램핑 인사이트</title>
+    <link>https://wocs.kr/resources/blog.html</link>
+  </image>
+
+  <item>
+    <title>텐트 수명 15년 보장: 프레임 소재와 캔버스 관리 노하우</title>
+    <link>https://wocs.kr/resources/blog-post.html?id=10</link>
+    <guid isPermaLink="true">https://wocs.kr/resources/blog-post.html?id=10</guid>
+    <pubDate>Thu, 05 Mar 2026 09:00:00 +0900</pubDate>
+    <category>시공기술</category>
+    <description>6063-T5 알루미늄 합금 프레임은 15년 이상 사용 가능합니다. 하지만 관리를 모르면 3년 만에 녹이 슬죠. 프레임과 캔버스를 오래 쓰는 실전 관리법을 공개합니다.</description>
+  </item>
+
+  <item>
+    <title>대형 리조트 및 지자체 B2B 대단지 글램핑 기획 전략</title>
+    <link>https://wocs.kr/resources/blog-post.html?id=9</link>
+    <guid isPermaLink="true">https://wocs.kr/resources/blog-post.html?id=9</guid>
+    <pubDate>Mon, 02 Mar 2026 09:00:00 +0900</pubDate>
+    <category>사례</category>
+    <description>3,000평 이상 대단지, 지자체 관광 위탁 사업에서 WOCS의 국내 자체 공장 직송이 어떻게 30~40% 원가를 절감하는지 B2B 전략을 공개합니다.</description>
+  </item>
+
+  <item>
+    <title>유휴 부지 지주를 위한 WOCS 수익 공유 파트너십 제안</title>
+    <link>https://wocs.kr/resources/blog-post.html?id=8</link>
+    <guid isPermaLink="true">https://wocs.kr/resources/blog-post.html?id=8</guid>
+    <pubDate>Thu, 26 Feb 2026 09:00:00 +0900</pubDate>
+    <category>수익분석</category>
+    <description>좋은 땅은 있지만 자금이 없다? WOCS가 시공 기술과 자본을 투자하고, 지주는 부지를 제공하여 매출을 나누는 O4O 합작 모델을 설명합니다.</description>
+  </item>
+
+  <item>
+    <title>화순 O4O 쇼룸에서 3D 가설계를 무조건 받아야 하는 이유</title>
+    <link>https://wocs.kr/resources/blog-post.html?id=7</link>
+    <guid isPermaLink="true">https://wocs.kr/resources/blog-post.html?id=7</guid>
+    <pubDate>Fri, 20 Feb 2026 09:00:00 +0900</pubDate>
+    <category>창업가이드</category>
+    <description>사진 몇 장 보고 수천만 원을 결정하시겠습니까? 화순 쇼룸에서 실물을 만져보고, Fusion 360으로 3D 도면을 함께 그리는 과정이 왜 필수인지 설명합니다.</description>
+  </item>
+
+  <item>
+    <title>부동산 업자도 안 알려주는 야영장 인허가 필수 체크리스트</title>
+    <link>https://wocs.kr/resources/blog-post.html?id=6</link>
+    <guid isPermaLink="true">https://wocs.kr/resources/blog-post.html?id=6</guid>
+    <pubDate>Sat, 14 Feb 2026 09:00:00 +0900</pubDate>
+    <category>인허가</category>
+    <description>용도지역 확인 없이 계약금 날린 사례가 부지기수입니다. 야영장업 등록, 소방, 환경 — 계약 전 반드시 확인할 인허가 체크리스트를 공개합니다.</description>
+  </item>
+
+  <item>
+    <title>난민촌은 가라: 객단가 3배 높이는 1동당 80평 황금비율</title>
+    <link>https://wocs.kr/resources/blog-post.html?id=5</link>
+    <guid isPermaLink="true">https://wocs.kr/resources/blog-post.html?id=5</guid>
+    <pubDate>Sun, 08 Feb 2026 09:00:00 +0900</pubDate>
+    <category>창업가이드</category>
+    <description>10동을 빽빽이 넣어야 수익이 높다? 정반대입니다. 5동 x 35만 원이 10동 x 12만 원보다 총 매출도, 리뷰 점수도 높은 이유를 숫자로 증명합니다.</description>
+  </item>
+
+  <item>
+    <title>태풍(160km/h)에도 끄떡없는 무용접 특허 조인트 기술</title>
+    <link>https://wocs.kr/resources/blog-post.html?id=4</link>
+    <guid isPermaLink="true">https://wocs.kr/resources/blog-post.html?id=4</guid>
+    <pubDate>Sun, 01 Feb 2026 09:00:00 +0900</pubDate>
+    <category>시공기술</category>
+    <description>용접은 열 변형과 피로 파괴에 취약합니다. WOCS의 이중 쐐기 가압 방식은 볼트만으로 내구성 2배, 시공 시간 절반. 특허 기술의 핵심을 공개합니다.</description>
+  </item>
+
+  <item>
+    <title>영하 20도 견디는 극한환경 동계 특화 수익형: 4겹 단열 시스템의 원리</title>
+    <link>https://wocs.kr/resources/blog-post.html?id=3</link>
+    <guid isPermaLink="true">https://wocs.kr/resources/blog-post.html?id=3</guid>
+    <pubDate>Sun, 25 Jan 2026 09:00:00 +0900</pubDate>
+    <category>시공기술</category>
+    <description>겨울은 비수기가 아닙니다. WOCS의 4겹 알루미늄 포일 버블 + 캔버스 단열 시스템으로 영하 20도에서도 실내 20도 이상. 원리와 구조를 공개합니다.</description>
+  </item>
+
+  <item>
+    <title>유통 마진 제로: 국내 자체 공장 다이렉트 시공이 30% 저렴한 이유</title>
+    <link>https://wocs.kr/resources/blog-post.html?id=2</link>
+    <guid isPermaLink="true">https://wocs.kr/resources/blog-post.html?id=2</guid>
+    <pubDate>Thu, 15 Jan 2026 09:00:00 +0900</pubDate>
+    <category>수익분석</category>
+    <description>품질을 낮춘 것이 아닙니다. 불필요한 중간 유통 단계를 완전히 제거했기 때문입니다. WOCS의 원가 구조를 투명하게 공개합니다.</description>
+  </item>
+
+  <item>
+    <title>초보 창업자를 위한 토목 공사비 3천만 원 방어하는 법</title>
+    <link>https://wocs.kr/resources/blog-post.html?id=1</link>
+    <guid isPermaLink="true">https://wocs.kr/resources/blog-post.html?id=1</guid>
+    <pubDate>Mon, 05 Jan 2026 09:00:00 +0900</pubDate>
+    <category>창업가이드</category>
+    <description>글램핑 창업 실패의 핵심 원인은 글램핑이 아니라 토목입니다. 배수, 전기, 상하수도 — 예상 밖 토목비 폭탄을 막는 실전 가이드.</description>
+  </item>
+
+</channel>
+</rss>
