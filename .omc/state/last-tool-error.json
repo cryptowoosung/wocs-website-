@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"git add assets/js/blog-data.js && git rebase --continue\",\"description\":\"Resolve conflict and continue rebase\"}",
+  "error": "Exit code 1\nYou must edit all merge conflicts and then\nmark them as resolved using git add",
+  "timestamp": "2026-03-21T16:05:00.627Z",
+  "retry_count": 1
+}

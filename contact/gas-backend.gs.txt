@@ -1,0 +1,210 @@
+/* ============================================================
+   WOCS 리드 수집 자동화 — Google Apps Script (GAS)
+   
+   [기능]
+   1. 프론트엔드에서 POST 데이터 수신
+   2. 구글 스프레드시트에 새 행(Row) 자동 기록
+   3. 알리고 API로 문자 자동 발송
+      - 고객에게: "접수 완료" 안내 문자
+      - 내 폰으로: "신규 DB 알림" 문자
+   
+   [세팅 방법]
+   1. 구글 시트 생성 → 확장 프로그램 → Apps Script
+   2. 이 코드 전체를 복사-붙여넣기
+   3. 아래 설정값 수정
+   4. 배포 → 웹앱 → 배포
+   ============================================================ */
+
+// ======== 설정값 (여기만 수정) ========
+var CONFIG = {
+  // 구글 시트 ID (시트 URL에서 /d/ 와 /edit 사이의 문자열)
+  SHEET_ID: 'YOUR_GOOGLE_SHEET_ID_HERE',
+  SHEET_NAME: 'leads',  // 시트 탭 이름
+  
+  // 알리고 API (https://smartsms.aligo.in 에서 발급)
+  ALIGO_API_KEY: 'YOUR_ALIGO_API_KEY',
+  ALIGO_USER_ID: 'YOUR_ALIGO_USER_ID',
+  ALIGO_SENDER: '010-4337-0582',  // 발신번호 (알리고에 등록된 번호)
+  
+  // 내 폰번호 (신규 DB 알림 수신용)
+  MY_PHONE: '01043370582',
+  
+  // 문자 발송 ON/OFF (true로 바꾸면 실제 발송)
+  SMS_ENABLED: false
+};
+
+// ======== 메인 핸들러 ========
+function doPost(e) {
+  try {
+    // 1) 데이터 파싱
+    var raw = e.parameter.data;
+    var d = JSON.parse(raw);
+    
+    // 2) 스프레드시트에 기록
+    saveToSheet(d);
+    
+    // 3) 문자 발송
+    if (CONFIG.SMS_ENABLED) {
+      sendCustomerSMS(d);
+      sendOwnerSMS(d);
+    }
+    
+    // 4) 응답
+    return ContentService
+      .createTextOutput(JSON.stringify({result: 'ok'}))
+      .setMimeType(ContentService.MimeType.JSON);
+      
+  } catch (err) {
+    // 에러 발생해도 시트에 에러 로그 기록
+    Logger.log('ERROR: ' + err.toString());
+    return ContentService
+      .createTextOutput(JSON.stringify({result: 'error', message: err.toString()}))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+// CORS 프리플라이트 대응
+function doGet(e) {
+  return ContentService
+    .createTextOutput(JSON.stringify({status: 'WOCS Lead API is running'}))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+// ======== 스프레드시트 저장 ========
+function saveToSheet(d) {
+  var ss = SpreadsheetApp.openById(CONFIG.SHEET_ID);
+  var sheet = ss.getSheetByName(CONFIG.SHEET_NAME);
+  
+  // 시트가 없으면 생성 + 헤더 추가
+  if (!sheet) {
+    sheet = ss.insertSheet(CONFIG.SHEET_NAME);
+    sheet.appendRow([
+      '접수일시', '이름', '연락처', '부지면적(평)', '관심타입',
+      '메모', '유닛수', '1박요금', '가동률(%)', '투자금(만원)',
+      '예상연매출(만원)', '예상연순이익(만원)', '처리상태'
+    ]);
+    // 헤더 서식
+    sheet.getRange(1, 1, 1, 13).setFontWeight('bold').setBackground('#C9A96E');
+  }
+  
+  // 새 행 추가
+  sheet.appendRow([
+    d.timestamp || new Date().toLocaleString('ko-KR'),
+    d.name || '',
+    d.phone || '',
+    d.area || '',
+    d.type || '',
+    d.memo || '',
+    d.units || '',
+    d.price || '',
+    d.occupancy || '',
+    d.investment || '',
+    d.annualRevenue || '',
+    d.annualProfit || '',
+    '미처리'  // 처리 상태 기본값
+  ]);
+}
+
+// ======== 고객에게 문자 발송 ========
+function sendCustomerSMS(d) {
+  var phone = d.phone.replace(/-/g, '');
+  var msg = '[WOCS] ' + d.name + '님, 견적 요청이 접수되었습니다.\n'
+          + '시뮬레이션: ' + d.units + '동/' + d.price + '만원/1박\n'
+          + '담당자가 빠르게 연락드리겠습니다.\n'
+          + '☎ 010-4337-0582';
+  
+  sendAligo(phone, msg);
+}
+
+// ======== 내 폰으로 알림 발송 ========
+function sendOwnerSMS(d) {
+  var msg = '🔔 [WOCS 신규 DB]\n'
+          + '이름: ' + d.name + '\n'
+          + '연락처: ' + d.phone + '\n'
+          + '면적: ' + d.area + '평\n'
+          + '타입: ' + d.type + '\n'
+          + '시뮬: ' + d.units + '동·' + d.price + '만원·가동' + d.occupancy + '%\n'
+          + '연매출: ' + d.annualRevenue + '만원';
+  
+  sendAligo(CONFIG.MY_PHONE, msg);
+}
+
+// ======== 알리고 API 호출 ========
+function sendAligo(receiver, msg) {
+  var url = 'https://apis.aligo.in/send/';
+  var payload = {
+    'key': CONFIG.ALIGO_API_KEY,
+    'userid': CONFIG.ALIGO_USER_ID,
+    'sender': CONFIG.ALIGO_SENDER.replace(/-/g, ''),
+    'receiver': receiver,
+    'msg': msg,
+    'testmode_yn': CONFIG.SMS_ENABLED ? 'N' : 'Y'  // 테스트모드
+  };
+  
+  var options = {
+    'method': 'post',
+    'payload': payload,
+    'muteHttpExceptions': true
+  };
+  
+  try {
+    var response = UrlFetchApp.fetch(url, options);
+    Logger.log('알리고 응답: ' + response.getContentText());
+    return JSON.parse(response.getContentText());
+  } catch (err) {
+    Logger.log('알리고 에러: ' + err.toString());
+    return null;
+  }
+}
+
+// ======== 테스트 함수 (GAS 에디터에서 직접 실행) ========
+function testDoPost() {
+  var testData = {
+    parameter: {
+      data: JSON.stringify({
+        name: '테스트',
+        phone: '010-1234-5678',
+        area: '500',
+        type: 'B-표준수익',
+        memo: '테스트 데이터입니다',
+        units: '5',
+        price: '15',
+        occupancy: '45',
+        investment: '10000',
+        annualRevenue: 12338,
+        annualProfit: 8738,
+        timestamp: new Date().toLocaleString('ko-KR')
+      })
+    }
+  };
+  
+  var result = doPost(testData);
+  Logger.log(result.getContent());
+}
+
+/* ============================================================
+   [Solapi를 쓰고 싶다면?]
+   
+   sendAligo 함수를 아래로 교체:
+   
+   function sendSolapi(receiver, msg) {
+     var url = 'https://api.solapi.com/messages/v4/send';
+     var payload = {
+       "message": {
+         "to": receiver,
+         "from": CONFIG.SOLAPI_SENDER,
+         "text": msg
+       }
+     };
+     var options = {
+       'method': 'post',
+       'contentType': 'application/json',
+       'headers': {
+         'Authorization': 'Bearer ' + CONFIG.SOLAPI_API_SECRET
+       },
+       'payload': JSON.stringify(payload),
+       'muteHttpExceptions': true
+     };
+     return UrlFetchApp.fetch(url, options);
+   }
+   ============================================================ */

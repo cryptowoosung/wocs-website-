@@ -1,0 +1,43 @@
+name: WOCS Auto Blog Writer
+
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  write-blog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: 패키지 설치
+        run: pip install google-genai requests
+      - name: 블로그 글 자동 생성
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python auto_writer.py
+      - name: sitemap.xml 갱신
+        run: python update_sitemap.py
+      - name: 워드프레스 자동 포스팅
+        env:
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: python wp_publisher.py
+      - name: LinkedIn 자동 포스팅
+        env:
+          LI_ACCESS_TOKEN: ${{ secrets.LI_ACCESS_TOKEN }}
+        run: python linkedin_poster.py
+      - name: 커밋 & 푸시
+        run: |
+          git config user.name "WOCS Auto Writer"
+          git config user.email "candlejs6@gmail.com"
+          git add -A
+          git diff --staged --quiet || git commit -m "auto: 블로그 글 자동 추가 $(date '+%Y-%m-%d')"
+          git push
