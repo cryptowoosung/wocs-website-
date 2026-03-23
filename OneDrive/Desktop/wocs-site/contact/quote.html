@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+    <link rel="canonical" href="https://wocs.kr/contact/quote.html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-t="pageTitle">WOCS 견적 요청 | 무료 1차 가견적</title>
+<meta name="description" content="글램핑·펜션 창업을 위한 맞춤 견적. 구체적인 부지·예산·모델 정보를 입력하면 WOCS의 16년 노하우가 담긴 최적의 솔루션을 제안합니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Lexend:wght@200;300;400;500;600&family=Noto+Sans+KR:wght@300;400;500;600&family=Noto+Serif+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/wocs-common.css">
+<link rel="alternate" hreflang="ko" href="https://wocs.kr/contact/quote.html">
+<link rel="alternate" hreflang="en" href="https://wocs.kr/contact/quote.html?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://wocs.kr/contact/quote.html">
+<meta name="theme-color" content="#09090b">
+<style>
+:root{--gold:#c9a96e;--ivory:#f0ebe0;--bg:#09090b;--bg2:#0f0f11}
+.qt-hero{position:relative;padding:140px 5% 60px;background:var(--bg);text-align:center}
+.qt-hero .kicker{font-family:var(--font-body);font-size:11px;letter-spacing:6px;color:var(--gold);text-transform:uppercase;margin-bottom:16px}
+.qt-hero h1{font-family:var(--font-serif);font-size:clamp(28px,4vw,48px);font-weight:300;color:var(--ivory);line-height:1.3}
+.qt-hero .lead{font-family:var(--font-body);font-size:14px;color:rgba(240,235,224,0.6);line-height:2;margin:20px auto 0;max-width:680px}
+.qt-trust{display:flex;justify-content:center;gap:48px;margin-top:40px;padding:24px 0;border-top:1px solid rgba(201,169,110,0.08);border-bottom:1px solid rgba(201,169,110,0.08)}
+.qt-trust-item{text-align:center}
+.qt-trust-num{font-family:var(--font-serif);font-size:28px;font-weight:300;color:var(--gold)}
+.qt-trust-label{font-family:var(--font-body);font-size:10px;color:rgba(240,235,224,0.4);letter-spacing:1px;margin-top:2px}
+.qt-form-wrap{max-width:840px;margin:0 auto;padding:80px 5%}
+.qt-form{background:rgba(201,169,110,0.02);border:1px solid rgba(201,169,110,0.08);padding:56px 48px}
+.qt-section{margin-bottom:48px}
+.qt-section-header{display:flex;align-items:center;gap:16px;margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid rgba(201,169,110,0.08)}
+.qt-section-num{width:32px;height:32px;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-size:16px;color:var(--gold)}
+.qt-section-title{font-family:var(--font-serif);font-size:20px;font-weight:400;color:var(--ivory)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.form-group{margin-bottom:20px}
+.form-label{display:block;font-family:var(--font-body);font-size:11px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+.form-label .opt{color:rgba(240,235,224,0.3);font-size:9px;letter-spacing:1px;margin-left:4px}
+.form-input,.form-select,.form-textarea{width:100%;padding:14px 16px;background:rgba(240,235,224,0.04);border:1px solid rgba(201,169,110,0.12);color:var(--ivory);font-family:var(--font-body);font-size:14px;outline:none;transition:border-color .3s;box-sizing:border-box}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--gold)}
+.form-input::placeholder,.form-textarea::placeholder{color:rgba(240,235,224,0.25)}
+.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='%23c9a96e'%3E%3Cpath d='M6 8L0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;background-color:rgba(240,235,224,0.04)}
+.form-select option{background:#1a1a1c;color:var(--ivory)}
+.form-textarea{min-height:120px;resize:vertical}
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.check-item{display:flex;align-items:center;gap:10px;padding:14px 16px;border:1px solid rgba(201,169,110,0.1);cursor:pointer;transition:all .3s}
+.check-item:hover{border-color:rgba(201,169,110,0.3);background:rgba(201,169,110,0.03)}
+.check-item input[type="checkbox"]{display:none}
+.check-item input[type="checkbox"]:checked+.check-box{background:var(--gold);border-color:var(--gold)}
+.check-item input[type="checkbox"]:checked+.check-box::after{content:'✓';color:#09090b;font-size:12px}
+.check-item input[type="checkbox"]:checked~.check-label{color:var(--ivory)}
+.check-box{width:20px;height:20px;border:1px solid rgba(201,169,110,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s}
+.check-label{font-family:var(--font-body);font-size:13px;color:rgba(240,235,224,0.55);transition:color .3s}
+.form-submit{display:block;width:100%;padding:18px;background:var(--gold);color:#09090b;font-family:var(--font-body);font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase;border:none;cursor:pointer;transition:all .3s;margin-top:8px}
+.form-submit:hover{background:#b8983c;transform:translateY(-1px)}
+.qt-footer-note{text-align:center;margin-top:24px;font-family:var(--font-body);font-size:11px;color:rgba(240,235,224,0.3);line-height:1.8}
+.ct-simple-banner{padding:40px 5%;background:var(--bg2);text-align:center;border-top:1px solid rgba(201,169,110,0.08)}
+.ct-simple-banner p{font-family:var(--font-body);font-size:13px;color:rgba(240,235,224,0.5)}
+.ct-simple-banner a{color:var(--gold);text-decoration:none;font-weight:500}
+@media(max-width:768px){.form-row,.check-grid{grid-template-columns:1fr}.qt-form{padding:32px 20px}.qt-trust{gap:24px;flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<script>var WOCS_BASE="../";</script>
+<div id="wocs-header"></div>
+
+<!-- HERO -->
+<section class="qt-hero">
+  <div class="container">
+    <div class="breadcrumb" style="text-align:left;margin-bottom:24px"><a href="../index.html" data-t="home">홈</a> <span>›</span> <a href="index.html">문의</a> <span>›</span> <span>견적 요청</span></div>
+    <div class="kicker anim">REQUEST A QUOTE</div>
+    <h1 class="anim anim-delay-1">정확한 데이터가<br><span class="gold-text">성공적인 사업</span>을 만듭니다.</h1>
+    <p class="lead anim anim-delay-2">구체적인 정보를 입력해 주시면, WOCS의 16년 노하우가 담긴<br>최적의 모듈러/글램핑 솔루션을 제안해 드립니다.</p>
+    <div class="qt-trust anim anim-delay-3">
+      <div class="qt-trust-item"><div class="qt-trust-num">무료</div><div class="qt-trust-label">1차 가견적</div></div>
+      <div class="qt-trust-item"><div class="qt-trust-num">24h</div><div class="qt-trust-label">회신 보장</div></div>
+      <div class="qt-trust-item"><div class="qt-trust-num">16년</div><div class="qt-trust-label">시공 노하우</div></div>
+      <div class="qt-trust-item"><div class="qt-trust-num">30%↓</div><div class="qt-trust-label">타사 대비 원가</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE FORM -->
+<div class="qt-form-wrap">
+  <div class="qt-form anim">
+
+    <!-- STEP 1: 기본 정보 -->
+    <div class="qt-section">
+      <div class="qt-section-header">
+        <div class="qt-section-num">1</div>
+        <div class="qt-section-title">기본 정보</div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">이름 *</label>
+          <input type="text" class="form-input" placeholder="홍길동" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">연락처 *</label>
+          <input type="tel" class="form-input" placeholder="010-0000-0000" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">회사명 <span class="opt">(선택)</span></label>
+        <input type="text" class="form-input" placeholder="회사명 또는 상호">
+      </div>
+    </div>
+
+    <!-- STEP 2: 부지 정보 -->
+    <div class="qt-section">
+      <div class="qt-section-header">
+        <div class="qt-section-num">2</div>
+        <div class="qt-section-title">부지 정보</div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">시공 예정 지역 *</label>
+          <input type="text" class="form-input" placeholder="예: 강원도 평창군" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">부지 면적 (평) *</label>
+          <input type="text" class="form-input" placeholder="예: 300평" required>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3: 예산 및 일정 -->
+    <div class="qt-section">
+      <div class="qt-section-header">
+        <div class="qt-section-num">3</div>
+        <div class="qt-section-title">예산 및 일정</div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">총 예상 예산 *</label>
+          <select class="form-select" required>
+            <option value="" disabled selected>선택해 주세요</option>
+            <option value="under50">5천만 원 이하</option>
+            <option value="50to100">5천만 원 ~ 1억</option>
+            <option value="100to300">1억 ~ 3억</option>
+            <option value="over300">3억 이상</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">오픈 목표일</label>
+          <input type="text" class="form-input" placeholder="예: 2026년 6월">
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4: 희망 모델 -->
+    <div class="qt-section">
+      <div class="qt-section-header">
+        <div class="qt-section-num">4</div>
+        <div class="qt-section-title">희망 모델 <span style="font-size:12px;color:rgba(240,235,224,0.35);margin-left:8px">복수 선택 가능</span></div>
+      </div>
+      <div class="check-grid">
+        <label class="check-item">
+          <input type="checkbox" name="model" value="dome">
+          <div class="check-box"></div>
+          <span class="check-label">🔵 D-시리즈 돔</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" name="model" value="safari">
+          <div class="check-box"></div>
+          <span class="check-label">🟤 S-시리즈 스위트</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" name="model" value="signature">
+          <div class="check-box"></div>
+          <span class="check-label">🟡 Signature 라운지</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" name="model" value="modular">
+          <div class="check-box"></div>
+          <span class="check-label">⬜ 모듈러 유닛</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- STEP 5: 추가 요청 -->
+    <div class="qt-section" style="margin-bottom:32px">
+      <div class="qt-section-header">
+        <div class="qt-section-num">5</div>
+        <div class="qt-section-title">추가 요청사항</div>
+      </div>
+      <div class="form-group" style="margin-bottom:0">
+        <textarea class="form-textarea" placeholder="운영 콘셉트, 특별 요구사항, 참고 이미지 등을 자유롭게 작성해 주세요."></textarea>
+      </div>
+    </div>
+
+    <button type="button" class="form-submit" onclick="alert('견적 요청이 접수되었습니다.\n영업일 기준 24시간 내 1차 가견적을 회신 드리겠습니다.\n감사합니다!')">무료 1차 가견적 요청하기</button>
+
+    <div class="qt-footer-note">
+      입력하신 정보는 견적 제안 목적으로만 사용되며, 제3자에게 제공되지 않습니다.<br>
+      영업일 기준 24시간 내 전화 또는 이메일로 1차 가견적을 회신 드립니다.
+    </div>
+  </div>
+</div>
+
+<!-- Simple inquiry banner -->
+<div class="ct-simple-banner">
+  <p>견적이 아닌 일반 문의(쇼룸 예약, A/S, 제휴)는 → <a href="index.html">일반 문의 페이지</a>를 이용해 주세요.</p>
+</div>
+
+<div id="wocs-cta"></div>
+<div id="wocs-footer"></div>
+
+<script>
+var WOCS_PAGE_TR={ko:{},en:{},ja:{},zh:{},es:{},fr:{},de:{},pt:{},it:{},ar:{},ru:{},tr:{},tw:{},id:{},th:{}};
+</script>
+<script src="../assets/js/wocs-i18n.js"></script>
+<script src="../assets/js/wocs-header.js"></script>
+<script src="../assets/js/wocs-footer.js"></script>
+</body>
+</html>
