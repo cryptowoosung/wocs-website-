@@ -7,6 +7,7 @@ node_modules/
 .DS_Store
 *.log
 /backup/
+/quotes/
 credentials.json
 token.json
 *.key
