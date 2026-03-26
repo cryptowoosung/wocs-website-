@@ -9,7 +9,7 @@ echo "=== WOCS 프로젝트 설정 시작 ==="
 
 # 1. npm 패키지 설치
 echo ""
-echo "[1/4] npm 패키지 설치..."
+echo "[1/5] npm 패키지 설치..."
 if [ -f package.json ]; then
     npm install
 else
@@ -18,12 +18,12 @@ fi
 
 # 2. pip 패키지 설치
 echo ""
-echo "[2/4] Python 패키지 설치..."
+echo "[2/5] Python 패키지 설치..."
 pip install google-generativeai python-dotenv requests 2>/dev/null || echo "  pip 설치 실패 — 수동 설치 필요"
 
 # 3. .env 파일 생성
 echo ""
-echo "[3/4] .env 파일 확인..."
+echo "[3/5] .env 파일 확인..."
 if [ ! -f .env ]; then
     cp .env.example .env
     echo "  .env.example → .env 복사 완료"
@@ -34,7 +34,7 @@ fi
 
 # 4. Claude Code 스킬 설치
 echo ""
-echo "[4/4] Claude Code 스킬 설치..."
+echo "[4/5] Claude Code 스킬 설치..."
 
 # Gemini (Google)
 echo "  → Gemini 스킬..."
@@ -65,6 +65,24 @@ mkdir -p "$SKILL_DIR"
 [ ! -d "$SKILL_DIR/prompt-master" ] && git clone https://github.com/nidhinjs/prompt-master.git "$SKILL_DIR/prompt-master" 2>/dev/null && echo "    ✓ prompt-master" || echo "    · prompt-master (이미 설치됨)"
 [ ! -d "$SKILL_DIR/claude-seo" ] && git clone https://github.com/AgriciDaniel/claude-seo.git "$SKILL_DIR/claude-seo" 2>/dev/null && echo "    ✓ claude-seo" || echo "    · claude-seo (이미 설치됨)"
 [ ! -d "$SKILL_DIR/ai-marketing-skills" ] && git clone https://github.com/BrianRWagner/ai-marketing-skills.git "$SKILL_DIR/ai-marketing-skills" 2>/dev/null && echo "    ✓ ai-marketing-skills" || echo "    · ai-marketing-skills (이미 설치됨)"
+
+# 5. n8n MCP 서버 등록
+echo ""
+echo "[5/5] n8n MCP 서버 등록..."
+if [ -f .env ]; then
+    N8N_MCP_TOKEN=$(grep '^N8N_MCP_TOKEN=' .env | cut -d'=' -f2-)
+    if [ -n "$N8N_MCP_TOKEN" ]; then
+        claude mcp add n8n-mcp "https://wocs.app.n8n.cloud/mcp-server/http" \
+            -t http -s user \
+            -H "Authorization: Bearer $N8N_MCP_TOKEN" 2>/dev/null \
+            && echo "  ✓ n8n MCP 등록 완료" \
+            || echo "  ✗ n8n MCP 등록 실패 — claude CLI 확인 필요"
+    else
+        echo "  ✗ .env에 N8N_MCP_TOKEN 값이 없음 — 입력 후 재실행"
+    fi
+else
+    echo "  ✗ .env 파일 없음 — 먼저 .env 생성 필요"
+fi
 
 echo ""
 echo "=== 설정 완료 ==="
