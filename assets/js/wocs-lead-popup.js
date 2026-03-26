@@ -152,6 +152,7 @@ function submitPopup() {
 }
 
 // ── 팝업 트리거 ──
+// [2026-03-26] 팝업 자동 실행 비활성화 — 다시 켜려면 아래 주석 해제
 var popupShown = false;
 
 function triggerPopup() {
@@ -160,11 +161,11 @@ function triggerPopup() {
   createPopup();
 }
 
-// Timer: 15초 후
-setTimeout(function() { triggerPopup(); }, 15000);
+// // Timer: 15초 후
+// setTimeout(function() { triggerPopup(); }, 15000);
 
-// Scroll: 50% 이상
-window.addEventListener('scroll', function() {
-  var scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-  if (scrollPercent >= 50) triggerPopup();
-}, { passive: true });
+// // Scroll: 50% 이상
+// window.addEventListener('scroll', function() {
+//   var scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+//   if (scrollPercent >= 50) triggerPopup();
+// }, { passive: true });
