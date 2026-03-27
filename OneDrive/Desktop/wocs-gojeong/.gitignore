@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.quote_counter.json
+output/
+_test_*.xlsx
+NanumGothic.ttf
+.env
