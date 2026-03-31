@@ -15,8 +15,6 @@ import random
 import requests
 from datetime import datetime, timezone, timedelta
 from google.auth.transport.requests import Request
-from googleapiclient.discovery import build
-from googleapiclient.http import MediaInMemoryUpload
 
 # ============================================================
 # 환경변수 로드
