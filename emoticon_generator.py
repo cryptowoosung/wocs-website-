@@ -302,21 +302,11 @@ def generate_and_upload(creds, prompts, folder_id, folder_name):
             image_bytes = base64.b64decode(b64_data)
             del b64_data
 
-            import hashlib
-            timestamp = int(time.time())
-            folder = f"emoticons/{folder_name}"
-            public_id = f"{folder}/{filename.replace('.png','')}"
-
-            params = f"public_id={public_id}&timestamp={timestamp}"
-            sig = hashlib.sha1((params + CLOUDINARY_API_SECRET).encode()).hexdigest()
-
             upload_resp = requests.post(
                 f"https://api.cloudinary.com/v1_1/{CLOUDINARY_CLOUD_NAME}/image/upload",
+                auth=(CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET),
                 data={
-                    "api_key": CLOUDINARY_API_KEY,
-                    "timestamp": timestamp,
-                    "public_id": public_id,
-                    "signature": sig,
+                    "public_id": f"emoticons/{folder_name}/{filename.replace('.png','')}",
                 },
                 files={"file": (filename, image_bytes, "image/png")},
                 timeout=60,
