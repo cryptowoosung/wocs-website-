@@ -27,6 +27,11 @@ TELEGRAM_BOT_TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
 TELEGRAM_CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
 GOOGLE_CREDENTIALS_JSON = os.environ["GOOGLE_CREDENTIALS_JSON"]
 
+# Cloudinary 설정
+CLOUDINARY_CLOUD_NAME = os.environ.get("CLOUDINARY_CLOUD_NAME", "dd0ijn8bl")
+CLOUDINARY_API_KEY = os.environ["CLOUDINARY_API_KEY"]
+CLOUDINARY_API_SECRET = os.environ["CLOUDINARY_API_SECRET"]
+
 # Google Sheets 설정
 SPREADSHEET_ID = "1OGZplXhNReH5M6rbNHH-ENjA_yJqIhorxSRSi3SYqmg"
 SHEET_NAME = "이모티콘_캐릭터_로그"
@@ -292,24 +297,32 @@ def generate_and_upload(creds, prompts, folder_id):
             fail_count += 1
             continue
 
-        # 토큰 갱신
-        creds.refresh(Request())
-
-        # --- Google Drive 업로드 ---
+        # --- Cloudinary 업로드 ---
         try:
             image_bytes = base64.b64decode(b64_data)
             del b64_data
 
-            drive_service = build('drive', 'v3', credentials=creds)
-            file_metadata = {'name': filename, 'parents': [folder_id]}
-            media = MediaInMemoryUpload(image_bytes, mimetype='image/png')
-            del image_bytes
+            import hashlib
+            timestamp = int(time.time())
+            folder = f"emoticons/{folder_name}"
+            public_id = f"{folder}/{filename.replace('.png','')}"
 
-            drive_service.files().create(
-                body=file_metadata,
-                media_body=media,
-                fields='id'
-            ).execute()
+            params = f"public_id={public_id}&timestamp={timestamp}"
+            sig = hashlib.sha1((params + CLOUDINARY_API_SECRET).encode()).hexdigest()
+
+            upload_resp = requests.post(
+                f"https://api.cloudinary.com/v1_1/{CLOUDINARY_CLOUD_NAME}/image/upload",
+                data={
+                    "api_key": CLOUDINARY_API_KEY,
+                    "timestamp": timestamp,
+                    "public_id": public_id,
+                    "signature": sig,
+                },
+                files={"file": (filename, image_bytes, "image/png")},
+                timeout=60,
+            )
+            upload_resp.raise_for_status()
+            del image_bytes
 
             print(f"✅ 업로드 완료")
             success_count += 1
