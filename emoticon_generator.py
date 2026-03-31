@@ -289,6 +289,10 @@ def generate_and_upload(creds, prompts, folder_id):
             fail_count += 1
             continue
 
+        # 토큰 갱신
+        from google.auth.transport.requests import Request
+        creds.refresh(Request())
+
         # --- Google Drive 업로드 (multipart) ---
         try:
             image_bytes = base64.b64decode(b64_data)
