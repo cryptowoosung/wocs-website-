@@ -63,7 +63,6 @@ def get_google_credentials():
         creds_dict,
         scopes=[
             "https://www.googleapis.com/auth/spreadsheets",
-            "https://www.googleapis.com/auth/drive",
         ],
     )
     creds.refresh(Request())
@@ -234,32 +233,9 @@ EMOTICON STYLE:
 
 
 # ============================================================
-# Step 4: Google Drive 폴더 생성
+# Step 4-5: 이미지 생성 + Cloudinary 업로드 (32개 순차)
 # ============================================================
-def create_drive_folder(creds, folder_name):
-    """Google Drive에 날짜_캐릭터명 폴더 생성"""
-    metadata = {
-        "name": folder_name,
-        "mimeType": "application/vnd.google-apps.folder",
-    }
-    if DRIVE_PARENT_FOLDER:
-        metadata["parents"] = [DRIVE_PARENT_FOLDER]
-
-    resp = requests.post(
-        "https://www.googleapis.com/drive/v3/files",
-        headers=google_headers(creds),
-        json=metadata,
-    )
-    resp.raise_for_status()
-    folder_id = resp.json()["id"]
-    print(f"[Step 4] Drive 폴더 생성: {folder_name} (ID: {folder_id})")
-    return folder_id
-
-
-# ============================================================
-# Step 5: 이미지 생성 + Drive 업로드 (32개 순차)
-# ============================================================
-def generate_and_upload(creds, prompts, folder_id, folder_name):
+def generate_and_upload(creds, prompts, folder_name):
     """gpt-image-1.5로 이미지 생성 후 Google Drive에 업로드"""
     success_count = 0
     fail_count = 0
@@ -401,12 +377,9 @@ def main():
     # Step 3: 프롬프트 생성
     prompts, folder_name = generate_prompts(data)
 
-    # Step 4: Drive 폴더 생성
-    folder_id = create_drive_folder(creds, folder_name)
-
-    # Step 5: 이미지 생성 + 업로드
-    print(f"\n[Step 5] 32개 이미지 생성 시작...")
-    success_count, fail_count = generate_and_upload(creds, prompts, folder_id, folder_name)
+    # Step 4-5: 이미지 생성 + Cloudinary 업로드
+    print(f"\n[Step 4-5] 32개 이미지 생성 시작...")
+    success_count, fail_count = generate_and_upload(creds, prompts, folder_name)
 
     # Step 6: Sheets 로그
     log_to_sheets(creds, data)
