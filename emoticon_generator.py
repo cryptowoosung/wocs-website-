@@ -233,7 +233,7 @@ EMOTICON STYLE:
 # ============================================================
 # Step 4-5: 이미지 생성 + Cloudinary 업로드 (32개 순차)
 # ============================================================
-def generate_and_upload(creds, prompts, folder_name):
+def generate_and_upload(prompts, folder_name):
     """gpt-image-1.5로 이미지 생성 후 Google Drive에 업로드"""
     success_count = 0
     fail_count = 0
@@ -377,7 +377,7 @@ def main():
 
     # Step 4-5: 이미지 생성 + Cloudinary 업로드
     print(f"\n[Step 4-5] 32개 이미지 생성 시작...")
-    success_count, fail_count = generate_and_upload(creds, prompts, folder_name)
+    success_count, fail_count = generate_and_upload(prompts, folder_name)
 
     # Step 6: Sheets 로그
     log_to_sheets(creds, data)
