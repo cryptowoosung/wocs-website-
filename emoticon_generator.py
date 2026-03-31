@@ -259,7 +259,7 @@ def create_drive_folder(creds, folder_name):
 # ============================================================
 # Step 5: 이미지 생성 + Drive 업로드 (32개 순차)
 # ============================================================
-def generate_and_upload(creds, prompts, folder_id):
+def generate_and_upload(creds, prompts, folder_id, folder_name):
     """gpt-image-1.5로 이미지 생성 후 Google Drive에 업로드"""
     success_count = 0
     fail_count = 0
@@ -416,7 +416,7 @@ def main():
 
     # Step 5: 이미지 생성 + 업로드
     print(f"\n[Step 5] 32개 이미지 생성 시작...")
-    success_count, fail_count = generate_and_upload(creds, prompts, folder_id)
+    success_count, fail_count = generate_and_upload(creds, prompts, folder_id, folder_name)
 
     # Step 6: Sheets 로그
     log_to_sheets(creds, data)
