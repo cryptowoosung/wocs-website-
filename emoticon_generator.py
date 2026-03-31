@@ -14,6 +14,9 @@ import time
 import random
 import requests
 from datetime import datetime, timezone, timedelta
+from google.auth.transport.requests import Request
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaInMemoryUpload
 
 # ============================================================
 # 환경변수 로드
@@ -290,40 +293,23 @@ def generate_and_upload(creds, prompts, folder_id):
             continue
 
         # 토큰 갱신
-        from google.auth.transport.requests import Request
         creds.refresh(Request())
 
-        # --- Google Drive 업로드 (multipart) ---
+        # --- Google Drive 업로드 ---
         try:
             image_bytes = base64.b64decode(b64_data)
-            # 메모리 해제: b64 문자열 즉시 삭제
             del b64_data
 
-            metadata = json.dumps({"name": filename, "parents": [folder_id]})
-            boundary = "emoticon_boundary"
-            body = (
-                f"--{boundary}\r\n"
-                f"Content-Type: application/json; charset=UTF-8\r\n\r\n"
-                f"{metadata}\r\n"
-                f"--{boundary}\r\n"
-                f"Content-Type: image/png\r\n\r\n"
-            ).encode("utf-8")
-            body += image_bytes + f"\r\n--{boundary}--\r\n".encode("utf-8")
-
-            # 메모리 해제: 이미지 바이트 즉시 삭제
+            drive_service = build('drive', 'v3', credentials=creds)
+            file_metadata = {'name': filename, 'parents': [folder_id]}
+            media = MediaInMemoryUpload(image_bytes, mimetype='image/png')
             del image_bytes
 
-            upload_resp = requests.post(
-                "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
-                headers={
-                    "Authorization": f"Bearer {creds.token}",
-                    "Content-Type": f"multipart/related; boundary={boundary}",
-                },
-                data=body,
-                timeout=60,
-            )
-            upload_resp.raise_for_status()
-            del body  # 메모리 해제
+            drive_service.files().create(
+                body=file_metadata,
+                media_body=media,
+                fields='id'
+            ).execute()
 
             print(f"✅ 업로드 완료")
             success_count += 1
