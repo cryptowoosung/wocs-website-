@@ -285,7 +285,6 @@ def generate_and_upload(prompts, folder_name):
                 files={"file": (filename, image_bytes, "image/png")},
                 timeout=60,
             )
-            print(f"Cloudinary 응답: {upload_resp.status_code} {upload_resp.text[:200]}")
             upload_resp.raise_for_status()
             del image_bytes
 
