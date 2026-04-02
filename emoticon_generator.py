@@ -281,6 +281,10 @@ def generate_and_upload(prompts, folder_name):
                 auth=(CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET),
                 data={
                     "public_id": f"emoticons/{folder_name}/{filename.replace('.png','')}",
+                    "folder": "",
+                    "use_filename": "true",
+                    "unique_filename": "false",
+                    "overwrite": "true",
                 },
                 files={"file": (filename, image_bytes, "image/png")},
                 timeout=60,
