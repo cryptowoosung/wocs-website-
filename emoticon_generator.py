@@ -884,6 +884,15 @@ def main():
 
     print(f"✅ 애니메이션 완료: {anim_success}/24개")
 
+    # 임시 폴더 정리
+    import shutil
+    try:
+        shutil.rmtree(tmp_dir)
+        shutil.rmtree(static_tmp)
+        print("✅ 임시 파일 정리 완료")
+    except Exception as e:
+        print(f"⚠️ 임시 파일 정리 실패: {e}")
+
     # Step 6: Sheets 로그
     log_to_sheets(creds, data)
 
