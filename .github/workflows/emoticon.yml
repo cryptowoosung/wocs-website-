@@ -21,7 +21,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests google-auth google-auth-httplib2 google-api-python-client
+          pip install requests google-auth google-auth-httplib2 google-api-python-client pillow
 
       - name: Run Emoticon Generator
         env:

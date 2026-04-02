@@ -15,6 +15,12 @@ import random
 import requests
 from datetime import datetime, timezone, timedelta
 from google.auth.transport.requests import Request
+import struct
+import zlib
+import io
+import math
+import tempfile
+from PIL import Image
 
 # ============================================================
 # 환경변수 로드
@@ -231,6 +237,81 @@ EMOTICON STYLE:
 
 
 # ============================================================
+# 애니메이션 헬퍼 함수
+# ============================================================
+def save_apng(frames, out_path, delay=12):
+    def png_chunk(t, d):
+        c = t + d
+        return struct.pack('>I', len(d)) + c + struct.pack('>I', zlib.crc32(c) & 0xffffffff)
+    w, h = frames[0].size
+    n = len(frames)
+    out = io.BytesIO()
+    out.write(b'\x89PNG\r\n\x1a\n')
+    out.write(png_chunk(b'IHDR', struct.pack('>IIBBBBB', w, h, 8, 6, 0, 0, 0)))
+    out.write(png_chunk(b'acTL', struct.pack('>II', n, 0)))
+    seq = 0
+    for i, frame in enumerate(frames):
+        fctl = (struct.pack('>I', seq) + struct.pack('>II', w, h) +
+                struct.pack('>II', 0, 0) + struct.pack('>HH', delay, 100) +
+                struct.pack('>BB', 1, 0))
+        out.write(png_chunk(b'fcTL', fctl))
+        seq += 1
+        fb = io.BytesIO()
+        frame.save(fb, format='PNG')
+        fd = fb.getvalue()
+        pos = 8
+        while pos < len(fd):
+            l = struct.unpack('>I', fd[pos:pos+4])[0]
+            ct = fd[pos+4:pos+8]
+            cd = fd[pos+8:pos+8+l]
+            pos += 12 + l
+            if ct == b'IDAT':
+                if i == 0:
+                    out.write(png_chunk(b'IDAT', cd))
+                else:
+                    out.write(png_chunk(b'fdAT', struct.pack('>I', seq) + cd))
+                    seq += 1
+    out.write(png_chunk(b'IEND', b''))
+    with open(out_path, 'wb') as f:
+        f.write(out.getvalue())
+
+
+def save_gif(frames, out_path, delay=12):
+    gif_frames = []
+    for frame in frames:
+        bg = Image.new("RGB", frame.size, (255, 255, 255))
+        bg.paste(frame, mask=frame.split()[3])
+        gif_frames.append(bg.convert("P", palette=Image.ADAPTIVE, colors=256))
+    gif_frames[0].save(
+        out_path, save_all=True, append_images=gif_frames[1:],
+        loop=0, duration=delay * 10, disposal=2
+    )
+
+
+def save_webp(frames, out_path, delay=120):
+    frames[0].save(
+        out_path, format="WEBP", save_all=True,
+        append_images=frames[1:], loop=0, duration=delay,
+        lossless=False, quality=85
+    )
+
+
+def make_frames_from_bytes(base_bytes, size):
+    """단일 이미지로 3프레임 애니메이션 생성 (bounce 효과)"""
+    frames = []
+    base_img = Image.open(io.BytesIO(base_bytes)).convert("RGBA")
+    w, h = size
+    for i in range(4):  # 4프레임 루프 (위→중간→아래→중간)
+        t = i / 4
+        offset_y = int(-abs(math.sin(t * math.pi)) * h * 0.06)
+        canvas = Image.new("RGBA", size, (0, 0, 0, 0))
+        resized = base_img.resize(size, Image.LANCZOS)
+        canvas.paste(resized, (0, offset_y), resized)
+        frames.append(canvas)
+    return frames
+
+
+# ============================================================
 # Step 4-5: 이미지 생성 + Cloudinary 업로드 (32개 순차)
 # ============================================================
 def generate_and_upload(prompts, folder_name):
@@ -382,6 +463,91 @@ def main():
     # Step 4-5: 이미지 생성 + Cloudinary 업로드
     print(f"\n[Step 4-5] 32개 이미지 생성 시작...")
     success_count, fail_count = generate_and_upload(prompts, folder_name)
+
+    # ============================================================
+    # Step 5.5: 플랫폼별 애니메이션 이모티콘 생성 및 Cloudinary 업로드
+    # ============================================================
+    print("\n[Step 5.5] 움직이는 이모티콘 생성 중...")
+
+    tmp_dir = tempfile.mkdtemp()
+
+    line_dir = os.path.join(tmp_dir, "line_anim")
+    ogq_dir = os.path.join(tmp_dir, "ogq_anim")
+    kakao_dir = os.path.join(tmp_dir, "kakao_anim")
+    for d in [line_dir, ogq_dir, kakao_dir]:
+        os.makedirs(d, exist_ok=True)
+
+    # 카카오 WEBP 대상: 0,1,2번 인덱스 (첫 3개)
+    kakao_anim_indices = {0, 1, 2}
+
+    anim_success = 0
+    for idx in range(min(24, len(data["emotions"]))):
+        emotion = data["emotions"][idx]
+        filename = f"{str(idx+1).zfill(2)}.png"
+        cloudinary_url = f"https://res.cloudinary.com/{os.environ['CLOUDINARY_CLOUD_NAME']}/image/upload/emoticons/{folder_name}/{filename}"
+
+        try:
+            # Cloudinary에서 원본 이미지 다운로드
+            img_resp = requests.get(cloudinary_url, timeout=30)
+            img_resp.raise_for_status()
+            base_bytes = img_resp.content
+
+            # 라인: APNG 320x270
+            frames_line = make_frames_from_bytes(base_bytes, (320, 270))
+            line_path = os.path.join(line_dir, f"{idx+1:02d}.png")
+            save_apng(frames_line, line_path)
+
+            # OGQ: GIF 740x640
+            frames_ogq = make_frames_from_bytes(base_bytes, (740, 640))
+            ogq_path = os.path.join(ogq_dir, f"O{idx+1:02d}.gif")
+            save_gif(frames_ogq, ogq_path)
+
+            # 카카오: WEBP 360x360 (첫 3개만)
+            if idx in kakao_anim_indices:
+                frames_kakao = make_frames_from_bytes(base_bytes, (360, 360))
+                kakao_path = os.path.join(kakao_dir, f"{idx+1:02d}.webp")
+                save_webp(frames_kakao, kakao_path)
+
+            anim_success += 1
+            print(f"  [{idx+1}/24] 애니메이션 완료: {emotion[:30]}")
+
+        except Exception as e:
+            print(f"  [{idx+1}/24] 애니메이션 실패: {e}")
+
+    # Cloudinary 애니메이션 업로드
+    print("  Cloudinary 애니메이션 업로드 중...")
+    CLOUD = os.environ["CLOUDINARY_CLOUD_NAME"]
+    API_KEY = os.environ["CLOUDINARY_API_KEY"]
+    API_SECRET = os.environ["CLOUDINARY_API_SECRET"]
+
+    for fname in sorted(os.listdir(line_dir)):
+        with open(os.path.join(line_dir, fname), "rb") as f:
+            requests.post(
+                f"https://api.cloudinary.com/v1_1/{CLOUD}/image/upload",
+                auth=(API_KEY, API_SECRET),
+                data={"public_id": f"emoticons/{folder_name}/line_anim/{fname}"},
+                files={"file": f}
+            )
+
+    for fname in sorted(os.listdir(ogq_dir)):
+        with open(os.path.join(ogq_dir, fname), "rb") as f:
+            requests.post(
+                f"https://api.cloudinary.com/v1_1/{CLOUD}/image/upload",
+                auth=(API_KEY, API_SECRET),
+                data={"public_id": f"emoticons/{folder_name}/ogq_anim/{fname}"},
+                files={"file": f}
+            )
+
+    for fname in sorted(os.listdir(kakao_dir)):
+        with open(os.path.join(kakao_dir, fname), "rb") as f:
+            requests.post(
+                f"https://api.cloudinary.com/v1_1/{CLOUD}/image/upload",
+                auth=(API_KEY, API_SECRET),
+                data={"public_id": f"emoticons/{folder_name}/kakao_anim/{fname}"},
+                files={"file": f}
+            )
+
+    print(f"✅ 애니메이션 완료: {anim_success}/24개")
 
     # Step 6: Sheets 로그
     log_to_sheets(creds, data)
