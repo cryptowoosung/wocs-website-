@@ -433,20 +433,21 @@ def make_frames_from_bytes(base_bytes, size, emotion="", api_key=None, character
 
     for frame_num, action in [(2, f2_action), (3, f3_action)]:
         try:
-            prompt = f"{base_prompt}. Action: {action}. Same character design as original, consistent style."
+            prompt = f"Keep EXACTLY the same character from the reference image. Same face, body, colors, style. Only change the action/pose to: {action}. Kawaii emoticon sticker, flat 2D illustration, thick black outlines, transparent background."
+            # edit API - 원본 이미지 참조해서 캐릭터 일관성 유지
+            import io as _io
             resp = req.post(
-                "https://api.openai.com/v1/images/generations",
-                headers={
-                    "Authorization": f"Bearer {api_key}",
-                    "Content-Type": "application/json"
+                "https://api.openai.com/v1/images/edits",
+                headers={"Authorization": f"Bearer {api_key}"},
+                files={
+                    "image": ("frame1.png", _io.BytesIO(base_bytes), "image/png"),
                 },
-                json={
+                data={
                     "model": "gpt-image-1",
                     "prompt": prompt,
                     "size": "1024x1024",
                     "quality": "low",
-                    "n": 1,
-                    "response_format": "b64_json"
+                    "n": "1",
                 },
                 timeout=120
             )
