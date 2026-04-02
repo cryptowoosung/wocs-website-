@@ -337,142 +337,134 @@ def save_webp(frames, out_path, delay=120):
     return size_kb
 
 
-def make_frames_from_bytes(base_bytes, size, emotion=""):
-    """감정 키워드 분석해서 24가지 동작 중 자동 선택, 5프레임 생성"""
-    base_img = Image.open(io.BytesIO(base_bytes)).convert("RGBA")
-    w, h = size
-    e = emotion.lower()
+def make_frames_from_bytes(base_bytes, size, emotion="", api_key=None, character_desc=""):
+    """
+    GPT Image로 프레임2, 프레임3 실제 생성.
+    실패시 위치이동 폴백.
+    """
+    import requests as req
 
-    # 동작 정의: (offset_x 리스트, offset_y 리스트) - 5프레임
-    def px(r): return int(w * r)
-    def py(r): return int(h * r)
-
-    # 1. 좌우 흔들기 (인사/작별)
-    if any(k in e for k in ["wave", "hello", "hi ", "bye", "farewell", "greet"]):
-        ox = [0, px(0.05), 0, px(-0.05), 0]
-        oy = [0, 0, 0, 0, 0]
-
-    # 2. 크게 점프 (기쁨/흥분/축하)
-    elif any(k in e for k in ["jump", "celebrat", "excit", "hooray", "yay", "party", "cheer"]):
-        ox = [0, 0, 0, 0, 0]
-        oy = [0, py(-0.08), py(-0.13), py(-0.08), 0]
-
-    # 3. 아래로 처짐 (슬픔/울음)
-    elif any(k in e for k in ["cry", "sad", "tear", "sob", "weep", "depress", "grief"]):
-        ox = [0, 0, 0, 0, 0]
-        oy = [0, py(0.03), py(0.06), py(0.03), 0]
-
-    # 4. 좌우 떨림 (화남/분노)
-    elif any(k in e for k in ["angry", "anger", "mad", "rage", "furious", "stomp", "frustrat"]):
-        ox = [0, px(0.04), px(-0.04), px(0.04), 0]
-        oy = [0, 0, 0, 0, 0]
-
-    # 5. 고개 끄덕임 (동의/긍정)
-    elif any(k in e for k in ["nod", "agree", "yes", "thumbs up", "approve", "okay"]):
-        ox = [0, 0, 0, 0, 0]
-        oy = [0, py(0.04), py(0.07), py(0.04), 0]
-
-    # 6. 고개 젓기 (거부/부정)
-    elif any(k in e for k in ["no", "refuse", "reject", "deny", "shake head", "disagree"]):
-        ox = [0, px(0.05), 0, px(-0.05), 0]
-        oy = [0, py(0.01), 0, py(0.01), 0]
-
-    # 7. 천천히 아래 (졸음/피로)
-    elif any(k in e for k in ["sleep", "drowsy", "tired", "exhaust", "zzz", "yawn", "lying flat"]):
-        ox = [0, 0, 0, 0, 0]
-        oy = [0, py(0.02), py(0.05), py(0.07), py(0.05)]
-
-    # 8. 작게 좌우 (생각/고민)
-    elif any(k in e for k in ["think", "wonder", "ponder", "question", "hmm", "consider"]):
-        ox = [0, px(0.02), px(0.04), px(0.02), 0]
-        oy = [0, py(-0.01), py(-0.02), py(-0.01), 0]
-
-    # 9. 웃음 떨림 (폭소/웃음)
-    elif any(k in e for k in ["laugh", "lol", "haha", "giggle", "hilarious", "crack up"]):
-        ox = [0, px(0.02), px(-0.02), px(0.02), 0]
-        oy = [0, py(-0.02), py(-0.04), py(-0.02), 0]
-
-    # 10. 앞뒤 흔들기 (부끄럼/수줍음)
-    elif any(k in e for k in ["shy", "embarrass", "blush", "awkward", "fidget"]):
-        ox = [0, px(0.01), 0, px(-0.01), 0]
-        oy = [0, py(0.02), py(0.03), py(0.02), 0]
-
-    # 11. 크게 떨림 (놀람/충격)
-    elif any(k in e for k in ["surpris", "shock", "startl", "gasp", "astonish"]):
-        ox = [0, px(0.03), px(-0.03), px(0.03), 0]
-        oy = [0, py(-0.03), py(0.03), py(-0.03), 0]
-
-    # 12. 앞으로 기울기 (집중/열정)
-    elif any(k in e for k in ["focus", "concentrat", "determin", "serious", "intense"]):
-        ox = [0, 0, px(0.02), px(0.02), 0]
-        oy = [0, py(-0.02), py(-0.03), py(-0.02), 0]
-
-    # 13. 뒤로 기울기 (당황/혼란)
-    elif any(k in e for k in ["confus", "daze", "dizzy", "lost", "panic", "overwhelm"]):
-        ox = [0, px(-0.02), px(-0.04), px(-0.02), 0]
-        oy = [0, py(-0.01), py(-0.02), py(-0.01), 0]
-
-    # 14. 천천히 bounce (힐링/평온)
-    elif any(k in e for k in ["heal", "calm", "peace", "relax", "content", "cozy", "comfort"]):
-        ox = [0, 0, 0, 0, 0]
-        oy = [0, py(-0.02), py(-0.03), py(-0.02), 0]
-
-    # 15. 빠른 좌우 (신남/에너지)
-    elif any(k in e for k in ["energetic", "hype", "pump", "fired up", "enthusiast"]):
-        ox = [0, px(0.06), px(-0.06), px(0.06), 0]
-        oy = [0, py(-0.02), 0, py(-0.02), 0]
-
-    # 16. 아래 + 좌우 (실망/낙담)
-    elif any(k in e for k in ["disappoint", "discourag", "deflat", "sulk", "pout"]):
-        ox = [0, px(0.01), 0, px(-0.01), 0]
-        oy = [0, py(0.03), py(0.05), py(0.03), 0]
-
-    # 17. 위아래 빠르게 (간절함/애원)
-    elif any(k in e for k in ["beg", "plead", "desperat", "pray", "wish"]):
-        ox = [0, 0, 0, 0, 0]
-        oy = [0, py(-0.04), 0, py(-0.04), 0]
-
-    # 18. 좌우 + 위 (자신감/뽐내기)
-    elif any(k in e for k in ["proud", "confident", "boast", "show off", "smug", "cool"]):
-        ox = [0, px(0.03), 0, px(-0.03), 0]
-        oy = [0, py(-0.03), py(-0.05), py(-0.03), 0]
-
-    # 19. 천천히 위 (사랑/설렘)
-    elif any(k in e for k in ["love", "heart", "kiss", "adore", "crush", "affection", "romantic"]):
-        ox = [0, 0, 0, 0, 0]
-        oy = [0, py(-0.03), py(-0.06), py(-0.03), 0]
-
-    # 20. 좌로 기울기 (게으름/나태)
-    elif any(k in e for k in ["lazy", "bored", "dull", "meh", "whatever", "indifferent"]):
-        ox = [0, px(-0.02), px(-0.04), px(-0.02), 0]
-        oy = [0, py(0.01), py(0.02), py(0.01), 0]
-
-    # 21. 빠른 떨림 (추위/두려움)
-    elif any(k in e for k in ["cold", "shiver", "freeze", "fear", "scared", "nervous", "anxious"]):
-        ox = [0, px(0.02), px(-0.02), px(0.02), 0]
-        oy = [0, py(0.01), py(-0.01), py(0.01), 0]
-
-    # 22. 크게 위아래 (먹방/맛있음)
-    elif any(k in e for k in ["eat", "food", "delicious", "yummy", "hungry", "nom", "feast"]):
-        ox = [0, 0, 0, 0, 0]
-        oy = [0, py(-0.03), py(-0.05), py(-0.03), 0]
-
-    # 23. 좌우 크게 (운동/달리기)
-    elif any(k in e for k in ["run", "sprint", "exercise", "workout", "sport", "dash", "rush"]):
-        ox = [0, px(0.06), 0, px(-0.06), 0]
-        oy = [0, py(-0.02), 0, py(-0.02), 0]
-
-    # 24. 기본 bounce (그 외 전부)
-    else:
-        ox = [0, 0, 0, 0, 0]
-        oy = [0, py(-0.03), py(-0.06), py(-0.03), 0]
-
-    frames = []
-    for i in range(5):
+    def resize_frame(img_bytes, size):
+        img = Image.open(io.BytesIO(img_bytes)).convert("RGBA")
         canvas = Image.new("RGBA", size, (0, 0, 0, 0))
-        resized = base_img.resize(size, Image.LANCZOS)
-        canvas.paste(resized, (ox[i], oy[i]), resized)
-        frames.append(canvas)
+        ratio = min(size[0]/img.width, size[1]/img.height)
+        nw, nh = int(img.width*ratio), int(img.height*ratio)
+        resized = img.resize((nw, nh), Image.LANCZOS)
+        canvas.paste(resized, ((size[0]-nw)//2, (size[1]-nh)//2), resized)
+        return canvas
+
+    def fallback_frames(base_bytes, size, emotion):
+        """위치이동 폴백"""
+        base_img = Image.open(io.BytesIO(base_bytes)).convert("RGBA")
+        w, h = size
+        e = emotion.lower()
+        def px(r): return int(w*r)
+        def py(r): return int(h*r)
+        if any(k in e for k in ["wave","hello","bye","farewell"]):
+            ox=[0,px(0.05),0,px(-0.05),0]; oy=[0,0,0,0,0]
+        elif any(k in e for k in ["jump","celebrat","excit","hooray","yay","cheer"]):
+            ox=[0,0,0,0,0]; oy=[0,py(-0.08),py(-0.13),py(-0.08),0]
+        elif any(k in e for k in ["cry","sad","tear","sob"]):
+            ox=[0,0,0,0,0]; oy=[0,py(0.03),py(0.06),py(0.03),0]
+        elif any(k in e for k in ["angry","mad","rage","stomp"]):
+            ox=[0,px(0.04),px(-0.04),px(0.04),0]; oy=[0,0,0,0,0]
+        elif any(k in e for k in ["love","heart","kiss"]):
+            ox=[0,0,0,0,0]; oy=[0,py(-0.03),py(-0.06),py(-0.03),0]
+        elif any(k in e for k in ["laugh","lol","haha"]):
+            ox=[0,px(0.02),px(-0.02),px(0.02),0]; oy=[0,py(-0.02),py(-0.04),py(-0.02),0]
+        else:
+            ox=[0,0,0,0,0]; oy=[0,py(-0.03),py(-0.06),py(-0.03),0]
+        frames=[]
+        for i in range(5):
+            canvas=Image.new("RGBA",size,(0,0,0,0))
+            resized=base_img.resize(size,Image.LANCZOS)
+            canvas.paste(resized,(ox[i],oy[i]),resized)
+            frames.append(canvas)
+        return frames
+
+    if not api_key:
+        return fallback_frames(base_bytes, size, emotion)
+
+    # 감정별 프레임2,3 프롬프트
+    e = emotion.lower()
+    if any(k in e for k in ["wave","hello","bye"]):
+        f2_action = "right arm/paw raised halfway up, mid-wave"
+        f3_action = "right arm/paw fully raised high, peak wave"
+    elif any(k in e for k in ["jump","celebrat","excit","cheer","hooray"]):
+        f2_action = "body slightly lifted off ground, arms beginning to raise"
+        f3_action = "fully jumping in air, both arms raised high, big smile"
+    elif any(k in e for k in ["cry","sad","tear","sob"]):
+        f2_action = "eyes beginning to well up with tears, mouth slightly open"
+        f3_action = "big tears streaming down face, mouth wide open crying"
+    elif any(k in e for k in ["angry","mad","rage","stomp","furious"]):
+        f2_action = "eyebrows furrowed, fists clenched, body tensing"
+        f3_action = "peak anger, fists raised, face very red, steam from head"
+    elif any(k in e for k in ["laugh","lol","haha","giggle"]):
+        f2_action = "mouth opening wider, eyes beginning to squint"
+        f3_action = "holding belly laughing, eyes closed, mouth wide open"
+    elif any(k in e for k in ["love","heart","kiss","adore"]):
+        f2_action = "leaning forward slightly, eyes half closed, lips puckered"
+        f3_action = "blowing kiss, heart floating from mouth, eyes closed happy"
+    elif any(k in e for k in ["think","wonder","ponder","question"]):
+        f2_action = "one finger raised to chin, looking upward thoughtfully"
+        f3_action = "finger tapping chin, question mark appearing above head"
+    elif any(k in e for k in ["sleep","drowsy","tired","zzz"]):
+        f2_action = "eyes half closed, head drooping slightly"
+        f3_action = "eyes fully closed, head tilted, ZZZ bubble above"
+    elif any(k in e for k in ["surpris","shock","gasp"]):
+        f2_action = "eyes beginning to widen, mouth starting to open"
+        f3_action = "eyes fully wide, mouth wide open shocked, hands on cheeks"
+    elif any(k in e for k in ["shy","embarrass","blush"]):
+        f2_action = "cheeks turning pink, looking slightly away"
+        f3_action = "face fully blushing red, both paws covering cheeks"
+    elif any(k in e for k in ["eat","food","delicious","yummy"]):
+        f2_action = "food approaching mouth, eyes lighting up"
+        f3_action = "eating with big bite, eyes sparkling with delight"
+    elif any(k in e for k in ["run","sprint","dash","rush"]):
+        f2_action = "leaning forward, one leg lifted, arms pumping"
+        f3_action = "full sprint, both arms pumping, speed lines behind"
+    else:
+        f2_action = f"mid-action {emotion}, halfway through the movement"
+        f3_action = f"peak action {emotion}, maximum expression of the emotion"
+
+    base_prompt = f"{character_desc}, kawaii emoticon sticker style, flat 2D illustration, thick black outlines, transparent background, centered composition, single character only"
+
+    results = [resize_frame(base_bytes, size)]  # 프레임1: 원본
+
+    for frame_num, action in [(2, f2_action), (3, f3_action)]:
+        try:
+            prompt = f"{base_prompt}. Action: {action}. Same character design as original, consistent style."
+            resp = req.post(
+                "https://api.openai.com/v1/images/generations",
+                headers={
+                    "Authorization": f"Bearer {api_key}",
+                    "Content-Type": "application/json"
+                },
+                json={
+                    "model": "gpt-image-1",
+                    "prompt": prompt,
+                    "size": "1024x1024",
+                    "quality": "low",
+                    "n": 1,
+                    "response_format": "b64_json"
+                },
+                timeout=120
+            )
+            resp.raise_for_status()
+            img_bytes = base64.b64decode(resp.json()["data"][0]["b64_json"])
+            results.append(resize_frame(img_bytes, size))
+            print(f"      frame{frame_num} OK")
+        except Exception as e:
+            print(f"      frame{frame_num} fail({e}), fallback")
+            fb = fallback_frames(base_bytes, size, emotion)
+            results.append(fb[frame_num])
+
+    # 5프레임으로 확장: 1->2->3->2->1 (자연스러운 루프)
+    if len(results) >= 3:
+        frames = [results[0], results[1], results[2], results[1].copy(), results[0].copy()]
+    else:
+        frames = fallback_frames(base_bytes, size, emotion)
+
     return frames
 
 
@@ -774,19 +766,39 @@ def main():
             img_resp.raise_for_status()
             base_bytes = img_resp.content
 
+            # GPT Image로 프레임 생성 (1024x1024 기준으로 한번만 생성)
+            print(f"    GPT Image 프레임 생성 중...")
+            base_frames = make_frames_from_bytes(
+                base_bytes, (1024, 1024), emotion,
+                api_key=os.environ.get("OPENAI_API_KEY"),
+                character_desc=data.get("character_desc", "cute kawaii animal character")
+            )
+
+            # 각 플랫폼 크기로 리사이즈
+            def resize_frames(frames, size):
+                result = []
+                for f in frames:
+                    canvas = Image.new("RGBA", size, (0,0,0,0))
+                    ratio = min(size[0]/f.width, size[1]/f.height)
+                    nw, nh = int(f.width*ratio), int(f.height*ratio)
+                    resized = f.resize((nw,nh), Image.LANCZOS)
+                    canvas.paste(resized, ((size[0]-nw)//2,(size[1]-nh)//2), resized)
+                    result.append(canvas)
+                return result
+
             # 라인: APNG 320x270
-            frames_line = make_frames_from_bytes(base_bytes, (320, 270), emotion)
+            frames_line = resize_frames(base_frames, (320, 270))
             line_path = os.path.join(line_dir, f"{idx+1:02d}.png")
             save_apng(frames_line, line_path)
 
             # OGQ: GIF 740x640
-            frames_ogq = make_frames_from_bytes(base_bytes, (740, 640), emotion)
+            frames_ogq = resize_frames(base_frames, (740, 640))
             ogq_path = os.path.join(ogq_dir, f"O{idx+1:02d}.gif")
             save_gif(frames_ogq, ogq_path)
 
             # 카카오: WEBP 360x360 (감정 강도 기반 3개) + 시안용 GIF
             if idx in kakao_anim_indices:
-                frames_kakao = make_frames_from_bytes(base_bytes, (360, 360), emotion)
+                frames_kakao = resize_frames(base_frames, (360, 360))
                 kakao_path = os.path.join(kakao_dir, f"{idx+1:02d}.webp")
                 save_webp(frames_kakao, kakao_path)
                 # 시안 제출용 GIF도 생성
@@ -876,6 +888,10 @@ def main():
 
     # Step 7: Telegram 알림
     send_telegram(data, success_count, fail_count, folder_name, anim_success, anim_failed)
+
+    # 비용 출력
+    anim_cost = min(24, len(data["emotions"])) * 2 * 0.011
+    print(f"  애니메이션 추가 비용: ${anim_cost:.3f} (24개 × 2프레임 × $0.011)")
 
     print("\n" + "=" * 60)
     print(f"전체 완료! 성공: {success_count}/32")
