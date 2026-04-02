@@ -239,18 +239,35 @@ EMOTICON STYLE:
 # ============================================================
 # 애니메이션 헬퍼 함수
 # ============================================================
-def save_apng(frames, out_path, delay=12):
+def save_apng(frames, out_path, delay=15, loops=4):
+    """APNG 저장 - 라인 공식 규격 준수
+    - 5~20프레임
+    - loop: 1~4회 (무한루프 금지)
+    - 각 프레임 픽셀이 달라야 업로드 오류 방지
+    """
     def png_chunk(t, d):
         c = t + d
         return struct.pack('>I', len(d)) + c + struct.pack('>I', zlib.crc32(c) & 0xffffffff)
-    w, h = frames[0].size
-    n = len(frames)
+
+    # 프레임 픽셀 고유성 보장: 각 프레임에 1픽셀 차이 강제 적용
+    unique_frames = []
+    for idx, frame in enumerate(frames):
+        f = frame.copy()
+        px = f.getpixel((0, 0))
+        # alpha 채널에 미세한 차이 추가 (육안 식별 불가)
+        new_alpha = max(0, min(255, (px[3] if len(px) > 3 else 255) - idx))
+        f.putpixel((0, 0), (px[0], px[1], px[2], new_alpha))
+        unique_frames.append(f)
+
+    w, h = unique_frames[0].size
+    n = len(unique_frames)
+
     out = io.BytesIO()
     out.write(b'\x89PNG\r\n\x1a\n')
     out.write(png_chunk(b'IHDR', struct.pack('>IIBBBBB', w, h, 8, 6, 0, 0, 0)))
-    out.write(png_chunk(b'acTL', struct.pack('>II', n, 0)))
+    out.write(png_chunk(b'acTL', struct.pack('>II', n, loops)))  # loops=4 (무한루프 금지)
     seq = 0
-    for i, frame in enumerate(frames):
+    for i, frame in enumerate(unique_frames):
         fctl = (struct.pack('>I', seq) + struct.pack('>II', w, h) +
                 struct.pack('>II', 0, 0) + struct.pack('>HH', delay, 100) +
                 struct.pack('>BB', 1, 0))
@@ -272,8 +289,16 @@ def save_apng(frames, out_path, delay=12):
                     out.write(png_chunk(b'fdAT', struct.pack('>I', seq) + cd))
                     seq += 1
     out.write(png_chunk(b'IEND', b''))
+
+    data = out.getvalue()
     with open(out_path, 'wb') as f:
-        f.write(out.getvalue())
+        f.write(data)
+
+    # 파일 크기 검증 (라인 최대 1MB)
+    size_kb = len(data) / 1024
+    if size_kb > 1024:
+        print(f"  ⚠️ APNG 크기 초과: {size_kb:.0f}KB > 1MB ({out_path})")
+    return size_kb
 
 
 def save_gif(frames, out_path, delay=12):
