@@ -21,7 +21,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests google-auth google-auth-httplib2 google-api-python-client pillow
+          pip install requests google-auth google-auth-httplib2 google-api-python-client "pillow>=9.1.0" anthropic openai python-dotenv
 
       - name: Run Emoticon Generator
         env:
