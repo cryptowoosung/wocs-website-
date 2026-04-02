@@ -301,15 +301,19 @@ def save_apng(frames, out_path, delay=15, loops=4):
     return size_kb
 
 
-def save_gif(frames, out_path, delay=12):
+def save_gif(frames, out_path, delay=15):
+    """GIF 저장 - 투명 배경을 흰색으로 합성 (GIF는 완전 투명 미지원)"""
     gif_frames = []
     for frame in frames:
-        bg = Image.new("RGB", frame.size, (255, 255, 255))
-        bg.paste(frame, mask=frame.split()[3])
-        gif_frames.append(bg.convert("P", palette=Image.ADAPTIVE, colors=256))
+        bg = Image.new("RGBA", frame.size, (255, 255, 255, 255))
+        bg.paste(frame, mask=frame.split()[3] if frame.mode == 'RGBA' else None)
+        rgb = bg.convert("RGB")
+        # 고품질 팔레트 변환
+        p = rgb.quantize(colors=256, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.FLOYDSTEINBERG)
+        gif_frames.append(p)
     gif_frames[0].save(
         out_path, save_all=True, append_images=gif_frames[1:],
-        loop=0, duration=delay * 10, disposal=2
+        loop=0, duration=delay * 10, disposal=2, optimize=True
     )
 
 
@@ -319,6 +323,18 @@ def save_webp(frames, out_path, delay=120):
         append_images=frames[1:], loop=0, duration=delay,
         lossless=False, quality=85
     )
+    size_kb = os.path.getsize(out_path) / 1024
+    if size_kb > 150:
+        # 품질 낮춰서 재시도
+        frames[0].save(
+            out_path, format="WEBP", save_all=True,
+            append_images=frames[1:], loop=0, duration=delay,
+            lossless=False, quality=60
+        )
+        size_kb = os.path.getsize(out_path) / 1024
+        if size_kb > 150:
+            print(f"  ⚠️ WEBP 150KB 초과: {size_kb:.0f}KB ({out_path})")
+    return size_kb
 
 
 def make_frames_from_bytes(base_bytes, size, emotion=""):
@@ -566,8 +582,15 @@ def log_to_sheets(creds, data):
 # ============================================================
 # Step 7: Telegram 알림
 # ============================================================
-def send_telegram(data, success_count, fail_count, folder_name):
+def send_telegram(data, success_count, fail_count, folder_name, anim_success=0, anim_failed=None):
     """Telegram으로 완료 알림 전송"""
+    anim_failed = anim_failed or []
+    anim_status = f"✅ 애니메이션: {anim_success}/24개 성공"
+    if anim_failed:
+        anim_status += f"\n❌ 실패: {', '.join(anim_failed[:5])}"
+
+    cloudinary_anim_url = f"https://console.cloudinary.com/console/media_library/folders/emoticons/{folder_name}"
+
     message = (
         f"🐾 이모티콘 생성 완료!\n"
         f"📅 {TODAY}\n"
@@ -576,6 +599,9 @@ def send_telegram(data, success_count, fail_count, folder_name):
         f"✨ 스타일: {data['style']}\n"
         f"✅ 성공: {success_count}개 / ❌ 실패: {fail_count}개\n"
         f"📁 Google Drive: WOCS_emoticons/{folder_name}\n"
+        f"\n🎬 {anim_status}\n"
+        f"📦 라인 ZIP / 카카오 ZIP Cloudinary에 저장됨\n"
+        f"🔗 {cloudinary_anim_url}\n"
         f"👉 다음: Claude Code 변환 → OGQ → 라인 제출"
     )
 
@@ -717,13 +743,26 @@ def main():
     line_dir = os.path.join(tmp_dir, "line_anim")
     ogq_dir = os.path.join(tmp_dir, "ogq_anim")
     kakao_dir = os.path.join(tmp_dir, "kakao_anim")
-    for d in [line_dir, ogq_dir, kakao_dir]:
+    kakao_gif_dir = os.path.join(tmp_dir, "kakao_gif")
+    for d in [line_dir, ogq_dir, kakao_dir, kakao_gif_dir]:
         os.makedirs(d, exist_ok=True)
 
-    # 카카오 WEBP 대상: 0,1,2번 인덱스 (첫 3개)
-    kakao_anim_indices = {0, 1, 2}
+    # 감정 강도 강한 것 우선 선택 (카카오 WEBP 3개)
+    priority_keywords = ["excited", "cry", "angry", "jump", "celebrat", "love", "surprise", "laugh", "cheer"]
+    kakao_anim_indices = set()
+    for idx_k, emotion_k in enumerate(data["emotions"][:24]):
+        if any(k in emotion_k.lower() for k in priority_keywords):
+            kakao_anim_indices.add(idx_k)
+        if len(kakao_anim_indices) >= 3:
+            break
+    if len(kakao_anim_indices) < 3:
+        for idx_k in range(24):
+            kakao_anim_indices.add(idx_k)
+            if len(kakao_anim_indices) >= 3:
+                break
 
     anim_success = 0
+    anim_failed = []
     for idx in range(min(24, len(data["emotions"]))):
         emotion = data["emotions"][idx]
         filename = f"{str(idx+1).zfill(2)}.png"
@@ -745,17 +784,38 @@ def main():
             ogq_path = os.path.join(ogq_dir, f"O{idx+1:02d}.gif")
             save_gif(frames_ogq, ogq_path)
 
-            # 카카오: WEBP 360x360 (첫 3개만)
+            # 카카오: WEBP 360x360 (감정 강도 기반 3개) + 시안용 GIF
             if idx in kakao_anim_indices:
                 frames_kakao = make_frames_from_bytes(base_bytes, (360, 360), emotion)
                 kakao_path = os.path.join(kakao_dir, f"{idx+1:02d}.webp")
                 save_webp(frames_kakao, kakao_path)
+                # 시안 제출용 GIF도 생성
+                kakao_gif_path = os.path.join(kakao_gif_dir, f"{idx+1:02d}.gif")
+                save_gif(frames_kakao, kakao_gif_path)
 
             anim_success += 1
             print(f"  [{idx+1}/24] 애니메이션 완료: {emotion[:30]}")
 
         except Exception as e:
             print(f"  [{idx+1}/24] 애니메이션 실패: {e}")
+            anim_failed.append(f"{idx+1}: {str(e)[:50]}")
+
+    # 라인 ZIP 생성
+    import zipfile as zf
+    line_zip_path = os.path.join(tmp_dir, "line_anim.zip")
+    with zf.ZipFile(line_zip_path, "w", zf.ZIP_DEFLATED) as zfile:
+        for fname in sorted(os.listdir(line_dir)):
+            zfile.write(os.path.join(line_dir, fname), fname)
+    line_zip_kb = os.path.getsize(line_zip_path) / 1024
+    print(f"  라인 ZIP: {line_zip_kb:.0f}KB {'✅' if line_zip_kb < 61440 else '❌ 60MB 초과'}")
+
+    # 카카오 ZIP 생성 (WEBP + GIF 전부 포함)
+    kakao_zip_path = os.path.join(tmp_dir, "kakao_anim.zip")
+    with zf.ZipFile(kakao_zip_path, "w", zf.ZIP_DEFLATED) as zfile:
+        for fname in sorted(os.listdir(kakao_dir)):
+            zfile.write(os.path.join(kakao_dir, fname), f"webp/{fname}")
+        for fname in sorted(os.listdir(kakao_gif_dir)):
+            zfile.write(os.path.join(kakao_gif_dir, fname), f"gif_시안/{fname}")
 
     # Cloudinary 애니메이션 업로드
     print("  Cloudinary 애니메이션 업로드 중...")
@@ -763,32 +823,51 @@ def main():
     API_KEY = os.environ["CLOUDINARY_API_KEY"]
     API_SECRET = os.environ["CLOUDINARY_API_SECRET"]
 
+    # APNG 업로드 (라인) - raw 타입
     for fname in sorted(os.listdir(line_dir)):
         with open(os.path.join(line_dir, fname), "rb") as f:
             requests.post(
-                f"https://api.cloudinary.com/v1_1/{CLOUD}/image/upload",
+                f"https://api.cloudinary.com/v1_1/{CLOUD}/raw/upload",
                 auth=(API_KEY, API_SECRET),
-                data={"public_id": f"emoticons/{folder_name}/line_anim/{fname}"},
+                data={"public_id": f"emoticons/{folder_name}/line_anim/{fname}", "resource_type": "raw"},
                 files={"file": f}
             )
 
+    # GIF 업로드 (OGQ) - image 타입
     for fname in sorted(os.listdir(ogq_dir)):
         with open(os.path.join(ogq_dir, fname), "rb") as f:
             requests.post(
                 f"https://api.cloudinary.com/v1_1/{CLOUD}/image/upload",
                 auth=(API_KEY, API_SECRET),
-                data={"public_id": f"emoticons/{folder_name}/ogq_anim/{fname}"},
+                data={"public_id": f"emoticons/{folder_name}/ogq_anim/{fname}", "resource_type": "image"},
                 files={"file": f}
             )
 
+    # WEBP 업로드 (카카오) - image 타입
     for fname in sorted(os.listdir(kakao_dir)):
         with open(os.path.join(kakao_dir, fname), "rb") as f:
             requests.post(
                 f"https://api.cloudinary.com/v1_1/{CLOUD}/image/upload",
                 auth=(API_KEY, API_SECRET),
-                data={"public_id": f"emoticons/{folder_name}/kakao_anim/{fname}"},
+                data={"public_id": f"emoticons/{folder_name}/kakao_anim/{fname}", "resource_type": "image"},
                 files={"file": f}
             )
+
+    # ZIP 업로드 (라인, 카카오)
+    with open(line_zip_path, "rb") as f:
+        requests.post(
+            f"https://api.cloudinary.com/v1_1/{CLOUD}/raw/upload",
+            auth=(API_KEY, API_SECRET),
+            data={"public_id": f"emoticons/{folder_name}/line_anim.zip"},
+            files={"file": f}
+        )
+    with open(kakao_zip_path, "rb") as f:
+        requests.post(
+            f"https://api.cloudinary.com/v1_1/{CLOUD}/raw/upload",
+            auth=(API_KEY, API_SECRET),
+            data={"public_id": f"emoticons/{folder_name}/kakao_anim.zip"},
+            files={"file": f}
+        )
 
     print(f"✅ 애니메이션 완료: {anim_success}/24개")
 
@@ -796,7 +875,7 @@ def main():
     log_to_sheets(creds, data)
 
     # Step 7: Telegram 알림
-    send_telegram(data, success_count, fail_count, folder_name)
+    send_telegram(data, success_count, fail_count, folder_name, anim_success, anim_failed)
 
     print("\n" + "=" * 60)
     print(f"전체 완료! 성공: {success_count}/32")
