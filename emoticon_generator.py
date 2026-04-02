@@ -297,18 +297,19 @@ def save_webp(frames, out_path, delay=120):
 
 
 def make_frames_from_bytes(base_bytes, size):
-    """단일 이미지로 3프레임 애니메이션 생성 (bounce 효과)"""
+    """단일 이미지로 5프레임 애니메이션 생성 (bounce 효과)"""
     frames = []
     base_img = Image.open(io.BytesIO(base_bytes)).convert("RGBA")
     w, h = size
-    for i in range(4):  # 4프레임 루프 (위→중간→아래→중간)
-        t = i / 4
-        offset_y = int(-abs(math.sin(t * math.pi)) * h * 0.06)
+    # 5프레임: 기본→위→최고→위→기본 (자연스러운 bounce 루프)
+    offsets = [0, -0.03, -0.06, -0.03, 0]
+    for t in offsets:
+        offset_y = int(t * h)
         canvas = Image.new("RGBA", size, (0, 0, 0, 0))
         resized = base_img.resize(size, Image.LANCZOS)
         canvas.paste(resized, (0, offset_y), resized)
         frames.append(canvas)
-    return frames
+    return frames  # 5프레임 루프
 
 
 # ============================================================
