@@ -297,53 +297,141 @@ def save_webp(frames, out_path, delay=120):
 
 
 def make_frames_from_bytes(base_bytes, size, emotion=""):
-    """감정별 다른 5프레임 애니메이션 생성"""
+    """감정 키워드 분석해서 24가지 동작 중 자동 선택, 5프레임 생성"""
     base_img = Image.open(io.BytesIO(base_bytes)).convert("RGBA")
     w, h = size
-    frames = []
+    e = emotion.lower()
 
-    emotion_lower = emotion.lower()
+    # 동작 정의: (offset_x 리스트, offset_y 리스트) - 5프레임
+    def px(r): return int(w * r)
+    def py(r): return int(h * r)
 
-    # 감정별 움직임 분류
-    if any(k in emotion_lower for k in ["wave", "hello", "bye", "waving"]):
-        # 좌우 흔들기
-        offsets_x = [0, int(w*0.04), 0, int(-w*0.04), 0]
-        offsets_y = [0, 0, 0, 0, 0]
-    elif any(k in emotion_lower for k in ["cry", "sad", "tear", "sob"]):
-        # 아래로 처짐 (슬픔)
-        offsets_x = [0, 0, 0, 0, 0]
-        offsets_y = [0, int(h*0.03), int(h*0.05), int(h*0.03), 0]
-    elif any(k in emotion_lower for k in ["angry", "anger", "stomp", "mad"]):
-        # 좌우 떨림 (화남)
-        offsets_x = [0, int(w*0.03), int(-w*0.03), int(w*0.03), 0]
-        offsets_y = [0, 0, 0, 0, 0]
-    elif any(k in emotion_lower for k in ["jump", "cheer", "celebrat", "excit", "joy"]):
-        # 크게 bounce (기쁨)
-        offsets_x = [0, 0, 0, 0, 0]
-        offsets_y = [0, int(-h*0.08), int(-h*0.12), int(-h*0.08), 0]
-    elif any(k in emotion_lower for k in ["think", "wonder", "question"]):
-        # 작게 좌우 (생각)
-        offsets_x = [0, int(w*0.02), int(w*0.03), int(w*0.02), 0]
-        offsets_y = [0, int(-h*0.01), int(-h*0.02), int(-h*0.01), 0]
-    elif any(k in emotion_lower for k in ["sleep", "drowsy", "zzz"]):
-        # 천천히 아래 (졸음)
-        offsets_x = [0, 0, 0, 0, 0]
-        offsets_y = [0, int(h*0.02), int(h*0.04), int(h*0.02), 0]
-    elif any(k in emotion_lower for k in ["laugh", "haha", "lol"]):
-        # 좌우+위아래 (웃음)
-        offsets_x = [0, int(w*0.02), 0, int(-w*0.02), 0]
-        offsets_y = [0, int(-h*0.02), int(-h*0.04), int(-h*0.02), 0]
+    # 1. 좌우 흔들기 (인사/작별)
+    if any(k in e for k in ["wave", "hello", "hi ", "bye", "farewell", "greet"]):
+        ox = [0, px(0.05), 0, px(-0.05), 0]
+        oy = [0, 0, 0, 0, 0]
+
+    # 2. 크게 점프 (기쁨/흥분/축하)
+    elif any(k in e for k in ["jump", "celebrat", "excit", "hooray", "yay", "party", "cheer"]):
+        ox = [0, 0, 0, 0, 0]
+        oy = [0, py(-0.08), py(-0.13), py(-0.08), 0]
+
+    # 3. 아래로 처짐 (슬픔/울음)
+    elif any(k in e for k in ["cry", "sad", "tear", "sob", "weep", "depress", "grief"]):
+        ox = [0, 0, 0, 0, 0]
+        oy = [0, py(0.03), py(0.06), py(0.03), 0]
+
+    # 4. 좌우 떨림 (화남/분노)
+    elif any(k in e for k in ["angry", "anger", "mad", "rage", "furious", "stomp", "frustrat"]):
+        ox = [0, px(0.04), px(-0.04), px(0.04), 0]
+        oy = [0, 0, 0, 0, 0]
+
+    # 5. 고개 끄덕임 (동의/긍정)
+    elif any(k in e for k in ["nod", "agree", "yes", "thumbs up", "approve", "okay"]):
+        ox = [0, 0, 0, 0, 0]
+        oy = [0, py(0.04), py(0.07), py(0.04), 0]
+
+    # 6. 고개 젓기 (거부/부정)
+    elif any(k in e for k in ["no", "refuse", "reject", "deny", "shake head", "disagree"]):
+        ox = [0, px(0.05), 0, px(-0.05), 0]
+        oy = [0, py(0.01), 0, py(0.01), 0]
+
+    # 7. 천천히 아래 (졸음/피로)
+    elif any(k in e for k in ["sleep", "drowsy", "tired", "exhaust", "zzz", "yawn", "lying flat"]):
+        ox = [0, 0, 0, 0, 0]
+        oy = [0, py(0.02), py(0.05), py(0.07), py(0.05)]
+
+    # 8. 작게 좌우 (생각/고민)
+    elif any(k in e for k in ["think", "wonder", "ponder", "question", "hmm", "consider"]):
+        ox = [0, px(0.02), px(0.04), px(0.02), 0]
+        oy = [0, py(-0.01), py(-0.02), py(-0.01), 0]
+
+    # 9. 웃음 떨림 (폭소/웃음)
+    elif any(k in e for k in ["laugh", "lol", "haha", "giggle", "hilarious", "crack up"]):
+        ox = [0, px(0.02), px(-0.02), px(0.02), 0]
+        oy = [0, py(-0.02), py(-0.04), py(-0.02), 0]
+
+    # 10. 앞뒤 흔들기 (부끄럼/수줍음)
+    elif any(k in e for k in ["shy", "embarrass", "blush", "awkward", "fidget"]):
+        ox = [0, px(0.01), 0, px(-0.01), 0]
+        oy = [0, py(0.02), py(0.03), py(0.02), 0]
+
+    # 11. 크게 떨림 (놀람/충격)
+    elif any(k in e for k in ["surpris", "shock", "startl", "gasp", "astonish"]):
+        ox = [0, px(0.03), px(-0.03), px(0.03), 0]
+        oy = [0, py(-0.03), py(0.03), py(-0.03), 0]
+
+    # 12. 앞으로 기울기 (집중/열정)
+    elif any(k in e for k in ["focus", "concentrat", "determin", "serious", "intense"]):
+        ox = [0, 0, px(0.02), px(0.02), 0]
+        oy = [0, py(-0.02), py(-0.03), py(-0.02), 0]
+
+    # 13. 뒤로 기울기 (당황/혼란)
+    elif any(k in e for k in ["confus", "daze", "dizzy", "lost", "panic", "overwhelm"]):
+        ox = [0, px(-0.02), px(-0.04), px(-0.02), 0]
+        oy = [0, py(-0.01), py(-0.02), py(-0.01), 0]
+
+    # 14. 천천히 bounce (힐링/평온)
+    elif any(k in e for k in ["heal", "calm", "peace", "relax", "content", "cozy", "comfort"]):
+        ox = [0, 0, 0, 0, 0]
+        oy = [0, py(-0.02), py(-0.03), py(-0.02), 0]
+
+    # 15. 빠른 좌우 (신남/에너지)
+    elif any(k in e for k in ["energetic", "hype", "pump", "fired up", "enthusiast"]):
+        ox = [0, px(0.06), px(-0.06), px(0.06), 0]
+        oy = [0, py(-0.02), 0, py(-0.02), 0]
+
+    # 16. 아래 + 좌우 (실망/낙담)
+    elif any(k in e for k in ["disappoint", "discourag", "deflat", "sulk", "pout"]):
+        ox = [0, px(0.01), 0, px(-0.01), 0]
+        oy = [0, py(0.03), py(0.05), py(0.03), 0]
+
+    # 17. 위아래 빠르게 (간절함/애원)
+    elif any(k in e for k in ["beg", "plead", "desperat", "pray", "wish"]):
+        ox = [0, 0, 0, 0, 0]
+        oy = [0, py(-0.04), 0, py(-0.04), 0]
+
+    # 18. 좌우 + 위 (자신감/뽐내기)
+    elif any(k in e for k in ["proud", "confident", "boast", "show off", "smug", "cool"]):
+        ox = [0, px(0.03), 0, px(-0.03), 0]
+        oy = [0, py(-0.03), py(-0.05), py(-0.03), 0]
+
+    # 19. 천천히 위 (사랑/설렘)
+    elif any(k in e for k in ["love", "heart", "kiss", "adore", "crush", "affection", "romantic"]):
+        ox = [0, 0, 0, 0, 0]
+        oy = [0, py(-0.03), py(-0.06), py(-0.03), 0]
+
+    # 20. 좌로 기울기 (게으름/나태)
+    elif any(k in e for k in ["lazy", "bored", "dull", "meh", "whatever", "indifferent"]):
+        ox = [0, px(-0.02), px(-0.04), px(-0.02), 0]
+        oy = [0, py(0.01), py(0.02), py(0.01), 0]
+
+    # 21. 빠른 떨림 (추위/두려움)
+    elif any(k in e for k in ["cold", "shiver", "freeze", "fear", "scared", "nervous", "anxious"]):
+        ox = [0, px(0.02), px(-0.02), px(0.02), 0]
+        oy = [0, py(0.01), py(-0.01), py(0.01), 0]
+
+    # 22. 크게 위아래 (먹방/맛있음)
+    elif any(k in e for k in ["eat", "food", "delicious", "yummy", "hungry", "nom", "feast"]):
+        ox = [0, 0, 0, 0, 0]
+        oy = [0, py(-0.03), py(-0.05), py(-0.03), 0]
+
+    # 23. 좌우 크게 (운동/달리기)
+    elif any(k in e for k in ["run", "sprint", "exercise", "workout", "sport", "dash", "rush"]):
+        ox = [0, px(0.06), 0, px(-0.06), 0]
+        oy = [0, py(-0.02), 0, py(-0.02), 0]
+
+    # 24. 기본 bounce (그 외 전부)
     else:
-        # 기본 bounce
-        offsets_x = [0, 0, 0, 0, 0]
-        offsets_y = [0, int(-h*0.03), int(-h*0.06), int(-h*0.03), 0]
+        ox = [0, 0, 0, 0, 0]
+        oy = [0, py(-0.03), py(-0.06), py(-0.03), 0]
 
-    for ox, oy in zip(offsets_x, offsets_y):
+    frames = []
+    for i in range(5):
         canvas = Image.new("RGBA", size, (0, 0, 0, 0))
         resized = base_img.resize(size, Image.LANCZOS)
-        canvas.paste(resized, (ox, oy), resized)
+        canvas.paste(resized, (ox[i], oy[i]), resized)
         frames.append(canvas)
-
     return frames
 
 
