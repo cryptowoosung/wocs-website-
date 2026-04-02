@@ -296,20 +296,55 @@ def save_webp(frames, out_path, delay=120):
     )
 
 
-def make_frames_from_bytes(base_bytes, size):
-    """단일 이미지로 5프레임 애니메이션 생성 (bounce 효과)"""
-    frames = []
+def make_frames_from_bytes(base_bytes, size, emotion=""):
+    """감정별 다른 5프레임 애니메이션 생성"""
     base_img = Image.open(io.BytesIO(base_bytes)).convert("RGBA")
     w, h = size
-    # 5프레임: 기본→위→최고→위→기본 (자연스러운 bounce 루프)
-    offsets = [0, -0.03, -0.06, -0.03, 0]
-    for t in offsets:
-        offset_y = int(t * h)
+    frames = []
+
+    emotion_lower = emotion.lower()
+
+    # 감정별 움직임 분류
+    if any(k in emotion_lower for k in ["wave", "hello", "bye", "waving"]):
+        # 좌우 흔들기
+        offsets_x = [0, int(w*0.04), 0, int(-w*0.04), 0]
+        offsets_y = [0, 0, 0, 0, 0]
+    elif any(k in emotion_lower for k in ["cry", "sad", "tear", "sob"]):
+        # 아래로 처짐 (슬픔)
+        offsets_x = [0, 0, 0, 0, 0]
+        offsets_y = [0, int(h*0.03), int(h*0.05), int(h*0.03), 0]
+    elif any(k in emotion_lower for k in ["angry", "anger", "stomp", "mad"]):
+        # 좌우 떨림 (화남)
+        offsets_x = [0, int(w*0.03), int(-w*0.03), int(w*0.03), 0]
+        offsets_y = [0, 0, 0, 0, 0]
+    elif any(k in emotion_lower for k in ["jump", "cheer", "celebrat", "excit", "joy"]):
+        # 크게 bounce (기쁨)
+        offsets_x = [0, 0, 0, 0, 0]
+        offsets_y = [0, int(-h*0.08), int(-h*0.12), int(-h*0.08), 0]
+    elif any(k in emotion_lower for k in ["think", "wonder", "question"]):
+        # 작게 좌우 (생각)
+        offsets_x = [0, int(w*0.02), int(w*0.03), int(w*0.02), 0]
+        offsets_y = [0, int(-h*0.01), int(-h*0.02), int(-h*0.01), 0]
+    elif any(k in emotion_lower for k in ["sleep", "drowsy", "zzz"]):
+        # 천천히 아래 (졸음)
+        offsets_x = [0, 0, 0, 0, 0]
+        offsets_y = [0, int(h*0.02), int(h*0.04), int(h*0.02), 0]
+    elif any(k in emotion_lower for k in ["laugh", "haha", "lol"]):
+        # 좌우+위아래 (웃음)
+        offsets_x = [0, int(w*0.02), 0, int(-w*0.02), 0]
+        offsets_y = [0, int(-h*0.02), int(-h*0.04), int(-h*0.02), 0]
+    else:
+        # 기본 bounce
+        offsets_x = [0, 0, 0, 0, 0]
+        offsets_y = [0, int(-h*0.03), int(-h*0.06), int(-h*0.03), 0]
+
+    for ox, oy in zip(offsets_x, offsets_y):
         canvas = Image.new("RGBA", size, (0, 0, 0, 0))
         resized = base_img.resize(size, Image.LANCZOS)
-        canvas.paste(resized, (0, offset_y), resized)
+        canvas.paste(resized, (ox, oy), resized)
         frames.append(canvas)
-    return frames  # 5프레임 루프
+
+    return frames
 
 
 # ============================================================
@@ -588,18 +623,18 @@ def main():
             base_bytes = img_resp.content
 
             # 라인: APNG 320x270
-            frames_line = make_frames_from_bytes(base_bytes, (320, 270))
+            frames_line = make_frames_from_bytes(base_bytes, (320, 270), emotion)
             line_path = os.path.join(line_dir, f"{idx+1:02d}.png")
             save_apng(frames_line, line_path)
 
             # OGQ: GIF 740x640
-            frames_ogq = make_frames_from_bytes(base_bytes, (740, 640))
+            frames_ogq = make_frames_from_bytes(base_bytes, (740, 640), emotion)
             ogq_path = os.path.join(ogq_dir, f"O{idx+1:02d}.gif")
             save_gif(frames_ogq, ogq_path)
 
             # 카카오: WEBP 360x360 (첫 3개만)
             if idx in kakao_anim_indices:
-                frames_kakao = make_frames_from_bytes(base_bytes, (360, 360))
+                frames_kakao = make_frames_from_bytes(base_bytes, (360, 360), emotion)
                 kakao_path = os.path.join(kakao_dir, f"{idx+1:02d}.webp")
                 save_webp(frames_kakao, kakao_path)
 
