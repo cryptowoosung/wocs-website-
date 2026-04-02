@@ -465,6 +465,100 @@ def main():
     success_count, fail_count = generate_and_upload(prompts, folder_name)
 
     # ============================================================
+    # Step 5.4: 플랫폼별 정적 PNG 리사이즈 및 Cloudinary 업로드
+    # ============================================================
+    print("\n[Step 5.4] 정적 이모티콘 플랫폼별 리사이즈 중...")
+
+    def resize_canvas(src_bytes, size, padding=10):
+        img = Image.open(io.BytesIO(src_bytes)).convert("RGBA")
+        bbox = img.getbbox()
+        if bbox:
+            img = img.crop(bbox)
+        cw, ch = img.size
+        max_w = size[0] - padding * 2
+        max_h = size[1] - padding * 2
+        scale = min(max_w / cw, max_h / ch)
+        resized = img.resize((int(cw * scale), int(ch * scale)), Image.LANCZOS)
+        canvas = Image.new("RGBA", size, (0, 0, 0, 0))
+        px = (size[0] - resized.width) // 2
+        py = (size[1] - resized.height) // 2
+        canvas.paste(resized, (px, py), resized)
+        return canvas
+
+    static_tmp = tempfile.mkdtemp()
+    kakao_static_dir = os.path.join(static_tmp, "kakao")
+    line_static_dir = os.path.join(static_tmp, "line")
+    ogq_static_dir = os.path.join(static_tmp, "ogq")
+    for d in [kakao_static_dir, line_static_dir, ogq_static_dir]:
+        os.makedirs(d, exist_ok=True)
+
+    CLOUD = os.environ["CLOUDINARY_CLOUD_NAME"]
+    API_KEY = os.environ["CLOUDINARY_API_KEY"]
+    API_SECRET = os.environ["CLOUDINARY_API_SECRET"]
+
+    for idx in range(len(data["emotions"])):
+        filename = f"{str(idx+1).zfill(2)}.png"
+        cloudinary_url = f"https://res.cloudinary.com/{CLOUD}/image/upload/emoticons/{folder_name}/{filename}"
+
+        try:
+            img_resp = requests.get(cloudinary_url, timeout=30)
+            img_resp.raise_for_status()
+            src_bytes = img_resp.content
+
+            # 카카오: 360×360 (32개)
+            kakao_img = resize_canvas(src_bytes, (360, 360))
+            kakao_path = os.path.join(kakao_static_dir, filename)
+            kakao_img.save(kakao_path, "PNG", optimize=True, compress_level=9)
+
+            # 라인: 370×320 (24개만)
+            if idx < 24:
+                line_img = resize_canvas(src_bytes, (370, 320))
+                line_path = os.path.join(line_static_dir, filename)
+                line_img.save(line_path, "PNG", optimize=True, compress_level=9)
+
+            # OGQ: 740×640 (24개만, O01 형식)
+            if idx < 24:
+                ogq_img = resize_canvas(src_bytes, (740, 640))
+                ogq_path = os.path.join(ogq_static_dir, f"O{idx+1:02d}.png")
+                ogq_img.save(ogq_path, "PNG", optimize=True, compress_level=9)
+
+            print(f"  [{idx+1}] 리사이즈 완료")
+
+        except Exception as e:
+            print(f"  [{idx+1}] 리사이즈 실패: {e}")
+
+    # 첫 번째 이미지로 main.png, tab.png, icon 생성
+    try:
+        first_url = f"https://res.cloudinary.com/{CLOUD}/image/upload/emoticons/{folder_name}/01.png"
+        first_resp = requests.get(first_url, timeout=30)
+        first_bytes = first_resp.content
+
+        for d, name, size, pad in [
+            (line_static_dir, "main.png", (240, 240), 8),
+            (line_static_dir, "tab.png", (96, 74), 4),
+            (ogq_static_dir, "main.png", (240, 240), 8),
+            (ogq_static_dir, "tab.png", (96, 74), 4),
+            (kakao_static_dir, "icon_78x78.png", (78, 78), 4),
+        ]:
+            resize_canvas(first_bytes, size, pad).save(os.path.join(d, name), "PNG")
+    except Exception as e:
+        print(f"  main/tab/icon 생성 실패: {e}")
+
+    # Cloudinary 업로드
+    print("  정적 PNG Cloudinary 업로드 중...")
+    for platform, d in [("kakao", kakao_static_dir), ("line", line_static_dir), ("ogq", ogq_static_dir)]:
+        for fname in sorted(os.listdir(d)):
+            with open(os.path.join(d, fname), "rb") as f:
+                requests.post(
+                    f"https://api.cloudinary.com/v1_1/{CLOUD}/image/upload",
+                    auth=(API_KEY, API_SECRET),
+                    data={"public_id": f"emoticons/{folder_name}/{platform}_static/{fname}"},
+                    files={"file": f}
+                )
+
+    print("✅ 정적 리사이즈 완료!")
+
+    # ============================================================
     # Step 5.5: 플랫폼별 애니메이션 이모티콘 생성 및 Cloudinary 업로드
     # ============================================================
     print("\n[Step 5.5] 움직이는 이모티콘 생성 중...")
