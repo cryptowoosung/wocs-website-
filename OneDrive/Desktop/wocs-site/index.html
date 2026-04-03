@@ -150,8 +150,18 @@ body { background: #09090b; }
 .wocs-hamburger { display:none!important; }
 .wocs-desk-nav { display:flex!important; }
 .wocs-mobile-panel { display:none; }
+/* 수정2: 모바일 메뉴 open 시 배경 요소 터치 차단 */
+body.mob-open .noise-overlay,
+body.mob-open section,
+body.mob-open .carousel { pointer-events:none!important; }
+body.mob-open { overflow:hidden; }
+/* 수정3: 모바일 헤더 언어 버튼 */
+.wocs-mob-lang-icon { display:none!important; }
+.wocs-mob-controls { display:flex; align-items:center; gap:8px; }
 @media(max-width:1024px) {
   .wocs-hamburger { display:block!important; background:none; border:none; color:#c9a96e; font-size:28px; cursor:pointer; padding:8px; z-index:10001; position:relative; }
+  .wocs-mob-lang-icon { display:flex!important; align-items:center; justify-content:center; width:38px; height:38px; border-radius:50%; border:1.5px solid rgba(201,169,110,0.3); background:transparent; cursor:pointer; z-index:10001; position:relative; }
+  .wocs-mob-lang-icon:active { border-color:#c9a96e; background:rgba(201,169,110,0.1); }
   .wocs-desk-nav { display:none!important; }
   .wocs-mobile-panel.open { display:block; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(9,9,11,0.97); z-index:10000; padding:80px 24px 40px; overflow-y:auto; animation:slideDown .3s ease; }
   .wocs-mobile-panel .mob-item { display:flex; justify-content:space-between; align-items:center; padding:16px 0; border-bottom:1px solid rgba(201,169,110,0.12); font-family:'Lexend',sans-serif; font-size:16px; color:#f0ebe0cc; text-decoration:none; cursor:pointer; background:none; border-left:none; border-right:none; border-top:none; width:100%; text-align:left; }
@@ -274,6 +284,17 @@ function WOCSHomepage() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobAccordion, setMobAccordion] = useState(null);
   const [mobLangOpen, setMobLangOpen] = useState(false);
+
+  // 수정1+2: body class 토글 (pointer-events 제어 + scroll lock)
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.classList.add('mob-open');
+    } else {
+      document.body.classList.remove('mob-open');
+      setMobAccordion(null);
+      setMobLangOpen(false);
+    }
+  }, [mobileOpen]);
   const [activeDome, setActiveDome] = useState(2);
   const [activeProduct, setActiveProduct] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
@@ -6009,87 +6030,103 @@ function WOCSHomepage() {
       alignItems: "center",
       gap: 6
     }
-  }, flagCircle(languages.find(l => l.code === currentLang), 14), languages.find(l => l.code === currentLang)?.label))))), /*#__PURE__*/React.createElement("button", {
-    className: "wocs-hamburger",
-    onClick: () => setMobileOpen(!mobileOpen),
-    style: {
-      background: "none",
-      border: "none",
-      color: GOLD,
-      fontSize: 28,
-      cursor: "pointer"
-    }
-  }, mobileOpen ? "\u2715" : "\u2630"),
-  /*#__PURE__*/React.createElement("div", {
-    className: "wocs-mobile-panel" + (mobileOpen ? " open" : "")
-  },
-  /*#__PURE__*/React.createElement("button", {
-    className: "mob-close",
-    onClick: () => { setMobileOpen(false); setMobAccordion(null); setMobLangOpen(false); }
-  }, "\u2715"),
+  }, flagCircle(languages.find(l => l.code === currentLang), 14), languages.find(l => l.code === currentLang)?.label))))),
 
-  /* 언어 선택 - 상단 */
-  /*#__PURE__*/React.createElement("div", { className: "mob-lang-bar" },
+  /* 수정3: 모바일 컨트롤 (언어 아이콘 + 햄버거) */
+  /*#__PURE__*/React.createElement("div", { className: "wocs-mob-controls" },
     /*#__PURE__*/React.createElement("button", {
-      className: "mob-lang-btn",
-      onClick: () => setMobLangOpen(!mobLangOpen)
+      className: "wocs-mob-lang-icon",
+      onClick: function() { setMobileOpen(true); setMobLangOpen(true); }
     },
-    flagCircle(languages.find(function(l){return l.code===currentLang}), 20),
-    " ",
-    languages.find(function(l){return l.code===currentLang})?.label || "한국어",
-    " ",
-    /*#__PURE__*/React.createElement("span", { style:{fontSize:10,marginLeft:4} }, mobLangOpen ? "\u25B2" : "\u25BC"))
-  ),
-  /*#__PURE__*/React.createElement("div", {
-    className: "mob-lang-dropdown" + (mobLangOpen ? " open" : "")
-  },
-    /*#__PURE__*/React.createElement("div", { className: "mob-lang-grid" },
-      languages.map(function(lang, i) { return /*#__PURE__*/React.createElement("button", {
-        key: i,
-        className: currentLang === lang.code ? "active" : "",
-        onClick: function() { setCurrentLang(lang.code); try{localStorage.setItem("wocs-lang",lang.code)}catch(e){} setMobLangOpen(false); setMobileOpen(false); window.location.search="?lang="+lang.code; }
-      }, flagCircle(lang, 18), " ", lang.label); })
-    )
+      /*#__PURE__*/React.createElement("svg", { width:20, height:20, viewBox:"0 0 24 24", fill:"none", stroke:`${IVORY}bb`, strokeWidth:1.5 },
+        /*#__PURE__*/React.createElement("circle", { cx:12, cy:12, r:10 }),
+        /*#__PURE__*/React.createElement("ellipse", { cx:12, cy:12, rx:4.5, ry:10 }),
+        /*#__PURE__*/React.createElement("path", { d:"M2 12h20" })),
+      /*#__PURE__*/React.createElement("img", {
+        src: "https://flagcdn.com/w40/" + (languages.find(function(l){return l.code===currentLang})?.cc||"kr").toLowerCase() + ".png",
+        alt: "", style:{ position:"absolute", bottom:-2, right:-2, width:14, height:14, borderRadius:"50%", objectFit:"cover" },
+        onError: function(e){ e.target.style.display="none"; }
+      })
+    ),
+    /*#__PURE__*/React.createElement("button", {
+      className: "wocs-hamburger",
+      onClick: function() { setMobileOpen(!mobileOpen); }
+    }, mobileOpen ? "\u2715" : "\u2630")
   ),
 
-  /* 네비게이션 - accordion */
-  navItems.map(function(item, i) { return /*#__PURE__*/React.createElement("div", { key: "mob-"+i },
+  /* 수정1: Portal — 모바일 패널을 body 직계 자식으로 렌더링 */
+  ReactDOM.createPortal(
+    /*#__PURE__*/React.createElement("div", {
+      className: "wocs-mobile-panel" + (mobileOpen ? " open" : "")
+    },
     /*#__PURE__*/React.createElement("button", {
-      className: "mob-item",
-      onClick: function() {
-        if (item.mega) {
-          setMobAccordion(mobAccordion === i ? null : i);
-        } else if (item.href) {
-          window.location.href = item.href + (item.href.indexOf("?") >= 0 ? "&" : "?") + "lang=" + currentLang;
-          setMobileOpen(false);
-        } else if (item.scrollTo) {
-          scrollToSection(item.scrollTo);
-          setMobileOpen(false);
+      className: "mob-close",
+      onClick: function() { setMobileOpen(false); }
+    }, "\u2715"),
+
+    /* 언어 선택 - 상단 */
+    /*#__PURE__*/React.createElement("div", { className: "mob-lang-bar" },
+      /*#__PURE__*/React.createElement("button", {
+        className: "mob-lang-btn",
+        onClick: function() { setMobLangOpen(!mobLangOpen); }
+      },
+      flagCircle(languages.find(function(l){return l.code===currentLang}), 20),
+      " ",
+      languages.find(function(l){return l.code===currentLang})?.label || "한국어",
+      " ",
+      /*#__PURE__*/React.createElement("span", { style:{fontSize:10,marginLeft:4} }, mobLangOpen ? "\u25B2" : "\u25BC"))
+    ),
+    /*#__PURE__*/React.createElement("div", {
+      className: "mob-lang-dropdown" + (mobLangOpen ? " open" : "")
+    },
+      /*#__PURE__*/React.createElement("div", { className: "mob-lang-grid" },
+        languages.map(function(lang, i) { return /*#__PURE__*/React.createElement("button", {
+          key: i,
+          className: currentLang === lang.code ? "active" : "",
+          onClick: function() { setCurrentLang(lang.code); try{localStorage.setItem("wocs-lang",lang.code)}catch(e){} setMobLangOpen(false); setMobileOpen(false); window.location.search="?lang="+lang.code; }
+        }, flagCircle(lang, 18), " ", lang.label); })
+      )
+    ),
+
+    /* 네비게이션 - accordion */
+    navItems.map(function(item, i) { return /*#__PURE__*/React.createElement("div", { key: "mob-"+i },
+      /*#__PURE__*/React.createElement("button", {
+        className: "mob-item",
+        onClick: function() {
+          if (item.mega) {
+            setMobAccordion(mobAccordion === i ? null : i);
+          } else if (item.href) {
+            window.location.href = item.href + (item.href.indexOf("?") >= 0 ? "&" : "?") + "lang=" + currentLang;
+            setMobileOpen(false);
+          } else if (item.scrollTo) {
+            scrollToSection(item.scrollTo);
+            setMobileOpen(false);
+          }
         }
-      }
-    },
-    item.label,
-    item.mega && /*#__PURE__*/React.createElement("span", {
-      className: "mob-arrow" + (mobAccordion === i ? " open" : "")
-    }, "\u25BC")),
+      },
+      item.label,
+      item.mega && /*#__PURE__*/React.createElement("span", {
+        className: "mob-arrow" + (mobAccordion === i ? " open" : "")
+      }, "\u25BC")),
 
-    item.mega && /*#__PURE__*/React.createElement("div", {
-      className: "mob-sub" + (mobAccordion === i ? " open" : "")
-    },
-      item.mega.map(function(col, ci) { return /*#__PURE__*/React.createElement("div", { key: ci },
-        col.title && /*#__PURE__*/React.createElement("a", {
-          className: "mob-sub-title",
-          href: col.titleHref ? col.titleHref + "?lang=" + currentLang : "#"
-        }, col.title),
-        col.links.map(function(link, li) { return /*#__PURE__*/React.createElement("a", {
-          key: li,
-          href: link.href + "?lang=" + currentLang,
-          onClick: function() { setMobileOpen(false); setMobAccordion(null); }
-        }, link.text); })
-      ); })
-    )
-  ); })
-  )
+      item.mega && /*#__PURE__*/React.createElement("div", {
+        className: "mob-sub" + (mobAccordion === i ? " open" : "")
+      },
+        item.mega.map(function(col, ci) { return /*#__PURE__*/React.createElement("div", { key: ci },
+          col.title && /*#__PURE__*/React.createElement("a", {
+            className: "mob-sub-title",
+            href: col.titleHref ? col.titleHref + "?lang=" + currentLang : "#"
+          }, col.title),
+          col.links.map(function(link, li) { return /*#__PURE__*/React.createElement("a", {
+            key: li,
+            href: link.href + "?lang=" + currentLang,
+            onClick: function() { setMobileOpen(false); setMobAccordion(null); }
+          }, link.text); })
+        ); })
+      )
+    ); })
+    ),
+    document.body
   ))), /*#__PURE__*/React.createElement("section", {
     style: {
       position: "relative",
