@@ -204,8 +204,22 @@ body.mob-open { overflow:hidden; }
 <link rel="alternate" hreflang="th" href="https://wocs.kr/index.html?lang=th">
 <link rel="alternate" hreflang="x-default" href="https://wocs.kr/index.html">
 <meta name="theme-color" content="#09090b">
+
+<!-- wocs-header.js 시스템 로드 -->
+<link rel="stylesheet" href="assets/css/wocs-common.css">
+<script src="assets/js/wocs-i18n.js"></script>
+<script>var WOCS_BASE='';</script>
+<style>
+/* React 렌더링 헤더 숨기고 wocs-header.js 사용 */
+#root > div > header { display:none!important; }
+/* wocs-header.js 모바일 메뉴용 추가 CSS */
+.wocs-mobile-panel, .wocs-mob-controls, .wocs-mob-lang-icon, .wocs-hamburger { display:none; }
+</style>
 </head>
 <body>
+
+<!-- wocs-header.js가 여기에 헤더 주입 -->
+<div id="wocs-header"></div>
 
 <!-- ═══════════ SEO 프리렌더 콘텐츠 (검색엔진용) ═══════════ -->
 <!-- noscript: JS 미실행 크롤러(네이버 등)만 읽음. React와 ID 충돌 Zero -->
@@ -8416,5 +8430,6 @@ try {
   document.getElementById('root').innerHTML = '<div style="color:#c9a96e;text-align:center;padding:100px;font-family:sans-serif"><h1>WOCS</h1><p>Loading...</p></div>';
 }
 </script>
+<script src="assets/js/wocs-header.js"></script>
 </body>
 </html>
