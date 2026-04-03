@@ -17,3 +17,8 @@ token.json
 secrets/
 *credentials*
 *service-account*
+.bkit/audit/
+.bkit/state/
+.bkit/runtime/
+.omc/
+.claude/settings.local.json

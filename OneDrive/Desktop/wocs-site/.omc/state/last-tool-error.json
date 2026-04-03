@@ -1,7 +1,0 @@
-{
-  "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"cd \\\"C:/Users/user/OneDrive/Desktop/wocs-site\\\" && git stash && git pull --rebase origin main && git stash pop\",\"timeout\":60000,\"description\":\"Stash, pull rebase, then pop\"}",
-  "error": "Exit code 1\nSaved working directory and index state WIP on main: 1c1856d feat(blog): AI 블로그 자동화 시스템 구축\nFrom https://github.com/cryptowoosung/wocs-website-\n * branch            main       -> FETCH_HEAD\n   639a87e..eda2615  main       -> origin/main\nAuto packing the repository for optimum performance.\nSee \"git help gc\" for manual housekeeping.\nwarning: There are too many unreachable loose objects; run 'git prune' to remove them.\nRebasing (1/1)\rCONFLICT (modify/delete): OneDrive/Desktop/wocs-site/....",
-  "timestamp": "2026-04-03T14:22:10.120Z",
-  "retry_count": 3
-}
