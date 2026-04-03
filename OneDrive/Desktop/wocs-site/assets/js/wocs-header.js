@@ -98,8 +98,25 @@ function buildWocsHeader() {
     if (typeof WOCS_BASE !== 'undefined') return WOCS_BASE;
     return '';
   })();
+  // 존재하는 페이지 목록 (없는 페이지는 상위 카테고리로 리다이렉트)
+  var existingPages = [
+    'index.html','products/index.html','products/geodesic-domes.html','products/safari-tents.html','products/luxury-tents.html',
+    'about/index.html','contact/index.html','gallery/index.html',
+    'occasions/index.html','portfolio/index.html','project/index.html','resources/index.html'
+  ];
+  var fallbackMap = {
+    'products/':'products/index.html','occasions/':'occasions/index.html','project/':'project/index.html',
+    'resources/':'resources/index.html','about/':'about/index.html','contact/':'contact/index.html',
+    'gallery/':'gallery/index.html','portfolio/':'portfolio/index.html','legal/':'index.html'
+  };
   function href(path) {
     var clean = path.replace(/^\//, '');
+    // 존재하지 않는 페이지는 상위 카테고리로 연결
+    if (existingPages.indexOf(clean) < 0 && clean.indexOf('#') < 0) {
+      for (var prefix in fallbackMap) {
+        if (clean.indexOf(prefix) === 0) { clean = fallbackMap[prefix]; break; }
+      }
+    }
     var b = base + clean;
     if (!langParam) return b;
     if (b.indexOf('#') >= 0) {

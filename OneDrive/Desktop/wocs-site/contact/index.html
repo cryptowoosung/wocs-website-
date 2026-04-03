@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>견적 문의 | WOCS 글램핑 시공 전문</title>
+<meta name="description" content="WOCS 글램핑 시공 무료 상담 및 견적 요청. 전화 010-4337-0582, 이메일 info@wocs.kr. 화순 쇼룸 방문 예약.">
+<link rel="canonical" href="https://wocs.kr/contact/index.html">
+<meta property="og:title" content="견적 문의 | WOCS 글램핑 시공">
+<meta property="og:description" content="글램핑 시공 무료 상담 및 견적 요청. 010-4337-0582">
+<meta property="og:image" content="https://wocs.kr/assets/images/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;700&family=Lexend:wght@300;400;500;600&family=Noto+Sans+KR:wght@400;500&family=Noto+Serif+KR:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/wocs-common.css">
+<script src="../assets/js/wocs-i18n.js"></script>
+</head>
+<body>
+<div id="wocs-header"></div>
+
+<section class="page-hero" style="text-align:center">
+  <p class="slab">Contact Us</p>
+  <h1 style="font-size:clamp(36px,5vw,64px);font-weight:300;margin-top:12px;color:var(--ivory)">견적 문의</h1>
+  <p class="font-body" style="margin-top:20px;color:rgba(240,235,224,0.6);max-width:500px;margin-left:auto;margin-right:auto;line-height:1.8">글램핑 시공, 견적, 쇼룸 방문 등 무엇이든 편하게 문의하세요.</p>
+</section>
+
+<section class="section-pad">
+  <div class="grid-2">
+    <!-- 문의 폼 -->
+    <div>
+      <h2 style="font-size:clamp(24px,3vw,36px);font-weight:300;margin-bottom:32px">문의하기</h2>
+      <form id="contact-form" onsubmit="return submitForm(event)">
+        <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+          <input type="text" name="name" placeholder="이름 *" required style="padding:14px 16px;background:var(--bg2);border:1px solid rgba(201,169,110,0.15);color:var(--ivory);font-family:var(--font-body);font-size:14px;width:100%">
+          <input type="tel" name="phone" placeholder="연락처 *" required style="padding:14px 16px;background:var(--bg2);border:1px solid rgba(201,169,110,0.15);color:var(--ivory);font-family:var(--font-body);font-size:14px;width:100%">
+        </div>
+        <input type="email" name="email" placeholder="이메일" style="padding:14px 16px;background:var(--bg2);border:1px solid rgba(201,169,110,0.15);color:var(--ivory);font-family:var(--font-body);font-size:14px;width:100%;margin-bottom:16px">
+        <select name="type" style="padding:14px 16px;background:var(--bg2);border:1px solid rgba(201,169,110,0.15);color:var(--ivory);font-family:var(--font-body);font-size:14px;width:100%;margin-bottom:16px">
+          <option value="견적요청">견적 요청</option>
+          <option value="쇼룸방문">쇼룸 방문 예약</option>
+          <option value="기술문의">기술 문의</option>
+          <option value="파트너십">파트너십</option>
+          <option value="기타">기타</option>
+        </select>
+        <textarea name="message" placeholder="문의 내용을 입력해주세요 *" required rows="6" style="padding:14px 16px;background:var(--bg2);border:1px solid rgba(201,169,110,0.15);color:var(--ivory);font-family:var(--font-body);font-size:14px;width:100%;margin-bottom:16px;resize:vertical"></textarea>
+        <button type="submit" class="btn-gold-fill" style="width:100%">문의 보내기</button>
+        <p id="form-status" class="font-body" style="margin-top:12px;font-size:13px;color:var(--gold);display:none"></p>
+      </form>
+    </div>
+    <!-- 연락처 정보 -->
+    <div>
+      <h2 style="font-size:clamp(24px,3vw,36px);font-weight:300;margin-bottom:32px">연락처</h2>
+      <div style="padding:32px;border:1px solid rgba(201,169,110,0.12);background:var(--bg2);margin-bottom:24px">
+        <div class="font-body" style="font-size:14px;color:rgba(240,235,224,0.7);line-height:2.2">
+          <p><strong style="color:var(--gold)">전화</strong><br><a href="tel:010-4337-0582" style="color:var(--ivory);font-size:20px">010-4337-0582</a></p>
+          <p style="margin-top:16px"><strong style="color:var(--gold)">이메일</strong><br><a href="mailto:info@wocs.kr" style="color:var(--ivory)">info@wocs.kr</a></p>
+          <p style="margin-top:16px"><strong style="color:var(--gold)">주소</strong><br>전남 화순군 사평면 유마로 592</p>
+          <p style="margin-top:16px"><strong style="color:var(--gold)">영업시간</strong><br>월~금 09:00~18:00 (쇼룸 방문은 예약제)</p>
+        </div>
+      </div>
+      <a href="tel:010-4337-0582" class="btn-gold" style="width:100%;display:block;text-align:center;margin-bottom:12px">📞 전화 상담</a>
+      <a href="https://wocs.kr" class="btn-gold" style="width:100%;display:block;text-align:center">🌐 홈페이지</a>
+    </div>
+  </div>
+</section>
+
+<div id="wocs-footer"></div>
+<script src="../assets/js/wocs-header.js"></script>
+<script src="../assets/js/wocs-footer.js"></script>
+<script>
+function submitForm(e) {
+  e.preventDefault();
+  var form = document.getElementById('contact-form');
+  var data = new FormData(form);
+  var obj = {};
+  data.forEach(function(v,k){obj[k]=v});
+  obj.page = 'contact';
+  obj.timestamp = new Date().toISOString();
+  fetch('https://script.google.com/macros/s/AKfycby7cq4Krqif_h0A059Rz4ip0KOJb3uJv8XU8fdHZRknNW-Zsmlsz8C2DQ_oQ2eHideE/exec', {
+    method:'POST', mode:'no-cors',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(obj)
+  }).then(function(){
+    var s=document.getElementById('form-status');
+    s.textContent='문의가 접수되었습니다. 빠르게 연락드리겠습니다.';
+    s.style.display='block';
+    form.reset();
+  }).catch(function(){
+    var s=document.getElementById('form-status');
+    s.textContent='전송에 실패했습니다. 전화(010-4337-0582)로 연락해주세요.';
+    s.style.display='block';
+  });
+  return false;
+}
+</script>
+</body>
+</html>
