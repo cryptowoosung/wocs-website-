@@ -146,6 +146,25 @@ html { scroll-behavior: smooth; scroll-padding-top: 120px; }
 body { background: #09090b; }
 ::selection { background: #c9a96e44; color: #f0ebe0; }
 @media(max-width:768px){body,p,li,td{font-size:15px!important}.nav-link{font-size:14px!important}}
+/* Mobile hamburger & nav */
+.wocs-hamburger { display:none!important; }
+.wocs-desk-nav { display:flex!important; }
+.wocs-mobile-panel { display:none; }
+@media(max-width:1024px) {
+  .wocs-hamburger { display:block!important; background:none; border:none; color:#c9a96e; font-size:28px; cursor:pointer; padding:8px; z-index:1001; }
+  .wocs-desk-nav { display:none!important; }
+  .wocs-mobile-panel.open { display:block; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(9,9,11,0.97); z-index:999; padding:80px 24px 40px; overflow-y:auto; animation:slideDown .3s ease; }
+  .wocs-mobile-panel .mob-item { display:block; padding:16px 0; border-bottom:1px solid rgba(201,169,110,0.12); font-family:'Lexend',sans-serif; font-size:16px; color:#f0ebe0cc; text-decoration:none; cursor:pointer; background:none; border-left:none; border-right:none; border-top:none; width:100%; text-align:left; }
+  .wocs-mobile-panel .mob-item:hover { color:#c9a96e; }
+  .wocs-mobile-panel .mob-sub { padding-left:20px; }
+  .wocs-mobile-panel .mob-sub a { display:block; padding:10px 0; font-size:14px; color:#f0ebe088; text-decoration:none; }
+  .wocs-mobile-panel .mob-sub a:hover { color:#c9a96e; }
+  .wocs-mobile-panel .mob-lang { display:flex; gap:8px; flex-wrap:wrap; margin-top:24px; padding-top:24px; border-top:1px solid rgba(201,169,110,0.12); }
+  .wocs-mobile-panel .mob-lang button { padding:8px 16px; background:transparent; border:1px solid rgba(201,169,110,0.3); color:#f0ebe0aa; font-size:13px; cursor:pointer; font-family:'Lexend',sans-serif; }
+  .wocs-mobile-panel .mob-lang button.active { background:#c9a96e; color:#09090b; border-color:#c9a96e; }
+  .mob-close { position:absolute; top:20px; right:20px; background:none; border:none; color:#c9a96e; font-size:28px; cursor:pointer; }
+}
+@keyframes slideDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
 </style>
 
 <!-- SEO: hreflang -->
@@ -5666,6 +5685,7 @@ function WOCSHomepage() {
       marginTop: -2
     }
   }, "MODULAR STRUCTURES"))), /*#__PURE__*/React.createElement("nav", {
+    className: "wocs-desk-nav",
     style: {
       display: "flex",
       gap: 0,
@@ -5979,16 +5999,53 @@ function WOCSHomepage() {
       gap: 6
     }
   }, flagCircle(languages.find(l => l.code === currentLang), 14), languages.find(l => l.code === currentLang)?.label))))), /*#__PURE__*/React.createElement("button", {
+    className: "wocs-hamburger",
     onClick: () => setMobileOpen(!mobileOpen),
     style: {
-      display: "none",
       background: "none",
       border: "none",
       color: GOLD,
-      fontSize: 24,
+      fontSize: 28,
       cursor: "pointer"
     }
-  }, "\u2630"))), /*#__PURE__*/React.createElement("section", {
+  }, mobileOpen ? "\u2715" : "\u2630"),
+  /*#__PURE__*/React.createElement("div", {
+    className: "wocs-mobile-panel" + (mobileOpen ? " open" : "")
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "mob-close",
+    onClick: () => setMobileOpen(false)
+  }, "\u2715"),
+  navItems.map((item, i) => /*#__PURE__*/React.createElement("div", { key: "mob-"+i },
+    /*#__PURE__*/React.createElement("button", {
+      className: "mob-item",
+      onClick: () => {
+        if (item.href && !item.mega) {
+          window.location.href = item.href + (item.href.indexOf("?") >= 0 ? "&" : "?") + "lang=" + currentLang;
+          setMobileOpen(false);
+        } else if (item.scrollTo) {
+          scrollToSection(item.scrollTo);
+          setMobileOpen(false);
+        }
+      }
+    }, item.label),
+    item.mega && /*#__PURE__*/React.createElement("div", { className: "mob-sub" },
+      item.mega.map((col, ci) => /*#__PURE__*/React.createElement(React.Fragment, { key: ci },
+        col.links.map((link, li) => /*#__PURE__*/React.createElement("a", {
+          key: li,
+          href: link.href + "?lang=" + currentLang,
+          onClick: () => setMobileOpen(false)
+        }, link.label))
+      ))
+    )
+  )),
+  /*#__PURE__*/React.createElement("div", { className: "mob-lang" },
+    languages.map((lang, i) => /*#__PURE__*/React.createElement("button", {
+      key: i,
+      className: currentLang === lang.code ? "active" : "",
+      onClick: () => { setCurrentLang(lang.code); try{localStorage.setItem("wocs-lang",lang.code)}catch(e){} setMobileOpen(false); window.location.search="?lang="+lang.code; }
+    }, lang.flag, " ", lang.label))
+  ))
+  ))), /*#__PURE__*/React.createElement("section", {
     style: {
       position: "relative",
       height: "100vh",
