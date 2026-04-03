@@ -11,5 +11,9 @@ node_modules/
 config.json
 credentials.json
 token.json
+*.json
 *.key
 *.pem
+secrets/
+*credentials*
+*service-account*
