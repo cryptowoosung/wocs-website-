@@ -151,9 +151,9 @@ body { background: #09090b; }
 .wocs-desk-nav { display:flex!important; }
 .wocs-mobile-panel { display:none; }
 @media(max-width:1024px) {
-  .wocs-hamburger { display:block!important; background:none; border:none; color:#c9a96e; font-size:28px; cursor:pointer; padding:8px; z-index:1001; }
+  .wocs-hamburger { display:block!important; background:none; border:none; color:#c9a96e; font-size:28px; cursor:pointer; padding:8px; z-index:10001; position:relative; }
   .wocs-desk-nav { display:none!important; }
-  .wocs-mobile-panel.open { display:block; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(9,9,11,0.97); z-index:999; padding:80px 24px 40px; overflow-y:auto; animation:slideDown .3s ease; }
+  .wocs-mobile-panel.open { display:block; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(9,9,11,0.97); z-index:10000; padding:80px 24px 40px; overflow-y:auto; animation:slideDown .3s ease; }
   .wocs-mobile-panel .mob-item { display:flex; justify-content:space-between; align-items:center; padding:16px 0; border-bottom:1px solid rgba(201,169,110,0.12); font-family:'Lexend',sans-serif; font-size:16px; color:#f0ebe0cc; text-decoration:none; cursor:pointer; background:none; border-left:none; border-right:none; border-top:none; width:100%; text-align:left; }
   .wocs-mobile-panel .mob-item:active { color:#c9a96e; }
   .wocs-mobile-panel .mob-arrow { font-size:12px; color:#c9a96e; transition:transform .3s; }
@@ -171,7 +171,7 @@ body { background: #09090b; }
   .wocs-mobile-panel .mob-lang-grid button { display:flex; align-items:center; gap:8px; padding:10px 12px; background:transparent; border:none; color:#f0ebe0aa; font-size:14px; cursor:pointer; font-family:'Lexend',sans-serif; text-align:left; border-radius:4px; }
   .wocs-mobile-panel .mob-lang-grid button:active { background:rgba(201,169,110,0.15); }
   .wocs-mobile-panel .mob-lang-grid button.active { background:rgba(201,169,110,0.15); color:#c9a96e; font-weight:600; }
-  .mob-close { position:absolute; top:20px; right:20px; background:none; border:none; color:#c9a96e; font-size:28px; cursor:pointer; z-index:1000; }
+  .mob-close { position:absolute; top:20px; right:20px; background:none; border:none; color:#c9a96e; font-size:28px; cursor:pointer; z-index:10001; }
 }
 @keyframes slideDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
 </style>
