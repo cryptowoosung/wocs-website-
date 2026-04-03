@@ -12,6 +12,8 @@ config.json
 credentials.json
 token.json
 *.json
+!vercel.json
+!package.json
 *.key
 *.pem
 secrets/
