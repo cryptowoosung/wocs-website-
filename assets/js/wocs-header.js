@@ -266,11 +266,6 @@ function buildWocsHeader() {
     header.style.transition = 'all .5s';
   }
 
-  // Mobile mega-menu CSS override
-  var s = document.createElement('style');
-  s.textContent = '@media(max-width:768px){.mega-menu{display:none!important}.mega-menu.mob-visible{display:block!important;flex-direction:column!important;padding-left:16px;gap:4px}}';
-  document.head.appendChild(s);
-
   // Scroll effect
   window.addEventListener('scroll', () => {
     const header = document.getElementById('wocs-header');
@@ -294,156 +289,149 @@ document.addEventListener('click', function(e) {
   if (dd && sel && !sel.contains(e.target)) dd.style.display = 'none';
 });
 
-// ── Mobile Menu ──
+// ── Mobile Menu (완전 독립 패널) ──
 function initMobileMenu() {
   var header = document.getElementById('wocs-header');
   if (!header) return;
   var main = header.querySelector('.header-main');
   if (!main) return;
 
-  // 언어 아이콘 (모바일 전용)
+  // 네비게이션 데이터 추출
+  var navItems = header.querySelectorAll('.nav-item');
+
+  // 언어 버튼
   var langBtn = document.createElement('button');
-  langBtn.id = 'mob-lang-btn';
-  langBtn.style.cssText = 'display:none;background:none;border:1px solid rgba(201,169,110,0.3);color:#c9a96e;padding:8px 10px;cursor:pointer;border-radius:4px;margin-right:8px;font-size:18px;';
-  langBtn.innerHTML = '🌐';
-  langBtn.title = '언어 선택';
+  langBtn.setAttribute('style','display:none;background:none;border:1px solid rgba(201,169,110,0.3);color:#c9a96e;padding:6px 10px;cursor:pointer;border-radius:4px;margin-right:6px;font-size:20px;vertical-align:middle;');
+  langBtn.innerHTML = '&#127760;';
 
   // 햄버거 버튼
-  var hamburger = document.createElement('button');
-  hamburger.id = 'mobile-hamburger';
-  hamburger.innerHTML = '☰';
-  hamburger.style.cssText = 'display:none;background:none;border:1px solid rgba(201,169,110,0.3);color:#c9a96e;font-size:24px;padding:8px 12px;cursor:pointer;font-family:sans-serif';
+  var hbtn = document.createElement('button');
+  hbtn.setAttribute('style','display:none;background:none;border:1px solid rgba(201,169,110,0.3);color:#c9a96e;font-size:22px;padding:6px 12px;cursor:pointer;');
+  hbtn.innerHTML = '&#9776;';
 
   main.appendChild(langBtn);
-  main.appendChild(hamburger);
+  main.appendChild(hbtn);
 
-  var navList = header.querySelector('.nav-list');
-  var langDropdown = document.getElementById('lang-dropdown');
+  // 모바일 전용 패널 생성
+  var panel = document.createElement('div');
+  panel.id = 'wocs-mob-panel';
+  panel.setAttribute('style','display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:#0a0a0c;z-index:999999;overflow-y:auto;padding:20px;box-sizing:border-box;');
 
-  // 언어 버튼 클릭
-  langBtn.addEventListener('click', function(e) {
-    e.stopPropagation();
-    if (!langDropdown) return;
-    var isVisible = langDropdown.style.display === 'grid';
-    langDropdown.style.display = isVisible ? 'none' : 'grid';
-    langDropdown.style.position = 'fixed';
-    langDropdown.style.top = '70px';
-    langDropdown.style.right = '10px';
-    langDropdown.style.left = '10px';
-    langDropdown.style.zIndex = '100001';
-  });
+  // 닫기 버튼
+  var closeBtn = document.createElement('button');
+  closeBtn.setAttribute('style','position:absolute;top:16px;right:16px;background:none;border:1px solid rgba(201,169,110,0.3);color:#c9a96e;font-size:22px;padding:6px 12px;cursor:pointer;z-index:1000000;');
+  closeBtn.innerHTML = '&#x2715;';
+  panel.appendChild(closeBtn);
 
-  // 모바일 여부 체크
-  function checkMobile() {
-    if (window.innerWidth <= 768) {
-      hamburger.style.display = 'block';
-      langBtn.style.display = 'block';
-      if (navList && !navList.classList.contains('mob-open')) {
-        navList.style.display = 'none';
-      }
-    } else {
-      hamburger.style.display = 'none';
-      langBtn.style.display = 'none';
-      if (navList) {
-        navList.style.display = 'flex';
-        navList.style.position = '';
-        navList.style.flexDirection = '';
-      }
-    }
-  }
+  // 메뉴 컨테이너
+  var menuDiv = document.createElement('div');
+  menuDiv.setAttribute('style','margin-top:60px;');
 
-  // 햄버거 클릭
-  hamburger.addEventListener('click', function() {
-    if (!navList) return;
-    var isOpen = navList.classList.contains('mob-open');
-    if (!isOpen) {
-      navList.classList.add('mob-open');
-      navList.style.display = 'flex';
-      navList.style.flexDirection = 'column';
-      navList.style.position = 'fixed';
-      navList.style.top = '0';
-      navList.style.left = '0';
-      navList.style.right = '0';
-      navList.style.bottom = '0';
-      navList.style.background = 'rgba(9,9,11,0.98)';
-      navList.style.padding = '80px 24px 24px';
-      navList.style.zIndex = '99999';
-      navList.style.overflowY = 'auto';
-      navList.style.gap = '0';
-      hamburger.innerHTML = '✕';
-      hamburger.style.zIndex = '100000';
-      hamburger.style.position = 'relative';
-    } else {
-      navList.classList.remove('mob-open');
-      navList.style.display = 'none';
-      hamburger.innerHTML = '☰';
-      // 열린 서브메뉴 전부 닫기
-      navList.querySelectorAll('.mega-menu').forEach(function(m) {
-        m.classList.remove('mob-visible');
-      });
-      navList.querySelectorAll('.mob-arrow').forEach(function(a) {
-        a.style.transform = 'rotate(0deg)';
-      });
-    }
-  });
-
-  // 서브메뉴 accordion
-  var navItems = navList ? navList.querySelectorAll('.nav-item') : [];
+  // navItems에서 메뉴 구성
   navItems.forEach(function(item) {
     var link = item.querySelector('.nav-link');
     var mega = item.querySelector('.mega-menu');
-    if (!mega || !link) return;
+    if (!link) return;
 
-    // 화살표 버튼 추가
-    var arrow = document.createElement('span');
-    arrow.className = 'mob-arrow';
-    arrow.innerHTML = ' ▼';
-    arrow.style.cssText = 'font-size:11px;color:#c9a96e;transition:transform 0.3s;display:inline-block;margin-left:4px;';
-    link.appendChild(arrow);
+    var row = document.createElement('div');
+    row.setAttribute('style','border-bottom:1px solid rgba(201,169,110,0.1);');
 
-    // mega-menu 초기: CSS가 display:none!important 처리
-    mega.classList.remove('mob-visible');
+    if (mega) {
+      // 서브메뉴 있는 항목
+      var topBtn = document.createElement('button');
+      topBtn.setAttribute('style','width:100%;text-align:left;background:none;border:none;color:#f0ebe0;font-size:16px;padding:16px 8px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;letter-spacing:1px;');
+      topBtn.innerHTML = (link.childNodes[0] ? link.childNodes[0].textContent.trim() : link.textContent.trim()) + '<span style="color:#c9a96e;font-size:12px;transition:transform 0.3s;display:inline-block;">&#9660;</span>';
 
-    function toggleMega(e) {
-      if (window.innerWidth > 768) return;
-      e.preventDefault();
-      e.stopPropagation();
-      var isOpen = mega.classList.contains('mob-visible');
-      // 다른 것 전부 닫기
-      navItems.forEach(function(other) {
-        if (other !== item) {
-          var om = other.querySelector('.mega-menu');
-          var oa = other.querySelector('.mob-arrow');
-          if (om) om.classList.remove('mob-visible');
-          if (oa) oa.style.transform = 'rotate(0deg)';
-        }
+      var subDiv = document.createElement('div');
+      subDiv.setAttribute('style','display:none;padding:0 8px 12px;');
+
+      // mega-link들 복사
+      var megaLinks = mega.querySelectorAll('a');
+      megaLinks.forEach(function(ml) {
+        var a = document.createElement('a');
+        a.href = ml.href;
+        a.textContent = ml.textContent.trim();
+        a.setAttribute('style','display:block;color:rgba(240,235,224,0.65);font-size:13px;padding:8px 12px;text-decoration:none;border-left:2px solid rgba(201,169,110,0.2);margin-bottom:2px;');
+        subDiv.appendChild(a);
       });
-      if (isOpen) {
-        mega.classList.remove('mob-visible');
-        arrow.style.transform = 'rotate(0deg)';
-      } else {
-        mega.classList.add('mob-visible');
-        arrow.style.transform = 'rotate(180deg)';
-      }
+
+      var isOpen = false;
+      topBtn.addEventListener('click', function() {
+        isOpen = !isOpen;
+        subDiv.style.display = isOpen ? 'block' : 'none';
+        var arrow = topBtn.querySelector('span');
+        if (arrow) arrow.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+      });
+
+      row.appendChild(topBtn);
+      row.appendChild(subDiv);
+    } else {
+      // 서브메뉴 없는 항목
+      var a = document.createElement('a');
+      a.href = link.href;
+      a.textContent = link.textContent.trim();
+      a.setAttribute('style','display:block;color:#f0ebe0;font-size:16px;padding:16px 8px;text-decoration:none;letter-spacing:1px;');
+      row.appendChild(a);
     }
 
-    link.addEventListener('click', toggleMega);
-    link.addEventListener('touchstart', toggleMega, { passive: false });
+    menuDiv.appendChild(row);
   });
+
+  // 언어 선택 (모바일 패널 하단)
+  var langDiv = document.createElement('div');
+  langDiv.setAttribute('style','margin-top:24px;padding:16px 8px;');
+  langDiv.innerHTML = '<div style="color:rgba(240,235,224,0.4);font-size:11px;letter-spacing:2px;margin-bottom:12px;">LANGUAGE</div>';
+  var langs = [{c:'ko',n:'한국어'},{c:'en',n:'English'},{c:'ja',n:'日本語'},{c:'zh',n:'中文'},{c:'es',n:'Español'},{c:'fr',n:'Français'}];
+  var lgrid = document.createElement('div');
+  lgrid.setAttribute('style','display:grid;grid-template-columns:repeat(3,1fr);gap:8px;');
+  langs.forEach(function(l) {
+    var b = document.createElement('button');
+    b.setAttribute('style','background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.2);color:#c9a96e;padding:8px;cursor:pointer;border-radius:4px;font-size:12px;');
+    b.textContent = l.n;
+    b.addEventListener('click', function() { wocsSetLang(l.c); });
+    lgrid.appendChild(b);
+  });
+  langDiv.appendChild(lgrid);
+  menuDiv.appendChild(langDiv);
+
+  panel.appendChild(menuDiv);
+  document.body.appendChild(panel);
+
+  // 언어 버튼 클릭 → 패널 열고 언어 섹션으로 스크롤
+  langBtn.addEventListener('click', function() {
+    panel.style.display = 'block';
+    hbtn.style.display = 'none';
+    setTimeout(function() { langDiv.scrollIntoView({behavior:'smooth'}); }, 100);
+  });
+
+  // 햄버거 클릭
+  hbtn.addEventListener('click', function() {
+    panel.style.display = 'block';
+    hbtn.style.display = 'none';
+  });
+
+  // 닫기
+  closeBtn.addEventListener('click', function() {
+    panel.style.display = 'none';
+    if (window.innerWidth <= 768) hbtn.style.display = 'block';
+  });
+
+  // 반응형
+  function checkMobile() {
+    var isMob = window.innerWidth <= 768;
+    hbtn.style.display = isMob ? 'block' : 'none';
+    langBtn.style.display = isMob ? 'block' : 'none';
+    var navList = header.querySelector('.nav-list');
+    if (navList) navList.style.display = isMob ? 'none' : 'flex';
+    if (!isMob) panel.style.display = 'none';
+  }
 
   checkMobile();
   window.addEventListener('resize', checkMobile);
-
-  // 외부 클릭 시 언어 드롭다운 닫기
-  document.addEventListener('click', function(e) {
-    if (langDropdown && !langBtn.contains(e.target)) {
-      langDropdown.style.display = 'none';
-    }
-  });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  setTimeout(initMobileMenu, 200);
+  setTimeout(initMobileMenu, 300);
 });
 
 // Language switch function — works on local file:// AND http://
