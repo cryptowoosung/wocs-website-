@@ -8503,6 +8503,15 @@ try {
   document.getElementById('root').innerHTML = '<div style="color:#c9a96e;text-align:center;padding:100px;font-family:sans-serif"><h1>WOCS</h1><p>Loading...</p></div>';
 }
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var d = document.createElement('div');
+  d.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:red;color:white;font-size:14px;padding:10px;z-index:99999;';
+  d.id = 'test-debug';
+  d.textContent = 'JS 실행됨: ' + new Date().toLocaleTimeString();
+  document.body.appendChild(d);
+});
+</script>
 <script>/* wocs-header.js inlined */
 /* ═══════════════════════════════════════════════════
    WOCS Header Component — Auto-injected on all pages
