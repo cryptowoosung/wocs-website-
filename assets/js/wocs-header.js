@@ -130,7 +130,7 @@ function buildWocsHeader() {
         const title = col.titleKey ? (col.titleHref ? `<a class="mega-title" href="${href(col.titleHref)}" style="text-decoration:none;display:block">${tc(col.titleKey)}</a>` : `<div class="mega-title">${tc(col.titleKey)}</div>`) : '';
         cols += `<div>${title}${links}</div>`;
       });
-      megaHTML = `<div class="mega-menu ${isMul ? 'multi' : ''}">${cols}</div>`;
+      megaHTML = `<div class="mega-menu ${isMul ? 'multi' : ''}" style="display:none;flex-direction:row;gap:40px">${cols}</div>`;
     }
     navHTML += `
       <li class="nav-item">
@@ -141,8 +141,8 @@ function buildWocsHeader() {
 
   const html = `
     <div class="header-bar">
-      <span>✆ ${tc('phone')}</span>
-      <span>${tc('email')}</span>
+      <span><a href="tel:${tc('phone').replace(/-/g,'')}" style="color:inherit;text-decoration:none">✆ ${tc('phone')}</a></span>
+      <span><a href="mailto:${tc('email')}" style="color:inherit;text-decoration:none">${tc('email')}</a></span>
     </div>
     <div class="header-main">
       <a class="header-logo" href="${href('index.html')}">
@@ -289,7 +289,7 @@ document.addEventListener('click', function(e) {
   if (dd && sel && !sel.contains(e.target)) dd.style.display = 'none';
 });
 
-// ── Mobile Menu (Accordion + Language Icon) ──
+// ── Mobile Menu (Accordion + Language Icon + Fullscreen Panel) ──
 function initMobileMenu() {
   var header = document.getElementById('wocs-header');
   if (!header) return;
@@ -353,7 +353,6 @@ function initMobileMenu() {
 
   // Build panel HTML
   var ph = '<button class="mob-x">\u2715</button>';
-
   // Language bar
   ph += '<div class="mob-lang-bar"><button class="mob-lang-btn" id="mob-lang-toggle">'
     + '<img src="https://flagcdn.com/w40/'+curInfo.cc+'.png" style="width:20px;height:20px;border-radius:50%;object-fit:cover" onerror="this.style.display=\'none\'" alt="">'
@@ -365,22 +364,20 @@ function initMobileMenu() {
       + ' '+l.name+'</button>';
   });
   ph += '</div>';
-
   // Nav items with accordion
   navItems.forEach(function(item, idx) {
     var link = item.querySelector('.nav-link');
     var mega = item.querySelector('.mega-menu');
     var label = link ? link.textContent.replace('\u25BE','').trim() : '';
-    var href = link ? link.getAttribute('href') : '#';
+    var itemHref = link ? link.getAttribute('href') : '#';
     if (mega) {
       ph += '<button class="mob-item" data-acc="'+idx+'">'+label+' <span class="mob-arr" id="arr-'+idx+'">\u25BC</span></button>';
       ph += '<div class="mob-sub" id="sub-'+idx+'">'+mega.innerHTML+'</div>';
     } else {
-      ph += '<a class="mob-item" href="'+href+'">'+label+'</a>';
+      ph += '<a class="mob-item" href="'+itemHref+'">'+label+'</a>';
     }
   });
-
-  // Append panel to body (outside stacking context)
+  // Append panel to body
   var panel = document.createElement('div');
   panel.id = 'mob-panel';
   panel.innerHTML = ph;
@@ -390,32 +387,22 @@ function initMobileMenu() {
   var isOpen = false, openAcc = null, langOpen = false;
   function show() { panel.classList.add('open'); document.body.classList.add('mob-open'); isOpen = true; }
   function hide() { panel.classList.remove('open'); document.body.classList.remove('mob-open'); isOpen = false; openAcc = null; langOpen = false; var ll = document.getElementById('mob-lang-list'); if(ll) ll.classList.remove('open'); }
-
-  // Dual event helper
-  function on(el, fn) {
-    el.addEventListener('click', fn);
-    el.addEventListener('touchstart', function(e){e.preventDefault();fn(e);}, {passive:false});
-  }
+  function on(el, fn) { el.addEventListener('click', fn); el.addEventListener('touchstart', function(e){e.preventDefault();fn(e);}, {passive:false}); }
 
   // Hamburger
   var hb = document.getElementById('mob-hamburger');
   on(hb, function(e){e.preventDefault();e.stopPropagation();if(isOpen){hide();hb.innerHTML='\u2630';}else{show();hb.innerHTML='\u2715';}});
-
-  // Lang icon opens panel + lang list
+  // Lang icon
   on(document.getElementById('mob-lang-icon'), function(e){e.preventDefault();e.stopPropagation();show();hb.innerHTML='\u2715';var ll=document.getElementById('mob-lang-list');if(ll){ll.classList.add('open');langOpen=true;}});
-
-  // Close button
+  // Close
   on(panel.querySelector('.mob-x'), function(e){e.preventDefault();hide();hb.innerHTML='\u2630';});
-
   // Lang toggle
   var lt = document.getElementById('mob-lang-toggle');
   if(lt) on(lt, function(e){e.preventDefault();e.stopPropagation();var ll=document.getElementById('mob-lang-list');if(ll){langOpen=!langOpen;if(langOpen)ll.classList.add('open');else ll.classList.remove('open');}});
-
   // Lang buttons
   panel.querySelectorAll('.mob-lang-list button[data-lang]').forEach(function(btn){
     on(btn, function(e){e.preventDefault();wocsSetLang(btn.getAttribute('data-lang'));});
   });
-
   // Accordion
   panel.querySelectorAll('[data-acc]').forEach(function(btn){
     on(btn, function(e){
@@ -423,19 +410,13 @@ function initMobileMenu() {
       var idx = btn.getAttribute('data-acc');
       var sub = document.getElementById('sub-'+idx);
       var arr = document.getElementById('arr-'+idx);
-      if(openAcc===idx){
-        if(sub)sub.classList.remove('open');if(arr)arr.classList.remove('open');openAcc=null;
-      } else {
-        if(openAcc!==null){var ps=document.getElementById('sub-'+openAcc);var pa=document.getElementById('arr-'+openAcc);if(ps)ps.classList.remove('open');if(pa)pa.classList.remove('open');}
-        if(sub)sub.classList.add('open');if(arr)arr.classList.add('open');openAcc=idx;
-      }
+      if(openAcc===idx){if(sub)sub.classList.remove('open');if(arr)arr.classList.remove('open');openAcc=null;}
+      else{if(openAcc!==null){var ps=document.getElementById('sub-'+openAcc);var pa=document.getElementById('arr-'+openAcc);if(ps)ps.classList.remove('open');if(pa)pa.classList.remove('open');}if(sub)sub.classList.add('open');if(arr)arr.classList.add('open');openAcc=idx;}
     });
   });
-
-  // Close on submenu link click
+  // Close on link click
   panel.querySelectorAll('.mega-link').forEach(function(l){l.addEventListener('click',function(){hide();hb.innerHTML='\u2630';});});
-
-  // Responsive toggle
+  // Responsive
   function check(){if(window.innerWidth>768){if(navList)navList.style.display='flex';hide();hb.innerHTML='\u2630';}else{if(navList)navList.style.display='none';}}
   check();window.addEventListener('resize',check);
 }
