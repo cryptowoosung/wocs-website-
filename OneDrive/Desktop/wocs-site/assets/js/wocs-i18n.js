@@ -3,7 +3,7 @@
    Supports: data-t, data-t-html, data-t-placeholder, data-t-alt
    ═══════════════════════════════════════════════════ */
 var WOCS_LANGS=['ko','en','ja','zh','es','fr','de','pt','it','ar','ru','tr','tw','id','th'];
-function getWocsLang(){try{var h=window.location.href;var m=h.match(/[?&]lang=([a-z]{2})/i);if(m&&WOCS_LANGS.indexOf(m[1])>=0){try{localStorage.setItem('wocs-lang',m[1])}catch(e){}return m[1]}var s=localStorage.getItem('wocs-lang');if(s&&WOCS_LANGS.indexOf(s)>=0)return s}catch(e){}return'ko'}
+function getWocsLang(){try{var h=window.location.href;var m=h.match(/[?&]lang=([a-z]{2})/i);if(m&&WOCS_LANGS.indexOf(m[1])>=0){try{localStorage.setItem('wocs-lang',m[1])}catch(e){}return m[1]}var s=localStorage.getItem('wocs-lang');if(s&&WOCS_LANGS.indexOf(s)>=0)return s;try{localStorage.setItem('wocs-lang','ko')}catch(e){}}catch(e){}return'ko'}
 var WOCS_LANG=getWocsLang();
 
 var WOCS_COMMON_TR={
