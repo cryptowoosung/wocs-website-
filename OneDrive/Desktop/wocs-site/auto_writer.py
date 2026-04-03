@@ -270,6 +270,15 @@ def generate_schema_markup(title, excerpt, keyword, image, post_date):
     if schema_type == "Product":
         schema["@graph"][1]["brand"] = {"@type": "Brand", "name": "WOCS"}
         schema["@graph"][1]["manufacturer"] = {"@type": "Organization", "name": "WOCS (우성어닝천막공사캠프시스템)"}
+        schema["@graph"][1]["offers"] = {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "KRW",
+            "priceValidUntil": "2026-12-31",
+            "availability": "https://schema.org/InStock",
+            "url": "https://wocs.kr/contact",
+            "description": "견적 문의"
+        }
 
     return schema
 
