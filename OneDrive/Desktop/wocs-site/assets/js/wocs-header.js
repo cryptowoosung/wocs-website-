@@ -326,14 +326,14 @@ function initMobileMenu() {
     #mobile-hamburger, #mobile-lang-btn { display:none; }
     @media(max-width:1024px) {
       .nav-list { display:none!important; }
-      #mobile-hamburger { display:block!important; background:none; border:none; color:#c9a96e; font-size:28px; cursor:pointer; padding:8px; z-index:10001; }
-      #mobile-lang-btn { display:flex!important; align-items:center; justify-content:center; width:38px; height:38px; border-radius:50%; border:1.5px solid rgba(201,169,110,0.3); background:transparent; cursor:pointer; z-index:10001; position:relative; }
+      #mobile-hamburger { display:block!important; background:none; border:none; color:#c9a96e; font-size:28px; cursor:pointer; padding:8px; z-index:100000; }
+      #mobile-lang-btn { display:flex!important; align-items:center; justify-content:center; width:38px; height:38px; border-radius:50%; border:1.5px solid rgba(201,169,110,0.3); background:transparent; cursor:pointer; z-index:100000; position:relative; }
       #mobile-lang-btn:active { border-color:#c9a96e; }
       .mob-controls { display:flex; align-items:center; gap:8px; }
     }
-    #mob-panel { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(9,9,11,0.97); z-index:10000; padding:80px 24px 40px; overflow-y:auto; }
+    #mob-panel { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(9,9,11,0.97); z-index:99999; padding:80px 24px 40px; overflow-y:auto; }
     #mob-panel.open { display:block; animation:mobSlideDown .3s ease; }
-    #mob-panel .mob-close { position:absolute; top:20px; right:20px; background:none; border:none; color:#c9a96e; font-size:28px; cursor:pointer; z-index:10001; }
+    #mob-panel .mob-close { position:absolute; top:20px; right:20px; background:none; border:none; color:#c9a96e; font-size:28px; cursor:pointer; z-index:100000; }
     #mob-panel .mob-nav-item { display:flex; justify-content:space-between; align-items:center; padding:16px 0; border-bottom:1px solid rgba(201,169,110,0.12); font-family:'Lexend',sans-serif; font-size:16px; color:rgba(240,235,224,0.8); cursor:pointer; background:none; border-left:none; border-right:none; border-top:none; width:100%; text-align:left; text-decoration:none; }
     #mob-panel .mob-nav-item:active { color:#c9a96e; }
     #mob-panel .mob-arrow { font-size:12px; color:#c9a96e; transition:transform .3s; display:inline-block; }
