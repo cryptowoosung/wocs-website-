@@ -266,6 +266,11 @@ function buildWocsHeader() {
     header.style.transition = 'all .5s';
   }
 
+  // Mobile mega-menu CSS override
+  var s = document.createElement('style');
+  s.textContent = '@media(max-width:768px){.mega-menu{display:none!important}.mega-menu.mob-visible{display:block!important;flex-direction:column!important;padding-left:16px;gap:4px}}';
+  document.head.appendChild(s);
+
   // Scroll effect
   window.addEventListener('scroll', () => {
     const header = document.getElementById('wocs-header');
@@ -374,8 +379,7 @@ function initMobileMenu() {
       hamburger.innerHTML = '☰';
       // 열린 서브메뉴 전부 닫기
       navList.querySelectorAll('.mega-menu').forEach(function(m) {
-        m.style.display = 'none';
-        m.style.maxHeight = '0';
+        m.classList.remove('mob-visible');
       });
       navList.querySelectorAll('.mob-arrow').forEach(function(a) {
         a.style.transform = 'rotate(0deg)';
@@ -397,31 +401,28 @@ function initMobileMenu() {
     arrow.style.cssText = 'font-size:11px;color:#c9a96e;transition:transform 0.3s;display:inline-block;margin-left:4px;';
     link.appendChild(arrow);
 
-    // mega-menu 초기 숨김
-    mega.style.display = 'none';
-    mega.style.flexDirection = 'column';
-    mega.style.paddingLeft = '16px';
-    mega.style.gap = '4px';
+    // mega-menu 초기: CSS가 display:none!important 처리
+    mega.classList.remove('mob-visible');
 
     function toggleMega(e) {
       if (window.innerWidth > 768) return;
       e.preventDefault();
       e.stopPropagation();
-      var isOpen = mega.style.display === 'block';
+      var isOpen = mega.classList.contains('mob-visible');
       // 다른 것 전부 닫기
       navItems.forEach(function(other) {
         if (other !== item) {
           var om = other.querySelector('.mega-menu');
           var oa = other.querySelector('.mob-arrow');
-          if (om) om.style.display = 'none';
+          if (om) om.classList.remove('mob-visible');
           if (oa) oa.style.transform = 'rotate(0deg)';
         }
       });
       if (isOpen) {
-        mega.style.display = 'none';
+        mega.classList.remove('mob-visible');
         arrow.style.transform = 'rotate(0deg)';
       } else {
-        mega.style.display = 'block';
+        mega.classList.add('mob-visible');
         arrow.style.transform = 'rotate(180deg)';
       }
     }
