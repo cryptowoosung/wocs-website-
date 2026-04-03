@@ -278,8 +278,12 @@ function buildWocsHeader() {
   }, { passive: true });
 }
 
-// Auto-init
-document.addEventListener('DOMContentLoaded', buildWocsHeader);
+// Auto-init (handle both before and after DOMContentLoaded)
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', buildWocsHeader);
+} else {
+  buildWocsHeader();
+}
 
 
 // Close language dropdown on outside click
@@ -481,9 +485,14 @@ function initMobileMenu() {
   window.addEventListener('resize', checkMobile);
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+// Init mobile menu (handle both before and after DOMContentLoaded)
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(initMobileMenu, 200);
+  });
+} else {
   setTimeout(initMobileMenu, 200);
-});
+}
 
 // Language switch function — works on local file:// AND http://
 function wocsSetLang(code) {
