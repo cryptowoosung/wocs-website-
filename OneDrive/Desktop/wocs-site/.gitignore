@@ -22,3 +22,5 @@ secrets/
 .bkit/runtime/
 .omc/
 .claude/settings.local.json
+node_modules/
+package-lock.json
