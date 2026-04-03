@@ -159,7 +159,7 @@ function buildWocsHeader() {
             <a class="btn-gold btn-sm" href="${href('contact/index.html')}">${tc('getQuote')}</a>
           </li>
           <li style="margin-left:12px;position:relative" id="lang-selector">
-            <button onclick="document.getElementById('lang-dropdown').style.display=document.getElementById('lang-dropdown').style.display==='grid'?'none':'grid'" style="width:42px;height:42px;border-radius:50%;border:1.5px solid rgba(240,235,224,0.27);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .4s;position:relative" onmouseover="this.style.borderColor='#c9a96e'" onmouseout="this.style.borderColor='rgba(240,235,224,0.27)'">
+            <button onclick="var dd=document.getElementById('lang-dropdown');if(dd)dd.style.display=dd.style.display==='grid'?'none':'grid';" style="width:42px;height:42px;border-radius:50%;border:1.5px solid rgba(240,235,224,0.27);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .4s;position:relative" onmouseover="this.style.borderColor='#c9a96e'" onmouseout="this.style.borderColor='rgba(240,235,224,0.27)'">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(240,235,224,0.73)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="4.5" ry="10"/><path d="M2 12h20"/><path d="M4 7h16" opacity=".3"/><path d="M4 17h16" opacity=".3"/></svg>
               <img src="${flagImg}" alt="" style="position:absolute;bottom:-4px;right:-4px;width:16px;height:16px;border-radius:50%;object-fit:cover;filter:drop-shadow(0 1px 3px rgba(0,0,0,0.7))" onerror="this.style.display='none'">
             </button>
