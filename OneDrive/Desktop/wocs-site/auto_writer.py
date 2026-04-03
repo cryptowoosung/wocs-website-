@@ -277,7 +277,29 @@ def generate_schema_markup(title, excerpt, keyword, image, post_date):
             "priceValidUntil": "2026-12-31",
             "availability": "https://schema.org/InStock",
             "url": "https://wocs.kr/contact",
-            "description": "견적 문의"
+            "description": "견적 문의",
+            "shippingDetails": {
+                "@type": "OfferShippingDetails",
+                "shippingRate": {
+                    "@type": "MonetaryAmount",
+                    "value": "0",
+                    "currency": "KRW"
+                },
+                "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 1,
+                        "maxValue": 3,
+                        "unitCode": "DAY"
+                    }
+                }
+            },
+            "hasMerchantReturnPolicy": {
+                "@type": "MerchantReturnPolicy",
+                "applicableCountry": "KR",
+                "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+            }
         }
 
     return schema
