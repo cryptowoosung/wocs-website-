@@ -383,6 +383,19 @@ function initMobileMenu() {
   panel.innerHTML = ph;
   document.body.appendChild(panel);
 
+  // Fix: strip inline display:none from copied mega-menu content
+  panel.querySelectorAll('.mega-menu').forEach(function(m) {
+    m.style.display = 'block';
+    m.style.flexDirection = 'column';
+    m.style.gap = '0';
+    m.style.minWidth = 'auto';
+    m.style.position = 'static';
+    m.style.background = 'none';
+    m.style.border = 'none';
+    m.style.padding = '0';
+    m.style.backdropFilter = 'none';
+  });
+
   // State
   var isOpen = false, openAcc = null, langOpen = false;
   function show() { panel.classList.add('open'); document.body.classList.add('mob-open'); isOpen = true; }
