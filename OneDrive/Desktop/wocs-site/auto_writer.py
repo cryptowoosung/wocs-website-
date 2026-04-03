@@ -103,22 +103,175 @@ SYSTEM_PROMPT = """당신은 WOCS(우성어닝천막캠프시스템)의 대표�
    - 화순 O4O 쇼룸 방문 시 Fusion 360 기반 3D 가설계 무료 제공
 3. 단호하고 자신감 있는 톤. "~인 것 같습니다" 같은 애매한 표현 금지.
 
-## 글 구조 (반드시 이 순서)
-1. [도발적 질문 또는 충격적 팩트로 시작] — 독자의 고정관념을 깨는 오프닝
-2. [문제의 원인 분석] — 왜 대부분 실패하는지, 업계의 구조적 문제점
-3. [WOCS의 해결책] — 특허 기술, 원가 구조, 배치 전략으로 문제 해결
-4. [구체적 숫자와 비교] — 투자비, 수익률, 회수 기간 등 실제 데이터
-5. [CTA] — "화순 쇼룸 방문 예약" 또는 "자동 견적 계산기 이용" 유도
+## SEO 키워드 배치 규칙 (필수)
+1. 제목(H1)에 타겟 키워드를 반드시 포함
+2. 첫 문단 100자 이내에 타겟 키워드를 자연스럽게 1회 포함
+3. H2 소제목 중 최소 1개에 타겟 키워드 또는 변형 키워드 포함
+4. 키워드 밀도는 본문 전체의 1~2% 수준 유지 (과도한 반복 금지)
+
+## 검색 의도별 글 구조
+키워드의 검색 의도를 판단하여 구조를 선택할 것:
+
+### A. 정보성 키워드 (설치, 방법, 종류, 비교, 가이드)
+1. [도발적 질문/충격적 팩트] — 독자의 고정관념을 깨는 오프닝
+2. [단계별 설명] — Step 1, Step 2... 또는 항목별 상세 설명
+3. [WOCS의 전문가 팁] — 16년 현장 경험에서 나온 실전 조언
+4. [비교표 또는 체크리스트] — 한눈에 보는 정리
+5. [내부링크 + CTA] — 관련 글 연결 + 상담 유도
+
+### B. 상업성 키워드 (견적, 비용, 단가, 업체, 가격)
+1. [시장 현실 폭로] — "대부분의 견적서에 숨겨진 함정"
+2. [비교표] — WOCS vs 일반업체 원가 구조 비교 (HTML <table> 사용)
+3. [WOCS 원가 절감 구조] — 왜 30% 저렴한지 근거 제시
+4. [실제 사례/숫자] — 투자비, 수익률, 회수 기간
+5. [강력한 CTA] — 견적 요청/쇼룸 방문 유도
+
+## 내부링크 슬롯 (필수 2개)
+본문 중간과 후반에 아래 플레이스홀더를 자연스러운 문맥 속에 삽입:
+- [INTERNAL_LINK_1] — 본문 중간 (관련 주제 연결)
+- [INTERNAL_LINK_2] — 본문 후반 (심화 주제 연결)
+예시: "자세한 내용은 [INTERNAL_LINK_1]에서 확인하실 수 있습니다."
+
+## 본문 마무리 (필수)
+글의 마지막 단락에 다음 정보를 자연스러운 문장으로 포함:
+- 상호: WOCS (우성어닝천막공사캠프시스템)
+- 전화: 010-4337-0582
+- 웹사이트: wocs.kr
+- 위치: 전남 화순군 (쇼룸)
+예시: "WOCS(우성어닝천막공사캠프시스템)는 전남 화순에서 16년간 글램핑 구조물을 직접 제조·시공해왔습니다. 무료 상담은 010-4337-0582 또는 wocs.kr에서 신청하실 수 있습니다."
 
 ## HTML 포맷
-- <h2>로 소제목 (3~4개)
+- <h2>로 소제목 (3~4개, 최소 1개에 키워드 포함)
 - <p>로 본문 단락
 - <strong>으로 핵심 강조 (골드색으로 표시됨)
 - <blockquote>로 핵심 인용/요약
 - <ul><li>로 리스트
+- <table>로 비교표 (상업성 키워드 시)
 - <a href="../contact/index.html">화순 쇼룸 방문 예약</a> 형태로 CTA 링크
 - 전체 분량: 1,500~2,500자 (한글 기준)
 """
+
+# ============================================================
+# 내부링크 매핑 (키워드 → 관련 페이지)
+# ============================================================
+
+INTERNAL_LINKS = {
+    "시공": ('<a href="https://wocs.kr/resources/blog-post.html?id=4">무용접 특허 조인트 기술 상세 보기</a>',
+             '<a href="https://wocs.kr/resources/blog-post.html?id=10">프레임·캔버스 관리 노하우</a>'),
+    "비용": ('<a href="https://wocs.kr/resources/blog-post.html?id=5">객단가 3배 높이는 80평 황금비율</a>',
+             '<a href="https://wocs.kr/contact/quote.html">무료 견적 요청하기</a>'),
+    "단가": ('<a href="https://wocs.kr/resources/blog-post.html?id=5">객단가 3배 높이는 80평 황금비율</a>',
+             '<a href="https://wocs.kr/contact/quote.html">무료 견적 요청하기</a>'),
+    "창업": ('<a href="https://wocs.kr/resources/blog-post.html?id=6">야영장 인허가 체크리스트</a>',
+             '<a href="https://wocs.kr/resources/blog-post.html?id=8">수익 공유 파트너십</a>'),
+    "텐트": ('<a href="https://wocs.kr/resources/blog-post.html?id=4">무용접 특허 조인트 기술</a>',
+             '<a href="https://wocs.kr/resources/blog-post.html?id=10">텐트 수명 15년 관리법</a>'),
+    "수익": ('<a href="https://wocs.kr/resources/blog-post.html?id=5">80평 황금비율 수익 구조</a>',
+             '<a href="https://wocs.kr/resources/blog-post.html?id=9">B2B 대단지 기획 전략</a>'),
+    "인허가": ('<a href="https://wocs.kr/resources/blog-post.html?id=7">화순 쇼룸 3D 가설계</a>',
+              '<a href="https://wocs.kr/contact/index.html">인허가 무료 상담 신청</a>'),
+    "default": ('<a href="https://wocs.kr/resources/blog.html">WOCS 블로그 전체 보기</a>',
+                '<a href="https://wocs.kr/contact/quote.html">무료 견적 요청하기</a>'),
+}
+
+
+def resolve_internal_links(content, keyword):
+    """[INTERNAL_LINK_1], [INTERNAL_LINK_2] 플레이스홀더를 실제 링크로 치환"""
+    link1, link2 = INTERNAL_LINKS.get("default")
+    for key, links in INTERNAL_LINKS.items():
+        if key != "default" and key in keyword:
+            link1, link2 = links
+            break
+    content = content.replace("[INTERNAL_LINK_1]", link1)
+    content = content.replace("[INTERNAL_LINK_2]", link2)
+    return content
+
+
+# ============================================================
+# JSON-LD Schema Markup 자동 생성
+# ============================================================
+
+WOCS_LOCAL_BUSINESS = {
+    "@type": "LocalBusiness",
+    "name": "WOCS (우성어닝천막공사캠프시스템)",
+    "telephone": "010-4337-0582",
+    "email": "info@wocs.kr",
+    "url": "https://wocs.kr",
+    "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "화순군",
+        "addressRegion": "전남",
+        "addressCountry": "KR",
+        "streetAddress": "사평면 유마로 592"
+    },
+    "priceRange": "₩₩₩",
+    "image": "https://wocs.kr/assets/images/og-image.jpg"
+}
+
+# 키워드 → schema 유형 매핑
+SCHEMA_TYPE_KEYWORDS = {
+    "HowTo": ["설치", "방법", "시공", "만드는", "절차", "가이드", "관리"],
+    "Product": ["텐트", "프레임", "소재", "PVC", "캔버스", "조인트", "모듈러", "데크"],
+    "Review": ["비교", "수익률", "단점", "장점", "vs", "리뷰"],
+}
+
+
+def detect_schema_type(keyword, title):
+    """키워드+제목 분석하여 적절한 schema 유형 반환"""
+    text = f"{keyword} {title}".lower()
+    for schema_type, triggers in SCHEMA_TYPE_KEYWORDS.items():
+        if any(t in text for t in triggers):
+            return schema_type
+    return "Article"
+
+
+def generate_schema_markup(title, excerpt, keyword, image, post_date):
+    """JSON-LD 구조화 데이터 생성"""
+    schema_type = detect_schema_type(keyword, title)
+
+    # 기본 Article 스키마
+    schema = {
+        "@context": "https://schema.org",
+        "@graph": [
+            WOCS_LOCAL_BUSINESS,
+            {
+                "@type": schema_type if schema_type != "Article" else "BlogPosting",
+                "headline": title,
+                "description": excerpt[:120],
+                "image": image,
+                "datePublished": post_date,
+                "dateModified": post_date,
+                "author": {
+                    "@type": "Person",
+                    "name": "김우성",
+                    "jobTitle": "WOCS 대표",
+                    "url": "https://wocs.kr"
+                },
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "WOCS",
+                    "url": "https://wocs.kr"
+                },
+                "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": f"https://wocs.kr/resources/blog-post.html?id={{post_id}}"
+                },
+                "keywords": keyword
+            }
+        ]
+    }
+
+    # HowTo 추가 필드
+    if schema_type == "HowTo":
+        schema["@graph"][1]["supply"] = [{"@type": "HowToSupply", "name": "글램핑 구조물 자재"}]
+        schema["@graph"][1]["tool"] = [{"@type": "HowToTool", "name": "WOCS 무용접 조인트 시스템"}]
+
+    # Product 추가 필드
+    if schema_type == "Product":
+        schema["@graph"][1]["brand"] = {"@type": "Brand", "name": "WOCS"}
+        schema["@graph"][1]["manufacturer"] = {"@type": "Organization", "name": "WOCS (우성어닝천막공사캠프시스템)"}
+
+    return schema
 
 # ============================================================
 # Gemini API 호출
@@ -190,23 +343,49 @@ def call_openai(prompt, system=SYSTEM_PROMPT):
         return None
 
 
+def detect_search_intent(keyword):
+    """키워드의 검색 의도 판별: informational / commercial"""
+    commercial = ["견적", "비용", "단가", "가격", "업체", "수익", "투자", "보조금"]
+    if any(w in keyword for w in commercial):
+        return "commercial"
+    return "informational"
+
+
 def generate_content(topic):
     """AI로 블로그 글 생성"""
+    intent = detect_search_intent(topic['keyword'])
+    intent_guide = ""
+    if intent == "commercial":
+        intent_guide = """이 키워드는 상업성(구매 의도) 키워드입니다.
+→ 비교표(<table>)를 반드시 포함하고, 강력한 CTA로 마무리하세요.
+→ 구조: 시장 현실 폭로 → 비교표 → WOCS 원가 절감 → 실제 사례 → CTA"""
+    else:
+        intent_guide = """이 키워드는 정보성 키워드입니다.
+→ 단계별 설명 또는 항목별 상세 비교로 구성하세요.
+→ 구조: 도발적 오프닝 → 단계별/항목별 설명 → 전문가 팁 → 정리 → CTA"""
+
     prompt = f"""아래 주제로 WOCS 블로그 글을 작성해주세요.
 
 주제: {topic['title_hint']}
 SEO 타겟 키워드: {topic['keyword']}
+검색 의도: {intent}
 
-요구사항:
-1. 제목은 SEO 키워드를 포함하되, 클릭하고 싶게 작성
-2. 본문은 HTML 태그(<h2>, <p>, <strong>, <blockquote>, <ul><li>) 사용
-3. 반드시 WOCS의 차별점(국내 공장 직영 30% 절감, 무용접 특허, 80평 황금비율, 화순 쇼룸)을 자연스럽게 녹일 것
-4. 마지막에 화순 쇼룸 방문 또는 자동 견적 계산기 CTA 포함
-5. 분량: 1,500~2,500자
+{intent_guide}
 
-출력 형식 (정확히 이 형식으로):
+SEO 필수 규칙:
+1. 제목(H1)에 "{topic['keyword']}" 키워드를 반드시 포함
+2. 첫 문단 100자 이내에 "{topic['keyword']}" 자연스럽게 1회 포함
+3. H2 소제목 중 최소 1개에 "{topic['keyword']}" 또는 변형 키워드 포함
+4. 본문 중간에 [INTERNAL_LINK_1], 후반에 [INTERNAL_LINK_2] 플레이스홀더 삽입
+5. 마지막 단락에 WOCS 상호/전화/웹사이트 정보 자연스럽게 포함
+6. WOCS 차별점(공장 직영 30% 절감, 무용접 특허, 80평 황금비율, 화순 쇼룸) 녹일 것
+7. 분량: 1,500~2,500자
+
+출력 형식 (정확히 이 형식, 순서 지켜주세요):
 ---TITLE---
-글 제목
+글 제목 (키워드 포함, 클릭 유도)
+---META_DESC---
+메타디스크립션 (120자 이내, 키워드 포함, 클릭 유도 문구)
 ---EXCERPT---
 2~3줄 요약
 ---CONTENT---
@@ -227,13 +406,18 @@ HTML 본문
 # ============================================================
 
 def parse_ai_output(raw_text):
-    """AI 출력을 제목/요약/본문으로 파싱"""
-    title = excerpt = content = ""
+    """AI 출력을 제목/메타디스크립션/요약/본문으로 파싱"""
+    title = meta_desc = excerpt = content = ""
 
     # ---TITLE--- 파싱
     m = re.search(r'---TITLE---\s*\n(.+?)(?:\n---|\Z)', raw_text, re.DOTALL)
     if m:
         title = m.group(1).strip()
+
+    # ---META_DESC--- 파싱
+    m = re.search(r'---META_DESC---\s*\n(.+?)(?:\n---|\Z)', raw_text, re.DOTALL)
+    if m:
+        meta_desc = m.group(1).strip()[:120]
 
     # ---EXCERPT--- 파싱
     m = re.search(r'---EXCERPT---\s*\n(.+?)(?:\n---|\Z)', raw_text, re.DOTALL)
@@ -248,7 +432,11 @@ def parse_ai_output(raw_text):
         content = re.sub(r'^```html?\s*', '', content)
         content = re.sub(r'\s*```$', '', content)
 
-    return title, excerpt, content
+    # meta_desc가 없으면 excerpt에서 생성
+    if not meta_desc and excerpt:
+        meta_desc = excerpt[:120]
+
+    return title, meta_desc, excerpt, content
 
 
 def get_next_id():
@@ -327,19 +515,31 @@ def save_to_blog_data_js(post_id, title, excerpt, content, topic, image):
         return False
 
 
-def save_to_txt(post_id, title, excerpt, content, image):
-    """content/ 폴더에 txt 백업 저장"""
+def save_to_txt(post_id, title, meta_desc, excerpt, content, keyword, image, schema):
+    """content/ 폴더에 txt 백업 저장 (schema markup 포함)"""
     today = datetime.now().strftime('%Y-%m-%d')
     filename = f"auto_post_{today}_{post_id}.txt"
     filepath = CONTENT_DIR / filename
 
+    # schema의 post_id 플레이스홀더 치환
+    schema_str = json.dumps(schema, ensure_ascii=False, indent=2)
+    schema_str = schema_str.replace("{post_id}", str(post_id))
+
     txt = f"""{title}
 {today}
 {image}
----
+---META_DESC---
+{meta_desc}
+---EXCERPT---
 {excerpt}
----
+---KEYWORD---
+{keyword}
+---CONTENT---
 {content}
+---SCHEMA---
+<script type="application/ld+json">
+{schema_str}
+</script>
 """
     filepath.write_text(txt, encoding='utf-8')
     print(f"✅ {filepath} 저장 완료")
@@ -449,18 +649,30 @@ def main():
             continue
 
         # 3. 파싱
-        title, excerpt, content = parse_ai_output(raw)
+        title, meta_desc, excerpt, content = parse_ai_output(raw)
         if not title or not content:
             print("⚠ 파싱 실패. 원본을 txt로 저장합니다.")
-            save_to_txt(post_id, topic['title_hint'], topic['keyword'], raw, image)
+            save_to_txt(post_id, topic['title_hint'], "", topic['keyword'], raw,
+                        topic['keyword'], image, {})
             continue
 
-        print(f"✍  제목: {title}")
-        print(f"📄 본문: {len(content)}자")
+        # 4. 내부링크 치환
+        content = resolve_internal_links(content, topic['keyword'])
 
-        # 4. 저장
+        # 5. Schema Markup 생성
+        today = datetime.now().strftime('%Y-%m-%d')
+        schema = generate_schema_markup(title, excerpt, topic['keyword'], image, today)
+        schema_type = detect_schema_type(topic['keyword'], title)
+
+        print(f"✍  제목: {title}")
+        print(f"📝 메타: {meta_desc}")
+        print(f"📄 본문: {len(content)}자")
+        print(f"🔗 Schema: {schema_type}")
+
+        # 6. 저장
         save_to_blog_data_js(post_id, title, excerpt, content, topic, image)
-        save_to_txt(post_id, title, excerpt, content, image)
+        save_to_txt(post_id, title, meta_desc, excerpt, content,
+                    topic['keyword'], image, schema)
 
     print(f"\n{'='*50}")
     print("🎉 완료!")
