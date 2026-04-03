@@ -10,6 +10,7 @@ var currentCC = LANG_CC[typeof WOCS_LANG !== 'undefined' ? WOCS_LANG : 'ko'] || 
 var flagImg = 'https://flagcdn.com/w40/' + currentCC + '.png';
 
 function buildWocsHeader() {
+  if(typeof wDbg==='function') wDbg('buildWocsHeader 시작');
   const nav = [
     { key: 'navProducts', href: '/products/index.html', mega: [
       { titleKey: 'megaGeoDomes', titleHref: '/products/geodesic-domes.html', links: [
@@ -294,13 +295,31 @@ document.addEventListener('click', function(e) {
 });
 
 // ── Mobile Menu (Accordion + Language + Fullscreen Panel) ──
+// Debug helper — shows messages on screen for mobile testing
+function wDbg(msg) {
+  console.log('[WOCS-MOB] ' + msg);
+  var d = document.getElementById('wocs-debug');
+  if (!d) {
+    d = document.createElement('div');
+    d.id = 'wocs-debug';
+    d.style.cssText = 'position:fixed;bottom:0;left:0;right:0;max-height:150px;overflow-y:auto;background:rgba(180,20,20,0.92);color:#fff;font-size:11px;font-family:monospace;padding:8px 12px;z-index:99999;pointer-events:auto;';
+    document.body.appendChild(d);
+  }
+  d.innerHTML = '[' + new Date().toLocaleTimeString() + '] ' + msg + '<br>' + d.innerHTML;
+  if (d.children.length > 30) d.innerHTML = d.innerHTML.substring(0, d.innerHTML.lastIndexOf('<br>', 2000));
+}
+
 function initMobileMenu() {
+  wDbg('initMobileMenu 시작');
   var header = document.getElementById('wocs-header');
-  if (!header) return;
+  if (!header) { wDbg('ERROR: #wocs-header 없음!'); return; }
+  wDbg('#wocs-header 찾음, innerHTML길이=' + header.innerHTML.length);
   var main = header.querySelector('.header-main');
-  if (!main) return;
+  if (!main) { wDbg('ERROR: .header-main 없음!'); return; }
+  wDbg('.header-main 찾음');
   var navList = header.querySelector('.nav-list');
   var navItems = header.querySelectorAll('.nav-item');
+  wDbg('navList=' + (navList ? 'found' : 'null') + ', navItems=' + navItems.length + '개');
 
   // Inject mobile CSS
   var mobileCSS = document.createElement('style');
@@ -392,6 +411,7 @@ function initMobileMenu() {
   panel.id = 'mob-panel';
   panel.innerHTML = panelHTML;
   document.body.appendChild(panel);
+  wDbg('패널 생성됨, body에 추가됨');
 
   // State
   var isOpen = false;
@@ -403,7 +423,7 @@ function initMobileMenu() {
 
   // Hamburger
   var hamburger = document.getElementById('mobile-hamburger');
-  function onHamburger(e) { e.preventDefault(); e.stopPropagation(); if(isOpen){closePanel();hamburger.innerHTML='☰';}else{openPanel();hamburger.innerHTML='✕';} }
+  function onHamburger(e) { e.preventDefault(); e.stopPropagation(); wDbg('햄버거 클릭! isOpen='+isOpen); if(isOpen){closePanel();hamburger.innerHTML='☰';}else{openPanel();hamburger.innerHTML='✕';} }
   hamburger.addEventListener('click', onHamburger);
   hamburger.addEventListener('touchstart', function(e){e.preventDefault();onHamburger(e);}, {passive:false});
 
@@ -441,13 +461,16 @@ function initMobileMenu() {
     function onAcc(e) {
       e.preventDefault(); e.stopPropagation();
       var idx = btn.getAttribute('data-accordion');
+      wDbg('accordion 클릭! idx='+idx+', openAccordion='+openAccordion);
       var sub = document.getElementById('mob-sub-'+idx);
       var arrow = document.getElementById('mob-arrow-'+idx);
+      wDbg('sub='+(sub?'found,classes='+sub.className:'null')+', arrow='+(arrow?'found':'null'));
       if (openAccordion === idx) {
         // Close current
         if(sub) sub.classList.remove('open');
         if(arrow) arrow.classList.remove('open');
         openAccordion = null;
+        wDbg('서브메뉴 닫힘 idx='+idx);
       } else {
         // Close previous
         if (openAccordion !== null) {
@@ -460,6 +483,7 @@ function initMobileMenu() {
         if(sub) sub.classList.add('open');
         if(arrow) arrow.classList.add('open');
         openAccordion = idx;
+        wDbg('서브메뉴 열림 idx='+idx+', sub.maxHeight='+((sub&&sub.style)?sub.style.maxHeight:'n/a'));
       }
     }
     btn.addEventListener('click', onAcc);
