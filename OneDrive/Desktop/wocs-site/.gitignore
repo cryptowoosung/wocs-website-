@@ -1,0 +1,15 @@
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+node_modules/
+.DS_Store
+*.log
+/backup/
+/quotes/
+config.json
+credentials.json
+token.json
+*.key
+*.pem

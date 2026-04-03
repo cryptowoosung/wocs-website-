@@ -1,0 +1,12 @@
+{"t":0,"agent":"a378a88","agent_type":"Product Manager","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"aa9b03c","agent_type":"Trend Researcher","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"ac24384","agent_type":"Brand Guardian","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"ac24384","agent_type":"Brand Guardian","event":"agent_stop","success":true,"duration_ms":18754}
+{"t":0,"agent":"a378a88","agent_type":"Product Manager","event":"agent_stop","success":true,"duration_ms":49203}
+{"t":0,"agent":"aa9b03c","agent_type":"Trend Researcher","event":"agent_stop","success":true,"duration_ms":149007}
+{"t":0,"agent":"a784a2f","agent_type":"Software Architect","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"a784a2f","agent_type":"Software Architect","event":"agent_stop","success":true,"duration_ms":29109}
+{"t":0,"agent":"ae53374","agent_type":"executor","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"ae53374","agent_type":"executor","event":"agent_stop","success":true,"duration_ms":212409}
+{"t":0,"agent":"ae58f57","agent_type":"Reality Checker","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"ae58f57","agent_type":"Reality Checker","event":"agent_stop","success":true,"duration_ms":32083}

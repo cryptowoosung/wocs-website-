@@ -1,0 +1,436 @@
+{
+  "name": "WOCS Emoticon Auto Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 9,
+              "field": "cronExpression",
+              "expression": "0 9 */3 * *"
+            }
+          ]
+        }
+      },
+      "id": "node-1",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "1OGZplXhNReH5M6rbNHH-ENjA_yJqIhorxSRSi3SYqmg",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "이모티콘_캐릭터_로그",
+          "mode": "name"
+        }
+      },
+      "id": "node-2",
+      "name": "Read Character Log",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [220, 0],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const rows = $input.all();\nconst prevChars = rows\n  .map(r => r.json['캐릭터명'])\n  .filter(Boolean)\n  .slice(-20)\n  .join(', ');\nreturn [{ json: { previous_characters: prevChars || '없음' } }];"
+      },
+      "id": "node-3",
+      "name": "Extract Previous Characters",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "={{ $env.ANTHROPIC_API_KEY }}"
+            },
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-haiku-4-5-20251001\",\n  \"max_tokens\": 2000,\n  \"system\": \"너는 이모티콘 캐릭터 기획자다. 매번 완전히 다른 신선한 캐릭터를 제안해야 한다. 이전에 만든 캐릭터와 절대 겹치면 안 된다. 반드시 JSON만 출력하고 다른 텍스트는 절대 포함하지 마라.\",\n  \"messages\": [{\n    \"role\": \"user\",\n    \"content\": \"오늘의 이모티콘 캐릭터를 새로 기획해라.\\n이전 캐릭터: {{ $json.previous_characters }}\\n\\n조건:\\n- 동물 또는 귀여운 사물 캐릭터\\n- 2025-2026 트렌드 반영 (낙서감성, 병맛, 힐링귀여움 중 하나)\\n- 카카오 심사 기준: 표정 과장, 성격 뚜렷, 일상 대화 표현 가능\\n- 32개 동작 리스트 (영어)\\n\\n출력 형식 (JSON만):\\n{\\\"character_name\\\": \\\"캐릭터명(한국어)\\\", \\\"character_desc\\\": \\\"A [color] [animal], flat 2D kawaii style, thick black outlines, white exterior stroke, transparent background\\\", \\\"theme\\\": \\\"테마명\\\", \\\"style\\\": \\\"healing/meme/rough-sketch 중 하나\\\", \\\"emotions\\\": [\\\"동작1\\\", \\\"동작2\\\"]}\"\n  }]\n}",
+        "options": {}
+      },
+      "id": "node-4",
+      "name": "Claude - Character Planning",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [660, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "const content = $input.first().json.content[0].text;\nconst data = JSON.parse(content.match(/\\{[\\s\\S]*\\}/)[0]);\nconst base_style = `${data.character_desc}\nMUST KEEP:\n- Flat 2D illustration style\n- Thick black outlines\n- WHITE OUTLINE/STROKE around entire character exterior (dark mode)\n- Transparent background\n- Centered, 10px margin\n- Kakaotalk emoticon sticker style\n- NO text, NO background elements\n- Exaggerated expressions, personality clearly visible`;\nconst date = $now.format('YYYY-MM-DD');\nreturn data.emotions.map((emotion, i) => ({\n  json: {\n    index: i + 1,\n    emotion,\n    character_name: data.character_name,\n    theme: data.theme,\n    style: data.style,\n    prompt: `${base_style}\\nAction: ${emotion}`,\n    date,\n    filename: `${String(i + 1).padStart(2, '0')}.png`,\n    folder: `${date}_${data.character_name}`\n  }\n}));"
+      },
+      "id": "node-5",
+      "name": "Parse + Generate Prompts",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [880, 0]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "node-6",
+      "name": "Split In Batches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [1100, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/images/generations",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.OPENAI_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"gpt-image-1\",\n  \"prompt\": \"{{ $json.prompt }}\",\n  \"size\": \"1024x1024\",\n  \"quality\": \"medium\",\n  \"background\": \"transparent\",\n  \"output_format\": \"png\",\n  \"n\": 1\n}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "node-7",
+      "name": "GPT Image Generate",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1320, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "const prevData = $('Split In Batches').first().json;\nconst b64 = $input.first().json.data[0].b64_json;\nreturn [{\n  json: {\n    filename: prevData.filename,\n    folder: prevData.folder,\n    character_name: prevData.character_name,\n    theme: prevData.theme,\n    style: prevData.style,\n    date: prevData.date,\n    index: prevData.index\n  },\n  binary: {\n    data: {\n      data: b64,\n      mimeType: 'image/png',\n      fileName: prevData.filename,\n      fileExtension: 'png'\n    }\n  }\n}];"
+      },
+      "id": "node-8",
+      "name": "Base64 to Binary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1540, 0]
+    },
+    {
+      "parameters": {
+        "operation": "upload",
+        "name": "={{ $json.filename }}",
+        "folderId": {
+          "__rl": true,
+          "value": "root",
+          "mode": "list"
+        },
+        "driveId": {
+          "__rl": true,
+          "value": "MyDrive",
+          "mode": "list"
+        },
+        "options": {
+          "parents": ["/WOCS_emoticons/{{ $json.folder }}/original/"]
+        }
+      },
+      "id": "node-9",
+      "name": "Google Drive Upload",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [1760, 0],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 1.5,
+        "unit": "seconds"
+      },
+      "id": "node-10",
+      "name": "Wait 1.5s",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [1980, 0],
+      "webhookId": "wait-emoticon"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-last",
+              "leftValue": "={{ $json.index }}",
+              "rightValue": 32,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "node-11-if",
+      "name": "Is Last Image?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [2200, 0]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1OGZplXhNReH5M6rbNHH-ENjA_yJqIhorxSRSi3SYqmg",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "이모티콘_캐릭터_로그",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "날짜": "={{ $json.date }}",
+            "캐릭터명": "={{ $json.character_name }}",
+            "테마": "={{ $json.theme }}",
+            "스타일": "={{ $json.style }}",
+            "OGQ": "pending",
+            "라인": "pending",
+            "카카오": "pending"
+          }
+        },
+        "options": {}
+      },
+      "id": "node-12",
+      "name": "Log to Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [2420, -100],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "",
+        "text": "=\uD83D\uDC3E \uC774\uBAA8\uD2F0\uCF58 \uC0DD\uC131 \uC644\uB8CC!\n\uD83D\uDCC5 {{ $json.date }}\n\uD83C\uDFA8 \uCE90\uB9AD\uD130: {{ $json.character_name }}\n\uD83C\uDFAD \uD14C\uB9C8: {{ $json.theme }}\n\uD83D\uDCC1 Google Drive \uC800\uC7A5 \uC644\uB8CC\n\uD83D\uDC49 \uB2E4\uC74C: Claude Code \uBCC0\uD658 \u2192 OGQ/\uB77C\uC778 \uC5C5\uB85C\uB4DC",
+        "additionalFields": {}
+      },
+      "id": "node-13",
+      "name": "Telegram Notification",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [2640, -100],
+      "credentials": {
+        "telegramApi": {
+          "id": "",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Read Character Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Character Log": {
+      "main": [
+        [
+          {
+            "node": "Extract Previous Characters",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Previous Characters": {
+      "main": [
+        [
+          {
+            "node": "Claude - Character Planning",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude - Character Planning": {
+      "main": [
+        [
+          {
+            "node": "Parse + Generate Prompts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse + Generate Prompts": {
+      "main": [
+        [
+          {
+            "node": "Split In Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split In Batches": {
+      "main": [
+        [
+          {
+            "node": "GPT Image Generate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GPT Image Generate": {
+      "main": [
+        [
+          {
+            "node": "Base64 to Binary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Base64 to Binary": {
+      "main": [
+        [
+          {
+            "node": "Google Drive Upload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Upload": {
+      "main": [
+        [
+          {
+            "node": "Wait 1.5s",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 1.5s": {
+      "main": [
+        [
+          {
+            "node": "Is Last Image?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Last Image?": {
+      "main": [
+        [
+          {
+            "node": "Log to Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Split In Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log to Sheets": {
+      "main": [
+        [
+          {
+            "node": "Telegram Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "WOCS",
+      "id": "wocs-tag"
+    },
+    {
+      "name": "emoticon",
+      "id": "emoticon-tag"
+    }
+  ],
+  "pinData": {}
+}

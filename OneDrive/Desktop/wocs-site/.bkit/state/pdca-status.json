@@ -1,0 +1,1903 @@
+{
+  "version": "3.0",
+  "lastUpdated": "2026-04-03T14:13:45.813Z",
+  "activeFeatures": [
+    "user",
+    "wordpress_auto",
+    "wocs-site",
+    "js",
+    "multi-agent-workflow",
+    "wocs_theme",
+    "wocs_wp",
+    "wocs-website-",
+    "patentjigi",
+    "clients",
+    "core",
+    "ui"
+  ],
+  "primaryFeature": "user",
+  "features": {
+    "user": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-21T11:04:36.221Z",
+        "lastUpdated": "2026-03-31T08:35:55.257Z"
+      },
+      "lastFile": "C:\\Users\\user\\emoticon_generator.py"
+    },
+    "wordpress_auto": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-21T12:16:21.358Z",
+        "lastUpdated": "2026-03-21T12:32:46.582Z"
+      },
+      "lastFile": "C:/Users/user/Desktop/wocs-site/wordpress_auto/wordpress.py"
+    },
+    "wocs-site": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-21T12:54:12.905Z",
+        "lastUpdated": "2026-04-03T14:13:45.813Z"
+      },
+      "lastFile": "C:\\Users\\user\\OneDrive\\Desktop\\wocs-site\\auto_writer.py"
+    },
+    "js": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-21T16:02:40.794Z",
+        "lastUpdated": "2026-03-26T06:09:23.466Z"
+      },
+      "lastFile": "C:\\Users\\user\\assets\\js\\wocs-lead-popup.js"
+    },
+    "multi-agent-workflow": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-25T04:50:27.270Z",
+        "lastUpdated": "2026-03-25T04:54:04.101Z"
+      },
+      "lastFile": "C:\\Users\\user\\OneDrive\\Desktop\\multi-agent-workflow\\app\\main.py"
+    },
+    "wocs_theme": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-25T10:47:56.226Z",
+        "lastUpdated": "2026-03-25T10:54:34.093Z"
+      },
+      "lastFile": "C:\\Users\\user\\AppData\\Local\\Temp\\wocs_theme\\category.php"
+    },
+    "wocs_wp": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-26T06:15:52.301Z",
+        "lastUpdated": "2026-03-26T06:15:52.301Z"
+      },
+      "lastFile": "C:\\Users\\user\\AppData\\Local\\Temp\\wocs_wp\\functions.php"
+    },
+    "wocs-website-": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-04-02T07:35:27.602Z",
+        "lastUpdated": "2026-04-02T08:26:28.830Z"
+      },
+      "lastFile": "C:\\Users\\user\\wocs-website-\\emoticon_generator.py"
+    },
+    "patentjigi": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-04-02T17:02:05.318Z",
+        "lastUpdated": "2026-04-03T02:54:03.200Z"
+      },
+      "lastFile": "C:\\Users\\user\\OneDrive\\Desktop\\patentjigi\\config.py"
+    },
+    "clients": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-04-02T17:02:06.828Z",
+        "lastUpdated": "2026-04-03T01:43:27.864Z"
+      },
+      "lastFile": "C:\\Users\\user\\OneDrive\\Desktop\\patentjigi\\clients\\kipris_client.py"
+    },
+    "core": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-04-02T17:02:08.085Z",
+        "lastUpdated": "2026-04-03T02:41:58.312Z"
+      },
+      "lastFile": "C:\\Users\\user\\OneDrive\\Desktop\\patentjigi\\core\\db.py"
+    },
+    "ui": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-04-02T17:02:09.297Z",
+        "lastUpdated": "2026-04-02T17:02:09.297Z"
+      },
+      "lastFile": "C:\\Users\\user\\OneDrive\\Desktop\\patentjigi\\ui\\__init__.py"
+    }
+  },
+  "pipeline": {
+    "currentPhase": 1,
+    "level": "Dynamic",
+    "phaseHistory": []
+  },
+  "session": {
+    "startedAt": "2026-03-21T10:51:01.343Z",
+    "onboardingCompleted": false,
+    "lastActivity": "2026-04-03T14:13:45.813Z"
+  },
+  "history": [
+    {
+      "timestamp": "2026-03-21T11:04:36.221Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T11:22:05.472Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T11:24:34.089Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T11:25:32.390Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T11:26:58.643Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T11:30:33.308Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T11:32:48.490Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T12:16:21.358Z",
+      "feature": "wordpress_auto",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T12:16:47.485Z",
+      "feature": "wordpress_auto",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T12:17:16.367Z",
+      "feature": "wordpress_auto",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T12:32:24.430Z",
+      "feature": "wordpress_auto",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T12:32:34.731Z",
+      "feature": "wordpress_auto",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T12:32:46.582Z",
+      "feature": "wordpress_auto",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T12:54:12.905Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T12:54:25.478Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T12:54:34.104Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T12:54:42.616Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T12:54:49.199Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T13:34:45.589Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T14:19:32.407Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T15:03:23.783Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T15:31:12.010Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T15:31:23.686Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T15:42:42.933Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T15:42:52.469Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T15:43:08.103Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T15:54:21.094Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T15:54:38.776Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T15:54:48.565Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T15:54:55.621Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T16:02:40.794Z",
+      "feature": "js",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T16:04:32.270Z",
+      "feature": "js",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T16:10:33.717Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T16:10:54.912Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T16:11:04.842Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T16:11:21.227Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T16:11:29.479Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T16:19:50.063Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T16:38:39.287Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T17:17:55.988Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T17:22:59.887Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T17:23:06.997Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T17:28:27.057Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-21T18:45:35.805Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:50:27.270Z",
+      "feature": "multi-agent-workflow",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:53:10.883Z",
+      "feature": "multi-agent-workflow",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:53:17.812Z",
+      "feature": "multi-agent-workflow",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:53:26.151Z",
+      "feature": "multi-agent-workflow",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:53:32.672Z",
+      "feature": "multi-agent-workflow",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:53:38.859Z",
+      "feature": "multi-agent-workflow",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:53:53.905Z",
+      "feature": "multi-agent-workflow",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:54:04.101Z",
+      "feature": "multi-agent-workflow",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T10:47:56.226Z",
+      "feature": "wocs_theme",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T10:54:02.723Z",
+      "feature": "wocs_theme",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T10:54:26.969Z",
+      "feature": "wocs_theme",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T10:54:34.093Z",
+      "feature": "wocs_theme",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T06:09:23.466Z",
+      "feature": "js",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T06:15:52.301Z",
+      "feature": "wocs_wp",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T15:33:14.828Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T17:35:32.879Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T17:36:19.880Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T17:36:20.683Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T17:36:21.566Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T17:36:22.438Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T17:55:17.339Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T18:33:15.492Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T18:33:26.561Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T18:33:37.883Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T18:33:50.000Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T18:33:57.102Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T18:34:05.420Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T18:34:12.829Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T18:34:21.949Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T18:35:13.973Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T18:39:13.433Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T18:39:51.054Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T18:40:27.941Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T18:40:37.534Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-26T21:23:27.122Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-28T09:55:39.261Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-30T05:34:28.372Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-30T07:12:25.523Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-30T08:29:57.141Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T07:00:46.857Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T07:06:10.046Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T07:06:30.878Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T07:19:55.575Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T07:20:08.492Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T07:32:18.681Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T07:32:30.195Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T07:33:32.342Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T07:34:28.973Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T07:34:37.540Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T07:34:43.518Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T07:36:55.343Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T07:37:41.874Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T08:15:25.162Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T08:22:54.898Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T08:35:55.257Z",
+      "feature": "user",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T07:35:27.602Z",
+      "feature": "wocs-website-",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T07:35:41.970Z",
+      "feature": "wocs-website-",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T07:35:50.333Z",
+      "feature": "wocs-website-",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T07:36:03.070Z",
+      "feature": "wocs-website-",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T07:36:11.655Z",
+      "feature": "wocs-website-",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T07:36:17.333Z",
+      "feature": "wocs-website-",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T07:36:28.298Z",
+      "feature": "wocs-website-",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T07:36:43.633Z",
+      "feature": "wocs-website-",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T07:36:57.338Z",
+      "feature": "wocs-website-",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T07:37:02.938Z",
+      "feature": "wocs-website-",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T07:39:39.803Z",
+      "feature": "wocs-website-",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T07:39:58.154Z",
+      "feature": "wocs-website-",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T07:40:14.948Z",
+      "feature": "wocs-website-",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T07:43:44.717Z",
+      "feature": "wocs-website-",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T07:45:58.564Z",
+      "feature": "wocs-website-",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T08:23:24.308Z",
+      "feature": "wocs-website-",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T08:23:56.972Z",
+      "feature": "wocs-website-",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T08:25:18.001Z",
+      "feature": "wocs-website-",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T08:26:14.184Z",
+      "feature": "wocs-website-",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T08:26:28.830Z",
+      "feature": "wocs-website-",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T17:02:05.318Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T17:02:06.828Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T17:02:08.085Z",
+      "feature": "core",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T17:02:09.297Z",
+      "feature": "ui",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T17:02:27.980Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T17:02:37.177Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T17:02:53.916Z",
+      "feature": "core",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T17:03:08.487Z",
+      "feature": "core",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T17:03:21.448Z",
+      "feature": "core",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T17:03:40.941Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T17:04:03.291Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T17:50:07.916Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T18:07:34.040Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T18:07:39.207Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T18:10:25.568Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T18:10:33.688Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T18:10:48.778Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T18:14:05.889Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T18:14:06.822Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T18:14:07.784Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T18:14:18.294Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T18:15:33.092Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T18:53:25.135Z",
+      "feature": "core",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T18:53:26.220Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T18:53:35.783Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T18:54:10.786Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T19:35:36.539Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T19:49:13.812Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T19:53:08.156Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T19:59:51.981Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T20:01:11.998Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T20:05:23.439Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T20:33:33.917Z",
+      "feature": "core",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T20:33:50.834Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T20:33:52.989Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T20:33:59.867Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T20:34:46.965Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T20:35:19.075Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T20:35:29.552Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T20:35:32.272Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T20:35:42.363Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T20:53:19.074Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:02:11.651Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:02:27.767Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:02:42.713Z",
+      "feature": "core",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:02:51.276Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:02:52.666Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:03:06.209Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:03:13.903Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:03:15.660Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:03:18.102Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:18:43.805Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:18:44.946Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:19:00.348Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:19:18.001Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:19:29.830Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:30:17.190Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:30:24.048Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:30:31.814Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:30:41.966Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:30:49.458Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:31:25.338Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:38:23.247Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:38:32.967Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:38:50.211Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:49:01.690Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T21:57:46.152Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T22:02:30.612Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T22:27:43.404Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T22:27:55.677Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T22:27:57.021Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T22:28:06.558Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T22:28:11.492Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T22:28:19.285Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T22:28:21.238Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T22:28:22.326Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T22:57:59.820Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:02:09.624Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:02:18.625Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:02:33.910Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:02:35.617Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:02:37.239Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:02:39.106Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:02:40.524Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:07:22.607Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:07:31.543Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:07:33.434Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:07:36.202Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:07:38.325Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:07:40.510Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:13:27.924Z",
+      "feature": "core",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:13:37.396Z",
+      "feature": "core",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:14:01.230Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:19:15.396Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:24:33.435Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:33:02.590Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:33:13.494Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:33:29.343Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:38:09.719Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:38:18.524Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:59:27.529Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:59:37.528Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-02T23:59:54.235Z",
+      "feature": "core",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T00:00:03.665Z",
+      "feature": "core",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T00:18:47.848Z",
+      "feature": "core",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T00:18:50.676Z",
+      "feature": "core",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T00:19:11.508Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T00:19:24.939Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T00:29:16.073Z",
+      "feature": "core",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T00:29:18.107Z",
+      "feature": "core",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T00:29:19.956Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T00:29:22.113Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T00:29:23.329Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T00:29:24.640Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T00:31:18.848Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T00:34:58.125Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T00:35:07.531Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T00:35:17.220Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T00:54:44.283Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T00:56:05.353Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T00:56:44.552Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T01:21:57.730Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T01:22:13.075Z",
+      "feature": "core",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T01:22:48.052Z",
+      "feature": "core",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T01:22:58.216Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T01:23:00.227Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T01:23:32.967Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T01:23:45.117Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T01:23:52.562Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T01:24:12.129Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T01:26:23.088Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T01:26:36.575Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T01:34:09.610Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T01:43:27.864Z",
+      "feature": "clients",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T01:55:51.278Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T02:05:25.507Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T02:12:03.265Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T02:12:04.957Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T02:15:23.993Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T02:18:15.535Z",
+      "feature": "core",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T02:18:23.976Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T02:18:26.047Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T02:19:20.024Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T02:27:46.773Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T02:27:48.376Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T02:27:49.515Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T02:33:55.040Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T02:41:58.312Z",
+      "feature": "core",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T02:42:12.994Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T02:42:26.269Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T02:42:33.391Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T02:42:35.896Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T02:43:12.805Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T02:54:00.467Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T02:54:01.777Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T02:54:03.200Z",
+      "feature": "patentjigi",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T14:08:04.534Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T14:09:07.135Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T14:09:35.779Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T14:09:48.652Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T14:10:33.704Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T14:13:21.253Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T14:13:44.643Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T14:13:45.813Z",
+      "feature": "wocs-site",
+      "phase": "do",
+      "action": "updated"
+    }
+  ],
+  "stateMachine": {
+    "defaultWorkflow": "default",
+    "activeWorkflows": {},
+    "totalTransitions": 0
+  },
+  "automation": {
+    "globalLevel": 2,
+    "trustScore": 40,
+    "pendingApprovals": 0,
+    "lastGateResult": null
+  },
+  "team": {
+    "enabled": true,
+    "stateFile": ".bkit/runtime/agent-state.json",
+    "eventsFile": ".bkit/runtime/agent-events.jsonl"
+  }
+}

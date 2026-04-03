@@ -1,0 +1,51 @@
+name: WOCS AI Blog Auto Writer
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 매일 UTC 00:00 = KST 09:00
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: '직접 주제 지정 (비우면 자동 선택)'
+        required: false
+      count:
+        description: '생성할 글 수'
+        required: false
+        default: '1'
+
+jobs:
+  generate-blog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.2.2
+
+      - name: Set up Python
+        uses: actions/setup-python@v5.3.0
+        with:
+          python-version: '3.11'
+
+      - name: Run Auto Writer
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          ARGS="--count ${{ github.event.inputs.count || '1' }}"
+          if [ -n "${{ github.event.inputs.topic }}" ]; then
+            ARGS="$ARGS --topic \"${{ github.event.inputs.topic }}\""
+          fi
+          eval python auto_writer.py $ARGS
+
+      - name: Commit and push
+        run: |
+          git config user.name "WOCS AI Writer"
+          git config user.email "actions@wocs.kr"
+          git add assets/js/blog-data.js content/
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "feat(blog): AI 자동 생성 블로그 글 추가 $(date +%Y-%m-%d)"
+            git push
+          fi
