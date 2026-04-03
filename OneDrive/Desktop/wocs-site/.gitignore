@@ -24,5 +24,7 @@ secrets/
 .bkit/runtime/
 .omc/
 .claude/settings.local.json
+WOCS_사진/
+WOCS_카달로그/
 node_modules/
 package-lock.json
