@@ -130,7 +130,7 @@ function buildWocsHeader() {
         const title = col.titleKey ? (col.titleHref ? `<a class="mega-title" href="${href(col.titleHref)}" style="text-decoration:none;display:block">${tc(col.titleKey)}</a>` : `<div class="mega-title">${tc(col.titleKey)}</div>`) : '';
         cols += `<div>${title}${links}</div>`;
       });
-      megaHTML = `<div class="mega-menu ${isMul ? 'multi' : ''}" style="display:none;flex-direction:row;gap:40px">${cols}</div>`;
+      megaHTML = `<div class="mega-menu ${isMul ? 'multi' : ''}">${cols}</div>`;
     }
     navHTML += `
       <li class="nav-item">
@@ -141,8 +141,8 @@ function buildWocsHeader() {
 
   const html = `
     <div class="header-bar">
-      <span><a href="tel:${tc('phone').replace(/-/g,'')}" style="color:inherit;text-decoration:none">✆ ${tc('phone')}</a></span>
-      <span><a href="mailto:${tc('email')}" style="color:inherit;text-decoration:none">${tc('email')}</a></span>
+      <span>✆ ${tc('phone')}</span>
+      <span>${tc('email')}</span>
     </div>
     <div class="header-main">
       <a class="header-logo" href="${href('index.html')}">
@@ -301,60 +301,45 @@ function initMobileMenu() {
   var hamburger = document.createElement('button');
   hamburger.id = 'mobile-hamburger';
   hamburger.innerHTML = '☰';
-  hamburger.style.cssText = 'background:none;border:1px solid rgba(201,169,110,0.3);color:#c9a96e;font-size:24px;padding:8px 12px;cursor:pointer;font-family:sans-serif;z-index:10001;position:relative';
+  hamburger.style.cssText = 'display:none;background:none;border:1px solid rgba(201,169,110,0.3);color:#c9a96e;font-size:24px;padding:8px 12px;cursor:pointer;font-family:sans-serif';
   main.appendChild(hamburger);
   
   var nav = header.querySelector('nav');
   var navList = header.querySelector('.nav-list');
   
-  // CSS handles show/hide via #mobile-hamburger media queries
+  // Show hamburger on mobile
   function checkMobile() {
-    if (window.innerWidth > 768) {
-      if (navList) navList.classList.remove('mobile-open');
-      hamburger.innerHTML = '☰';
+    if (window.innerWidth <= 768) {
+      hamburger.style.display = 'block';
+      if (navList) navList.style.display = 'none';
+    } else {
+      hamburger.style.display = 'none';
+      if (navList) navList.style.display = 'flex';
     }
   }
   
   hamburger.addEventListener('click', function() {
     if (!navList) return;
-    var isOpen = navList.classList.contains('mobile-open');
-    if (!isOpen) {
-      navList.classList.add('mobile-open');
+    if (navList.style.display === 'none' || navList.style.display === '') {
+      navList.style.display = 'flex';
+      navList.style.flexDirection = 'column';
+      navList.style.position = 'absolute';
+      navList.style.top = '100%';
+      navList.style.left = '0';
+      navList.style.right = '0';
+      navList.style.background = 'rgba(9,9,11,0.97)';
+      navList.style.padding = '20px';
+      navList.style.borderTop = '1px solid rgba(201,169,110,0.14)';
+      navList.style.zIndex = '1001';
       hamburger.innerHTML = '✕';
     } else {
-      navList.classList.remove('mobile-open');
+      navList.style.display = 'none';
       hamburger.innerHTML = '☰';
     }
   });
   
   checkMobile();
   window.addEventListener('resize', checkMobile);
-
-  // Mobile mega-menu click toggle
-  var navItems = navList ? navList.querySelectorAll('.nav-item') : [];
-  navItems.forEach(function(item) {
-    var link = item.querySelector('.nav-link');
-    var mega = item.querySelector('.mega-menu');
-    if (!mega || !link) return;
-    link.addEventListener('click', function(e) {
-      if (window.innerWidth > 768) return;
-      e.preventDefault();
-      e.stopPropagation();
-      navItems.forEach(function(other) {
-        if (other !== item) { var om = other.querySelector('.mega-menu'); if (om) om.style.display = 'none'; }
-      });
-      mega.style.display = (mega.style.display === 'block') ? 'none' : 'block';
-    });
-  });
-
-  // Close menu on mega-link click
-  var megaLinks = navList ? navList.querySelectorAll('.mega-link') : [];
-  megaLinks.forEach(function(ml) {
-    ml.addEventListener('click', function() {
-      if (navList) navList.classList.remove('mobile-open');
-      hamburger.innerHTML = '☰';
-    });
-  });
 }
 
 document.addEventListener('DOMContentLoaded', function() {

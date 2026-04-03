@@ -119,7 +119,17 @@
       "Bash(PYTHONIOENCODING=utf-8 python auto_writer.py --dry-run --count 2)",
       "Bash(PYTHONIOENCODING=utf-8 python auto_writer.py --count 1)",
       "Bash(PYTHONIOENCODING=utf-8 GEMINI_API_KEY=AIzaSyByMyuHebiuqZ5RDVAlweReQMCrxkDNqNI python auto_writer.py --count 1)",
-      "Bash(gh secret:*)"
+      "Bash(gh secret:*)",
+      "Bash(cp index.html index.html.bak)",
+      "Bash(taskkill /F /IM OneDrive.exe)",
+      "Bash(taskkill //F //IM OneDrive.exe)",
+      "Bash(rm \"C:/Users/user/AppData/Local/Temp/test_write.txt\")",
+      "Bash(icacls \"C:/Users/user/OneDrive/Desktop/wocs-site/index.html\")",
+      "Bash(attrib -R \"C:\\\\Users\\\\user\\\\OneDrive\\\\Desktop\\\\wocs-site\\\\index.html\")",
+      "Bash(npm ls:*)",
+      "Bash(npm install:*)",
+      "Bash(mkdir:*)",
+      "Bash(PYTHONIOENCODING=utf-8 python gen_pages.py)"
     ]
   }
 }
