@@ -15,7 +15,7 @@ import requests
 # ── 설정 ──
 WP_URL = "https://glampingtentgo.com"
 WP_USER = "candlejs6"
-WP_APP_PASSWORD = os.environ.get("WP_APP_PASSWORD", "5LxV PK7F SdZ4 nf1X r83l QB9d")
+WP_APP_PASSWORD = os.environ.get("WP_APP_PASSWORD", "5LxV PK7F SdZ4 nf1X ")
 
 CATEGORY_NAME = "글램핑창업"
 
