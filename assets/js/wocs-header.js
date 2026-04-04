@@ -381,7 +381,7 @@ function initMobileMenu() {
   var langDiv = document.createElement('div');
   langDiv.setAttribute('style','margin-top:24px;padding:16px 8px;');
   langDiv.innerHTML = '<div style="color:rgba(240,235,224,0.4);font-size:11px;letter-spacing:2px;margin-bottom:12px;">LANGUAGE</div>';
-  var langs = [{c:'ko',n:'한국어'},{c:'en',n:'English'},{c:'ja',n:'日本語'},{c:'zh',n:'中文'},{c:'es',n:'Español'},{c:'fr',n:'Français'}];
+  var langs = [{c:'ko',n:'한국어'},{c:'en',n:'English'},{c:'ja',n:'日本語'},{c:'zh',n:'中文'},{c:'es',n:'Español'},{c:'fr',n:'Français'},{c:'de',n:'Deutsch'},{c:'pt',n:'Português'},{c:'it',n:'Italiano'},{c:'ru',n:'Русский'},{c:'ar',n:'العربية'},{c:'tr',n:'Türkçe'},{c:'tw',n:'繁體中文'},{c:'id',n:'Bahasa'},{c:'th',n:'ไทย'}];
   var lgrid = document.createElement('div');
   lgrid.setAttribute('style','display:grid;grid-template-columns:repeat(3,1fr);gap:8px;');
   langs.forEach(function(l) {
