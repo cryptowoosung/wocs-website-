@@ -153,6 +153,7 @@ body { background: #09090b; }
 /* React 헤더 숨기고 wocs-header.js 사용 */
 #root > div > header { display:none!important; }
 </style>
+  <meta property="og:image" content="https://wocs.kr/assets/images/og-default.jpg">
 </head>
 <body>
 <div id="wocs-header"></div>
@@ -1966,13 +1967,13 @@ function WOCSHomepage() {
           </div>
 
           {/* Title */}
-          <h1 key={`title-${heroIdx}`} style={{
+          <h2 key={`title-${heroIdx}`} style={{
             fontSize: "clamp(48px, 7vw, 96px)", fontWeight: 300, lineHeight: 1.05,
             letterSpacing: -1, whiteSpace: "pre-line", marginBottom: 24,
             animation: "slideUp .8s ease forwards",
           }}>
             {heroSlides[heroIdx].title}
-          </h1>
+          </h2>
 
           {/* Subtitle */}
           <p key={`sub-${heroIdx}`} style={{
@@ -2801,7 +2802,7 @@ try {
   root.render(React.createElement(WOCSHomepage));
 } catch(e) {
   console.warn('WOCS render error:', e);
-  document.getElementById('root').innerHTML = '<div style="color:#c9a96e;text-align:center;padding:100px;font-family:sans-serif"><h1>WOCS</h1><p>Loading...</p></div>';
+  document.getElementById('root').innerHTML = '<div style="color:#c9a96e;text-align:center;padding:100px;font-family:sans-serif"><h2>WOCS</h2><p>Loading...</p></div>';
 }
 </script>
 <script src="assets/js/wocs-lead-popup.js"></script>

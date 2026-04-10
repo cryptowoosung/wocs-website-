@@ -1,0 +1,30 @@
+{
+  "gallery/index.html": [
+    [
+      "title",
+      "WOCS 갤러리",
+      "WOCS 글램핑 시공 갤러리 — 실제 현장 사진"
+    ]
+  ],
+  "occasions/index.html": [
+    [
+      "title",
+      "WOCS 활용 분야",
+      "WOCS 활용 분야 — 글램핑·리조트·호텔 시공"
+    ]
+  ],
+  "products/geodesic-domes.html": [
+    [
+      "title",
+      "WOCS D-시리즈 돔",
+      "WOCS D-시리즈 측지 돔 제품 라인업"
+    ]
+  ],
+  "products/safari-basic.html": [
+    [
+      "title",
+      "WOCS S-Classic",
+      "WOCS S-Classic 사파리 텐트 — 베이직 라인"
+    ]
+  ]
+}
