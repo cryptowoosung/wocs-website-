@@ -3,3 +3,6 @@ assets/images-original/
 
 # ë¡œì»¬ ë°±ì—… íŒŒì¼
 *.backup_*
+
+# Claude Code ³»ºÎ »óÅÂ ÆÄÀÏ
+.omc/
