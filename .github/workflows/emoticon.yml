@@ -8,7 +8,7 @@ on:
 jobs:
   generate-emoticons:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
 
     steps:
       - name: Checkout repository
@@ -19,9 +19,15 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Cache rembg models
+        uses: actions/cache@v4
+        with:
+          path: ~/.u2net
+          key: rembg-birefnet-general-v1
+
       - name: Install dependencies
         run: |
-          pip install requests google-auth google-auth-httplib2 google-api-python-client "pillow>=9.1.0" anthropic openai python-dotenv
+          pip install requests google-auth google-auth-httplib2 google-api-python-client "pillow>=9.1.0" anthropic openai python-dotenv "rembg[cpu]>=2.0.50" onnxruntime
 
       - name: Run Emoticon Generator
         env:

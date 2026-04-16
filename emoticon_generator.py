@@ -16,6 +16,11 @@ import requests
 from datetime import datetime, timezone, timedelta
 from google.auth.transport.requests import Request
 
+# rembg 배경 제거 (gpt-image-1.5 아티팩트 해결)
+from rembg import new_session, remove
+from PIL import ImageFilter
+from io import BytesIO
+
 # ============================================================
 # 환경변수 로드
 # ============================================================
@@ -276,6 +281,12 @@ def generate_and_upload(prompts, folder_name):
             image_bytes = base64.b64decode(b64_data)
             del b64_data
 
+            # rembg 후처리 (배경 제거 + 흰 테두리)
+            try:
+                image_bytes = process_image_with_rembg(image_bytes)
+            except Exception as e:
+                print(f"[rembg] 후처리 실패, 원본 사용: {e}")
+
             upload_resp = requests.post(
                 f"https://api.cloudinary.com/v1_1/{CLOUDINARY_CLOUD_NAME}/image/upload",
                 auth=(CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET),
@@ -357,6 +368,42 @@ def send_telegram(data, success_count, fail_count, folder_name):
         print(f"[Step 7] Telegram 알림 전송 완료")
     else:
         print(f"[Step 7] Telegram 알림 실패: {resp.text}")
+
+
+# ============================================================
+# rembg 배경 제거 + 흰 테두리 (gpt-image-1.5 아티팩트 해결)
+# ============================================================
+
+_rembg_session = None
+
+
+def get_rembg_session():
+    """rembg 세션 싱글톤 (32개 이미지 처리 중 1회만 로드)"""
+    global _rembg_session
+    if _rembg_session is None:
+        print("    [rembg] 모델 로딩 중 (birefnet-general)...")
+        _rembg_session = new_session("birefnet-general")
+        print("    [rembg] 모델 로드 완료")
+    return _rembg_session
+
+
+def process_image_with_rembg(image_bytes, stroke_width=6):
+    """gpt-image-1.5 후처리: 배경 제거 + 흰 테두리 추가"""
+    from PIL import Image
+
+    img = Image.open(BytesIO(image_bytes))
+    session = get_rembg_session()
+    cleaned = remove(img, session=session).convert('RGBA')
+
+    alpha = cleaned.split()[3]
+    dilated = alpha.filter(ImageFilter.MaxFilter(stroke_width * 2 + 1))
+    white_bg = Image.new('RGBA', cleaned.size, (255, 255, 255, 0))
+    white_bg.putalpha(dilated)
+    result = Image.alpha_composite(white_bg, cleaned)
+
+    output = BytesIO()
+    result.save(output, 'PNG', optimize=True)
+    return output.getvalue()
 
 
 # ============================================================

@@ -1,2 +1,5 @@
 config.json
 assets/images-original/
+
+# 로컬 백업 파일
+*.backup_*
