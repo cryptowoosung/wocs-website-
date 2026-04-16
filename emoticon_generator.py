@@ -2,7 +2,7 @@
 """
 WOCS Emoticon Auto Generator
 - n8n 워크플로우를 GitHub Actions용 Python으로 완전 대체
-- 매일 자동 실행: 캐릭터 기획 → 32개 이미지 생성 → Google Drive 업로드 → 로그 → 알림
+- 매일 자동 실행: 캐릭터 기획 → 24개 이미지 생성 → Google Drive 업로드 → 로그 → 알림
 """
 
 import os
@@ -110,7 +110,7 @@ def plan_character(previous_characters):
 매번 완전히 다른 신선한 캐릭터를 제안해야 한다.
 이전에 만든 캐릭터와 절대 겹치면 안 된다.
 반드시 JSON만 출력하고 다른 텍스트는 절대 포함하지 마라.
-emotions 배열은 반드시 정확히 32개여야 한다."""
+emotions 배열은 반드시 정확히 24개여야 한다."""
 
     user_prompt = f"""오늘의 이모티콘 캐릭터를 새로 기획해라.
 이전 캐릭터: {previous_characters}
@@ -141,13 +141,13 @@ rough-sketch 스타일:
 - 과장되고 엉성한 표현, 의도적으로 삐뚤어진 느낌
 
 [emotions 필수 규칙]
-- 정확히 32개 (부족하면 심사 탈락)
+- 정확히 24개
 - 영어로 작성
 - 선택된 스타일에 맞는 동작 70% + 범용 감정 30%
 - 범용 감정: happy, sad, angry, surprised, love, crying, laughing, waving, thinking, sleeping
 
 [출력 형식 - JSON만, 다른 텍스트 절대 금지]
-{{"character_name": "캐릭터명(한국어)", "character_desc": "A [구체적 색상] [동물/사물], flat 2D kawaii illustration, thick black outlines, white exterior stroke, fully colored with vibrant solid colors, transparent background", "theme": "테마명", "style": "meme-mz/healing/rough-sketch 중 하나", "emotions": ["동작1", ..., "동작32"]}}"""
+{{"character_name": "캐릭터명(한국어)", "character_desc": "A [구체적 색상] [동물/사물], flat 2D kawaii illustration, thick black outlines, white exterior stroke, fully colored with vibrant solid colors, transparent background", "theme": "테마명", "style": "meme-mz/healing/rough-sketch 중 하나", "emotions": ["동작1", ..., "동작24"]}}"""
 
     resp = requests.post(
         "https://api.anthropic.com/v1/messages",
@@ -173,10 +173,10 @@ rough-sketch 스타일:
 
     data = json.loads(match.group(0))
 
-    # emotions 32개 보정
-    while len(data["emotions"]) < 32:
+    # emotions 24개 보정
+    while len(data["emotions"]) < 24:
         data["emotions"].append(f"extra_action_{len(data['emotions']) + 1}")
-    data["emotions"] = data["emotions"][:32]
+    data["emotions"] = data["emotions"][:24]
 
     print(f"[Step 2] 캐릭터 기획 완료: {data['character_name']} / {data['theme']} / {data['style']}")
     print(f"         emotions {len(data['emotions'])}개")
@@ -187,7 +187,7 @@ rough-sketch 스타일:
 # Step 3: 프롬프트 생성
 # ============================================================
 def generate_prompts(data):
-    """캐릭터 데이터에서 32개 이미지 프롬프트 생성"""
+    """캐릭터 데이터에서 24개 이미지 프롬프트 생성"""
 
     style_guide = ""
     if data["style"] == "meme-mz":
@@ -236,7 +236,7 @@ EMOTICON STYLE:
 
 
 # ============================================================
-# Step 4-5: 이미지 생성 + Cloudinary 업로드 (32개 순차)
+# Step 4-5: 이미지 생성 + Cloudinary 업로드 (24개 순차)
 # ============================================================
 def generate_and_upload(prompts, folder_name):
     """gpt-image-1.5로 이미지 생성 후 Google Drive에 업로드"""
@@ -248,7 +248,7 @@ def generate_and_upload(prompts, folder_name):
         filename = item["filename"]
         emotion = item["emotion"]
 
-        print(f"  [{idx:02d}/32] {emotion}...", end=" ", flush=True)
+        print(f"  [{idx:02d}/24] {emotion}...", end=" ", flush=True)
 
         # --- 이미지 생성 ---
         try:
@@ -378,7 +378,7 @@ _rembg_session = None
 
 
 def get_rembg_session():
-    """rembg 세션 싱글톤 (32개 이미지 처리 중 1회만 로드)"""
+    """rembg 세션 싱글톤 (24개 이미지 처리 중 1회만 로드)"""
     global _rembg_session
     if _rembg_session is None:
         print("    [rembg] 모델 로딩 중 (birefnet-general)...")
@@ -427,7 +427,7 @@ def main():
     prompts, folder_name = generate_prompts(data)
 
     # Step 4-5: 이미지 생성 + Cloudinary 업로드
-    print(f"\n[Step 4-5] 32개 이미지 생성 시작...")
+    print(f"\n[Step 4-5] 24개 이미지 생성 시작...")
     success_count, fail_count = generate_and_upload(prompts, folder_name)
 
     # Step 6: Sheets 로그
@@ -437,7 +437,7 @@ def main():
     send_telegram(data, success_count, fail_count, folder_name)
 
     print("\n" + "=" * 60)
-    print(f"전체 완료! 성공: {success_count}/32")
+    print(f"전체 완료! 성공: {success_count}/24")
     print("=" * 60)
 
     # 실패가 있으면 exit code 1
