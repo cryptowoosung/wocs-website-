@@ -322,10 +322,66 @@ EMOTICON STYLE:
 # ============================================================
 # Step 4-5: 이미지 생성 + Cloudinary 업로드 (24개 순차)
 # ============================================================
+def _generate_image_from_text(prompt: str) -> str:
+    """text-to-image (generations) — 1번 이미지 또는 fallback용"""
+    resp = requests.post(
+        "https://api.openai.com/v1/images/generations",
+        headers={
+            "Authorization": f"Bearer {OPENAI_API_KEY}",
+            "Content-Type": "application/json",
+        },
+        json={
+            "model": IMAGE_MODEL,
+            "prompt": prompt,
+            "size": IMAGE_SIZE,
+            "quality": IMAGE_QUALITY,
+            "background": "transparent",
+            "output_format": "png",
+            "n": 1,
+        },
+        timeout=120,
+    )
+    resp.raise_for_status()
+    return resp.json()["data"][0]["b64_json"]
+
+
+def _generate_image_from_reference(prompt: str, reference_png: bytes) -> str:
+    """image-to-image (edits) — 2~24번, 1번 이미지를 레퍼런스로"""
+    edit_preamble = (
+        "Use the attached reference image as the exact character design template. "
+        "Keep the exact same character, colors, proportions, outline style, and art style. "
+        "Change ONLY the pose, expression, and action as described below. "
+        "Do not redesign the character.\n\n"
+    )
+    resp = requests.post(
+        "https://api.openai.com/v1/images/edits",
+        headers={"Authorization": f"Bearer {OPENAI_API_KEY}"},
+        data={
+            "model": IMAGE_MODEL,
+            "prompt": edit_preamble + prompt,
+            "size": IMAGE_SIZE,
+            "quality": IMAGE_QUALITY,
+            "background": "transparent",
+            "output_format": "png",
+            "n": 1,
+        },
+        files={"image": ("reference.png", reference_png, "image/png")},
+        timeout=180,
+    )
+    resp.raise_for_status()
+    return resp.json()["data"][0]["b64_json"]
+
+
 def generate_and_upload(prompts, folder_name):
-    """gpt-image-1.5로 이미지 생성 후 Google Drive에 업로드"""
+    """gpt-image-1.5로 이미지 생성 후 Cloudinary 업로드.
+
+    1번은 text-to-image로 생성하고, 2~24번은 1번을 레퍼런스로 사용해 edits
+    엔드포인트로 생성 → 24개 캐릭터 일관성 확보.
+    1번이 실패하면 레퍼런스가 없으므로 전체가 text-to-image로 fallback.
+    """
     success_count = 0
     fail_count = 0
+    reference_png: bytes | None = None  # rembg 처리 후, overlay 이전 상태
 
     for item in prompts:
         idx = item["index"]
@@ -334,27 +390,19 @@ def generate_and_upload(prompts, folder_name):
 
         print(f"  [{idx:02d}/24] {emotion}...", end=" ", flush=True)
 
-        # --- 이미지 생성 ---
+        # --- 이미지 생성 (1번=text / 2~24번=ref 기반 edits) ---
         try:
-            img_resp = requests.post(
-                "https://api.openai.com/v1/images/generations",
-                headers={
-                    "Authorization": f"Bearer {OPENAI_API_KEY}",
-                    "Content-Type": "application/json",
-                },
-                json={
-                    "model": IMAGE_MODEL,
-                    "prompt": item["prompt"],
-                    "size": IMAGE_SIZE,
-                    "quality": IMAGE_QUALITY,
-                    "background": "transparent",
-                    "output_format": "png",
-                    "n": 1,
-                },
-                timeout=120,
-            )
-            img_resp.raise_for_status()
-            b64_data = img_resp.json()["data"][0]["b64_json"]
+            if reference_png is None:
+                b64_data = _generate_image_from_text(item["prompt"])
+                print("[t2i]", end=" ", flush=True)
+            else:
+                try:
+                    b64_data = _generate_image_from_reference(item["prompt"], reference_png)
+                    print("[ref]", end=" ", flush=True)
+                except Exception as ref_err:
+                    # edits 실패 시 text-to-image로 fallback (1회만)
+                    print(f"[ref 실패→t2i fallback: {ref_err}]", end=" ", flush=True)
+                    b64_data = _generate_image_from_text(item["prompt"])
         except Exception as e:
             print(f"❌ 생성 실패: {e}")
             fail_count += 1
@@ -370,6 +418,11 @@ def generate_and_upload(prompts, folder_name):
                 image_bytes = process_image_with_rembg(image_bytes)
             except Exception as e:
                 print(f"[rembg] 후처리 실패, 원본 사용: {e}")
+
+            # 1번 이미지가 성공하면 레퍼런스로 저장 (overlay 적용 이전 상태)
+            if reference_png is None:
+                reference_png = image_bytes
+                print("[ref저장]", end=" ", flush=True)
 
             # 한글 텍스트 오버레이 (24개 중 10개만)
             overlay_text = item.get("text_overlay")
