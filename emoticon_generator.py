@@ -120,34 +120,41 @@ emotions 배열은 반드시 정확히 24개여야 한다."""
 - 성격과 콘셉트가 뚜렷해야 함
 - 이전 캐릭터와 종류/색상/테마 모두 달라야 함
 
-[스타일 선택 - 반드시 아래 비중 준수]
-- meme-mz: 80% 확률 선택
-- healing: 15% 확률 선택
-- rough-sketch: 5% 확률 선택
+[스타일 선택 - 아래 비중 준수 (OGQ 인기 6종)]
+- sticker-pop: 25% (OGQ 표준 진한 외곽선 + 선명 컬러)
+- meme-mz: 25% (MZ 밈 / 과장 리액션 / 자조적 유머)
+- cute-round: 15% (통통 동글동글 / 아기 같은 귀여움)
+- healing-pastel: 15% (파스텔톤 / 따뜻하고 포근한 분위기)
+- minimal-line: 10% (미니멀 라인 드로잉 / 2-3색 제한 / 스칸디나비안)
+- rough-doodle: 10% (손그림 낙서체 / 거친 펜선 / B급 감성)
 
-[스타일별 동작 가이드]
-meme-mz 스타일:
-- 현실 공감형: 월요병, 야근, 현타, 피로, 번아웃, 지각, 시험기간
-- 자조적 유머: 통장잔고 확인, 배달음식 기다리기, 카톡 읽씹, 인스타 눈팅
-- 과장 리액션: 기절, 멘탈붕괴, 울면서 웃기, 억울함, 당황, 헛웃음
-- MZ 감성 동작 예시: lying flat exhausted, existential crisis stare, pretending to be fine, checking empty wallet, forced smile, monday morning suffering, doom scrolling, rage quitting
+[스타일별 한줄 가이드 - Claude 내부 참고용]
+sticker-pop: 선명한 팝 컬러, 동적 포즈, OGQ 베스트셀러 표준
+meme-mz: 월요병/현타/번아웃/통장잔고/야근/카톡읽씹 등 MZ 일상
+cute-round: 공 형태에 가까운 비율, 짧은 팔다리, 큰 머리
+healing-pastel: 민트/피치/라벤더 톤, 따뜻한 눈빛, 위로 제스처
+minimal-line: 단순한 선, 파스텔 단색, 비어있는 여백 활용
+rough-doodle: 공책 모서리 낙서 감성, 삐뚤빼뚤 일부러 엉성
 
-healing 스타일:
-- 따뜻한 위로, 응원, 소소한 행복, 귀여운 일상
-- 동작 예시: giving a warm hug, cheering you on, cozy sleeping, drinking hot tea, happy dancing, sending love
+[emotions 규칙 - 매우 중요]
+- 반드시 정확히 24개
+- 각 원소는 {{"action": "영어 구체 동작", "text_overlay": "한글 8자 이내" 또는 null}} 객체
+- 24개 중 정확히 10개에만 text_overlay에 한글 텍스트 (나머지 14개는 null)
+- 한글 텍스트 예시 (매우 짧게, 최대 8자): "퇴근하자", "월요병...", "현타옴", "존버중", "배고파", "사랑해", "화이팅!", "피곤해", "고마워", "미안해", "ㅠㅠ", "ㅎㅎ", "ㅇㅈ?", "ㄱㅊ?", "주말각", "칼퇴각", "출근싫어", "오늘도수고"
+- action은 영어로, 한국 MZ 상황을 구체화 (예: "lying flat on bed completely exhausted after overtime")
+- 한국 MZ 공감 action 예시 (최소 14개 포함):
+  lying flat on bed after work / checking empty bank account shocked / doom scrolling at 3am /
+  monday morning zombie walk / forced smile during meeting / existential stare out window /
+  screaming into pillow / rage keyboard smashing / pay day excited dance / awkward silent eye rolling /
+  waiting for delivery food impatiently / reading kakao message pretending to be away /
+  scrolling instagram jealously / running late to work / crying while laughing /
+  existential crisis over coffee / pretending to work busy / falling asleep at desk
 
-rough-sketch 스타일:
-- 거칠고 즉흥적인 선, B급 감성, 낙서체
-- 과장되고 엉성한 표현, 의도적으로 삐뚤어진 느낌
-
-[emotions 필수 규칙]
-- 정확히 24개
-- 영어로 작성
-- 선택된 스타일에 맞는 동작 70% + 범용 감정 30%
-- 범용 감정: happy, sad, angry, surprised, love, crying, laughing, waving, thinking, sleeping
+[character_desc 필수 형식]
+"A [구체적 색상] [동물/사물], flat 2D kawaii illustration, thick black outlines, white exterior stroke, fully colored with vibrant solid colors, transparent background"
 
 [출력 형식 - JSON만, 다른 텍스트 절대 금지]
-{{"character_name": "캐릭터명(한국어)", "character_desc": "A [구체적 색상] [동물/사물], flat 2D kawaii illustration, thick black outlines, white exterior stroke, fully colored with vibrant solid colors, transparent background", "theme": "테마명", "style": "meme-mz/healing/rough-sketch 중 하나", "emotions": ["동작1", ..., "동작24"]}}"""
+{{"character_name": "캐릭터명(한국어)", "character_desc": "...", "theme": "테마명", "style": "6종 중 하나", "emotions": [{{"action": "...", "text_overlay": "..."}}, {{"action": "...", "text_overlay": null}}, ...]}}"""
 
     resp = requests.post(
         "https://api.anthropic.com/v1/messages",
@@ -173,29 +180,99 @@ rough-sketch 스타일:
 
     data = json.loads(match.group(0))
 
-    # emotions 24개 보정
-    while len(data["emotions"]) < 24:
-        data["emotions"].append(f"extra_action_{len(data['emotions']) + 1}")
-    data["emotions"] = data["emotions"][:24]
+    # emotions 구조 정규화 (구형 string 포맷 호환)
+    normalized: list[dict] = []
+    for e in data.get("emotions", []):
+        if isinstance(e, str):
+            normalized.append({"action": e, "text_overlay": None})
+        elif isinstance(e, dict):
+            action = str(e.get("action") or e.get("emotion") or "idle pose").strip()
+            text = e.get("text_overlay")
+            if isinstance(text, str):
+                text = text.strip() or None
+                if text and len(text) > 10:
+                    text = text[:10]
+            else:
+                text = None
+            normalized.append({"action": action, "text_overlay": text})
+
+    # 24개 보정
+    while len(normalized) < 24:
+        normalized.append({"action": f"extra_pose_{len(normalized) + 1}", "text_overlay": None})
+    normalized = normalized[:24]
+
+    # 10:14 비율 강제
+    FALLBACK_TEXTS = [
+        "퇴근하자", "월요병...", "현타옴", "존버중", "배고파",
+        "사랑해", "화이팅!", "피곤해", "고마워", "ㅠㅠ",
+    ]
+    text_idx = [i for i, e in enumerate(normalized) if e["text_overlay"]]
+    if len(text_idx) != 10:
+        all_idx = list(range(24))
+        random.shuffle(all_idx)
+        target = set(all_idx[:10])
+        fallback_iter = iter(FALLBACK_TEXTS)
+        for i, e in enumerate(normalized):
+            if i in target:
+                if not e["text_overlay"]:
+                    e["text_overlay"] = next(fallback_iter, "ㅎㅎ")
+            else:
+                e["text_overlay"] = None
+        print(f"[Step 2] 10:14 비율 보정: Claude {len(text_idx)}개 → 10개로 재조정")
+
+    data["emotions"] = normalized
+    text_count = sum(1 for e in normalized if e["text_overlay"])
+
+    # 스타일 6종 화이트리스트 검증
+    VALID_STYLES = {"sticker-pop", "meme-mz", "cute-round", "healing-pastel", "minimal-line", "rough-doodle"}
+    if data.get("style") not in VALID_STYLES:
+        data["style"] = "sticker-pop"
+        print(f"[Step 2] style 화이트리스트 이탈 → sticker-pop 대체")
 
     print(f"[Step 2] 캐릭터 기획 완료: {data['character_name']} / {data['theme']} / {data['style']}")
-    print(f"         emotions {len(data['emotions'])}개")
+    print(f"         emotions 24개 (한글 {text_count} : 영문 {24 - text_count})")
     return data
 
 
 # ============================================================
-# Step 3: 프롬프트 생성
+# Step 3: 프롬프트 생성 (OGQ 인기 6종 스타일)
 # ============================================================
-def generate_prompts(data):
+STYLE_GUIDES: dict[str, str] = {
+    "sticker-pop": (
+        "Classic OGQ sticker style — bold and punchy. Vibrant saturated solid colors, "
+        "clear expressive faces, dynamic confident poses, high-contrast palette."
+    ),
+    "meme-mz": (
+        "Exaggerated Korean MZ meme reactions — over-the-top expressions, dramatic poses, "
+        "self-deprecating humor visible in posture, relatable everyday suffering, "
+        "slightly messy but readable energy."
+    ),
+    "cute-round": (
+        "Ultra round and chubby proportions, soft circular shapes, tiny stubby limbs, "
+        "oversized head relative to body, baby-like adorable features, "
+        "sparkly innocent eyes, blushed cheeks."
+    ),
+    "healing-pastel": (
+        "Soft pastel palette (mint green, peach, lavender, cream yellow), gentle warm "
+        "expressions, cozy comforting atmosphere, rounded gentle shapes, healing vibes."
+    ),
+    "minimal-line": (
+        "Clean minimalist design, 2 to 3 flat colors maximum, simple geometric shapes, "
+        "Scandinavian-inspired restraint, generous negative space, refined subtle lines "
+        "(outlines remain but thinner than default)."
+    ),
+    "rough-doodle": (
+        "Hand-drawn notebook-margin doodle feel, intentionally rough imperfect lines, "
+        "slightly wobbly outlines, spontaneous B-grade aesthetic, pen-sketch texture, "
+        "crooked on purpose."
+    ),
+}
+
+
+def generate_prompts(data: dict) -> tuple[list[dict], str]:
     """캐릭터 데이터에서 24개 이미지 프롬프트 생성"""
 
-    style_guide = ""
-    if data["style"] == "meme-mz":
-        style_guide = "Exaggerated MZ/meme reactions - over-the-top expressions, dramatic poses, self-deprecating humor visible in posture"
-    elif data["style"] == "healing":
-        style_guide = "Soft, warm, comforting expressions and poses, pastel tones preferred"
-    elif data["style"] == "rough-sketch":
-        style_guide = "Slightly rough lines, spontaneous B-grade aesthetic, intentionally imperfect strokes"
+    style_guide = STYLE_GUIDES.get(data["style"], STYLE_GUIDES["sticker-pop"])
 
     base_style = f"""{data['character_desc']}
 
@@ -211,27 +288,34 @@ VISUAL REQUIREMENTS (STRICT):
 COMPOSITION:
 - Transparent background only
 - Character centered with 10px margin on all sides
-- NO text, NO speech bubbles, NO background elements
+- NO text, NO letters, NO Hangul, NO speech bubbles, NO background elements (text is added later in post-processing)
 
 EMOTICON STYLE:
-- Kakaotalk/LINE sticker style
+- Kakaotalk/LINE/OGQ sticker style
 - Exaggerated facial expressions matching the action
 - Personality clearly visible in every pose
 - {style_guide}"""
 
-    prompts = []
+    prompts: list[dict] = []
     for i, emotion in enumerate(data["emotions"]):
+        action = emotion["action"]
+        text_overlay = emotion.get("text_overlay")
         prompts.append(
             {
                 "index": i + 1,
-                "emotion": emotion,
-                "prompt": f"{base_style}\nAction: {emotion}",
+                "emotion": action,
+                "text_overlay": text_overlay,
+                "prompt": f"{base_style}\nAction: {action}",
                 "filename": f"{str(i + 1).zfill(2)}.png",
             }
         )
 
     folder_name = f"{TODAY}_{data['character_name']}"
-    print(f"[Step 3] 프롬프트 {len(prompts)}개 생성 완료, 폴더: {folder_name}")
+    text_count = sum(1 for p in prompts if p["text_overlay"])
+    print(
+        f"[Step 3] 프롬프트 {len(prompts)}개 생성 완료 "
+        f"(한글오버레이 {text_count}개 / 폴더: {folder_name})"
+    )
     return prompts, folder_name
 
 
@@ -286,6 +370,15 @@ def generate_and_upload(prompts, folder_name):
                 image_bytes = process_image_with_rembg(image_bytes)
             except Exception as e:
                 print(f"[rembg] 후처리 실패, 원본 사용: {e}")
+
+            # 한글 텍스트 오버레이 (24개 중 10개만)
+            overlay_text = item.get("text_overlay")
+            if overlay_text:
+                try:
+                    image_bytes = overlay_korean_text(image_bytes, overlay_text)
+                    print(f"[text '{overlay_text}']", end=" ", flush=True)
+                except Exception as e:
+                    print(f"[overlay 실패: {e}]", end=" ", flush=True)
 
             upload_resp = requests.post(
                 f"https://api.cloudinary.com/v1_1/{CLOUDINARY_CLOUD_NAME}/image/upload",
@@ -349,6 +442,7 @@ def log_to_sheets(creds, data):
 # ============================================================
 def send_telegram(data, success_count, fail_count, folder_name):
     """Telegram으로 완료 알림 전송"""
+    text_count = sum(1 for e in data.get("emotions", []) if isinstance(e, dict) and e.get("text_overlay"))
     message = (
         f"🐾 이모티콘 생성 완료!\n"
         f"📅 {TODAY}\n"
@@ -356,6 +450,7 @@ def send_telegram(data, success_count, fail_count, folder_name):
         f"🎭 테마: {data['theme']}\n"
         f"✨ 스타일: {data['style']}\n"
         f"✅ 성공: {success_count}개 / ❌ 실패: {fail_count}개\n"
+        f"💬 한글텍스트 {text_count}개 / 이미지만 {24 - text_count}개\n"
         f"📁 Cloudinary: emoticons/{folder_name}\n"
         f"👉 다음: Claude Code 변환 → OGQ → 라인 제출"
     )
@@ -368,6 +463,93 @@ def send_telegram(data, success_count, fail_count, folder_name):
         print(f"[Step 7] Telegram 알림 전송 완료")
     else:
         print(f"[Step 7] Telegram 알림 실패: {resp.text}")
+
+
+# ============================================================
+# 한글 텍스트 오버레이 (PIL)
+# ============================================================
+KOREAN_FONT_CANDIDATES: tuple[str, ...] = (
+    # GitHub Actions Ubuntu (fonts-nanum-extra)
+    "/usr/share/fonts/truetype/nanum/NanumSquareRoundB.ttf",
+    "/usr/share/fonts/truetype/nanum/NanumSquareRoundEB.ttf",
+    "/usr/share/fonts/truetype/nanum/NanumSquareB.ttf",
+    # GitHub Actions Ubuntu (fonts-nanum)
+    "/usr/share/fonts/truetype/nanum/NanumGothicBold.ttf",
+    "/usr/share/fonts/truetype/nanum/NanumBarunpenB.ttf",
+    # Noto CJK fallback (fonts-noto-cjk)
+    "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+    "/usr/share/fonts/truetype/noto/NotoSansCJK-Bold.ttc",
+    # Windows 로컬 개발 fallback
+    "C:/Windows/Fonts/malgunbd.ttf",
+    "C:/Windows/Fonts/malgun.ttf",
+    # macOS fallback
+    "/System/Library/Fonts/AppleSDGothicNeo.ttc",
+)
+
+_korean_font_cache: dict[int, "object"] = {}
+
+
+def _load_korean_font(size: int):
+    """한글 폰트 로딩 (size별 캐시)"""
+    from PIL import ImageFont
+
+    if size in _korean_font_cache:
+        return _korean_font_cache[size]
+
+    for path in KOREAN_FONT_CANDIDATES:
+        if os.path.exists(path):
+            try:
+                font = ImageFont.truetype(path, size)
+                _korean_font_cache[size] = font
+                return font
+            except Exception:
+                continue
+
+    print("    [overlay] ⚠ 한글 폰트 미발견 → default 폰트 (한글 깨짐 가능)")
+    font = ImageFont.load_default()
+    _korean_font_cache[size] = font
+    return font
+
+
+def overlay_korean_text(image_bytes: bytes, text: str, position: str = "bottom") -> bytes:
+    """PNG 이미지에 한글 텍스트 오버레이
+
+    - 흰 글씨 + 검은 외곽선 (이모티콘 전통 스타일, 어떤 배경에도 가독)
+    - 폰트 크기: 이미지 폭의 9%
+    - position: "bottom"(기본) / "top"
+    """
+    from PIL import Image, ImageDraw
+
+    img = Image.open(BytesIO(image_bytes)).convert("RGBA")
+    width, height = img.size
+
+    font_size = max(60, int(width * 0.09))
+    font = _load_korean_font(font_size)
+    stroke_w = max(4, font_size // 10)
+
+    draw = ImageDraw.Draw(img)
+    bbox = draw.textbbox((0, 0), text, font=font, stroke_width=stroke_w)
+    text_w = bbox[2] - bbox[0]
+    text_h = bbox[3] - bbox[1]
+
+    x = (width - text_w) // 2 - bbox[0]
+    if position == "top":
+        y = int(height * 0.04) - bbox[1]
+    else:
+        y = height - text_h - int(height * 0.06) - bbox[1]
+
+    draw.text(
+        (x, y),
+        text,
+        font=font,
+        fill=(255, 255, 255, 255),
+        stroke_width=stroke_w,
+        stroke_fill=(0, 0, 0, 255),
+    )
+
+    out = BytesIO()
+    img.save(out, "PNG", optimize=True)
+    return out.getvalue()
 
 
 # ============================================================
