@@ -388,12 +388,32 @@ def get_rembg_session():
 
 
 def process_image_with_rembg(image_bytes, stroke_width=6):
-    """gpt-image-1.5 후처리: 배경 제거 + 흰 테두리 추가"""
+    """gpt-image-1.5 후처리: 배경 제거 + 밝기 감지 + 자동 흰 테두리
+
+    캐릭터 밝기에 따라 테두리 두께 자동 조정:
+    - 밝기 < 100: 10px (어두운 캐릭터)
+    - 밝기 100~140: 8px (중간)
+    - 밝기 > 140: 6px (밝은 캐릭터, 기본)
+    """
     from PIL import Image
+    import numpy as np
 
     img = Image.open(BytesIO(image_bytes))
     session = get_rembg_session()
     cleaned = remove(img, session=session).convert('RGBA')
+
+    arr = np.array(cleaned)
+    opaque_mask = arr[:, :, 3] > 200
+    if np.any(opaque_mask):
+        avg_brightness = arr[opaque_mask][:, :3].mean()
+        if avg_brightness < 100:
+            stroke_width = 10
+            print(f"    [rembg] 어두운 캐릭터 (밝기 {avg_brightness:.0f}) -> 테두리 {stroke_width}px")
+        elif avg_brightness < 140:
+            stroke_width = 8
+            print(f"    [rembg] 중간 밝기 (밝기 {avg_brightness:.0f}) -> 테두리 {stroke_width}px")
+        else:
+            print(f"    [rembg] 밝은 캐릭터 (밝기 {avg_brightness:.0f}) -> 테두리 {stroke_width}px")
 
     alpha = cleaned.split()[3]
     dilated = alpha.filter(ImageFilter.MaxFilter(stroke_width * 2 + 1))
