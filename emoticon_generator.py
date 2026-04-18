@@ -567,7 +567,8 @@ def _load_korean_font(size: int):
 def overlay_korean_text(image_bytes: bytes, text: str, position: str = "bottom") -> bytes:
     """PNG 이미지에 한글 텍스트 오버레이
 
-    - 흰 글씨 + 검은 외곽선 (이모티콘 전통 스타일, 어떤 배경에도 가독)
+    - 3중 레이어: 흰 외곽 테두리 → 검은 외곽선 → 흰 글씨
+      (다크모드/밝은배경 모두에서 가독성 극대화)
     - 폰트 크기: 이미지 폭의 9%
     - position: "bottom"(기본) / "top"
     """
@@ -578,10 +579,11 @@ def overlay_korean_text(image_bytes: bytes, text: str, position: str = "bottom")
 
     font_size = max(60, int(width * 0.09))
     font = _load_korean_font(font_size)
-    stroke_w = max(4, font_size // 10)
+    black_w = max(4, font_size // 10)
+    white_outer_w = black_w + max(3, font_size // 20)
 
     draw = ImageDraw.Draw(img)
-    bbox = draw.textbbox((0, 0), text, font=font, stroke_width=stroke_w)
+    bbox = draw.textbbox((0, 0), text, font=font, stroke_width=white_outer_w)
     text_w = bbox[2] - bbox[0]
     text_h = bbox[3] - bbox[1]
 
@@ -591,13 +593,30 @@ def overlay_korean_text(image_bytes: bytes, text: str, position: str = "bottom")
     else:
         y = height - text_h - int(height * 0.06) - bbox[1]
 
+    # Layer 1: 흰 외곽 테두리 (가장 바깥)
     draw.text(
         (x, y),
         text,
         font=font,
         fill=(255, 255, 255, 255),
-        stroke_width=stroke_w,
+        stroke_width=white_outer_w,
+        stroke_fill=(255, 255, 255, 255),
+    )
+    # Layer 2: 검은 외곽선 (중간)
+    draw.text(
+        (x, y),
+        text,
+        font=font,
+        fill=(0, 0, 0, 255),
+        stroke_width=black_w,
         stroke_fill=(0, 0, 0, 255),
+    )
+    # Layer 3: 흰 글씨 (안쪽)
+    draw.text(
+        (x, y),
+        text,
+        font=font,
+        fill=(255, 255, 255, 255),
     )
 
     out = BytesIO()
