@@ -564,12 +564,58 @@ def _load_korean_font(size: int):
     return font
 
 
+# === BACKUP_2026-04-18: 기존 overlay_korean_text 함수 (가독성 개선 전) ===
+# def overlay_korean_text(image_bytes: bytes, text: str, position: str = "bottom") -> bytes:
+#     """PNG 이미지에 한글 텍스트 오버레이
+#
+#     - 3중 레이어: 흰 외곽 테두리 → 검은 외곽선 → 흰 글씨
+#       (다크모드/밝은배경 모두에서 가독성 극대화)
+#     - 폰트 크기: 이미지 폭의 9%
+#     - position: "bottom"(기본) / "top"
+#     """
+#     from PIL import Image, ImageDraw
+#
+#     img = Image.open(BytesIO(image_bytes)).convert("RGBA")
+#     width, height = img.size
+#
+#     font_size = max(60, int(width * 0.09))
+#     font = _load_korean_font(font_size)
+#     black_w = max(4, font_size // 10)
+#     white_outer_w = black_w + max(3, font_size // 20)
+#
+#     draw = ImageDraw.Draw(img)
+#     bbox = draw.textbbox((0, 0), text, font=font, stroke_width=white_outer_w)
+#     text_w = bbox[2] - bbox[0]
+#     text_h = bbox[3] - bbox[1]
+#
+#     x = (width - text_w) // 2 - bbox[0]
+#     if position == "top":
+#         y = int(height * 0.04) - bbox[1]
+#     else:
+#         y = height - text_h - int(height * 0.06) - bbox[1]
+#
+#     # Layer 1: 흰 외곽 테두리 (가장 바깥)
+#     draw.text((x, y), text, font=font, fill=(255, 255, 255, 255),
+#               stroke_width=white_outer_w, stroke_fill=(255, 255, 255, 255))
+#     # Layer 2: 검은 외곽선 (중간)
+#     draw.text((x, y), text, font=font, fill=(0, 0, 0, 255),
+#               stroke_width=black_w, stroke_fill=(0, 0, 0, 255))
+#     # Layer 3: 흰 글씨 (안쪽)
+#     draw.text((x, y), text, font=font, fill=(255, 255, 255, 255))
+#
+#     out = BytesIO()
+#     img.save(out, "PNG", optimize=True)
+#     return out.getvalue()
+# === END BACKUP_2026-04-18 ===
+
+
 def overlay_korean_text(image_bytes: bytes, text: str, position: str = "bottom") -> bytes:
-    """PNG 이미지에 한글 텍스트 오버레이
+    """PNG 이미지에 한글 텍스트 오버레이 (가독성 개선판 2026-04-18)
 
     - 3중 레이어: 흰 외곽 테두리 → 검은 외곽선 → 흰 글씨
       (다크모드/밝은배경 모두에서 가독성 극대화)
-    - 폰트 크기: 이미지 폭의 9%
+    - 폰트 크기: 이미지 폭의 14% (기존 9% → 1.5배)
+    - 외곽선: 검정 font/7 (기존 //10), 흰 halo +font/12 (기존 //20)
     - position: "bottom"(기본) / "top"
     """
     from PIL import Image, ImageDraw
@@ -577,10 +623,10 @@ def overlay_korean_text(image_bytes: bytes, text: str, position: str = "bottom")
     img = Image.open(BytesIO(image_bytes)).convert("RGBA")
     width, height = img.size
 
-    font_size = max(60, int(width * 0.09))
+    font_size = max(80, int(width * 0.14))
     font = _load_korean_font(font_size)
-    black_w = max(4, font_size // 10)
-    white_outer_w = black_w + max(3, font_size // 20)
+    black_w = max(8, font_size // 7)
+    white_outer_w = black_w + max(5, font_size // 12)
 
     draw = ImageDraw.Draw(img)
     bbox = draw.textbbox((0, 0), text, font=font, stroke_width=white_outer_w)
