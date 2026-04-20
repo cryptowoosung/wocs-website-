@@ -4,6 +4,27 @@ import { viteStaticCopy } from 'vite-plugin-static-copy'
 import { resolve } from 'path'
 import fs from 'node:fs'
 
+// Inject LCP preload hint AFTER Vite's default HTML processing.
+// Placed in source HTML, Vite would resolve/rewrite the href to a hashed
+// bundle path that doesn't match the runtime <img src> from App.jsx.
+// Using `order: 'post'` keeps the URL verbatim so preload matches the
+// actual image request served by viteStaticCopy at /assets/images/.
+function injectLcpPreloadPlugin() {
+  return {
+    name: 'inject-lcp-preload',
+    transformIndexHtml: {
+      order: 'post',
+      handler(html) {
+        const tag = '  <link rel="preload" as="image" href="/assets/images/17-d600-ext.webp" fetchpriority="high">\n'
+        if (html.includes('href="/assets/images/17-d600-ext.webp"') && html.includes('rel="preload"')) {
+          return html
+        }
+        return html.replace('</head>', tag + '</head>')
+      },
+    },
+  }
+}
+
 // Vercel/정적 호스팅은 루트 요청 시 dist/index.html을 찾음.
 // Vite 빌드 input이 vite-index.html이라 기본값으로 dist/vite-index.html만 생성됨.
 // closeBundle 훅에서 rename하여 `/` 경로 404 방지.
@@ -45,6 +66,7 @@ export default defineConfig({
         }
       ]
     }),
+    injectLcpPreloadPlugin(),
     renameViteIndexPlugin(),
   ],
   publicDir: false,
