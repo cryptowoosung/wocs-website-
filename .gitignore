@@ -4,5 +4,25 @@ assets/images-original/
 # ë¡œì»¬ ë°±ì—… íŒŒì¼
 *.backup_*
 
-# Claude Code ³»ºÎ »óÅÂ ÆÄÀÏ
+# Claude Code ë¡œì»¬ ìƒíƒœ íŒŒì¼
 .omc/
+
+# Node
+node_modules/
+npm-debug.log*
+.npm/
+
+# Vite
+dist/
+.vite/
+
+# ë°±ì—… íŒŒì¼ (Phase 8 ìŠ¹ê²© í›„ ì •ë¦¬)
+*.bak
+*.original
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Vite public/ - junction to existing assets
+public/
