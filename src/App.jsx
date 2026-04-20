@@ -1491,7 +1491,28 @@ function WOCSHomepage() {
         {/* Main nav */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 5%", height: 70 }}>
           {/* Logo */}
-          <div style={{ display: "flex", alignItems: "center", gap: 12, cursor: "pointer" }}>
+          <div
+            role="link"
+            tabIndex={0}
+            onClick={() => {
+              const p = window.location.pathname;
+              const atHome = p === "/" || p.endsWith("/index.html") || p.endsWith("/vite-index.html");
+              if (atHome) {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                setMobileOpen(false);
+                setMegaNav(null);
+              } else {
+                window.location.href = "/?lang=" + currentLang;
+              }
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                e.currentTarget.click();
+              }
+            }}
+            style={{ display: "flex", alignItems: "center", gap: 12, cursor: "pointer" }}
+          >
             <div style={{
               width: 40, height: 40, border: `2px solid ${GOLD}`,
               transform: "rotate(45deg)", display: "flex", alignItems: "center", justifyContent: "center",
