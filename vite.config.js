@@ -2,6 +2,25 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 import { resolve } from 'path'
+import fs from 'node:fs'
+
+// Vercel/정적 호스팅은 루트 요청 시 dist/index.html을 찾음.
+// Vite 빌드 input이 vite-index.html이라 기본값으로 dist/vite-index.html만 생성됨.
+// closeBundle 훅에서 rename하여 `/` 경로 404 방지.
+function renameViteIndexPlugin() {
+  return {
+    name: 'rename-vite-index-to-index',
+    closeBundle() {
+      const from = resolve(__dirname, 'dist/vite-index.html')
+      const to = resolve(__dirname, 'dist/index.html')
+      if (fs.existsSync(from)) {
+        if (fs.existsSync(to)) fs.unlinkSync(to)
+        fs.renameSync(from, to)
+        console.log('✓ dist/vite-index.html → dist/index.html')
+      }
+    },
+  }
+}
 
 export default defineConfig({
   plugins: [
@@ -25,7 +44,8 @@ export default defineConfig({
           dest: '.'
         }
       ]
-    })
+    }),
+    renameViteIndexPlugin(),
   ],
   publicDir: false,
   build: {
