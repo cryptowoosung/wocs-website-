@@ -571,8 +571,11 @@ input, select, textarea { font-size: 16px !important; width: 100%; }
 
 .trust-bar { flex-wrap: wrap; gap: 1rem; padding: 1.5rem 1rem; }
 .trust-item { flex: 1 1 40%; text-align: center; }
-.showcase-inner { grid-template-columns: 1fr; }
-.showcase-slider { height: auto; }
+@media (max-width: 767px) {
+  .showcase-inner { grid-template-columns: 1fr; }
+  .showcase-slider { height: auto; }
+  .showcase-card { aspect-ratio: 4 / 3; height: auto; overflow: hidden; }
+}
 .faq-q { font-size: 0.875rem; padding: 1rem; }
 .faq-a { font-size: 0.813rem; padding: 0 1rem 1rem; }
 .why-grid { grid-template-columns: 1fr; }
