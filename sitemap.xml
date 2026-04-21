@@ -1,355 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/about/index.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/about/team.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/contact/index.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/contact/roi-calculator.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/gallery/index.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/index.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/legal/cookies.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/legal/privacy.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/legal/terms.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/occasions/airbnb.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/occasions/glamping-pod.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/occasions/glamping.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/occasions/hotel.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/occasions/index.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/occasions/permanent.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/occasions/resort.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/occasions/sports.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/occasions/wedding.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/occasions/winter.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/portfolio/index.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/addons.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/bell-tent.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/birdcage.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/cocoon-house.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/cube-cabin.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/dome-tent.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/geodesic-domes-custom.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/geodesic-domes-preconfigured.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/geodesic-domes-ready.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/geodesic-domes.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/index.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/luxury-tents.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/modular-bath.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/modular-deck.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/modular-systems.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/modular-units.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/nordic-tipi.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/peak-lodge.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/safari-basic.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/safari-cabin.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/safari-elite.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/safari-extreme.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/safari-luxury.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/safari-tents.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/sailing-tent.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/products/solar-system.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/project/buying-land.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/project/financing.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/project/index.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/project/planning-cases.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/project/revenue-sharing.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/project/start-business.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/resources/blog.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/resources/dealer.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/resources/downloads.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/resources/faq.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/resources/index.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/OneDrive/Desktop/wocs-site/resources/reviews.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/about/index.html</loc>
+    <loc>https://wocs.kr/about/</loc>
     <lastmod>2026-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -373,7 +25,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://wocs.kr/contact/index.html</loc>
+    <loc>https://wocs.kr/contact/</loc>
     <lastmod>2026-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -553,13 +205,13 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://wocs.kr/gallery/index.html</loc>
+    <loc>https://wocs.kr/gallery/</loc>
     <lastmod>2026-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://wocs.kr/index.html</loc>
+    <loc>https://wocs.kr/</loc>
     <lastmod>2026-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -607,7 +259,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://wocs.kr/occasions/index.html</loc>
+    <loc>https://wocs.kr/occasions/</loc>
     <lastmod>2026-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -649,14 +301,14 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://wocs.kr/portfolio/index.html</loc>
+    <loc>https://wocs.kr/portfolio/</loc>
     <lastmod>2026-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://wocs.kr/privacy.html</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -721,7 +373,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://wocs.kr/products/index.html</loc>
+    <loc>https://wocs.kr/products/</loc>
     <lastmod>2026-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -847,7 +499,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://wocs.kr/project/index.html</loc>
+    <loc>https://wocs.kr/project/</loc>
     <lastmod>2026-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -901,19 +553,13 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://wocs.kr/resources/index.html</loc>
+    <loc>https://wocs.kr/resources/</loc>
     <lastmod>2026-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://wocs.kr/resources/reviews.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://wocs.kr/vite-index.html</loc>
     <lastmod>2026-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
