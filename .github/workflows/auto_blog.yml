@@ -24,6 +24,9 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python auto_writer.py
+      - name: SEO 메타 태그 누락 자동 주입 (safety net)
+        run: python scripts/inject_missing_meta.py
+        continue-on-error: true
       - name: sitemap.xml 갱신
         run: python update_sitemap.py
       # - name: 워드프레스 자동 포스팅
