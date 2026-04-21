@@ -197,10 +197,10 @@ function WOCSHomepage() {
   // DATA ARRAYS — All using t() for full i18n
   // ═══════════════════════════════════════════════════════
   const heroSlides = [
-    { tag: t("heroTag1"), title: t("heroTitle1"), sub: t("heroSub1"), cta: t("heroCta1"), img: "assets/images/17-d600-ext.webp", href: "products/geodesic-domes.html" },
-    { tag: t("heroTag2"), title: t("heroTitle2"), sub: t("heroSub2"), cta: t("heroCta2"), img: "assets/images/01-ex15-ext.webp", href: "products/safari-tents.html" },
-    { tag: t("heroTag3"), title: t("heroTitle3"), sub: t("heroSub3"), cta: t("heroCta3"), img: "assets/images/22-sig-o-ext.webp", href: "products/luxury-tents.html" },
-    { tag: t("heroTag4"), title: t("heroTitle4"), sub: t("heroSub4"), cta: t("heroCta4"), img: "assets/images/50-resort-mountain.webp", href: "products/modular-systems.html" },
+    { tag: t("heroTag1"), title: t("heroTitle1"), sub: t("heroSub1"), cta: t("heroCta1"), img: "assets/images/17-d600-ext.webp", w: 1536, h: 1024, href: "products/geodesic-domes.html" },
+    { tag: t("heroTag2"), title: t("heroTitle2"), sub: t("heroSub2"), cta: t("heroCta2"), img: "assets/images/01-ex15-ext.webp", w: 1456, h: 816, href: "products/safari-tents.html" },
+    { tag: t("heroTag3"), title: t("heroTitle3"), sub: t("heroSub3"), cta: t("heroCta3"), img: "assets/images/22-sig-o-ext.webp", w: 1456, h: 816, href: "products/luxury-tents.html" },
+    { tag: t("heroTag4"), title: t("heroTitle4"), sub: t("heroSub4"), cta: t("heroCta4"), img: "assets/images/50-resort-mountain.webp", w: 1456, h: 816, href: "products/modular-systems.html" },
   ];
 
   const navItems = [
@@ -288,10 +288,10 @@ function WOCSHomepage() {
   };
 
   const productCards = [
-    { name: t("pcName1"), sub: t("pcSub1"), img: "assets/images/s-classic.webp", href: "products/safari-tents.html" },
-    { name: t("pcName2"), sub: t("pcSub2"), img: "assets/images/19-d800-ext.webp", href: "products/geodesic-domes.html" },
-    { name: t("pcName3"), sub: t("pcSub3"), img: "assets/images/22-sig-o-ext.webp", href: "products/luxury-tents.html" },
-    { name: t("pcName4"), sub: t("pcSub4"), img: "assets/images/42-modular-unit.webp", href: "products/modular-systems.html" },
+    { name: t("pcName1"), sub: t("pcSub1"), img: "assets/images/s-classic.webp", w: 1456, h: 816, href: "products/safari-tents.html" },
+    { name: t("pcName2"), sub: t("pcSub2"), img: "assets/images/19-d800-ext.webp", w: 1456, h: 816, href: "products/geodesic-domes.html" },
+    { name: t("pcName3"), sub: t("pcSub3"), img: "assets/images/22-sig-o-ext.webp", w: 1456, h: 816, href: "products/luxury-tents.html" },
+    { name: t("pcName4"), sub: t("pcSub4"), img: "assets/images/42-modular-unit.webp", w: 1456, h: 816, href: "products/modular-systems.html" },
   ];
 
   const domeSizes = [
@@ -332,16 +332,16 @@ function WOCSHomepage() {
   ];
 
   const occasions = [
-    { img: "assets/images/15-lodge-lx-ext.webp", name: t("occ1"), href: "occasions/glamping.html" },
-    { img: "assets/images/50-resort-mountain.webp", name: t("occ2"), href: "occasions/resort.html" },
-    { img: "assets/images/s-classic.webp", name: t("occ3"), href: "occasions/airbnb.html" },
-    { img: "assets/images/26-sig-p-ext.webp", name: t("occ4"), href: "occasions/wedding.html" },
-    { img: "assets/images/19-d800-ext.webp", name: t("occ5"), href: "occasions/sports.html" },
-    { img: "assets/images/17-d600-ext.webp", name: t("occ6"), href: "occasions/glamping-pod.html" },
-    { img: "assets/images/35-sig-q-ext.webp", name: t("occ7"), href: "occasions/permanent.html" },
-    { img: "assets/images/02-ex25-ext.webp", name: t("occ8"), href: "occasions/winter.html" },
-    { img: "assets/images/50-resort-mountain3.webp", name: t("occ9"), href: "occasions/index.html" },
-    { img: "assets/images/28-sig-h-ext.webp", name: t("occ10"), href: "occasions/index.html" },
+    { img: "assets/images/15-lodge-lx-ext.webp", w: 1024, h: 1024, name: t("occ1"), href: "occasions/glamping.html" },
+    { img: "assets/images/50-resort-mountain.webp", w: 1456, h: 816, name: t("occ2"), href: "occasions/resort.html" },
+    { img: "assets/images/s-classic.webp", w: 1456, h: 816, name: t("occ3"), href: "occasions/airbnb.html" },
+    { img: "assets/images/26-sig-p-ext.webp", w: 1456, h: 816, name: t("occ4"), href: "occasions/wedding.html" },
+    { img: "assets/images/19-d800-ext.webp", w: 1456, h: 816, name: t("occ5"), href: "occasions/sports.html" },
+    { img: "assets/images/17-d600-ext.webp", w: 1536, h: 1024, name: t("occ6"), href: "occasions/glamping-pod.html" },
+    { img: "assets/images/35-sig-q-ext.webp", w: 1456, h: 816, name: t("occ7"), href: "occasions/permanent.html" },
+    { img: "assets/images/02-ex25-ext.webp", w: 1456, h: 816, name: t("occ8"), href: "occasions/winter.html" },
+    { img: "assets/images/50-resort-mountain3.webp", w: 1456, h: 816, name: t("occ9"), href: "occasions/index.html" },
+    { img: "assets/images/28-sig-h-ext.webp", w: 1456, h: 816, name: t("occ10"), href: "occasions/index.html" },
   ];
 
   const features = [
@@ -365,9 +365,9 @@ function WOCSHomepage() {
   ];
 
   const blogs = [
-    { tag: t("blogTag1"), title: t("blogTitle1"), ko: t("blogKo1"), img: "assets/images/01-ex15-ext.webp", href: "resources/blog.html" },
-    { tag: t("blogTag2"), title: t("blogTitle2"), ko: t("blogKo2"), img: "assets/images/22-sig-o-ext.webp", href: "resources/blog.html" },
-    { tag: t("blogTag3"), title: t("blogTitle3"), ko: t("blogKo3"), img: "assets/images/50-resort-mountain.webp", href: "resources/blog.html" },
+    { tag: t("blogTag1"), title: t("blogTitle1"), ko: t("blogKo1"), img: "assets/images/01-ex15-ext.webp", w: 1456, h: 816, href: "resources/blog.html" },
+    { tag: t("blogTag2"), title: t("blogTitle2"), ko: t("blogKo2"), img: "assets/images/22-sig-o-ext.webp", w: 1456, h: 816, href: "resources/blog.html" },
+    { tag: t("blogTag3"), title: t("blogTitle3"), ko: t("blogKo3"), img: "assets/images/50-resort-mountain.webp", w: 1456, h: 816, href: "resources/blog.html" },
   ];
 
   // Language / Flag data
@@ -757,7 +757,7 @@ function WOCSHomepage() {
             opacity: heroIdx === i ? 1 : 0,
             transition: "opacity 1.5s ease",
           }}>
-            <img src={slide.img} alt="WOCS 프리미엄 글램핑 시공 index" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+            <img width={slide.w} height={slide.h} src={slide.img} alt="WOCS 프리미엄 글램핑 시공 index" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(9,9,11,0) 0%, rgba(9,9,11,0) 50%, rgba(9,9,11,0) 100%)" }} />
           </div>
         ))}
@@ -864,7 +864,7 @@ function WOCSHomepage() {
               >
                 {/* Card image area */}
                 <div style={{ height: 200, overflow: "hidden" }}>
-                  <img src={card.img} alt={card.name} style={{width:"100%",height:"100%",objectFit:"cover"}} />
+                  <img width={card.w} height={card.h} src={card.img} alt={card.name} style={{width:"100%",height:"100%",objectFit:"cover"}} />
                 </div>
                 {/* Card info */}
                 <div style={{ padding: "24px 28px 28px" }}>
@@ -1134,7 +1134,7 @@ function WOCSHomepage() {
                   transform: `${anim(`occ-${i}`, "fu", i * 0.06).style.transform} ${hovOccasion === i ? "translateY(-6px)" : ""}`,
                 }}
               >
-                <div style={{ marginBottom: 14, transition: "transform .3s", transform: hovOccasion === i ? "scale(1.1)" : "scale(1)" }}><img src={occ.img} alt={occ.name} style={{width:"80px",height:"80px",objectFit:"cover",borderRadius:"8px"}} /></div>
+                <div style={{ marginBottom: 14, transition: "transform .3s", transform: hovOccasion === i ? "scale(1.1)" : "scale(1)" }}><img width={occ.w} height={occ.h} src={occ.img} alt={occ.name} style={{width:"80px",height:"80px",objectFit:"cover",borderRadius:"8px"}} /></div>
                 <div style={{ ...S.sf, fontSize: 13, fontWeight: 500, color: IVORY }}>{occ.name}</div>
               </div>
             ))}
@@ -1382,7 +1382,7 @@ function WOCSHomepage() {
               onClick={() => window.location.href=blog.href+"?lang="+currentLang}
               >
                 <div style={{ height: 200, position: "relative", overflow: "hidden" }}>
-                  <img src={blog.img} alt={blog.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
+                  <img width={blog.w} height={blog.h} src={blog.img} alt={blog.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
                   <span style={{ ...S.sf, fontSize: 10, letterSpacing: 3, color: GOLD, padding: "6px 16px", border: `1px solid ${GOLD}40`, position: "absolute", top: 16, left: 16, background: "rgba(9,9,11,0.7)" }}>{blog.tag}</span>
                 </div>
                 <div style={{ padding: "24px 28px" }}>

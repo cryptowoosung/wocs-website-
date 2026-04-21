@@ -26,3 +26,6 @@ Thumbs.db
 
 # Vite public/ - junction to existing assets
 public/
+
+# local session memos
+handoff_*.md
