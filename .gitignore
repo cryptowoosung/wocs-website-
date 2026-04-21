@@ -29,3 +29,6 @@ public/
 
 # local session memos
 handoff_*.md
+
+# image backups (re-compressed originals)
+assets/images/_original-backup/

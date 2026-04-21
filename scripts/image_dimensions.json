@@ -5,9 +5,9 @@
     "bytes": 2493057
   },
   "01-ex15-ext.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 317562
+    "w": 1200,
+    "h": 673,
+    "bytes": 195874
   },
   "02-ex25-ext.png": {
     "w": 1456,
@@ -15,9 +15,9 @@
     "bytes": 2574901
   },
   "02-ex25-ext.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 367358
+    "w": 1200,
+    "h": 673,
+    "bytes": 231410
   },
   "03-ex35-ext.png": {
     "w": 1456,
@@ -25,9 +25,9 @@
     "bytes": 2438219
   },
   "03-ex35-ext.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 299660
+    "w": 1200,
+    "h": 673,
+    "bytes": 181480
   },
   "04-ex46-ext.png": {
     "w": 1456,
@@ -35,9 +35,9 @@
     "bytes": 2197681
   },
   "04-ex46-ext.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 258712
+    "w": 1200,
+    "h": 673,
+    "bytes": 159074
   },
   "05-ex46-int.png": {
     "w": 1456,
@@ -55,9 +55,9 @@
     "bytes": 2352104
   },
   "06-ex67-ext.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 261164
+    "w": 1200,
+    "h": 673,
+    "bytes": 161216
   },
   "07-suite-c24-ext.png": {
     "w": 1456,
@@ -95,9 +95,9 @@
     "bytes": 2045551
   },
   "10-suite-c38-int.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 212876
+    "w": 1200,
+    "h": 673,
+    "bytes": 126390
   },
   "11-lodge-e36-ext.png": {
     "w": 1456,
@@ -105,9 +105,9 @@
     "bytes": 2182978
   },
   "11-lodge-e36-ext.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 258202
+    "w": 1200,
+    "h": 673,
+    "bytes": 154490
   },
   "12-lodge-e36-int.png": {
     "w": 1456,
@@ -155,9 +155,9 @@
     "bytes": 2061490
   },
   "16-lodge-lx-int.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 205764
+    "w": 1200,
+    "h": 673,
+    "bytes": 120932
   },
   "17-d600-ext.png": {
     "w": 1536,
@@ -165,9 +165,9 @@
     "bytes": 3356478
   },
   "17-d600-ext.webp": {
-    "w": 1536,
-    "h": 1024,
-    "bytes": 379230
+    "w": 1200,
+    "h": 800,
+    "bytes": 218438
   },
   "18-d600-int.png": {
     "w": 1456,
@@ -175,9 +175,9 @@
     "bytes": 2106364
   },
   "18-d600-int.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 211404
+    "w": 1200,
+    "h": 673,
+    "bytes": 125818
   },
   "19-d800-ext.png": {
     "w": 1456,
@@ -185,9 +185,9 @@
     "bytes": 2120549
   },
   "19-d800-ext.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 221126
+    "w": 1200,
+    "h": 673,
+    "bytes": 133568
   },
   "20-d800-int.png": {
     "w": 1456,
@@ -195,9 +195,9 @@
     "bytes": 2453155
   },
   "20-d800-int.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 328472
+    "w": 1200,
+    "h": 673,
+    "bytes": 195640
   },
   "21-d-pro-ext.png": {
     "w": 1456,
@@ -220,9 +220,9 @@
     "bytes": 2416251
   },
   "22-sig-o-ext.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 310680
+    "w": 1200,
+    "h": 673,
+    "bytes": 205302
   },
   "23-sig-o-int.png": {
     "w": 1456,
@@ -230,9 +230,9 @@
     "bytes": 2119756
   },
   "23-sig-o-int.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 219346
+    "w": 1200,
+    "h": 673,
+    "bytes": 130258
   },
   "24-sig-a-ext.png": {
     "w": 1456,
@@ -240,9 +240,9 @@
     "bytes": 2179450
   },
   "24-sig-a-ext.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 249316
+    "w": 1200,
+    "h": 673,
+    "bytes": 167598
   },
   "25-sig-a-int.png": {
     "w": 1456,
@@ -280,9 +280,9 @@
     "bytes": 2411933
   },
   "28-sig-h-ext.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 301080
+    "w": 1200,
+    "h": 673,
+    "bytes": 177478
   },
   "29-sig-h-int.png": {
     "w": 1456,
@@ -290,9 +290,9 @@
     "bytes": 2219428
   },
   "29-sig-h-int.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 229954
+    "w": 1200,
+    "h": 673,
+    "bytes": 119140
   },
   "30-sig-t-single-ext.png": {
     "w": 1456,
@@ -330,9 +330,9 @@
     "bytes": 2005231
   },
   "33-sig-t-double-ext.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 221844
+    "w": 1200,
+    "h": 673,
+    "bytes": 135488
   },
   "34-sig-t-double-int.png": {
     "w": 1456,
@@ -340,9 +340,9 @@
     "bytes": 2173552
   },
   "34-sig-t-double-int.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 217846
+    "w": 1200,
+    "h": 673,
+    "bytes": 132458
   },
   "35-sig-q-ext.png": {
     "w": 1456,
@@ -350,9 +350,9 @@
     "bytes": 2509767
   },
   "35-sig-q-ext.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 342752
+    "w": 1200,
+    "h": 673,
+    "bytes": 212938
   },
   "36-sig-q-int.png": {
     "w": 1456,
@@ -380,9 +380,9 @@
     "bytes": 1984974
   },
   "38-sig-m-s100-ext.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 223000
+    "w": 1200,
+    "h": 673,
+    "bytes": 137400
   },
   "39-sig-m-s190-ext.png": {
     "w": 1456,
@@ -400,9 +400,9 @@
     "bytes": 2249883
   },
   "40-sig-m-l150-ext.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 280982
+    "w": 1200,
+    "h": 673,
+    "bytes": 174112
   },
   "41-sig-m-int.png": {
     "w": 1024,
@@ -420,9 +420,9 @@
     "bytes": 2683565
   },
   "42-modular-unit.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 392158
+    "w": 1200,
+    "h": 673,
+    "bytes": 247836
   },
   "43-modular-bath.png": {
     "w": 1456,
@@ -460,9 +460,9 @@
     "bytes": 2328095
   },
   "46-construction.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 295692
+    "w": 1200,
+    "h": 673,
+    "bytes": 183382
   },
   "47-factory.png": {
     "w": 1024,
@@ -490,9 +490,9 @@
     "bytes": 2334642
   },
   "48-showroom-ext.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 293626
+    "w": 1200,
+    "h": 673,
+    "bytes": 175682
   },
   "49-showroom-int.png": {
     "w": 1456,
@@ -510,9 +510,9 @@
     "bytes": 2242742
   },
   "50-resort-mountain.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 273200
+    "w": 1200,
+    "h": 673,
+    "bytes": 161648
   },
   "50-resort-mountain1.png": {
     "w": 1456,
@@ -520,9 +520,9 @@
     "bytes": 1991744
   },
   "50-resort-mountain1.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 207008
+    "w": 1200,
+    "h": 673,
+    "bytes": 124798
   },
   "50-resort-mountain2.png": {
     "w": 1456,
@@ -530,9 +530,9 @@
     "bytes": 2003831
   },
   "50-resort-mountain2.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 217756
+    "w": 1200,
+    "h": 673,
+    "bytes": 137718
   },
   "50-resort-mountain3.png": {
     "w": 1456,
@@ -540,9 +540,9 @@
     "bytes": 2413777
   },
   "50-resort-mountain3.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 310318
+    "w": 1200,
+    "h": 673,
+    "bytes": 187224
   },
   "50-resort-mountain4.png": {
     "w": 1456,
@@ -550,9 +550,9 @@
     "bytes": 2173213
   },
   "50-resort-mountain4.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 256234
+    "w": 1200,
+    "h": 673,
+    "bytes": 155050
   },
   "50-resort-mountain5.png": {
     "w": 1456,
@@ -560,9 +560,9 @@
     "bytes": 2229060
   },
   "50-resort-mountain5.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 262108
+    "w": 1200,
+    "h": 673,
+    "bytes": 158146
   },
   "50-resort-mountain6.png": {
     "w": 1456,
@@ -570,9 +570,9 @@
     "bytes": 2334642
   },
   "50-resort-mountain6.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 293626
+    "w": 1200,
+    "h": 673,
+    "bytes": 175682
   },
   "51-resort-lake.png": {
     "w": 1456,
@@ -590,9 +590,9 @@
     "bytes": 2248717
   },
   "52-night-scene.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 271976
+    "w": 1200,
+    "h": 673,
+    "bytes": 157040
   },
   "52-night-scene1.png": {
     "w": 1456,
@@ -875,9 +875,9 @@
     "bytes": 2257791
   },
   "WOCS__Modular_Glamping_Systems_Architectural_blueprint_of_a_c_3d3a54db-1843-4027-80d7-a8612eaa6047_0.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 250232
+    "w": 1200,
+    "h": 673,
+    "bytes": 107790
   },
   "WOCS__Modular_Glamping_Systems_Architectural_photography_of_a_25082c85-da5f-4a02-b054-6d5f81824071_3.png": {
     "w": 1456,
@@ -885,9 +885,9 @@
     "bytes": 2256733
   },
   "WOCS__Modular_Glamping_Systems_Architectural_photography_of_a_25082c85-da5f-4a02-b054-6d5f81824071_3.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 243394
+    "w": 1200,
+    "h": 673,
+    "bytes": 149688
   },
   "WOCS__Modular_Glamping_Systems_Architectural_photography_of_a_ace3ea2f-e6c0-4610-9d16-32bfc0611ad3_0.png": {
     "w": 1456,
@@ -895,9 +895,9 @@
     "bytes": 2241244
   },
   "WOCS__Modular_Glamping_Systems_Architectural_photography_of_a_ace3ea2f-e6c0-4610-9d16-32bfc0611ad3_0.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 240084
+    "w": 1200,
+    "h": 673,
+    "bytes": 142538
   },
   "WOCS__Modular_Glamping_Systems_Architectural_schematic_floor__177a5539-90c2-4f94-b42e-668d50897c40_0.png": {
     "w": 1232,
@@ -982,12 +982,12 @@
   "beach glamping3.webp": {
     "w": 1024,
     "h": 1024,
-    "bytes": 284574
+    "bytes": 263400
   },
   "beach glamping4.webp": {
     "w": 1024,
     "h": 1024,
-    "bytes": 238492
+    "bytes": 221984
   },
   "deck.png": {
     "w": 1024,
@@ -1005,9 +1005,9 @@
     "bytes": 29826
   },
   "f&b_pavilion1.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 210424
+    "w": 1200,
+    "h": 673,
+    "bytes": 128228
   },
   "fire.png": {
     "w": 1456,
@@ -1055,9 +1055,9 @@
     "bytes": 198130
   },
   "pavilion3.webp": {
-    "w": 1344,
-    "h": 896,
-    "bytes": 246478
+    "w": 1200,
+    "h": 800,
+    "bytes": 172810
   },
   "pavilion_7.webp": {
     "w": 1456,
@@ -1065,24 +1065,24 @@
     "bytes": 142342
   },
   "portpolio1.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 210844
+    "w": 1200,
+    "h": 673,
+    "bytes": 125302
   },
   "portpolio10.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 217846
+    "w": 1200,
+    "h": 673,
+    "bytes": 132458
   },
   "portpolio11.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 307766
+    "w": 1200,
+    "h": 673,
+    "bytes": 191702
   },
   "portpolio12.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 342752
+    "w": 1200,
+    "h": 673,
+    "bytes": 212938
   },
   "portpolio2.webp": {
     "w": 1456,
@@ -1095,19 +1095,19 @@
     "bytes": 88418
   },
   "portpolio5.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 262690
+    "w": 1200,
+    "h": 673,
+    "bytes": 159542
   },
   "portpolio6.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 205764
+    "w": 1200,
+    "h": 673,
+    "bytes": 120932
   },
   "portpolio7.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 234794
+    "w": 1200,
+    "h": 673,
+    "bytes": 140218
   },
   "portpolio8.webp": {
     "w": 1456,
@@ -1115,19 +1115,19 @@
     "bytes": 156988
   },
   "portpolio9.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 244418
+    "w": 1200,
+    "h": 673,
+    "bytes": 145590
   },
   "s-classic.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 243394
+    "w": 1200,
+    "h": 673,
+    "bytes": 149688
   },
   "s-classic0.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 240084
+    "w": 1200,
+    "h": 673,
+    "bytes": 142538
   },
   "s-classic1.webp": {
     "w": 1456,
@@ -1145,9 +1145,9 @@
     "bytes": 83114
   },
   "s-classic4.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 250232
+    "w": 1200,
+    "h": 673,
+    "bytes": 107790
   },
   "s-classic5.webp": {
     "w": 1232,
@@ -1170,19 +1170,19 @@
     "bytes": 101264
   },
   "s-classic_1.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 243394
+    "w": 1200,
+    "h": 673,
+    "bytes": 149688
   },
   "s-classic_2.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 240084
+    "w": 1200,
+    "h": 673,
+    "bytes": 142538
   },
   "s-classic_3.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 250232
+    "w": 1200,
+    "h": 673,
+    "bytes": 107790
   },
   "s-classic_4.webp": {
     "w": 1232,
@@ -1200,19 +1200,19 @@
     "bytes": 1696056
   },
   "solar1.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 226092
+    "w": 1200,
+    "h": 673,
+    "bytes": 131792
   },
   "solar2.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 238648
+    "w": 1200,
+    "h": 673,
+    "bytes": 142240
   },
   "solar3.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 319084
+    "w": 1200,
+    "h": 673,
+    "bytes": 192486
   },
   "total_smartcamp.png.png": {
     "w": 1456,
@@ -1227,7 +1227,7 @@
   "winter_glamping.webp": {
     "w": 960,
     "h": 1200,
-    "bytes": 288182
+    "bytes": 263918
   },
   "wocs_bath1.webp": {
     "w": 1456,
@@ -1260,9 +1260,9 @@
     "bytes": 2129172
   },
   "내부이미지D.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 223846
+    "w": 1200,
+    "h": 673,
+    "bytes": 134872
   },
   "내부이미지O.png": {
     "w": 1456,
@@ -1270,9 +1270,9 @@
     "bytes": 2169616
   },
   "내부이미지O.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 246410
+    "w": 1200,
+    "h": 673,
+    "bytes": 153114
   },
   "내부이미지S.png": {
     "w": 1456,
@@ -1280,9 +1280,9 @@
     "bytes": 2453155
   },
   "내부이미지S.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 328472
+    "w": 1200,
+    "h": 673,
+    "bytes": 195640
   },
   "외부이미지1.png": {
     "w": 1456,
@@ -1290,8 +1290,8 @@
     "bytes": 2071707
   },
   "외부이미지1.webp": {
-    "w": 1456,
-    "h": 816,
-    "bytes": 256234
+    "w": 1200,
+    "h": 673,
+    "bytes": 155050
   }
 }
