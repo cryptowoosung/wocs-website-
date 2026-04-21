@@ -25,6 +25,33 @@ function injectLcpPreloadPlugin() {
   }
 }
 
+// After Vite bundles CSS into /assets-built/main-*.css, it emits a
+// render-blocking <link rel="stylesheet" crossorigin href="...">. Rewrite
+// that to the preload+onload async pattern so the initial paint is not
+// blocked waiting for CSS. The above-the-fold look is covered by the
+// Critical CSS inlined in vite-index.html's <head>.
+function asyncCssPlugin() {
+  return {
+    name: 'async-bundled-css',
+    transformIndexHtml: {
+      order: 'post',
+      handler(html) {
+        return html.replace(
+          /<link\s+rel="stylesheet"(\s+crossorigin)?\s+href="([^"]+\.css)"\s*\/?>/g,
+          (match, crossorigin, href) => {
+            const co = crossorigin ? ' crossorigin' : ''
+            return (
+              `<link rel="preload"${co} href="${href}" as="style" ` +
+              `onload="this.onload=null;this.rel='stylesheet'">` +
+              `<noscript><link rel="stylesheet"${co} href="${href}"></noscript>`
+            )
+          },
+        )
+      },
+    },
+  }
+}
+
 // Vercel/정적 호스팅은 루트 요청 시 dist/index.html을 찾음.
 // Vite 빌드 input이 vite-index.html이라 기본값으로 dist/vite-index.html만 생성됨.
 // closeBundle 훅에서 rename하여 `/` 경로 404 방지.
@@ -67,6 +94,7 @@ export default defineConfig({
       ]
     }),
     injectLcpPreloadPlugin(),
+    asyncCssPlugin(),
     renameViteIndexPlugin(),
   ],
   publicDir: false,
