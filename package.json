@@ -1,0 +1,32 @@
+{
+  "name": "wocs-website-production",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cryptowoosung/wocs-website-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cryptowoosung/wocs-website-/issues"
+  },
+  "homepage": "https://github.com/cryptowoosung/wocs-website-#readme",
+  "description": "",
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.1",
+    "vite": "^8.0.9",
+    "vite-plugin-static-copy": "^4.1.0"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "type": "module"
+}
