@@ -76,6 +76,8 @@ function buildWocsFooter() {
         <a class="footer-link" href="${href('/legal/privacy.html')}">${tc("fPrivacy")}</a>
         <a class="footer-link" href="${href('/resources/downloads.html')}">${tc("fShipping")}</a>
         <a class="footer-link" href="${href('/legal/cookies.html')}">${tc("fCookie")}</a>
+        <!-- TODO: i18n - replace with tc("fSitemap") when multilingual is active -->
+        <a class="footer-link" href="/sitemap.html">사이트맵</a>
       </div>
     </div>
     <div class="footer-bottom">

@@ -1556,6 +1556,8 @@ function WOCSHomepage() {
               <a href={"legal/privacy.html?lang="+currentLang} style={{ ...S.sf, fontSize: 12, color: `${IVORY}77`, padding: "6px 0", cursor: "pointer", transition: "color .2s", display: "block", textDecoration: "none" }} onMouseEnter={e => e.target.style.color = GOLD} onMouseLeave={e => e.target.style.color = `${IVORY}77`}>{t("footLeg2")}</a>
               <a href={"resources/downloads.html?lang="+currentLang} style={{ ...S.sf, fontSize: 12, color: `${IVORY}77`, padding: "6px 0", cursor: "pointer", transition: "color .2s", display: "block", textDecoration: "none" }} onMouseEnter={e => e.target.style.color = GOLD} onMouseLeave={e => e.target.style.color = `${IVORY}77`}>{t("footLeg3")}</a>
               <a href={"legal/cookies.html?lang="+currentLang} style={{ ...S.sf, fontSize: 12, color: `${IVORY}77`, padding: "6px 0", cursor: "pointer", transition: "color .2s", display: "block", textDecoration: "none" }} onMouseEnter={e => e.target.style.color = GOLD} onMouseLeave={e => e.target.style.color = `${IVORY}77`}>{t("footLeg4")}</a>
+              {/* TODO: i18n - replace with t("footSitemap") when multilingual content is active */}
+              <a href="/sitemap.html" style={{ ...S.sf, fontSize: 12, color: `${IVORY}77`, padding: "6px 0", cursor: "pointer", transition: "color .2s", display: "block", textDecoration: "none" }} onMouseEnter={e => e.target.style.color = GOLD} onMouseLeave={e => e.target.style.color = `${IVORY}77`}>사이트맵</a>
 
             </div>
           </div>
