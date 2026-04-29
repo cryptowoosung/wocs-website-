@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>사이트맵 — WOCS 우성어닝 | 글램핑텐트·어닝·천막 전체 카탈로그</title>
+<meta name="description" content="WOCS 우성어닝의 모든 페이지를 한눈에. 글램핑 텐트, 사파리 시리즈, 지오데식 돔, 모듈러 시스템, 활용 시나리오, 사업 정보, 자료실까지 65개 페이지 종합 안내.">
+<meta name="keywords" content="WOCS 사이트맵, 글램핑텐트, 사파리텐트, 지오데식돔, 모듈러구조물, 우성어닝, 글램핑 카탈로그">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://wocs.kr/sitemap.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="사이트맵 — WOCS 우성어닝 전체 카탈로그">
+<meta property="og:description" content="글램핑텐트·어닝·천막 65개 페이지 종합 안내. 사파리·지오데식 돔·모듈러 시스템·활용 시나리오·사업 정보까지.">
+<meta property="og:url" content="https://wocs.kr/sitemap.html">
+<meta property="og:site_name" content="WOCS 우성어닝">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://wocs.kr/assets/images/og-default.jpg">
+
+<!-- Fonts (sub-page 동일 패턴) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Lexend:wght@200;300;400;500;600&family=Noto+Sans+KR:wght@300;400;500;600&family=Noto+Serif+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="/assets/css/wocs-common.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="/assets/css/wocs-common.css"></noscript>
+
+<style>
+/* sitemap.html 전용 스타일 — wocs-common.css 토큰 재사용 */
+.sm-hero {
+  padding: 180px 5% 80px;
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+  position: relative;
+  overflow: hidden;
+}
+.sm-hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 30% 20%, rgba(201,169,110,0.05), transparent 70%);
+  pointer-events: none;
+}
+.sm-hero .slab { margin-bottom: 16px; }
+.sm-hero h1 {
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: 24px;
+}
+.sm-hero p {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: rgba(240,235,224,0.6);
+  line-height: 1.8;
+  max-width: 720px;
+}
+
+.sm-main { padding: 80px 5% 120px; max-width: 1400px; margin: 0 auto; }
+
+.sm-section { margin-bottom: 80px; }
+.sm-section:last-child { margin-bottom: 0; }
+
+.sm-section-head {
+  border-bottom: 1px solid rgba(201,169,110,0.18);
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+}
+.sm-section h2 {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 400;
+  color: var(--ivory);
+  letter-spacing: 0.5px;
+}
+.sm-section .slab {
+  margin-bottom: 12px;
+  display: block;
+}
+
+.sm-group { margin-bottom: 36px; }
+.sm-group:last-child { margin-bottom: 0; }
+
+.sm-group h3 {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.sm-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px 32px;
+}
+
+.sm-list li { padding: 0; }
+
+.sm-list a {
+  display: block;
+  padding: 10px 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: rgba(240,235,224,0.75);
+  text-decoration: none;
+  transition: color .25s, padding-left .25s;
+  border-bottom: 1px solid rgba(201,169,110,0.06);
+  line-height: 1.5;
+}
+.sm-list a:hover {
+  color: var(--gold);
+  padding-left: 8px;
+}
+
+.sm-list a .sm-meta {
+  display: block;
+  font-size: 11px;
+  color: rgba(240,235,224,0.4);
+  margin-top: 2px;
+  letter-spacing: 0.3px;
+}
+
+.sm-back {
+  display: inline-block;
+  margin-top: 60px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 14px 32px;
+  text-decoration: none;
+  transition: all .3s;
+}
+.sm-back:hover {
+  background: var(--gold);
+  color: var(--bg);
+}
+
+@media (max-width: 767px) {
+  .sm-hero { padding: 140px 5% 60px; }
+  .sm-main { padding: 50px 5% 80px; }
+  .sm-section { margin-bottom: 56px; }
+  .sm-section-head { padding-bottom: 16px; margin-bottom: 28px; }
+  .sm-list {
+    grid-template-columns: 1fr;
+    gap: 2px 0;
+  }
+  .sm-list a { font-size: 13px; padding: 12px 0; }
+  .sm-group h3 { font-size: 11px; letter-spacing: 2px; }
+}
+</style>
+</head>
+<body>
+
+<div id="wocs-header"></div>
+
+<header class="sm-hero">
+  <div style="max-width:1400px;margin:0 auto;">
+    <div class="slab">SITEMAP · 전체 페이지 안내</div>
+    <h1>WOCS <span class="gold-text">사이트맵</span></h1>
+    <p>글램핑 텐트, 사파리 시리즈, 지오데식 돔, 모듈러 시스템부터 활용 시나리오, 사업 정보, 자료실까지 — WOCS 우성어닝의 65개 카테고리 페이지를 한눈에 확인하세요.</p>
+  </div>
+</header>
+
+<main class="sm-main">
+
+  <!-- ═══════════ 섹션 1: 제품 라인업 (28개) ═══════════ -->
+  <section class="sm-section" aria-labelledby="sm-products">
+    <div class="sm-section-head">
+      <span class="slab">PRODUCTS · 28 PAGES</span>
+      <h2 id="sm-products">제품 라인업</h2>
+    </div>
+
+    <div class="sm-group">
+      <h3>사파리 시리즈</h3>
+      <ul class="sm-list">
+        <li><a href="/products/safari-luxury.html">사파리 럭셔리<span class="sm-meta">프리미엄 글램핑 텐트</span></a></li>
+        <li><a href="/products/safari-elite.html">사파리 엘리트<span class="sm-meta">고급 사파리 텐트</span></a></li>
+        <li><a href="/products/safari-extreme.html">사파리 익스트림<span class="sm-meta">극한 환경용 텐트</span></a></li>
+        <li><a href="/products/safari-cabin.html">사파리 캐빈<span class="sm-meta">캐빈형 사파리 텐트</span></a></li>
+        <li><a href="/products/safari-basic.html">사파리 베이직<span class="sm-meta">입문형 사파리 텐트</span></a></li>
+        <li><a href="/products/safari-tents.html">사파리 텐트 시리즈<span class="sm-meta">전체 사파리 컬렉션</span></a></li>
+        <li><a href="/products/luxury-tents.html">럭셔리 텐트 컬렉션<span class="sm-meta">프리미엄 텐트 종합</span></a></li>
+      </ul>
+    </div>
+
+    <div class="sm-group">
+      <h3>돔 / 지오데식 구조물</h3>
+      <ul class="sm-list">
+        <li><a href="/products/dome-tent.html">돔 텐트<span class="sm-meta">글램핑 돔하우스</span></a></li>
+        <li><a href="/products/geodesic-domes.html">지오데식 돔<span class="sm-meta">표준 모델</span></a></li>
+        <li><a href="/products/geodesic-domes-ready.html">지오데식 돔 레디<span class="sm-meta">즉시 설치형</span></a></li>
+        <li><a href="/products/geodesic-domes-custom.html">지오데식 돔 커스텀<span class="sm-meta">맞춤 제작</span></a></li>
+        <li><a href="/products/geodesic-domes-preconfigured.html">지오데식 돔 사전구성<span class="sm-meta">프리셋 모델</span></a></li>
+      </ul>
+    </div>
+
+    <div class="sm-group">
+      <h3>이동식 텐트</h3>
+      <ul class="sm-list">
+        <li><a href="/products/bell-tent.html">벨 텐트<span class="sm-meta">클래식 종형 텐트</span></a></li>
+        <li><a href="/products/nordic-tipi.html">노르딕 티피<span class="sm-meta">북유럽 스타일 텐트</span></a></li>
+        <li><a href="/products/sailing-tent.html">세일링 텐트<span class="sm-meta">개방감 있는 돛 구조</span></a></li>
+      </ul>
+    </div>
+
+    <div class="sm-group">
+      <h3>모듈러 시스템</h3>
+      <ul class="sm-list">
+        <li><a href="/products/modular-systems.html">모듈러 시스템<span class="sm-meta">통합 모듈 구조</span></a></li>
+        <li><a href="/products/modular-units.html">모듈러 유닛<span class="sm-meta">단위 모듈</span></a></li>
+        <li><a href="/products/modular-bath.html">모듈러 욕실<span class="sm-meta">위생설비 유닛</span></a></li>
+        <li><a href="/products/modular-deck.html">모듈러 데크<span class="sm-meta">바닥 시스템</span></a></li>
+      </ul>
+    </div>
+
+    <div class="sm-group">
+      <h3>특수 구조물</h3>
+      <ul class="sm-list">
+        <li><a href="/products/cocoon-house.html">코쿤 하우스<span class="sm-meta">캡슐형 글램핑</span></a></li>
+        <li><a href="/products/cube-cabin.html">큐브 캐빈<span class="sm-meta">정육면체 캐빈</span></a></li>
+        <li><a href="/products/peak-lodge.html">피크 로지<span class="sm-meta">고지대용 로지</span></a></li>
+        <li><a href="/products/birdcage.html">버드케이지<span class="sm-meta">조형 구조물</span></a></li>
+      </ul>
+    </div>
+
+    <div class="sm-group">
+      <h3>부속 / 시스템</h3>
+      <ul class="sm-list">
+        <li><a href="/products/addons.html">액세서리 / 부가 옵션<span class="sm-meta">애드온 컬렉션</span></a></li>
+        <li><a href="/products/solar-system.html">태양광 시스템<span class="sm-meta">친환경 전원</span></a></li>
+        <li><a href="/products/universal-joint.html">무용접 유니버설 조인트<span class="sm-meta">WOCS 특허 기술</span></a></li>
+        <li><a href="/products/index.html">제품 메인<span class="sm-meta">전체 카탈로그</span></a></li>
+        <li><a href="/products/product-template.html">제품 템플릿<span class="sm-meta">표준 사양 템플릿</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════ 섹션 2: 활용 시나리오 (10개) ═══════════ -->
+  <section class="sm-section" aria-labelledby="sm-occasions">
+    <div class="sm-section-head">
+      <span class="slab">OCCASIONS · 10 PAGES</span>
+      <h2 id="sm-occasions">활용 시나리오</h2>
+    </div>
+    <ul class="sm-list">
+      <li><a href="/occasions/index.html">활용 시나리오 종합<span class="sm-meta">전체 활용 분야 안내</span></a></li>
+      <li><a href="/occasions/glamping.html">글램핑장 운영<span class="sm-meta">캠핑장 사업</span></a></li>
+      <li><a href="/occasions/glamping-pod.html">글램핑 포드<span class="sm-meta">컴팩트 유닛 운영</span></a></li>
+      <li><a href="/occasions/hotel.html">호텔 부대시설<span class="sm-meta">호텔 야외 시설</span></a></li>
+      <li><a href="/occasions/resort.html">리조트 객실<span class="sm-meta">리조트 야외 객실</span></a></li>
+      <li><a href="/occasions/airbnb.html">에어비앤비 운영<span class="sm-meta">단기 임대 운영</span></a></li>
+      <li><a href="/occasions/wedding.html">웨딩 이벤트<span class="sm-meta">야외 결혼식 텐트</span></a></li>
+      <li><a href="/occasions/sports.html">스포츠 시설<span class="sm-meta">대형 스포츠 텐트</span></a></li>
+      <li><a href="/occasions/winter.html">동절기 운영<span class="sm-meta">겨울철 글램핑</span></a></li>
+      <li><a href="/occasions/permanent.html">영구 시설<span class="sm-meta">고정형 구조물</span></a></li>
+    </ul>
+  </section>
+
+  <!-- ═══════════ 섹션 3: 사업 정보 (7개) ═══════════ -->
+  <section class="sm-section" aria-labelledby="sm-project">
+    <div class="sm-section-head">
+      <span class="slab">PROJECT · 7 PAGES</span>
+      <h2 id="sm-project">사업 정보</h2>
+    </div>
+    <ul class="sm-list">
+      <li><a href="/project/index.html">사업 정보 종합<span class="sm-meta">프로젝트 개요</span></a></li>
+      <li><a href="/project/start-business.html">글램핑 사업 시작<span class="sm-meta">창업 가이드</span></a></li>
+      <li><a href="/project/buying-land.html">토지 구매 가이드<span class="sm-meta">부지 선정 노하우</span></a></li>
+      <li><a href="/project/financing.html">자금 조달<span class="sm-meta">투자 및 대출 옵션</span></a></li>
+      <li><a href="/project/planning-cases.html">사업 계획 사례<span class="sm-meta">실제 프로젝트 사례</span></a></li>
+      <li><a href="/project/bulk-order.html">대량 주문 안내<span class="sm-meta">B2B 거래</span></a></li>
+      <li><a href="/project/revenue-sharing.html">수익 분배 모델<span class="sm-meta">파트너십 옵션</span></a></li>
+    </ul>
+  </section>
+
+  <!-- ═══════════ 섹션 4: 자료실 + 회사 정보 (14개) ═══════════ -->
+  <section class="sm-section" aria-labelledby="sm-resources">
+    <div class="sm-section-head">
+      <span class="slab">RESOURCES & COMPANY · 14 PAGES</span>
+      <h2 id="sm-resources">자료실 · 회사 정보</h2>
+    </div>
+
+    <div class="sm-group">
+      <h3>자료실</h3>
+      <ul class="sm-list">
+        <li><a href="/resources/index.html">자료실 메인<span class="sm-meta">자료실 종합</span></a></li>
+        <li><a href="/resources/blog.html">블로그<span class="sm-meta">글램핑 인사이트</span></a></li>
+        <li><a href="/resources/blog-post.html">블로그 포스트<span class="sm-meta">개별 글 템플릿</span></a></li>
+        <li><a href="/resources/faq.html">자주 묻는 질문<span class="sm-meta">FAQ</span></a></li>
+        <li><a href="/resources/dealer.html">딜러 안내<span class="sm-meta">파트너 / 대리점</span></a></li>
+        <li><a href="/resources/reviews.html">고객 후기<span class="sm-meta">시공 후기</span></a></li>
+        <li><a href="/resources/downloads.html">자료 다운로드<span class="sm-meta">카탈로그·자재 시험성적서</span></a></li>
+      </ul>
+    </div>
+
+    <div class="sm-group">
+      <h3>회사 정보</h3>
+      <ul class="sm-list">
+        <li><a href="/about/index.html">WOCS 소개<span class="sm-meta">회사 개요</span></a></li>
+        <li><a href="/about/team.html">팀 소개<span class="sm-meta">전문 시공 인력</span></a></li>
+        <li><a href="/about/technology.html">기술 소개<span class="sm-meta">특허·핵심 기술</span></a></li>
+        <li><a href="/about/showroom.html">쇼룸 방문<span class="sm-meta">전남 화순 쇼룸</span></a></li>
+        <li><a href="/portfolio/index.html">시공 포트폴리오<span class="sm-meta">실제 시공 사례 종합</span></a></li>
+        <li><a href="/portfolio/case-detail.html">시공 사례 상세<span class="sm-meta">프로젝트 케이스 스터디</span></a></li>
+        <li><a href="/gallery/index.html">갤러리<span class="sm-meta">제품 사진 모음</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════ 섹션 5: 문의 + 법적 정보 (6개) ═══════════ -->
+  <section class="sm-section" aria-labelledby="sm-contact">
+    <div class="sm-section-head">
+      <span class="slab">CONTACT & LEGAL · 6 PAGES</span>
+      <h2 id="sm-contact">문의 · 법적 정보</h2>
+    </div>
+
+    <div class="sm-group">
+      <h3>문의</h3>
+      <ul class="sm-list">
+        <li><a href="/contact/index.html">문의하기<span class="sm-meta">상담 신청</span></a></li>
+        <li><a href="/contact/quote.html">견적 요청<span class="sm-meta">맞춤 견적 신청</span></a></li>
+        <li><a href="/contact/roi-calculator.html">ROI 계산기<span class="sm-meta">투자 수익률 시뮬레이션</span></a></li>
+      </ul>
+    </div>
+
+    <div class="sm-group">
+      <h3>법적 정보</h3>
+      <ul class="sm-list">
+        <li><a href="/legal/terms.html">이용약관<span class="sm-meta">서비스 이용 조건</span></a></li>
+        <li><a href="/legal/privacy.html">개인정보처리방침<span class="sm-meta">프라이버시 정책</span></a></li>
+        <li><a href="/legal/cookies.html">쿠키 정책<span class="sm-meta">쿠키 사용 안내</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <a href="/" class="sm-back">← 홈으로 돌아가기</a>
+
+</main>
+
+<div id="wocs-cta"></div>
+<div id="wocs-footer"></div>
+
+<!-- 헤더/푸터 mount 스크립트 (sub-page 동일 패턴, 절대경로 사용) -->
+<script src="/assets/js/wocs-i18n.js" defer></script>
+<script src="/assets/js/wocs-header.js" defer></script>
+<script src="/assets/js/wocs-footer.js" defer></script>
+</body>
+</html>

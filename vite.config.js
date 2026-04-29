@@ -89,7 +89,7 @@ export default defineConfig({
         { src: 'content', dest: '.' },
         // 루트 정적 파일들 (존재하는 것만 복사)
         {
-          src: ['sitemap.xml', 'robots.txt', 'favicon.ico', 'favicon.svg', 'manifest.json', 'site.webmanifest', 'blog-data.js', 'cta_counter.json', 'privacy.html', 'bc5ada97a10c8516596ea24189a7452a.txt', 'feed.xml'],
+          src: ['sitemap.xml', 'sitemap.html', 'robots.txt', 'favicon.ico', 'favicon.svg', 'manifest.json', 'site.webmanifest', 'blog-data.js', 'cta_counter.json', 'privacy.html', 'bc5ada97a10c8516596ea24189a7452a.txt', 'feed.xml'],
           dest: '.'
         }
       ]
