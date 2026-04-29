@@ -24,6 +24,27 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python auto_writer.py
+      - name: 실패 시 Telegram 알림
+        if: failure()
+        run: |
+          KST_TIME=$(TZ='Asia/Seoul' date '+%Y-%m-%d %H:%M:%S KST')
+          RUN_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          MSG="⚠️ *wocs.kr 자동발행 실패*
+
+          날짜: ${KST_TIME}
+          실행 ID: ${{ github.run_id }}
+
+          로그 확인:
+          ${RUN_URL}
+
+          복구 방법:
+          1. 위 링크에서 실패 step 로그 확인
+          2. Gemini API 일시 장애면 같은 워크플로 수동 dispatch
+          3. 코드 문제면 수정 후 재실행"
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            --data-urlencode "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+            --data-urlencode "parse_mode=Markdown" \
+            --data-urlencode "text=${MSG}"
       - name: SEO 메타 태그 누락 자동 주입 (safety net)
         run: python scripts/inject_missing_meta.py
         continue-on-error: true
