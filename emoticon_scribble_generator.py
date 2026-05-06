@@ -88,9 +88,13 @@ def _ensure_unique_text_overlays(emotions: list) -> list:
 # ============================================================
 SCRIBBLE_PLAN_SYSTEM = """너는 한국 인터넷 밈 풍의 '낙서풍' 이모티콘 캐릭터 기획자야.
 
-영감: 한국 인터넷 커뮤니티에서 유행하는 낙서/밈 스타일.
-초등학생이 5분 만에 그린 듯한 단순한 동그라미와 선만으로 구성된 캐릭터.
-귀엽고 미니멀하지만 표정과 의도가 명확함.
+영감: 유치원생이 마커펜으로 노트 모서리에 30초 만에 휘갈겨 그린 듯한 캐릭터.
+손이 떨려서 라인이 비뚤고, 머리가 너무 크거나 다리가 막대기 같은 비례,
+한 눈은 동그랗고 한 눈은 점인 비대칭 — 그런 어설픔이 오히려 매력인 캐릭터.
+
+- 90% 귀엽고 10% 어설픈 균형
+- 식별은 명확하지만 손그림 느낌 + 저화질 매력 살아있음
+- 동물 또는 사람 (단순한 도형 위주)
 
 캐릭터 조건:
 - 동물 또는 사람 (단순한 형태)
@@ -240,27 +244,51 @@ emotions는 정확히 24개, 그 중 정확히 10개에만 text_overlay에 한�
 # ============================================================
 # DALL-E 프롬프트 빌드
 # ============================================================
-SCRIBBLE_DALLE_PROMPT_TEMPLATE = """A naive folk-art style cartoon sticker, charmingly minimal Korean internet meme doodle aesthetic.
+SCRIBBLE_DALLE_PROMPT_TEMPLATE = """A naive folk-art cartoon sticker in the style of a kindergarten marker doodle on a notebook margin.
 
 Subject: {character_description} {action}.
 
 Visual style requirements (STRICT):
-- Wobbly hand-drawn black outline, uneven thickness
-- Flat solid color fill (max 3 colors), no gradient, no shading, no highlights
-- Basic geometric shapes only: circles, ovals, simple lines, triangles
+
+[A: Hand-drawn imperfection]
+- Hand-drawn black outline with PLAYFUL IMPERFECTION
+- Slightly wobbly lines, shaky and uneven thickness varying 3-6 pixels
+- Outline has tiny bumps, waves, and minor wiggles — NOT mathematically smooth
+- MS Paint mouse drawing aesthetic — drawn with a computer mouse on Windows
+- Slightly pixelated edges — early 2000s computer doodle feel
+- Looks like drawn quickly with a thick marker pen or computer mouse in 30 seconds
+
+[B: Childlike simplicity]
+- Kindergarten-level drawing confidence
+- Simple basic shapes only: circles, ovals, sticks, triangles
+- Dot eyes (small filled circles)
+- Stick-thin or chubby simplified limbs
+- No professional polish — confident but basic
+
+[C: Naive low-fidelity charm]
+- Off-balance asymmetric proportions:
+  * Head can be 50-60% of body size
+  * One eye slightly bigger or higher than the other
+  * Limbs slightly mismatched lengths
+- Rough sketchy quality with low-fidelity charm
+- Naive folk-art that feels almost rough yet cute
+- Charming awkwardness — 90% cute, 10% awkward
+
+[Color & background]
+- Flat solid color fill (max 3 colors), no gradient, no shading
 - Pure white background
-- Character occupies center 70% of frame with 15% margin on all sides
+- Character occupies center 70% with 15% margin all sides
 - No text, no letters, no words anywhere in image
-- Character internal areas must be fully filled (no transparent holes inside the body)
-- Minimal detail, simple silhouette, recognizable but stylized
+- Character internal areas fully filled (no transparent holes)
 
 Aesthetic notes:
 - Korean internet meme doodle culture
-- Naive children's drawing style with adult humor
-- Intentionally simplistic flat-line illustration
-- Charm comes from minimalism, not from imitating any specific artist
+- Like a quick notebook margin sketch made with a marker or computer mouse
+- Charm comes from hand-drawn warmth and naive simplicity,
+  not from imitating any specific artist
+- Recognizable but with intentionally loose, unpolished hand-drawn feel
 
-Quality: simple, clean, expressive minimalism.
+Quality: simple, expressive, charmingly imperfect minimalism.
 Image format: 1024x1024 transparent PNG."""
 
 
@@ -320,9 +348,12 @@ def _generate_image_from_reference(prompt: str, reference_png: bytes) -> str:
     """image-to-image (edits) — 2~24번, 1번 이미지를 레퍼런스로"""
     edit_preamble = (
         "Use the attached reference image as the exact character design template. "
-        "Keep the exact same character, colors, proportions, and outline style. "
+        "Keep the EXACT same character: same colors, same shaky wobbly outline style, "
+        "same off-balance asymmetric proportions, same kindergarten-level imperfection, "
+        "same MS Paint mouse drawing aesthetic with pixelated edges. "
         "Change ONLY the pose, expression, and action as described below. "
-        "Do not redesign the character. Maintain the naive folk-art doodle aesthetic with simple flat lines.\n\n"
+        "Do NOT make it cleaner or more polished — preserve the hand-drawn warmth "
+        "and 90% cute 10% awkward charm.\n\n"
     )
     resp = requests.post(
         "https://api.openai.com/v1/images/edits",
@@ -431,64 +462,96 @@ def overlay_korean_text(image_bytes: bytes, text: str, position: str = "bottom")
 # ============================================================
 def fill_alpha_holes(img):
     """캐릭터 외곽 컨투어 내부의 모든 알파 구멍을 채운다.
-    외곽선 dilate 이전에 호출되어야 함.
+    cv2.inpaint(TELEA)는 회색 그라데이션 발생 → mode 색상 단색 채움으로 변경.
+
+    Returns:
+        (filled_img, fill_area_pct) — 처리된 이미지 + 채워진 면적 비율
     """
     import numpy as np
     import cv2
 
     arr = np.array(img)
     if arr.shape[2] != 4:
-        return img
+        return img, 0.0
 
     alpha = arr[:, :, 3]
     binary = (alpha > 50).astype(np.uint8) * 255
     contours, _ = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     if len(contours) == 0:
-        return img
+        return img, 0.0
 
     filled_mask = np.zeros_like(binary)
     cv2.drawContours(filled_mask, contours, -1, 255, thickness=cv2.FILLED)
 
     hole_mask = (filled_mask > 0) & (alpha < 50)
+    char_area = (filled_mask > 0).sum()
+    fill_area_pct = (hole_mask.sum() / char_area * 100) if char_area > 0 else 0.0
+
     if hole_mask.sum() == 0:
-        return img
+        return img, 0.0
 
     rgb = arr[:, :, :3].copy()
-    inpaint_mask = hole_mask.astype(np.uint8) * 255
-    rgb_inpainted = cv2.inpaint(rgb, inpaint_mask, 3, cv2.INPAINT_TELEA)
 
-    arr[:, :, :3] = rgb_inpainted
+    # === mode 색상 단색 채움 (cv2.inpaint TELEA 대체) ===
+    char_no_hole = (filled_mask > 0) & ~hole_mask & (alpha > 200)
+    if char_no_hole.sum() > 0:
+        char_pixels = rgb[char_no_hole]
+        quantized = (char_pixels // 32) * 32
+        unique_colors, counts = np.unique(
+            quantized.reshape(-1, 3), axis=0, return_counts=True
+        )
+        non_outline_mask = ~((unique_colors[:, 0] < 50) &
+                             (unique_colors[:, 1] < 50) &
+                             (unique_colors[:, 2] < 50))
+        if non_outline_mask.sum() > 0:
+            valid_colors = unique_colors[non_outline_mask]
+            valid_counts = counts[non_outline_mask]
+            mode_color = valid_colors[np.argmax(valid_counts)]
+        else:
+            mode_color = np.array([255, 255, 255])
+    else:
+        mode_color = np.array([255, 255, 255])
+
+    rgb[hole_mask] = mode_color
+    arr[:, :, :3] = rgb
     arr[:, :, 3] = filled_mask
 
-    return Image.fromarray(arr, mode='RGBA')
+    return Image.fromarray(arr, mode='RGBA'), float(fill_area_pct)
 
 
 def validate_alpha_holes(img, threshold_pct=1.0):
-    """외곽 컨투어 내부 알파 구멍 비율 측정.
-    Returns: (is_ok, hole_pct, hole_count)
+    """외곽 컨투어 내부 알파 구멍 비율 측정 + rembg 실패 검출.
+
+    Returns: (is_ok, hole_pct, hole_count, contour_area_pct)
     """
     import numpy as np
     import cv2
 
     arr = np.array(img)
     if arr.shape[2] != 4:
-        return (False, 100.0, 0)
+        return (False, 100.0, 0, 100.0)
 
     alpha = arr[:, :, 3]
+    img_total = alpha.size
     binary = (alpha > 50).astype(np.uint8) * 255
     contours, _ = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     if len(contours) == 0:
-        return (False, 100.0, 0)
+        return (False, 100.0, 0, 0.0)
 
     filled = np.zeros_like(binary)
     cv2.drawContours(filled, contours, -1, 255, thickness=cv2.FILLED)
 
-    inner_holes = (filled > 0) & (alpha < 50)
     char_area = (filled > 0).sum()
+    contour_area_pct = char_area / img_total * 100
+
+    inner_holes = (filled > 0) & (alpha < 50)
     hole_pct = (inner_holes.sum() / char_area * 100) if char_area > 0 else 100.0
 
-    return (hole_pct < threshold_pct, float(hole_pct), int(inner_holes.sum()))
+    rembg_failed = contour_area_pct >= 95.0
+    is_ok = (hole_pct < threshold_pct) and (not rembg_failed)
+
+    return (is_ok, float(hole_pct), int(inner_holes.sum()), float(contour_area_pct))
 
 
 # ============================================================
@@ -522,7 +585,17 @@ def process_image_with_rembg(image_bytes, stroke_width=6):
     img = Image.open(BytesIO(image_bytes))
     session = get_rembg_session()
     cleaned = remove(img, session=session, post_process_mask=True).convert('RGBA')
-    cleaned = fill_alpha_holes(cleaned)  # 내부 hole 메움 (dilate 이전)
+
+    # rembg 직후 hole 측정 (fill 전 실제 측정)
+    _, hole_pct_before, _, contour_pct = validate_alpha_holes(cleaned)
+    print(f"    [rembg 후] hole={hole_pct_before:.2f}% contour={contour_pct:.1f}%", flush=True)
+
+    if contour_pct >= 95.0:
+        print(f"    ⚠ rembg 실패 의심 (contour {contour_pct:.1f}%)", flush=True)
+
+    # fill 적용 (mode 색상 단색)
+    cleaned, fill_area_pct = fill_alpha_holes(cleaned)
+    print(f"    [fill] 채움 면적={fill_area_pct:.2f}%", flush=True)
 
     arr = np.array(cleaned)
     opaque_mask = arr[:, :, 3] > 200
@@ -605,7 +678,7 @@ def generate_and_upload_scribble(prompts: list, folder_name: str):
             # 알파 구멍 검증 (24컷 모두)
             try:
                 _vimg = Image.open(BytesIO(image_bytes))
-                _is_ok, _hole_pct, _hole_count = validate_alpha_holes(_vimg)
+                _is_ok, _hole_pct, _hole_count, _contour_pct = validate_alpha_holes(_vimg)
                 hole_results.append({'idx': idx, 'hole_pct': round(_hole_pct, 2)})
             except Exception as _ve:
                 print(f"[검증 오류: {_ve}]", end=" ", flush=True)
