@@ -6,7 +6,11 @@ on:
       run_only_first:
         description: '1컷만 생성 (dry-run 검증용)'
         type: boolean
-        default: true
+        default: false
+  schedule:
+    # 화/목/토 KST 02:00 (UTC 17:00) — 쿠로와 번갈아 운영
+    # 일요일은 양 트랙 모두 휴식
+    - cron: '0 17 * * 2,4,6'
 
 jobs:
   generate-scribble-emoticons:

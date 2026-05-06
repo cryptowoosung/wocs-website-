@@ -100,6 +100,26 @@ def read_previous_characters(creds):
     return prev
 
 
+def _ensure_unique_text_overlays(emotions: list) -> list:
+    """text_overlay 중복 방지. 같은 한글이 두 번 이상 나오면 두 번째부터 None으로 변경.
+
+    낙서풍 트랙(emoticon_scribble_generator.py)에서 검증된 helper 역포팅.
+    쿠로 5/6 시리즈에서 발견된 '월요병/현타옴 중복' 버그 영구 차단.
+    """
+    seen = set()
+    duplicates = []
+    for emo in emotions:
+        text = (emo.get('text_overlay') or '').strip() if isinstance(emo, dict) else ''
+        if text and text in seen:
+            duplicates.append(text)
+            emo['text_overlay'] = None
+        elif text:
+            seen.add(text)
+    if duplicates:
+        print(f"[중복 텍스트 제거] {len(duplicates)}개: {', '.join(duplicates)}", flush=True)
+    return emotions
+
+
 # ============================================================
 # Step 2: Claude Haiku로 캐릭터 기획
 # ============================================================
@@ -140,6 +160,7 @@ rough-doodle: 공책 모서리 낙서 감성, 삐뚤빼뚤 일부러 엉성
 - 반드시 정확히 24개
 - 각 원소는 {{"action": "영어 구체 동작", "text_overlay": "한글 8자 이내" 또는 null}} 객체
 - 24개 중 정확히 10개에만 text_overlay에 한글 텍스트 (나머지 14개는 null)
+- 한글 텍스트 10개는 모두 unique (중복 절대 없음). 같은 한글 텍스트는 한 번만 사용.
 - 한글 텍스트 예시 (매우 짧게, 최대 8자): "퇴근하자", "월요병...", "현타옴", "존버중", "배고파", "사랑해", "화이팅!", "피곤해", "고마워", "미안해", "ㅠㅠ", "ㅎㅎ", "ㅇㅈ?", "ㄱㅊ?", "주말각", "칼퇴각", "출근싫어", "오늘도수고"
 - action은 영어로, 한국 MZ 상황을 구체화 (예: "lying flat on bed completely exhausted after overtime")
 - 한국 MZ 공감 action 예시 (최소 14개 포함):
@@ -221,7 +242,9 @@ rough-doodle: 공책 모서리 낙서 감성, 삐뚤빼뚤 일부러 엉성
         print(f"[Step 2] 10:14 비율 보정: Claude {len(text_idx)}개 → 10개로 재조정")
 
     data["emotions"] = normalized
-    text_count = sum(1 for e in normalized if e["text_overlay"])
+    # 2단계 방어: 1단계(시스템 프롬프트 unique 강제) 통과 후 잔존 중복 자동 제거
+    data["emotions"] = _ensure_unique_text_overlays(data["emotions"])
+    text_count = sum(1 for e in data["emotions"] if e["text_overlay"])
 
     # 스타일 6종 화이트리스트 검증
     VALID_STYLES = {"sticker-pop", "meme-mz", "cute-round", "healing-pastel", "minimal-line", "rough-doodle"}
