@@ -379,14 +379,25 @@ def generate_and_upload(prompts, folder_name):
     엔드포인트로 생성 → 24개 캐릭터 일관성 확보.
     1번이 실패하면 레퍼런스가 없으므로 전체가 text-to-image로 fallback.
     """
+    if os.environ.get('RUN_ONLY_FIRST', '0') == '1':
+        print("=" * 60)
+        print("🧪 DRY-RUN MODE: RUN_ONLY_FIRST=1 — 1번 이미지만 생성합니다")
+        print("=" * 60)
+
     success_count = 0
     fail_count = 0
     reference_png: bytes | None = None  # rembg 처리 후, overlay 이전 상태
+    hole_results: list[dict] = []  # 24컷 알파 구멍 비율 누적
 
     for item in prompts:
         idx = item["index"]
         filename = item["filename"]
         emotion = item["emotion"]
+
+        # Dry-run 모드: RUN_ONLY_FIRST=1이면 1번만 처리하고 종료
+        if os.environ.get('RUN_ONLY_FIRST', '0') == '1' and idx > 1:
+            print(f"\n🧪 RUN_ONLY_FIRST=1 → idx={idx} 스킵 (1컷 dry-run 모드)")
+            break
 
         print(f"  [{idx:02d}/24] {emotion}...", end=" ", flush=True)
 
@@ -419,8 +430,34 @@ def generate_and_upload(prompts, folder_name):
             except Exception as e:
                 print(f"[rembg] 후처리 실패, 원본 사용: {e}")
 
-            # 1번 이미지가 성공하면 레퍼런스로 저장 (overlay 적용 이전 상태)
+            # 알파 구멍 검증 (24컷 모두 측정 — 텔레그램 알림에 첨부)
+            try:
+                from PIL import Image as _PILImage
+                _vimg = _PILImage.open(BytesIO(image_bytes))
+                _is_ok, _hole_pct, _hole_count = validate_alpha_holes(_vimg)
+                hole_results.append({'idx': idx, 'hole_pct': round(_hole_pct, 2)})
+            except Exception as _ve:
+                print(f"[검증 오류: {_ve}]", end=" ", flush=True)
+                _is_ok, _hole_pct, _hole_count = (True, 0.0, 0)
+                hole_results.append({'idx': idx, 'hole_pct': -1.0})
+
+            # 1컷 게이트: 1번 이미지가 알파 검증 통과해야 23컷 진행
             if reference_png is None:
+                if not _is_ok:
+                    msg = (f"⛔ 1컷 알파 검증 실패: hole={_hole_pct:.2f}% "
+                           f"({_hole_count:,}px) — 임계값 1.0%\n"
+                           f"23컷 생성 중단됨. fill_alpha_holes 또는 rembg 옵션 확인 필요.")
+                    print(f"\n{msg}")
+                    try:
+                        requests.post(
+                            f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage",
+                            json={"chat_id": TELEGRAM_CHAT_ID, "text": msg},
+                            timeout=10,
+                        )
+                    except Exception:
+                        pass
+                    sys.exit(1)
+                print(f"    ✅ 1컷 알파 검증 통과: hole={_hole_pct:.2f}%")
                 reference_png = image_bytes
                 print("[ref저장]", end=" ", flush=True)
 
@@ -462,7 +499,7 @@ def generate_and_upload(prompts, folder_name):
             time.sleep(1)
 
     print(f"\n[Step 5] 이미지 생성 완료: 성공 {success_count}, 실패 {fail_count}")
-    return success_count, fail_count
+    return success_count, fail_count, hole_results
 
 
 # ============================================================
@@ -493,11 +530,31 @@ def log_to_sheets(creds, data):
 # ============================================================
 # Step 7: Telegram 알림
 # ============================================================
-def send_telegram(data, success_count, fail_count, folder_name):
+def send_telegram(data, success_count, fail_count, folder_name, hole_results=None):
     """Telegram으로 완료 알림 전송"""
     text_count = sum(1 for e in data.get("emotions", []) if isinstance(e, dict) and e.get("text_overlay"))
+
+    hole_block = ""
+    if hole_results:
+        crit = [r for r in hole_results if r['hole_pct'] >= 5.0]
+        fail = [r for r in hole_results if 2.0 <= r['hole_pct'] < 5.0]
+        review = [r for r in hole_results if 0.5 <= r['hole_pct'] < 2.0]
+        passed = [r for r in hole_results if 0 <= r['hole_pct'] < 0.5]
+        errored = [r for r in hole_results if r['hole_pct'] < 0]
+        hole_summary = "\n".join([f"  {r['idx']:02d}: {r['hole_pct']}%" for r in hole_results])
+        hole_block = (
+            f"\n\n🕳 알파 구멍 검증 (24컷)\n"
+            f"🔴 CRITICAL(≥5%): {len(crit)}  🟠 FAIL(2~5%): {len(fail)}  "
+            f"🟡 REVIEW(0.5~2%): {len(review)}  ✅ PASS(<0.5%): {len(passed)}  "
+            f"⚠ 오류: {len(errored)}\n"
+            f"{hole_summary}"
+        )
+
+    is_dryrun = os.environ.get('RUN_ONLY_FIRST', '0') == '1'
+    title = "🧪 [DRY-RUN] 이모티콘 1컷 검증" if is_dryrun else "🐾 이모티콘 생성 완료!"
+
     message = (
-        f"🐾 이모티콘 생성 완료!\n"
+        f"{title}\n"
         f"📅 {TODAY}\n"
         f"🎨 캐릭터: {data['character_name']}\n"
         f"🎭 테마: {data['theme']}\n"
@@ -506,6 +563,7 @@ def send_telegram(data, success_count, fail_count, folder_name):
         f"💬 한글텍스트 {text_count}개 / 이미지만 {24 - text_count}개\n"
         f"📁 Cloudinary: emoticons/{folder_name}\n"
         f"👉 다음: Claude Code 변환 → OGQ → 라인 제출"
+        f"{hole_block}"
     )
 
     resp = requests.post(
@@ -687,6 +745,69 @@ def get_rembg_session():
     return _rembg_session
 
 
+def fill_alpha_holes(img):
+    """캐릭터 외곽 컨투어 내부의 모든 알파 구멍을 채운다.
+    외곽선 dilate 이전에 호출되어야 함.
+    """
+    import numpy as np
+    import cv2
+    from PIL import Image
+
+    arr = np.array(img)
+    if arr.shape[2] != 4:
+        return img
+
+    alpha = arr[:, :, 3]
+    binary = (alpha > 50).astype(np.uint8) * 255
+    contours, _ = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    if len(contours) == 0:
+        return img
+
+    filled_mask = np.zeros_like(binary)
+    cv2.drawContours(filled_mask, contours, -1, 255, thickness=cv2.FILLED)
+
+    hole_mask = (filled_mask > 0) & (alpha < 50)
+    if hole_mask.sum() == 0:
+        return img
+
+    rgb = arr[:, :, :3].copy()
+    inpaint_mask = hole_mask.astype(np.uint8) * 255
+    rgb_inpainted = cv2.inpaint(rgb, inpaint_mask, 3, cv2.INPAINT_TELEA)
+
+    arr[:, :, :3] = rgb_inpainted
+    arr[:, :, 3] = filled_mask
+
+    return Image.fromarray(arr, mode='RGBA')
+
+
+def validate_alpha_holes(img, threshold_pct=1.0):
+    """외곽 컨투어 내부 알파 구멍 비율 측정.
+    Returns: (is_ok, hole_pct, hole_count)
+    """
+    import numpy as np
+    import cv2
+
+    arr = np.array(img)
+    if arr.shape[2] != 4:
+        return (False, 100.0, 0)
+
+    alpha = arr[:, :, 3]
+    binary = (alpha > 50).astype(np.uint8) * 255
+    contours, _ = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    if len(contours) == 0:
+        return (False, 100.0, 0)
+
+    filled = np.zeros_like(binary)
+    cv2.drawContours(filled, contours, -1, 255, thickness=cv2.FILLED)
+
+    inner_holes = (filled > 0) & (alpha < 50)
+    char_area = (filled > 0).sum()
+    hole_pct = (inner_holes.sum() / char_area * 100) if char_area > 0 else 100.0
+
+    return (hole_pct < threshold_pct, float(hole_pct), int(inner_holes.sum()))
+
+
 def process_image_with_rembg(image_bytes, stroke_width=6):
     """gpt-image-1.5 후처리: 배경 제거 + 밝기 감지 + 자동 흰 테두리
 
@@ -700,7 +821,8 @@ def process_image_with_rembg(image_bytes, stroke_width=6):
 
     img = Image.open(BytesIO(image_bytes))
     session = get_rembg_session()
-    cleaned = remove(img, session=session).convert('RGBA')
+    cleaned = remove(img, session=session, post_process_mask=True).convert('RGBA')
+    cleaned = fill_alpha_holes(cleaned)  # 내부 hole 메움 (dilate 이전)
 
     arr = np.array(cleaned)
     opaque_mask = arr[:, :, 3] > 200
@@ -748,13 +870,13 @@ def main():
 
     # Step 4-5: 이미지 생성 + Cloudinary 업로드
     print(f"\n[Step 4-5] 24개 이미지 생성 시작...")
-    success_count, fail_count = generate_and_upload(prompts, folder_name)
+    success_count, fail_count, hole_results = generate_and_upload(prompts, folder_name)
 
     # Step 6: Sheets 로그
     log_to_sheets(creds, data)
 
     # Step 7: Telegram 알림
-    send_telegram(data, success_count, fail_count, folder_name)
+    send_telegram(data, success_count, fail_count, folder_name, hole_results)
 
     print("\n" + "=" * 60)
     print(f"전체 완료! 성공: {success_count}/24")

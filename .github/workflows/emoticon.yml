@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '0 21 * * *'
   workflow_dispatch:
+    inputs:
+      run_only_first:
+        description: '1컷만 생성 (dry-run 검증용)'
+        type: boolean
+        default: false
 
 jobs:
   generate-emoticons:
@@ -36,7 +41,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests google-auth google-auth-httplib2 google-api-python-client "pillow>=9.1.0" anthropic openai python-dotenv "rembg[cpu]>=2.0.50" onnxruntime
+          pip install requests google-auth google-auth-httplib2 google-api-python-client "pillow>=9.1.0" anthropic openai python-dotenv "rembg[cpu]>=2.0.50" onnxruntime "opencv-python-headless>=4.8.0"
 
       - name: Run Emoticon Generator
         env:
@@ -49,5 +54,6 @@ jobs:
           CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
           CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
           CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+          RUN_ONLY_FIRST: ${{ github.event.inputs.run_only_first == 'true' && '1' || '0' }}
         run: |
           python emoticon_generator.py
