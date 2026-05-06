@@ -3,7 +3,7 @@
 WOCS 낙서풍(Scribble) 이모티콘 생성기.
 
 기존 emoticon_generator.py와 분리된 별도 워크플로.
-- 캐릭터: 이말년 작가 옛날 프로필 풍 / 그림판 마우스 / 하찮은 / 픽셀
+- 캐릭터 톤: 한국 인터넷 밈 풍 낙서 / 미니멀 / 단순 형태
 - 시장: LINE 우선 (B급 친화), OGQ 보수적 (전략적 통과 시도)
 - 카카오: 제외 (~3% 통과율)
 
@@ -88,16 +88,19 @@ def _ensure_unique_text_overlays(emotions: list) -> list:
 # ============================================================
 SCRIBBLE_PLAN_SYSTEM = """너는 한국 인터넷 밈 풍의 '낙서풍' 이모티콘 캐릭터 기획자야.
 
-영감: 이말년 작가의 옛날 프로필 사진. 그림판에서 마우스로 5분 만에 막 그린 듯한
-하찮은 캐릭터. 단순한 동그라미와 선만으로 구성. 비례 안 맞고 어색함.
+영감: 한국 인터넷 커뮤니티에서 유행하는 낙서/밈 스타일.
+초등학생이 5분 만에 그린 듯한 단순한 동그라미와 선만으로 구성된 캐릭터.
+귀엽고 미니멀하지만 표정과 의도가 명확함.
 
 캐릭터 조건:
 - 동물 또는 사람 (단순한 형태)
 - 단색 + 흰 배경 (그라디언트 X)
 - 2D 평면, 음영 없음
-- 식별 가능하지만 명백히 못 그림
+- 표정/감정이 명확하게 드러남
+- character_desc 필드에는 절대 실존 작가/유명인 이름 포함 금지
+- character_desc는 캐릭터의 시각적 특징만 묘사 (예: "분홍색 둥근 곰", "노란 별 모양 친구")
 
-이름은 짧고 어딘가 어색한 한글 (예: 멍충이, 짤짤이, 오타쿠, 하찮이, 둘리없는, 쩌리)
+이름은 짧고 어딘가 어색한 한글 (예: 멍충이, 짤짤이, 하찮이, 둘리, 쩌리)
 
 emotions 24개 조건:
 - 한글 텍스트 10개 (모두 unique, 중복 절대 없음)
@@ -109,7 +112,7 @@ emotions 24개 조건:
 JSON 응답 형식 (반드시 이 구조 그대로):
 {
   "character_name": "캐릭터 이름",
-  "character_desc": "한 줄 외형 설명 (영문 가능)",
+  "character_desc": "시각적 특징만 묘사 (인명 절대 금지)",
   "theme": "주제",
   "style": "scribble-meme",
   "emotions": [
@@ -228,7 +231,7 @@ emotions는 정확히 24개, 그 중 정확히 10개에만 text_overlay에 한�
 
     data["emotions"] = normalized
     data.setdefault("character_desc",
-                    "A simple crude doodle character drawn in Microsoft Paint style")
+                    "A simple naive doodle character with minimal flat-line illustration")
     data.setdefault("theme", "낙서풍 일상 밈")
     data.setdefault("style", "scribble-meme")
     return data
@@ -237,28 +240,28 @@ emotions는 정확히 24개, 그 중 정확히 10개에만 text_overlay에 한�
 # ============================================================
 # DALL-E 프롬프트 빌드
 # ============================================================
-SCRIBBLE_DALLE_PROMPT_TEMPLATE = """A deliberately badly drawn cartoon sticker, in the style of '이말년' Korean cartoonist's old profile picture - crude MS Paint mouse drawing aesthetic, intentionally amateurish.
+SCRIBBLE_DALLE_PROMPT_TEMPLATE = """A naive folk-art style cartoon sticker, charmingly minimal Korean internet meme doodle aesthetic.
 
 Subject: {character_description} {action}.
 
 Visual style requirements (STRICT):
-- Wobbly hand-drawn black outline, uneven thickness like drawn with a computer mouse
-- Flat solid color fill (max 3 colors), NO gradient, NO shading, NO highlights
-- Basic geometric shapes only: circles, ovals, lines, triangles
+- Wobbly hand-drawn black outline, uneven thickness
+- Flat solid color fill (max 3 colors), no gradient, no shading, no highlights
+- Basic geometric shapes only: circles, ovals, simple lines, triangles
 - Pure white background
 - Character occupies center 70% of frame with 15% margin on all sides
-- NO text, NO letters, NO words anywhere in image
-- Character internal areas must be FILLED (no holes inside the body)
-- Recognizable but obviously poorly drawn
+- No text, no letters, no words anywhere in image
+- Character internal areas must be fully filled (no transparent holes inside the body)
+- Minimal detail, simple silhouette, recognizable but stylized
 
-Aesthetic references:
-- 이말년 작가의 옛날 프로필 사진
-- Microsoft Paint mouse drawing
-- Korean meme '하찮은' style
-- Internet doodle culture
+Aesthetic notes:
+- Korean internet meme doodle culture
+- Naive children's drawing style with adult humor
+- Intentionally simplistic flat-line illustration
+- Charm comes from minimalism, not from imitating any specific artist
 
-Quality: deliberately low effort, crude, charming-bad.
-Image size: 1024x1024 transparent PNG."""
+Quality: simple, clean, expressive minimalism.
+Image format: 1024x1024 transparent PNG."""
 
 
 def generate_prompts_scribble(data: dict) -> tuple[list, str]:
@@ -307,6 +310,8 @@ def _generate_image_from_text(prompt: str) -> str:
         },
         timeout=120,
     )
+    if resp.status_code >= 400:
+        print(f"[DALL-E ERROR {resp.status_code}] response body: {resp.text[:500]}", flush=True)
     resp.raise_for_status()
     return resp.json()["data"][0]["b64_json"]
 
@@ -315,9 +320,9 @@ def _generate_image_from_reference(prompt: str, reference_png: bytes) -> str:
     """image-to-image (edits) — 2~24번, 1번 이미지를 레퍼런스로"""
     edit_preamble = (
         "Use the attached reference image as the exact character design template. "
-        "Keep the exact same character, colors, proportions, outline style, and crude doodle aesthetic. "
+        "Keep the exact same character, colors, proportions, and outline style. "
         "Change ONLY the pose, expression, and action as described below. "
-        "Do not redesign the character. Maintain the deliberately badly-drawn MS Paint look.\n\n"
+        "Do not redesign the character. Maintain the naive folk-art doodle aesthetic with simple flat lines.\n\n"
     )
     resp = requests.post(
         "https://api.openai.com/v1/images/edits",
@@ -334,6 +339,8 @@ def _generate_image_from_reference(prompt: str, reference_png: bytes) -> str:
         files={"image": ("reference.png", reference_png, "image/png")},
         timeout=180,
     )
+    if resp.status_code >= 400:
+        print(f"[DALL-E ERROR {resp.status_code}] response body: {resp.text[:500]}", flush=True)
     resp.raise_for_status()
     return resp.json()["data"][0]["b64_json"]
 
