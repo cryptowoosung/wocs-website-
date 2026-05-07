@@ -1,0 +1,86 @@
+name: WOCS Regenerate Single Scribble Cut
+
+on:
+  workflow_dispatch:
+    inputs:
+      folder:
+        description: 'Cloudinary 폴더명 (예: scribble_2026-05-08_쪼글이)'
+        type: string
+        required: true
+      idx:
+        description: '재생성할 인덱스 (1-24)'
+        type: string
+        required: true
+      action:
+        description: 'action 묘사 (한글/영문)'
+        type: string
+        required: true
+      text:
+        description: '한글 텍스트 오버레이 (선택, 없으면 비워두기)'
+        type: string
+        required: false
+        default: ''
+      character_description:
+        description: 'character_description (기본: 레퍼런스에 위임)'
+        type: string
+        required: false
+        default: '(see reference image)'
+
+jobs:
+  regenerate-single-cut:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v5.3.0
+        with:
+          python-version: '3.11'
+
+      - name: Install Korean fonts (Nanum + Noto CJK)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-nanum fonts-nanum-extra fonts-noto-cjk
+          sudo fc-cache -fv
+          ls -la /usr/share/fonts/truetype/nanum/NanumBrush.ttf
+
+      - name: Cache rembg models
+        uses: actions/cache@v5
+        with:
+          path: ~/.u2net
+          key: rembg-birefnet-general-v1
+
+      - name: Install dependencies
+        run: |
+          pip install requests "pillow>=9.1.0" anthropic openai python-dotenv "rembg[cpu]>=2.0.50" onnxruntime "opencv-python-headless>=4.8.0"
+
+      - name: Regenerate cut ${{ github.event.inputs.idx }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+          INPUT_FOLDER: ${{ github.event.inputs.folder }}
+          INPUT_IDX: ${{ github.event.inputs.idx }}
+          INPUT_ACTION: ${{ github.event.inputs.action }}
+          INPUT_TEXT: ${{ github.event.inputs.text }}
+          INPUT_CHAR_DESC: ${{ github.event.inputs.character_description }}
+        run: |
+          set -e
+          ARGS=(--folder "$INPUT_FOLDER" --idx "$INPUT_IDX" --action "$INPUT_ACTION" --character-description "$INPUT_CHAR_DESC")
+          if [ -n "$INPUT_TEXT" ]; then
+            ARGS+=(--text "$INPUT_TEXT")
+          fi
+          python tools/regenerate_single_scribble.py "${ARGS[@]}"
+
+      - name: Upload debug artifact on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regen-failed-debug
+          path: /tmp/regen_failed_*.png
+          if-no-files-found: ignore
