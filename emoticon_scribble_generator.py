@@ -352,6 +352,10 @@ def _generate_image_from_reference(prompt: str, reference_png: bytes) -> str:
         "same off-balance asymmetric proportions, same kindergarten-level imperfection, "
         "same MS Paint mouse drawing aesthetic with pixelated edges. "
         "Change ONLY the pose, expression, and action as described below. "
+        "CRITICAL: Generate ONLY ONE single character — the same one as in reference. "
+        "Do NOT add any additional objects, creatures, decorations, or background elements. "
+        "Do NOT add another character, plant, food, prop, shadow, or anything else. "
+        "The output must contain exactly one character on a pure white background, nothing more. "
         "Do NOT make it cleaner or more polished — preserve the hand-drawn warmth "
         "and 90% cute 10% awkward charm.\n\n"
     )
@@ -554,6 +558,86 @@ def validate_alpha_holes(img, threshold_pct=1.0):
     return (is_ok, float(hole_pct), int(inner_holes.sum()), float(contour_area_pct))
 
 
+def detect_multiple_objects(img, min_object_area_pct: float = 2.0) -> tuple:
+    """캐릭터 외곽 컨투어 개수 검출. 환각 객체 의심 감지.
+
+    5/8 11번 사건: DALL-E edits가 reference 외에 다른 객체 환각 생성.
+    rembg가 두 객체를 분리해서 외곽 컨투어 2개 이상 생성 시 → 의심 flag.
+
+    Args:
+        img: PIL.Image (RGBA)
+        min_object_area_pct: 별개 객체로 판정할 최소 면적 (이미지 대비 %)
+
+    Returns:
+        (object_count, suspicious, areas_pct)
+        - object_count: min_object_area_pct 이상인 컨투어 개수
+        - suspicious: object_count >= 2이면 True
+        - areas_pct: 각 객체 면적 비율 (큰 순서)
+    """
+    import numpy as np
+    import cv2
+
+    arr = np.array(img)
+    if arr.shape[2] != 4:
+        return (0, False, [])
+
+    alpha = arr[:, :, 3]
+    img_total = alpha.size
+    binary = (alpha > 50).astype(np.uint8) * 255
+    contours, _ = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    if len(contours) == 0:
+        return (0, False, [])
+
+    areas = []
+    for c in contours:
+        area = cv2.contourArea(c)
+        area_pct = area / img_total * 100
+        if area_pct >= min_object_area_pct:
+            areas.append(area_pct)
+
+    areas.sort(reverse=True)
+    object_count = len(areas)
+    suspicious = object_count >= 2
+
+    return (object_count, suspicious, areas)
+
+
+def detect_color_anomaly(img, max_unique_colors: int = 150) -> tuple:
+    """캐릭터 영역 색상 다양성 검사. 환각 객체 의심.
+
+    5/8 11번: 회녹색 환각 객체로 인해 unique 색상 다양성 ↑.
+    32단계 양자화 후 unique 색상이 임계값 초과 시 → 의심 flag.
+
+    Args:
+        img: PIL.Image (RGBA)
+        max_unique_colors: 정상으로 간주할 최대 unique 색상 수
+
+    Returns:
+        (unique_n, suspicious)
+    """
+    import numpy as np
+
+    arr = np.array(img)
+    if arr.shape[2] != 4:
+        return (0, False)
+
+    alpha = arr[:, :, 3]
+    rgb = arr[:, :, :3]
+
+    char_mask = alpha > 200
+    if char_mask.sum() == 0:
+        return (0, False)
+
+    char_pixels = rgb[char_mask]
+    quantized = (char_pixels // 32) * 32
+    unique_colors = np.unique(quantized.reshape(-1, 3), axis=0)
+    unique_n = len(unique_colors)
+    suspicious = unique_n > max_unique_colors
+
+    return (unique_n, suspicious)
+
+
 # ============================================================
 # rembg 배경 제거 + 흰 외곽선 (외곽선 dilate 8px 구조 그대로)
 # ============================================================
@@ -596,6 +680,16 @@ def process_image_with_rembg(image_bytes, stroke_width=6):
     # fill 적용 (mode 색상 단색)
     cleaned, fill_area_pct = fill_alpha_holes(cleaned)
     print(f"    [fill] 채움 면적={fill_area_pct:.2f}%", flush=True)
+
+    # 환각 객체 사전 감지 (5/8 11번 사건 대응)
+    obj_count, obj_suspicious, obj_areas = detect_multiple_objects(cleaned)
+    color_n, color_suspicious = detect_color_anomaly(cleaned)
+    print(f"    [객체] 컨투어={obj_count}개 색상={color_n}", flush=True)
+    if obj_suspicious:
+        areas_str = ', '.join(f'{a:.1f}%' for a in obj_areas[:5])
+        print(f"    ⚠ 환각 객체 의심 (다중 컨투어 {obj_count}개: {areas_str})", flush=True)
+    if color_suspicious:
+        print(f"    ⚠ 색상 다양성 과다 ({color_n} unique colors)", flush=True)
 
     arr = np.array(cleaned)
     opaque_mask = arr[:, :, 3] > 200
@@ -679,7 +773,15 @@ def generate_and_upload_scribble(prompts: list, folder_name: str):
             try:
                 _vimg = Image.open(BytesIO(image_bytes))
                 _is_ok, _hole_pct, _hole_count, _contour_pct = validate_alpha_holes(_vimg)
-                hole_results.append({'idx': idx, 'hole_pct': round(_hole_pct, 2)})
+                _obj_count, _obj_suspicious, _ = detect_multiple_objects(_vimg)
+                _color_n, _color_suspicious = detect_color_anomaly(_vimg)
+                hole_results.append({
+                    'idx': idx,
+                    'hole_pct': round(_hole_pct, 2),
+                    'objects': _obj_count,
+                    'colors': _color_n,
+                    'flag': '⚠' if (_obj_suspicious or _color_suspicious) else '',
+                })
             except Exception as _ve:
                 print(f"[검증 오류: {_ve}]", end=" ", flush=True)
                 _is_ok, _hole_pct, _hole_count = (True, 0.0, 0)
@@ -769,7 +871,19 @@ def send_telegram_scribble(data: dict, success_count: int, fail_count: int,
         review = [r for r in hole_results if 0.5 <= r['hole_pct'] < 2.0]
         passed = [r for r in hole_results if 0 <= r['hole_pct'] < 0.5]
         errored = [r for r in hole_results if r['hole_pct'] < 0]
-        hole_summary = "\n".join([f"  {r['idx']:02d}: {r['hole_pct']}%" for r in hole_results])
+        hole_summary = "\n".join([
+            f"  {r['idx']:02d}: hole={r.get('hole_pct', '?')}% "
+            f"obj={r.get('objects', '?')} col={r.get('colors', '?')} "
+            f"{r.get('flag', '')}"
+            for r in hole_results
+        ])
+        # 의심 컷 카운트 (5/8 11번 사건 대응)
+        suspicious_count = sum(1 for r in hole_results if r.get('flag'))
+        if suspicious_count > 0:
+            hole_summary += (
+                f"\n  ⚠ 환각 의심 {suspicious_count}컷 — "
+                f"Cloudinary 시각 검증 필요"
+            )
         hole_block = (
             f"\n\n🕳 알파 구멍 검증 ({len(hole_results)}컷)\n"
             f"🔴 CRITICAL(≥5%): {len(crit)}  🟠 FAIL(2~5%): {len(fail)}  "

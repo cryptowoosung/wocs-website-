@@ -36,3 +36,6 @@ assets/images/_original-backup/
 # Python bytecode
 __pycache__/
 *.pyc
+
+# bkit 자동 상태 파일 (커밋 제외)
+.bkit/
