@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import os, json, random, re
 from datetime import datetime, timedelta
-from google import genai
+# google-genai는 기존 Gemini 모드에서만 필요 → webhook 모드는 표준 라이브러리만 사용
 
 API_KEY = os.environ.get("GEMINI_API_KEY") or ""
 if not API_KEY:
@@ -11,13 +11,19 @@ if not API_KEY:
     except:
         pass
 
-if not API_KEY:
-    print("GEMINI_API_KEY 없음")
-    exit(1)
-
-client = genai.Client(api_key=API_KEY)
 MODEL = "gemini-2.5-flash"
-print("Gemini 연결됨 (" + MODEL + ")")
+
+# webhook 모드: N8N_PAYLOAD 환경 변수가 있으면 외부 입력으로 발행 (Gemini 미사용)
+_WEBHOOK_MODE = bool(os.environ.get("N8N_PAYLOAD"))
+client = None
+
+if not _WEBHOOK_MODE:
+    if not API_KEY:
+        print("GEMINI_API_KEY 없음")
+        exit(1)
+    from google import genai  # 기존 모드에서만 import (webhook 모드는 의존성 없음)
+    client = genai.Client(api_key=API_KEY)
+    print("Gemini 연결됨 (" + MODEL + ")")
 
 # ─── TOPICS: 지역명 타겟팅 통합 ───
 TOPICS = [
@@ -271,30 +277,42 @@ def generate_meta_description(topic, content):
 
 # ─── 저장: blog-data.js ───
 
-def save_to_blog_data(post_id, title, content, topic, meta_desc):
+def save_to_blog_data(post_id, title, content, topic, meta_desc, image_url=None, is_html=False):
     today = datetime.now().strftime("%Y-%m-%d")
     safe = lambda s: s.replace('\\', '\\\\').replace("'", "\\'").replace('\n', ' ')
-    image_url = get_unsplash_image(topic["keyword"])
+    if image_url is None:
+        image_url = get_unsplash_image(topic["keyword"])
     cat_key = CATEGORY_MAP.get(topic["category"], "cat_startup")
-    excerpt = content[:100].replace("\n", " ")
+    # is_html이면 excerpt/content 필드는 태그를 제거한 순수 텍스트로 저장 (목록 표시 일관성)
+    if is_html:
+        text_src = re.sub(r"<[^>]+>", " ", content)
+        text_src = re.sub(r"\s+", " ", text_src).strip()
+    else:
+        text_src = content
+    excerpt = text_src[:100].replace("\n", " ")
     new_entry = (
         '{\n'
         "  id:" + str(post_id) + ", title:'" + safe(title) + "', excerpt:'" + safe(excerpt) + "',\n"
         "  date:'" + today + "', category:'" + cat_key + "', featured:false,\n"
         "  image:'" + image_url + "',\n"
         "  description:'" + safe(meta_desc) + "',\n"
-        "  content:'" + safe(content[:3000]) + "'\n"
+        "  content:'" + safe(text_src[:3000]) + "'\n"
         '}'
     )
-    try:
-        with open(BLOG_DATA_PATH, "r", encoding="utf-8") as f:
-            data = f.read()
-        data = data.replace("var BLOG_POSTS = [", "var BLOG_POSTS = [\n" + new_entry + ",", 1)
-        with open(BLOG_DATA_PATH, "w", encoding="utf-8") as f:
-            f.write(data)
-        print("blog-data.js 저장 완료 (id:" + str(post_id) + ")")
-    except Exception as e:
-        print("저장 실패: " + str(e))
+    with open(BLOG_DATA_PATH, "r", encoding="utf-8") as f:
+        data = f.read()
+    # silent fail 방지: 앵커 존재 + 치환 적용 + 결과 검증을 모두 확인, 실패 시 예외 발생
+    anchor = "var BLOG_POSTS = ["
+    if anchor not in data:
+        raise RuntimeError("blog-data.js 치환 실패: 앵커 '" + anchor + "'를 찾을 수 없음")
+    new_data = data.replace(anchor, anchor + "\n" + new_entry + ",", 1)
+    if new_data == data:
+        raise RuntimeError("blog-data.js 치환 실패: 내용이 변경되지 않음 (silent fail 차단)")
+    if ("id:" + str(post_id) + ",") not in new_data:
+        raise RuntimeError("blog-data.js 치환 검증 실패: 새 항목(id:" + str(post_id) + ")이 결과에 없음")
+    with open(BLOG_DATA_PATH, "w", encoding="utf-8") as f:
+        f.write(new_data)
+    print("blog-data.js 저장 완료 (id:" + str(post_id) + ")")
 
 
 # ─── 저장: HTML ───
@@ -337,14 +355,23 @@ def markdown_to_html(text):
     return "\n".join(result)
 
 
-def save_to_html(post_id, title, content, topic, meta_desc):
+def save_to_html(post_id, title, content, topic, meta_desc, image_url=None, is_html=False):
     os.makedirs(CONTENT_DIR, exist_ok=True)
     today = datetime.now().strftime("%Y-%m-%d")
-    path = CONTENT_DIR + "/auto_post_" + today + ".html"
+    # 파일명 충돌 방지: 같은 날 2건 이상이면 _2, _3 ... 접미사 (덮어쓰기 차단)
+    base = CONTENT_DIR + "/auto_post_" + today
+    path = base + ".html"
+    seq = 2
+    while os.path.exists(path):
+        path = base + "_" + str(seq) + ".html"
+        seq += 1
+    fname = os.path.basename(path)
     esc = lambda s: s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
-    body_html = markdown_to_html(content)
-    url = "https://wocs.kr/content/auto_post_" + today + ".html"
-    image_url = get_unsplash_image(topic["keyword"])
+    # is_html이면 본문이 이미 HTML이므로 markdown 변환을 건너뜀
+    body_html = content if is_html else markdown_to_html(content)
+    url = "https://wocs.kr/content/" + fname
+    if image_url is None:
+        image_url = get_unsplash_image(topic["keyword"])
     html = (
         '<!DOCTYPE html>\n'
         '<html lang="ko">\n'
@@ -449,9 +476,74 @@ def save_linkedin_data(title, li_text):
     print("linkedin_post.json 저장 완료")
 
 
+# ─── Webhook 모드 (n8n 외부 입력) ───
+
+def run_webhook_mode(payload_raw):
+    print("Webhook 모드 (n8n 외부 입력)")
+    try:
+        payload = json.loads(payload_raw)
+    except Exception as e:
+        print("페이로드 JSON 파싱 실패: " + str(e))
+        exit(1)
+    if not isinstance(payload, dict):
+        print("페이로드 형식 오류: JSON 객체가 아님")
+        exit(1)
+
+    # 필수 필드 검증 (누락 시 즉시 종료)
+    required = ["title", "content", "image_url"]
+    missing = [k for k in required if not str(payload.get(k) or "").strip()]
+    if missing:
+        print("필수 필드 누락: " + ", ".join(missing))
+        exit(1)
+
+    title = str(payload["title"]).strip()
+    content = str(payload["content"])
+    image_url = str(payload["image_url"]).strip()
+    keyword = str(payload.get("keyword") or "").strip()
+    region = str(payload.get("region") or "전남").strip()
+    excerpt = str(payload.get("excerpt") or "").strip()
+    meta_desc = str(payload.get("meta_desc") or excerpt or "").strip()
+    tags = payload.get("tags") or []
+
+    # 카테고리 정규화: payload는 wocs.kr 키(cat_*) 또는 한글 카테고리명을 허용
+    reverse_cat = {v: k for k, v in CATEGORY_MAP.items()}
+    cat_in = str(payload.get("category") or "").strip()
+    if cat_in in CATEGORY_MAP:
+        topic_category = cat_in
+    elif cat_in in reverse_cat:
+        topic_category = reverse_cat[cat_in]
+    else:
+        topic_category = "창업가이드"
+
+    topic = {"keyword": keyword or "글램핑", "region": region, "category": topic_category}
+
+    # meta description 보강: 없으면 본문 텍스트에서 생성 (외부 API 미사용)
+    if not meta_desc:
+        plain = re.sub(r"<[^>]+>", " ", content)
+        plain = re.sub(r"\s+", " ", plain).strip()
+        meta_desc = plain[:150]
+
+    post_id = get_next_id()
+    print("제목: " + title)
+    print("ID: " + str(post_id))
+    print("카테고리: " + topic_category + " (" + CATEGORY_MAP.get(topic_category, "cat_startup") + ")")
+    print("이미지: " + image_url)
+
+    save_to_blog_data(post_id, title, content, topic, meta_desc, image_url=image_url, is_html=True)
+    save_to_html(post_id, title, content, topic, meta_desc, image_url=image_url, is_html=True)
+
+    if tags:
+        print("tags " + str(len(tags)) + "개 수신 - 현 정적 구조에 저장 슬롯 없음(미반영)")
+
+    print("Webhook 발행 완료")
+
+
 # ─── 메인 ───
 
 def main():
+    if _WEBHOOK_MODE:
+        run_webhook_mode(os.environ.get("N8N_PAYLOAD", ""))
+        return
     topic = pick_topic()
     post_id = get_next_id()
     cta_this_post = should_include_cta(topic)
