@@ -708,12 +708,19 @@ def run_webhook_mode(payload_raw):
     excerpt = str(payload.get("excerpt") or "").strip()
     meta_desc = str(payload.get("meta_desc") or excerpt or "").strip()
     tags = payload.get("tags") or []
-    # Phase 5: SEO/AEO/GEO 확장 필드 파싱 (형식 방어 — dict/문자열만 수용)
-    tldr = str(payload.get("tldr") or "").strip()
-    faq = [x for x in (payload.get("faq") or []) if isinstance(x, dict)]
-    references = [x for x in (payload.get("references") or []) if isinstance(x, dict)]
-    how_to_steps = [str(x).strip() for x in (payload.get("how_to_steps") or [])
-                    if str(x).strip()]
+    # Phase 5 핫픽스: GitHub repository_dispatch는 client_payload top-level 속성
+    # 10개 제한 → tldr/faq/references/how_to_steps를 seo_extras 객체로 래핑.
+    # seo_extras 우선, 없으면 top-level fallback (구 페이로드 회귀 안전)
+    seo_extras = payload.get("seo_extras")
+    if not isinstance(seo_extras, dict):
+        seo_extras = {}
+    tldr = str(seo_extras.get("tldr") or payload.get("tldr") or "").strip()
+    faq_raw = seo_extras.get("faq") or payload.get("faq") or []
+    faq = [x for x in faq_raw if isinstance(x, dict)]
+    refs_raw = seo_extras.get("references") or payload.get("references") or []
+    references = [x for x in refs_raw if isinstance(x, dict)]
+    steps_raw = seo_extras.get("how_to_steps") or payload.get("how_to_steps") or []
+    how_to_steps = [str(x).strip() for x in steps_raw if str(x).strip()]
 
     # 카테고리 정규화: payload는 wocs.kr 키(cat_*) 또는 한글 카테고리명을 허용
     reverse_cat = {v: k for k, v in CATEGORY_MAP.items()}
