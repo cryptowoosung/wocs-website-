@@ -8,6 +8,10 @@ on:
 permissions:
   contents: write
 
+# n8n-webhook.yml과 동일 그룹 → blog-data.js 동시 쓰기 직렬화
+concurrency:
+  group: blog-write
+
 jobs:
   write-blog:
     runs-on: ubuntu-latest
