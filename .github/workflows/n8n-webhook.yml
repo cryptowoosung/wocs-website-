@@ -1,0 +1,70 @@
+name: n8n Webhook Blog Post
+
+# n8n 워크플로가 repository_dispatch로 트리거 → auto_writer.py webhook 모드 실행
+on:
+  repository_dispatch:
+    types: [n8n-blog-post]
+
+permissions:
+  contents: write
+
+# auto_blog.yml과 동일 그룹 → blog-data.js 동시 쓰기 직렬화
+concurrency:
+  group: blog-write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      # webhook 모드 auto_writer.py는 표준 라이브러리만 사용 → 추가 설치 불필요
+      - name: 페이로드 필수 필드 검증
+        env:
+          PAYLOAD: ${{ toJSON(github.event.client_payload) }}
+        run: |
+          python - <<'PY'
+          import json, os, sys
+          try:
+              p = json.loads(os.environ["PAYLOAD"])
+          except Exception as e:
+              sys.exit("페이로드 JSON 파싱 실패: %s" % e)
+          if not isinstance(p, dict):
+              sys.exit("페이로드 형식 오류: JSON 객체가 아님")
+          missing = [k for k in ("title", "content", "image_url")
+                     if not str(p.get(k) or "").strip()]
+          if missing:
+              sys.exit("필수 필드 누락: %s" % ", ".join(missing))
+          print("payload OK")
+          PY
+      - name: 블로그 글 발행 (webhook)
+        env:
+          N8N_PAYLOAD: ${{ toJSON(github.event.client_payload) }}
+        run: python auto_writer.py
+      - name: 커밋 & 푸시
+        run: |
+          git config user.name "WOCS n8n Writer"
+          git config user.email "actions@wocs.kr"
+          git add assets/js/blog-data.js content/
+          git diff --staged --quiet || git commit -m "feat(blog): n8n webhook 발행 글 추가 $(date '+%Y-%m-%d')"
+          git push
+      - name: 실패 시 Telegram 알림
+        if: failure()
+        run: |
+          KST_TIME=$(TZ='Asia/Seoul' date '+%Y-%m-%d %H:%M:%S KST')
+          RUN_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          MSG="⚠️ *wocs.kr n8n webhook 발행 실패*
+
+          날짜: ${KST_TIME}
+          실행 ID: ${{ github.run_id }}
+
+          로그 확인:
+          ${RUN_URL}"
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            --data-urlencode "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+            --data-urlencode "parse_mode=Markdown" \
+            --data-urlencode "text=${MSG}"
