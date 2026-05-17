@@ -309,20 +309,28 @@ def save_to_blog_data(post_id, title, content, topic, meta_desc, image_url=None,
     # Phase 5: SEO/AEO/GEO 확장 필드 (extra 없으면 기존 동작)
     extra = extra or {}
     tldr = extra.get("tldr", "")
-    faq_count = len([q for q in (extra.get("faq") or [])
-                     if q.get("q") and q.get("a")])
-    has_how_to = bool([s for s in (extra.get("how_to_steps") or []) if s])
-    ref_count = len([r for r in (extra.get("references") or []) if r.get("name")])
+    faq = [q for q in (extra.get("faq") or []) if q.get("q") and q.get("a")]
+    references = [r for r in (extra.get("references") or []) if r.get("name")]
+    how_to = [str(s).strip() for s in (extra.get("how_to_steps") or [])
+              if str(s).strip()]
     description = meta_desc or tldr
+    # JS 안전 JSON 직렬화 (U+2028/2029는 JS에서 줄바꿈으로 취급되므로 이스케이프)
+    jdump = lambda o: (json.dumps(o, ensure_ascii=False)
+                       .replace(" ", "\\u2028").replace(" ", "\\u2029"))
+    # 동적 페이지(blog-post.html)가 faq/references/how_to 전체 데이터를 렌더링하므로
+    # count뿐 아니라 원본 배열도 저장. blog-data.js는 <script src>로 로드됨 → JSON 안전.
     new_entry = (
         '{\n'
         "  id:" + str(post_id) + ", title:'" + safe(title) + "', excerpt:'" + safe(excerpt) + "',\n"
         "  date:'" + today + "', category:'" + cat_key + "', featured:false,\n"
         "  image:'" + image_url + "',\n"
         "  description:'" + safe(description) + "',\n"
-        "  tldr:'" + safe(tldr) + "', faq_count:" + str(faq_count)
-        + ", has_how_to:" + ("true" if has_how_to else "false")
-        + ", ref_count:" + str(ref_count) + ",\n"
+        "  tldr:'" + safe(tldr) + "', faq_count:" + str(len(faq))
+        + ", has_how_to:" + ("true" if how_to else "false")
+        + ", ref_count:" + str(len(references)) + ",\n"
+        "  faq:" + jdump(faq) + ",\n"
+        "  references:" + jdump(references) + ",\n"
+        "  how_to:" + jdump(how_to) + ",\n"
         "  content:'" + safe(text_src[:3000]) + "'\n"
         '}'
     )

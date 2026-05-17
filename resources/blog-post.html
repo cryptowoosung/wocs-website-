@@ -211,6 +211,135 @@ th:{p1:"บล็อก",p2:"กำลังโหลด...",p3:"กำลัง
   document.getElementById('post-date').textContent = post.date;
   document.getElementById('post-content').innerHTML = t(post.content);
 
+  // 4-b. SEO/AEO/GEO 블록 렌더링 (Phase 5 — 신규 필드가 있을 때만 표시)
+  (function renderSeoExtras(){
+    var esc = function(s){ return String(s==null?'':s).replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); };
+    var contentEl = document.getElementById('post-content');
+    if(!contentEl) return;
+
+    // CSS 1회 주입
+    if(!document.getElementById('seo-extras-css')){
+      var st=document.createElement('style'); st.id='seo-extras-css';
+      st.textContent='.tldr{margin:0 0 28px;padding:18px 22px;border-left:3px solid #c9a96e;'
+        +'background:rgba(201,169,110,.06)}'
+        +'.tldr-label{display:block;font-size:11px;letter-spacing:1px;color:#c9a96e;margin-bottom:8px}'
+        +'.tldr p{margin:0;line-height:1.9}'
+        +'.post-faq{margin:44px 0}.post-faq h2{margin-bottom:14px}'
+        +'.post-faq details{border-bottom:1px solid rgba(201,169,110,.18);padding:13px 0}'
+        +'.post-faq summary{cursor:pointer;font-weight:500}'
+        +'.post-faq details p{margin:10px 0 0;line-height:1.8}'
+        +'.post-refs{margin:36px 0}.post-refs h3{margin-bottom:10px}'
+        +'.post-refs li{margin-bottom:5px;font-size:14px}'
+        +'.post-eeat{margin:36px 0;padding:18px 22px;border:1px solid rgba(201,169,110,.18);'
+        +'background:rgba(201,169,110,.03);font-size:13px;line-height:1.7}';
+      document.head.appendChild(st);
+    }
+
+    // TL;DR — 본문 앞
+    if(post.tldr){
+      var tl=document.createElement('div'); tl.className='tldr';
+      tl.innerHTML='<span class="tldr-label">핵심 요약 (TL;DR)</span><p>'+esc(post.tldr)+'</p>';
+      contentEl.parentNode.insertBefore(tl, contentEl);
+    }
+
+    // 참고 자료 — 본문 뒤 (afterend는 역순 삽입되므로 eeat→faq→refs 순으로 호출)
+    var faq = Array.isArray(post.faq) ? post.faq : [];
+    var refs = Array.isArray(post.references) ? post.references : [];
+    var steps = Array.isArray(post.how_to) ? post.how_to : [];
+
+    var eh='<div class="post-eeat">'
+      +'<p><strong>김우성</strong> · WOCS 대표 · 16년 경력 어닝·천막·구조물 시공 전문가</p>'
+      +'<p>우성어닝천막공사 · 전남 화순군 사평면 유마로 592 · 010-4337-0582</p>'
+      +'<p>최종 수정: <time datetime="'+esc(post.date)+'">'+esc(post.date)+'</time></p></div>';
+    contentEl.insertAdjacentHTML('afterend', eh);
+
+    var vfaq=faq.filter(function(q){ return q && q.q && q.a; });
+    if(vfaq.length){
+      var fh='<section class="post-faq"><h2>자주 묻는 질문</h2>';
+      vfaq.forEach(function(q){
+        fh+='<details><summary>'+esc(q.q)+'</summary><p>'+esc(q.a)+'</p></details>';
+      });
+      fh+='</section>';
+      contentEl.insertAdjacentHTML('afterend', fh);
+    }
+
+    var vrefs=refs.filter(function(r){ return r && r.name; });
+    if(vrefs.length){
+      var rh='<section class="post-refs"><h3>참고 자료</h3><ul>';
+      vrefs.forEach(function(r){
+        rh += r.url
+          ? '<li><a href="'+esc(r.url)+'" rel="nofollow noopener" target="_blank">'+esc(r.name)+'</a></li>'
+          : '<li>'+esc(r.name)+'</li>';
+      });
+      rh+='</ul></section>';
+      contentEl.insertAdjacentHTML('afterend', rh);
+    }
+
+    // JSON-LD 스키마 동적 주입
+    var url=location.origin+location.pathname+'?id='+post.id;
+    var iso=post.date+'T09:00:00+09:00';
+    var catLabel=({cat_startup:'창업가이드',cat_construction:'시공정보',
+      cat_revenue:'수익분석',cat_case:'시공사례'})[post.category]||'블로그';
+    var orgId='https://wocs.kr/#organization', authorId='https://wocs.kr/#author';
+    var addr={'@type':'PostalAddress','addressCountry':'KR','addressRegion':'전라남도',
+      'streetAddress':'전남 화순군 사평면 유마로 592'};
+    var graph=[
+      {'@type':'BlogPosting','@id':url+'#article','headline':t(post.title),
+       'description':post.description||t(post.excerpt),'image':post.image,
+       'datePublished':iso,'dateModified':iso,'author':{'@id':authorId},
+       'publisher':{'@id':orgId},'mainEntityOfPage':{'@type':'WebPage','@id':url},
+       'articleSection':catLabel,'inLanguage':'ko-KR'},
+      {'@type':'BreadcrumbList','@id':url+'#breadcrumb','itemListElement':[
+        {'@type':'ListItem','position':1,'name':'홈','item':'https://wocs.kr'},
+        {'@type':'ListItem','position':2,'name':'블로그','item':'https://wocs.kr/resources/blog.html'},
+        {'@type':'ListItem','position':3,'name':catLabel},
+        {'@type':'ListItem','position':4,'name':t(post.title)}]},
+      {'@type':'Organization','@id':orgId,'name':'우성어닝천막공사','url':'https://wocs.kr',
+       'telephone':'010-4337-0582','address':addr,
+       'logo':{'@type':'ImageObject','url':'https://wocs.kr/assets/images/logo_preview_dark.png'}},
+      {'@type':'Person','@id':authorId,'name':'김우성',
+       'jobTitle':'WOCS 대표 · 16년 경력 어닝·천막·구조물 시공 전문가','worksFor':{'@id':orgId}},
+      {'@type':'LocalBusiness','@id':'https://wocs.kr/#localbusiness','name':'우성어닝천막공사',
+       'url':'https://wocs.kr','telephone':'010-4337-0582','address':addr,
+       'image':'https://wocs.kr/assets/images/logo_preview_dark.png','priceRange':'₩₩'}
+    ];
+    if(vfaq.length){
+      graph.push({'@type':'FAQPage','@id':url+'#faq','mainEntity':vfaq.map(function(q){
+        return {'@type':'Question','name':q.q,
+          'acceptedAnswer':{'@type':'Answer','text':q.a}}; })});
+    }
+    var vsteps=steps.filter(function(s){ return s; });
+    if(vsteps.length){
+      graph.push({'@type':'HowTo','@id':url+'#howto','name':t(post.title),
+        'step':vsteps.map(function(s,i){
+          return {'@type':'HowToStep','position':i+1,'text':s}; })});
+    }
+    var ld=document.createElement('script'); ld.type='application/ld+json';
+    ld.textContent=JSON.stringify({'@context':'https://schema.org','@graph':graph});
+    document.head.appendChild(ld);
+
+    // 메타 태그 보강 (canonical + Open Graph + Twitter)
+    var setMeta=function(attr,key,val){
+      var el=document.head.querySelector('meta['+attr+'="'+key+'"]');
+      if(!el){ el=document.createElement('meta'); el.setAttribute(attr,key);
+        document.head.appendChild(el); }
+      el.setAttribute('content',val);
+    };
+    var desc=post.description||t(post.excerpt);
+    setMeta('property','og:type','article');
+    setMeta('property','og:title',t(post.title));
+    setMeta('property','og:description',desc);
+    setMeta('property','og:image',post.image);
+    setMeta('property','og:url',url);
+    setMeta('name','twitter:card','summary_large_image');
+    setMeta('name','twitter:image',post.image);
+    var can=document.head.querySelector('link[rel="canonical"]');
+    if(!can){ can=document.createElement('link'); can.rel='canonical';
+      document.head.appendChild(can); }
+    can.href=url;
+  })();
+
   // 5. 관련 글 (같은 카테고리 우선, 없으면 랜덤 3개)
   var related = BLOG_POSTS.filter(function(p){ return p.id !== postId && p.category === post.category; });
   if(related.length < 3){
