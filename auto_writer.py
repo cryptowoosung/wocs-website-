@@ -1,7 +1,35 @@
 #!/usr/bin/env python3
-import os, json, random, re
+import os, json, random, re, time
 from datetime import datetime, timedelta
 # google-genai는 기존 Gemini 모드에서만 필요 → webhook 모드는 표준 라이브러리만 사용
+
+# ─── 재시도 설정 (Gemini 503/UNAVAILABLE 대응) ───
+RETRY_ATTEMPTS = 5
+RETRY_BASE_DELAY = 15  # 초, 지수 백오프 시작값
+RETRYABLE_STATUS = ("503", "UNAVAILABLE", "429", "RESOURCE_EXHAUSTED", "500", "INTERNAL", "504", "DEADLINE_EXCEEDED")
+
+
+def gemini_generate_with_retry(prompt, label="generate"):
+    """Gemini API 호출을 지수 백오프로 재시도한다. 5회 모두 실패하면 None 반환."""
+    last_err = None
+    for attempt in range(1, RETRY_ATTEMPTS + 1):
+        try:
+            response = client.models.generate_content(model=MODEL, contents=prompt)
+            if attempt > 1:
+                print("[retry] " + label + " 성공 (attempt " + str(attempt) + ")")
+            return response.text
+        except Exception as e:
+            last_err = e
+            err_str = str(e)
+            is_retryable = any(code in err_str for code in RETRYABLE_STATUS)
+            if not is_retryable or attempt == RETRY_ATTEMPTS:
+                print("오류(" + label + "): " + err_str)
+                return None
+            delay = RETRY_BASE_DELAY * (2 ** (attempt - 1))
+            print("[retry " + str(attempt) + "/" + str(RETRY_ATTEMPTS - 1) + "] " + label + " 일시 장애 — " + str(delay) + "초 후 재시도: " + err_str[:120])
+            time.sleep(delay)
+    print("오류(" + label + "): 재시도 모두 실패 — " + str(last_err))
+    return None
 
 API_KEY = os.environ.get("GEMINI_API_KEY") or ""
 if not API_KEY:
@@ -248,12 +276,7 @@ def generate_content(topic, cta_this_post):
         "- HTML 태그 없이 순수 텍스트만 출력\n\n"
         "제목(H1)과 본문만 출력. 설명이나 메타 정보는 출력하지 마시오.\n"
     )
-    try:
-        response = client.models.generate_content(model=MODEL, contents=prompt)
-        return response.text
-    except Exception as e:
-        print("오류: " + str(e))
-        return None
+    return gemini_generate_with_retry(prompt, label="blog-content")
 
 
 def parse_content(raw):
@@ -282,12 +305,11 @@ def generate_meta_description(topic, content):
         + topic["region"] + "' 지역명이 포함된 80~120자 메타 디스크립션을 작성하세요. "
         "설명 없이 텍스트만 출력:\n\n" + content[:500]
     )
-    try:
-        response = client.models.generate_content(model=MODEL, contents=prompt)
-        desc = response.text.strip().replace('"', "'").replace("\n", " ")
-        return desc[:150]
-    except:
+    raw = gemini_generate_with_retry(prompt, label="meta-desc")
+    if not raw:
         return content[:100].replace("\n", " ")
+    desc = raw.strip().replace('"', "'").replace("\n", " ")
+    return desc[:150]
 
 
 # ─── 저장: blog-data.js ───
@@ -673,12 +695,8 @@ def generate_linkedin_post(title, content, topic):
         "8. LinkedIn 전문가 톤, 줄바꿈을 활용해 가독성 높게\n\n"
         "포스트 텍스트만 출력하세요."
     )
-    try:
-        response = client.models.generate_content(model=MODEL, contents=prompt)
-        return response.text.strip()
-    except Exception as e:
-        print("LinkedIn 포스트 생성 오류: " + str(e))
-        return None
+    raw = gemini_generate_with_retry(prompt, label="linkedin-post")
+    return raw.strip() if raw else None
 
 
 def save_linkedin_data(title, li_text):
