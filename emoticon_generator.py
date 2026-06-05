@@ -8,7 +8,6 @@ WOCS Emoticon Auto Generator
 import os
 import sys
 import json
-import re
 import base64
 import time
 import random
@@ -19,6 +18,8 @@ from google.auth.transport.requests import Request
 # rembg 배경 제거 (gpt-image-1.5 아티팩트 해결)
 from rembg import new_session, remove
 from PIL import ImageFilter
+
+from llm_json import parse_llm_json
 from io import BytesIO
 
 # ============================================================
@@ -130,7 +131,8 @@ def plan_character(previous_characters):
 매번 완전히 다른 신선한 캐릭터를 제안해야 한다.
 이전에 만든 캐릭터와 절대 겹치면 안 된다.
 반드시 JSON만 출력하고 다른 텍스트는 절대 포함하지 마라.
-emotions 배열은 반드시 정확히 24개여야 한다."""
+emotions 배열은 반드시 정확히 24개여야 한다.
+출력 규칙: 순수 JSON 객체 하나만. 코드펜스(```json) 금지, 주석(//, /* */) 금지, 후행 쉼표(trailing comma) 절대 금지."""
 
     user_prompt = f"""오늘의 이모티콘 캐릭터를 새로 기획해라.
 이전 캐릭터: {previous_characters}
@@ -194,12 +196,8 @@ rough-doodle: 공책 모서리 낙서 감성, 삐뚤빼뚤 일부러 엉성
     resp.raise_for_status()
     raw_text = resp.json()["content"][0]["text"]
 
-    # JSON 추출 (Claude가 텍스트를 앞뒤에 붙여도 처리)
-    match = re.search(r"\{[\s\S]*\}", raw_text)
-    if not match:
-        raise ValueError(f"Claude가 JSON을 반환하지 않음: {raw_text[:200]}")
-
-    data = json.loads(match.group(0))
+    # JSON 추출/정제 (코드펜스·주석·후행쉼표 방어) — 공용 parse_llm_json 사용
+    data = parse_llm_json(raw_text)
 
     # emotions 구조 정규화 (구형 string 포맷 호환)
     normalized: list[dict] = []

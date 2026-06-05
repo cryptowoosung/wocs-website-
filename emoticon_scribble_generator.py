@@ -26,6 +26,8 @@ from datetime import datetime, timezone, timedelta
 from rembg import new_session, remove
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
+from llm_json import parse_llm_json
+
 # === 환경 변수 ===
 OPENAI_API_KEY = os.environ['OPENAI_API_KEY']
 ANTHROPIC_API_KEY = os.environ['ANTHROPIC_API_KEY']
@@ -126,7 +128,34 @@ JSON 응답 형식 (반드시 이 구조 그대로):
   ]
 }
 
-다른 텍스트는 절대 포함하지 말고 JSON만 출력해."""
+출력 규칙 (반드시 준수):
+- 순수 JSON 객체 하나만 출력한다.
+- 코드펜스(```json 등) 금지.
+- 주석(//, /* */) 절대 금지.
+- 후행 쉼표(trailing comma) 절대 금지 — 마지막 항목 뒤에 쉼표를 찍지 마라.
+- '...' 같은 생략 표기 금지 — emotions 24개를 모두 실제 항목으로 채워라.
+- JSON 앞뒤에 설명/인사말 등 다른 텍스트를 붙이지 마라."""
+
+
+def _request_scribble_plan(user_prompt: str) -> str:
+    """Claude API 를 호출하고 응답 본문 텍스트를 반환한다."""
+    resp = requests.post(
+        "https://api.anthropic.com/v1/messages",
+        headers={
+            "x-api-key": ANTHROPIC_API_KEY,
+            "anthropic-version": "2023-06-01",
+            "Content-Type": "application/json",
+        },
+        json={
+            "model": CLAUDE_MODEL,
+            "max_tokens": 2000,
+            "system": SCRIBBLE_PLAN_SYSTEM,
+            "messages": [{"role": "user", "content": user_prompt}],
+        },
+        timeout=60,
+    )
+    resp.raise_for_status()
+    return resp.json()["content"][0]["text"]
 
 
 def plan_character_scribble(previous_characters: list) -> dict:
@@ -144,29 +173,30 @@ emotions는 정확히 24개, 그 중 정확히 10개에만 text_overlay에 한�
 한글 텍스트는 모두 서로 달라야 한다 (중복 절대 금지).
 """
 
-    resp = requests.post(
-        "https://api.anthropic.com/v1/messages",
-        headers={
-            "x-api-key": ANTHROPIC_API_KEY,
-            "anthropic-version": "2023-06-01",
-            "Content-Type": "application/json",
-        },
-        json={
-            "model": CLAUDE_MODEL,
-            "max_tokens": 2000,
-            "system": SCRIBBLE_PLAN_SYSTEM,
-            "messages": [{"role": "user", "content": user_prompt}],
-        },
-        timeout=60,
-    )
-    resp.raise_for_status()
-    raw_text = resp.json()["content"][0]["text"]
-
-    match = re.search(r"\{[\s\S]*\}", raw_text)
-    if not match:
-        raise ValueError(f"Claude가 JSON을 반환하지 않음: {raw_text[:200]}")
-
-    data = json.loads(match.group(0))
+    raw_text = _request_scribble_plan(user_prompt)
+    try:
+        data = parse_llm_json(raw_text)
+    except (json.JSONDecodeError, ValueError) as first_err:
+        # 1차 파싱 실패 → LLM 에 1회 재요청
+        print(
+            f"[WARN] Claude JSON 파싱 1차 실패 ({first_err}) — 재요청 시도",
+            file=sys.stderr,
+        )
+        raw_retry = _request_scribble_plan(user_prompt)
+        try:
+            data = parse_llm_json(raw_retry)
+        except (json.JSONDecodeError, ValueError) as second_err:
+            preview = (raw_retry or "")[:500]
+            print(
+                "[ERROR] Claude JSON 파싱 재요청까지 실패.\n"
+                f"  1차 오류: {first_err}\n"
+                f"  2차 오류: {second_err}\n"
+                f"  재요청 응답 원문(앞 500자): {preview!r}",
+                file=sys.stderr,
+            )
+            raise ValueError(
+                f"LLM JSON 파싱 2회 연속 실패: {second_err}"
+            ) from second_err
 
     # emotions 정규화
     normalized: list = []
