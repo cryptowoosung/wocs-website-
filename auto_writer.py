@@ -6,7 +6,19 @@ from datetime import datetime, timedelta
 # ─── 재시도 설정 (Gemini 503/UNAVAILABLE 대응) ───
 RETRY_ATTEMPTS = 5
 RETRY_BASE_DELAY = 15  # 초, 지수 백오프 시작값
-RETRYABLE_STATUS = ("503", "UNAVAILABLE", "429", "RESOURCE_EXHAUSTED", "500", "INTERNAL", "504", "DEADLINE_EXCEEDED")
+# 순수 일시 장애(서버측 5xx)만 재시도 대상
+TRANSIENT_STATUS = ("503", "UNAVAILABLE", "500", "INTERNAL", "504", "DEADLINE_EXCEEDED")
+# 재시도해도 회복 불가능한 치명적 오류 패턴(소문자 비교): 크레딧 고갈 / 할당량 초과 등
+FATAL_PATTERNS = (
+    "prepayment credits",
+    "credits are depleted",
+    "quota",
+    "free tier",
+    "free_tier",
+    "billing",
+    "resource_exhausted",
+    "429",
+)
 
 
 def gemini_generate_with_retry(prompt, label="generate"):
@@ -21,8 +33,16 @@ def gemini_generate_with_retry(prompt, label="generate"):
         except Exception as e:
             last_err = e
             err_str = str(e)
-            is_retryable = any(code in err_str for code in RETRYABLE_STATUS)
-            if not is_retryable or attempt == RETRY_ATTEMPTS:
+            low = err_str.lower()
+            # 1) 회복 불가능한 치명적 오류(크레딧 고갈/할당량 초과 등) → 재시도 없이 즉시 중단
+            if any(p in low for p in FATAL_PATTERNS):
+                raise RuntimeError(
+                    "Gemini API 회복 불가 오류(" + label + ") — 재시도 무의미, 즉시 중단. "
+                    "키 크레딧/할당량 확인 필요: " + err_str
+                ) from e
+            # 2) 순수 일시 장애(5xx)만 지수 백오프 재시도
+            is_transient = any(code in err_str for code in TRANSIENT_STATUS)
+            if not is_transient or attempt == RETRY_ATTEMPTS:
                 print("오류(" + label + "): " + err_str)
                 return None
             delay = RETRY_BASE_DELAY * (2 ** (attempt - 1))
