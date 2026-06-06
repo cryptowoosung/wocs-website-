@@ -2,7 +2,7 @@ name: WOCS Auto Blog Writer
 
 on:
   schedule:
-    - cron: '0 2 * * *'
+    - cron: '0 2 * * 1,4'  # 매주 월·목 02:00 UTC = 11:00 KST 발행
   workflow_dispatch:
 
 permissions:
