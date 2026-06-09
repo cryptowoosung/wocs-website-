@@ -49,6 +49,15 @@ IMAGE_QUALITY = "low"  # 메모리 절약 (GitHub Actions는 7GB라 medium도 �
 IMAGE_SIZE = "1024x1024"
 CLAUDE_MODEL = "claude-haiku-4-5-20251001"
 
+# 이미지 API 재시도 정책
+# - 429/5xx 또는 네트워크 예외: 일시적 오류로 보고 지수 백오프 재시도
+# - 4xx(400/401/403 등): 비일시적(FATAL) 오류로 보고 즉시 실패
+TRANSIENT_STATUS = frozenset({429, 500, 502, 503, 504})
+IMAGE_MAX_ATTEMPTS = 3  # 총 시도 횟수 (초기 1 + 재시도 2)
+IMAGE_BACKOFF_BASE = 2  # 지수 백오프 기준(초): 2s, 4s
+# 컷별 허용 실패 임계치: 이 값 초과(즉 3컷 이상 실패) 시에만 워크플로를 실패 처리
+MAX_ALLOWED_FAILURES = 2
+
 # 한국 시간
 KST = timezone(timedelta(hours=9))
 TODAY = datetime.now(KST).strftime("%Y-%m-%d")
@@ -343,9 +352,47 @@ EMOTICON STYLE:
 # ============================================================
 # Step 4-5: 이미지 생성 + Cloudinary 업로드 (24개 순차)
 # ============================================================
+def _post_image_with_retry(url: str, **kwargs) -> requests.Response:
+    """OpenAI 이미지 API POST 를 일시적 오류에 한해 지수 백오프로 재시도.
+
+    - 429/5xx 또는 네트워크 예외: 최대 IMAGE_MAX_ATTEMPTS 회까지 재시도
+    - 4xx(400/401/403 등) 비일시적 오류: 재시도 없이 즉시 raise (FATAL)
+    - 재시도를 모두 소진한 transient 응답: 마지막에 raise_for_status() 로 승격 (FATAL)
+    """
+    for attempt in range(1, IMAGE_MAX_ATTEMPTS + 1):
+        is_last = attempt == IMAGE_MAX_ATTEMPTS
+        try:
+            resp = requests.post(url, **kwargs)
+        except requests.exceptions.RequestException as e:
+            if is_last:
+                raise
+            _sleep_backoff(attempt, f"network error: {e}")
+            continue
+
+        # 일시적 5xx/429 → 마지막 시도가 아니면 재시도
+        if resp.status_code in TRANSIENT_STATUS and not is_last:
+            _sleep_backoff(attempt, f"HTTP {resp.status_code}")
+            continue
+
+        # 4xx 즉시 FATAL / 소진된 transient → FATAL / 200 → 통과
+        resp.raise_for_status()
+        return resp
+
+
+def _sleep_backoff(attempt: int, reason: str) -> None:
+    """지수 백오프 + 소량 지터 후 대기 (재시도 직전 호출)."""
+    delay = IMAGE_BACKOFF_BASE ** attempt + random.uniform(0, 1)
+    print(
+        f"[retry {attempt}/{IMAGE_MAX_ATTEMPTS - 1} {reason} → {delay:.1f}s 후 재시도]",
+        end=" ",
+        flush=True,
+    )
+    time.sleep(delay)
+
+
 def _generate_image_from_text(prompt: str) -> str:
     """text-to-image (generations) — 1번 이미지 또는 fallback용"""
-    resp = requests.post(
+    resp = _post_image_with_retry(
         "https://api.openai.com/v1/images/generations",
         headers={
             "Authorization": f"Bearer {OPENAI_API_KEY}",
@@ -362,7 +409,6 @@ def _generate_image_from_text(prompt: str) -> str:
         },
         timeout=120,
     )
-    resp.raise_for_status()
     return resp.json()["data"][0]["b64_json"]
 
 
@@ -374,7 +420,7 @@ def _generate_image_from_reference(prompt: str, reference_png: bytes) -> str:
         "Change ONLY the pose, expression, and action as described below. "
         "Do not redesign the character.\n\n"
     )
-    resp = requests.post(
+    resp = _post_image_with_retry(
         "https://api.openai.com/v1/images/edits",
         headers={"Authorization": f"Bearer {OPENAI_API_KEY}"},
         data={
@@ -389,7 +435,6 @@ def _generate_image_from_reference(prompt: str, reference_png: bytes) -> str:
         files={"image": ("reference.png", reference_png, "image/png")},
         timeout=180,
     )
-    resp.raise_for_status()
     return resp.json()["data"][0]["b64_json"]
 
 
@@ -900,12 +945,16 @@ def main():
     send_telegram(data, success_count, fail_count, folder_name, hole_results)
 
     print("\n" + "=" * 60)
-    print(f"전체 완료! 성공: {success_count}/24")
+    print(f"전체 완료! 성공: {success_count}/24 (실패 {fail_count})")
     print("=" * 60)
 
-    # 실패가 있으면 exit code 1
-    if fail_count > 0:
+    # 부분 실패 허용: MAX_ALLOWED_FAILURES(2)컷까지는 경고로 처리하고 정상 종료.
+    # 3컷 이상 실패하면 실질적 장애로 보고 워크플로를 실패 처리(exit 1).
+    if fail_count > MAX_ALLOWED_FAILURES:
+        print(f"⛔ 실패 {fail_count}컷 > 허용 {MAX_ALLOWED_FAILURES}컷 → 워크플로 실패 처리")
         sys.exit(1)
+    elif fail_count > 0:
+        print(f"⚠️ 실패 {fail_count}컷 (허용 {MAX_ALLOWED_FAILURES}컷 이내) → 정상 종료")
 
 
 if __name__ == "__main__":

@@ -14,7 +14,9 @@ on:
 jobs:
   generate-emoticons:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    # 정상 실행 ~19분. 이미지 API 5xx/429 지수 백오프 재시도(컷당 최대 3시도)
+    # 누적분을 흡수하도록 45→60분으로 상향.
+    timeout-minutes: 60
 
     steps:
       - name: Checkout repository
