@@ -58,6 +58,13 @@ IMAGE_BACKOFF_BASE = 2  # 지수 백오프 기준(초): 2s, 4s
 # 컷별 허용 실패 임계치: 이 값 초과(즉 3컷 이상 실패) 시에만 워크플로를 실패 처리
 MAX_ALLOWED_FAILURES = 2
 
+# 캐릭터 기획(plan_character) 재시도 정책
+# Claude 응답이 비표준 JSON 으로 나오면 parse_llm_json 이 실패하는데, 응답은
+# 매번 새로 샘플링되므로 재요청만으로 대부분 복구된다. 재시도 없이 즉시 죽으면
+# 이미지 1컷도 못 만들고 워크플로 전체가 날아간다.
+PLAN_MAX_ATTEMPTS = 3  # 총 시도 횟수 (초기 1 + 재시도 2)
+PLAN_MAX_TOKENS = 4000  # emotions 24개 JSON 이 잘리지 않도록 여유 확보
+
 # 한국 시간
 KST = timezone(timedelta(hours=9))
 TODAY = datetime.now(KST).strftime("%Y-%m-%d")
@@ -133,6 +140,64 @@ def _ensure_unique_text_overlays(emotions: list) -> list:
 # ============================================================
 # Step 2: Claude Haiku로 캐릭터 기획
 # ============================================================
+def _log_plan_failure(
+    attempt: int, raw_text: str, stop_reason: str | None, err: Exception
+) -> None:
+    """파싱 실패한 Claude 응답 원문을 로그에 남긴다.
+
+    원문 없이는 어떤 문자가 JSON 을 깨뜨렸는지 사후 진단이 불가능하다.
+    (2026-07~08 동일 실패 5회, 매번 원인 특정 실패)
+    """
+    print(f"\n[plan_character] 시도 {attempt}/{PLAN_MAX_ATTEMPTS} JSON 파싱 실패: {err}")
+    print(f"[plan_character] stop_reason={stop_reason} 응답길이={len(raw_text)}자")
+    print("[plan_character] ---- RAW RESPONSE BEGIN ----")
+    print(raw_text)
+    print("[plan_character] ---- RAW RESPONSE END ----", flush=True)
+
+
+def _request_character_plan(system_prompt: str, user_prompt: str) -> dict:
+    """Claude 에 캐릭터 기획 JSON 을 요청하고 파싱된 dict 를 반환.
+
+    응답은 매 호출마다 새로 샘플링되므로, 비표준 JSON 으로 깨진 경우
+    동일 프롬프트로 재요청하면 대부분 복구된다. 모두 소진하면 마지막
+    파싱 오류를 원인으로 붙여 RuntimeError 로 승격한다.
+    """
+    last_error: Exception | None = None
+
+    for attempt in range(1, PLAN_MAX_ATTEMPTS + 1):
+        resp = requests.post(
+            "https://api.anthropic.com/v1/messages",
+            headers={
+                "x-api-key": ANTHROPIC_API_KEY,
+                "anthropic-version": "2023-06-01",
+                "Content-Type": "application/json",
+            },
+            json={
+                "model": CLAUDE_MODEL,
+                "max_tokens": PLAN_MAX_TOKENS,
+                "system": system_prompt,
+                "messages": [{"role": "user", "content": user_prompt}],
+            },
+            timeout=60,  # 무응답 연결이 job 타임아웃까지 매달리지 않도록 (낙서풍과 동일)
+        )
+        resp.raise_for_status()
+        body = resp.json()
+        raw_text = body["content"][0]["text"]
+
+        try:
+            # ValueError 는 JSONDecodeError(하위 클래스) 와 'JSON 객체 없음' 을 모두 포함
+            return parse_llm_json(raw_text)
+        except ValueError as e:
+            last_error = e
+            _log_plan_failure(attempt, raw_text, body.get("stop_reason"), e)
+            if attempt < PLAN_MAX_ATTEMPTS:
+                _sleep_backoff(attempt, "plan JSON 파싱 실패", PLAN_MAX_ATTEMPTS)
+
+    raise RuntimeError(
+        f"캐릭터 기획 JSON 파싱을 {PLAN_MAX_ATTEMPTS}회 모두 실패 (원문은 위 로그 참조)"
+    ) from last_error
+
+
 def plan_character(previous_characters):
     """Claude Haiku에게 새 캐릭터 JSON 생성 요청"""
 
@@ -188,25 +253,8 @@ rough-doodle: 공책 모서리 낙서 감성, 삐뚤빼뚤 일부러 엉성
 [출력 형식 - JSON만, 다른 텍스트 절대 금지]
 {{"character_name": "캐릭터명(한국어)", "character_desc": "...", "theme": "테마명", "style": "6종 중 하나", "emotions": [{{"action": "...", "text_overlay": "..."}}, {{"action": "...", "text_overlay": null}}, ...]}}"""
 
-    resp = requests.post(
-        "https://api.anthropic.com/v1/messages",
-        headers={
-            "x-api-key": ANTHROPIC_API_KEY,
-            "anthropic-version": "2023-06-01",
-            "Content-Type": "application/json",
-        },
-        json={
-            "model": CLAUDE_MODEL,
-            "max_tokens": 2000,
-            "system": system_prompt,
-            "messages": [{"role": "user", "content": user_prompt}],
-        },
-    )
-    resp.raise_for_status()
-    raw_text = resp.json()["content"][0]["text"]
-
-    # JSON 추출/정제 (코드펜스·주석·후행쉼표 방어) — 공용 parse_llm_json 사용
-    data = parse_llm_json(raw_text)
+    # JSON 추출/정제(코드펜스·주석·후행쉼표 방어) + 파싱 실패 시 재요청
+    data = _request_character_plan(system_prompt, user_prompt)
 
     # emotions 구조 정규화 (구형 string 포맷 호환)
     normalized: list[dict] = []
@@ -379,11 +427,13 @@ def _post_image_with_retry(url: str, **kwargs) -> requests.Response:
         return resp
 
 
-def _sleep_backoff(attempt: int, reason: str) -> None:
+def _sleep_backoff(
+    attempt: int, reason: str, max_attempts: int = IMAGE_MAX_ATTEMPTS
+) -> None:
     """지수 백오프 + 소량 지터 후 대기 (재시도 직전 호출)."""
     delay = IMAGE_BACKOFF_BASE ** attempt + random.uniform(0, 1)
     print(
-        f"[retry {attempt}/{IMAGE_MAX_ATTEMPTS - 1} {reason} → {delay:.1f}s 후 재시도]",
+        f"[retry {attempt}/{max_attempts - 1} {reason} → {delay:.1f}s 후 재시도]",
         end=" ",
         flush=True,
     )

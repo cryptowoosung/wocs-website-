@@ -5,6 +5,7 @@ pytest 미설치 환경을 고려해 stdlib unittest 로 작성.
 모듈 최상단이 환경변수/rembg/PIL/google 을 요구하므로 import 전에 stub 한다.
 실 네트워크 호출 없이 requests.post 를 mock 으로 대체해 500 응답을 주입한다.
 """
+import io
 import os
 import sys
 import types
@@ -103,6 +104,76 @@ class PostImageRetryTest(unittest.TestCase):
             with self.assertRaises(requests.exceptions.HTTPError):
                 gen._post_image_with_retry("https://api.openai.com/v1/images/generations")
         self.assertEqual(post.call_count, 1, "4xx 는 재시도하지 않아야 함")
+
+
+class PlanRetryTest(unittest.TestCase):
+    """_request_character_plan 재시도 / 원문 로깅 검증."""
+
+    def setUp(self):
+        self._sleep_patch = mock.patch.object(gen.time, "sleep", lambda *a, **k: None)
+        self._sleep_patch.start()
+
+    def tearDown(self):
+        self._sleep_patch.stop()
+
+    @staticmethod
+    def _claude_resp(text, stop_reason="end_turn"):
+        return FakeResp(200, {"content": [{"text": text}], "stop_reason": stop_reason})
+
+    def test_broken_json_then_valid_succeeds(self):
+        """1차 응답이 깨진 JSON 이면 재요청해 2차 응답으로 복구한다."""
+        # Arrange
+        good = '{"character_name": "복구", "emotions": []}'
+        post = mock.Mock(side_effect=[self._claude_resp("{깨진,,,}"), self._claude_resp(good)])
+
+        # Act
+        with mock.patch.object(gen.requests, "post", post):
+            data = gen._request_character_plan("sys", "user")
+
+        # Assert
+        self.assertEqual(data["character_name"], "복구")
+        self.assertEqual(post.call_count, 2, "깨진 JSON 1회 → 정확히 1회 재요청")
+
+    def test_all_attempts_broken_raises_runtime_error(self):
+        """PLAN_MAX_ATTEMPTS 회 모두 실패하면 RuntimeError 로 승격한다."""
+        # Arrange
+        post = mock.Mock(return_value=self._claude_resp("{계속깨짐,,,}"))
+
+        # Act / Assert
+        with mock.patch.object(gen.requests, "post", post):
+            with self.assertRaises(RuntimeError):
+                gen._request_character_plan("sys", "user")
+        self.assertEqual(post.call_count, gen.PLAN_MAX_ATTEMPTS)
+
+    def test_raw_response_is_logged_on_failure(self):
+        """진단 가능하도록 실패 응답 원문과 stop_reason 을 로그에 남긴다."""
+        # Arrange
+        raw = '{"character_name": "로그확인용" 깨짐,,,}'
+        post = mock.Mock(return_value=self._claude_resp(raw, stop_reason="max_tokens"))
+
+        # Act
+        with mock.patch.object(gen.requests, "post", post):
+            with mock.patch("sys.stdout", new_callable=io.StringIO) as out:
+                with self.assertRaises(RuntimeError):
+                    gen._request_character_plan("sys", "user")
+        printed = out.getvalue()
+
+        # Assert
+        self.assertIn(raw, printed, "실패한 응답 원문이 그대로 로그에 남아야 함")
+        self.assertIn("max_tokens", printed, "stop_reason 이 로그에 남아야 함")
+
+    def test_uses_plan_max_tokens(self):
+        """max_tokens 는 PLAN_MAX_TOKENS(4000) 로 요청해야 한다."""
+        # Arrange
+        post = mock.Mock(return_value=self._claude_resp('{"character_name": "정상"}'))
+
+        # Act
+        with mock.patch.object(gen.requests, "post", post):
+            gen._request_character_plan("sys", "user")
+
+        # Assert
+        self.assertEqual(post.call_args.kwargs["json"]["max_tokens"], gen.PLAN_MAX_TOKENS)
+        self.assertEqual(gen.PLAN_MAX_TOKENS, 4000)
 
 
 if __name__ == "__main__":

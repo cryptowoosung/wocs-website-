@@ -15,7 +15,9 @@ on:
 jobs:
   generate-scribble-emoticons:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    # 정상 실행 ~21분. 러너 인프라 지연(checkout 20분·apt 17분 실측)을 흡수하도록
+    # 45→90분 상향. 2026-08-18 런은 준비 단계가 29분을 먹어 21/24 컷에서 취소됨.
+    timeout-minutes: 90
 
     steps:
       - name: Checkout repository
@@ -53,6 +55,6 @@ jobs:
           CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
           CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
           CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
-          RUN_ONLY_FIRST: ${{ github.event.inputs.run_only_first }}
+          RUN_ONLY_FIRST: ${{ github.event.inputs.run_only_first == 'true' && '1' || '0' }}
         run: |
           python emoticon_scribble_generator.py
