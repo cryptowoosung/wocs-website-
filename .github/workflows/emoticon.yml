@@ -21,6 +21,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
+        with:
+          # 레포 tip 트리가 1.3GB(OneDrive/·assets/ 대용량 바이너리)라 전체 체크아웃 시
+          # depth=1 fetch 가 20분까지 늘어난다. 제너레이터는 루트 .py/.json 만 읽으므로
+          # 필요한 경로만 받는다. sparse-checkout 지정 시 checkout 이 blob:none 필터를
+          # 자동 적용한다(actions/checkout git-source-provider.ts).
+          sparse-checkout: |
+            /*.py
+            /*.json
+            /.github
+          sparse-checkout-cone-mode: false
 
       - name: Set up Python
         uses: actions/setup-python@v5.3.0
