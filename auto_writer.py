@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 # ─── 재시도 설정 (Gemini 503/UNAVAILABLE 대응) ───
 RETRY_ATTEMPTS = 5
 TITLE_MAX_LEN = 80  # 제목 상한 (초과 시 첫 문단 오파싱으로 간주하고 실패 처리)
+QUESTION_H2_MIN_RATIO = 0.6  # AEO: 질문형 소제목 최소 비율 (미만이면 1회 재생성)
 RETRY_BASE_DELAY = 15  # 초, 지수 백오프 시작값
 # 순수 일시 장애(서버측 5xx)만 재시도 대상
 TRANSIENT_STATUS = ("503", "UNAVAILABLE", "500", "INTERNAL", "504", "DEADLINE_EXCEEDED")
@@ -277,13 +278,21 @@ def generate_content(topic, cta_this_post):
         '- 접근성: "광주·전남권에서 당일 방문 가능한..."\n'
         '- 주변 관광: "' + topic["region"] + ' 인근 주요 관광지와 연계한 글램핑 전략"\n'
         "전남/전북 주요 지역명을 자연스럽게 1~3개 추가 언급 가능\n\n"
-        "### 구조 (단락별)\n"
-        "1단락: 훅 — " + topic["region"] + " 또는 전남권 관련 구체적 상황/질문 (광고 아닌 현장 느낌)\n"
-        "2단락: 핵심 정보 1 — 이 주제의 가장 중요한 실용 정보\n"
-        "3단락: 핵심 정보 2 — 수치, 사례, 비교 중 하나 포함\n"
-        "4단락: 전문가 시각 — 16년 경력에서 나온 현장 경험담\n"
-        "5단락: 지역 특화 팁 — " + topic["region"] + " 또는 전남권 특성에 맞는 구체적 조언\n"
-        + cta_instruction + "\n\n"
+        "### 구조 (반드시 이 마크다운 형식)\n"
+        "첫 줄: '# ' + 질문형 제목 (60자 이내, 예: '광주 글램핑 창업 비용은 얼마나 드나요?')\n"
+        "이후 소제목은 모두 '## ' + 질문형 (예: '## 부지 선정에서 무엇을 먼저 확인해야 하나요?'). 소제목 5개, 각 소제목 아래 문단 1~2개\n"
+        "## 1: 훅 — " + topic["region"] + " 또는 전남권 관련 구체적 상황/질문 (광고 아닌 현장 느낌)\n"
+        "## 2: 핵심 정보 1 — 이 주제의 가장 중요한 실용 정보\n"
+        "## 3: 핵심 정보 2 — 수치, 규격, 비교 중 하나 포함\n"
+        "## 4: 전문가 시각 — 16년 현장 경력에서 나온 관찰 ('16년 현장 경력', '전남 현장에서' 같은 경험 신호 2회 이상)\n"
+        "## 5: 지역 특화 팁 — " + topic["region"] + " 또는 전남권 특성에 맞는 구체적 조언\n"
+        + cta_instruction.replace("6단락", "마지막 문단") + "\n\n"
+        "### 인용 가능 문장 (GEO)\n"
+        "- 본문 안에 AI 검색엔진이 그대로 발췌할 수 있는 독립 단문 2~3개 포함 (각 40~70자, 규격·수치·기준 1개 이상, 앞뒤 문맥 없이도 성립)\n\n"
+        "### 환각 방지 (필수)\n"
+        "- 확실하지 않은 단가·가격·법규 수치는 구체적 숫자 대신 '현장 확인 필요' 또는 '견적 시 확정'으로 표기\n"
+        "- 존재하지 않는 시공 사례를 실제 사례처럼 쓰지 말 것 ('○○에 시공했다' 금지) → 일반론·가이드형으로만 작성\n"
+        "- 보증 기간·성능 단정('절대 누수 없음', 'N년 무상 A/S') 금지, 타사 비방 금지\n\n"
         "### 도입부 스타일: " + intro_style + "\n\n"
         "### 키워드 배치 (SEO)\n"
         "- 제목에 메인 키워드 포함\n"
@@ -294,10 +303,20 @@ def generate_content(topic, cta_this_post):
         '- "안녕하세요" "오늘은 ~에 대해 알아보겠습니다" 같은 판에 박힌 도입부\n'
         '- "무료 견적 받기" "지금 바로 문의" 같은 노골적 광고 문구\n'
         '- 같은 문장 구조 반복 ("~합니다. ~합니다. ~합니다.")\n'
-        "- HTML 태그 없이 순수 텍스트만 출력\n\n"
-        "제목(H1)과 본문만 출력. 설명이나 메타 정보는 출력하지 마시오.\n"
+        "- HTML 태그 금지 (마크다운 #, ## 만 사용)\n"
+        "- 평서문 소제목 금지: 모든 ## 소제목은 반드시 물음표(?)로 끝나는 질문문 (예: '## 신안 글램핑 수요는 충분한가요?')\n\n"
+        "제목(# 한 줄)과 본문(## 소제목 + 문단)만 출력. 설명이나 메타 정보는 출력하지 마시오.\n"
     )
     return gemini_generate_with_retry(prompt, label="blog-content")
+
+
+def question_heading_ratio(content):
+    """## 소제목 중 질문형(물음표/~나요/~까요/~인가요) 비율. 소제목이 없으면 0."""
+    heads = [l.strip()[3:] for l in content.split("\n") if l.strip().startswith("## ")]
+    if not heads:
+        return 0.0
+    q = [h for h in heads if re.search(r"\?$|나요\??$|까요\??$|인가요\??$|하나요\??$", h.strip())]
+    return len(q) / len(heads)
 
 
 def parse_content(raw):
@@ -316,6 +335,43 @@ def parse_content(raw):
     if not title and content:
         title = content.split("\n")[0][:50]
     return title, content
+
+
+# ─── AEO/GEO 확장: 즉답(tldr) + FAQ 3문항 + 인용형 단문 3개 (yanglim prompts.py 이식) ───
+
+def generate_aeo_extras(title, content, topic):
+    """글 본문을 바탕으로 {tldr, faq[3], key_quotes[3]} JSON 생성. 실패 시 빈 dict (발행은 계속)."""
+    import sys
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from llm_json import parse_llm_json
+    prompt = (
+        "다음 블로그 글을 읽고 JSON 객체만 출력하세요 (설명·코드펜스 금지).\n"
+        "{\n"
+        '  "tldr": "제목 질문에 대한 즉답 40~60자 한 문장 (글 최상단 핵심 답변 블록에 노출)",\n'
+        '  "faq": [{"q": "실무 질문", "a": "답변 2~3문장"}, {"q": "...", "a": "..."}, {"q": "...", "a": "..."}],\n'
+        '  "key_quotes": ["인용 가능한 독립 단문 (40~70자, 수치/규격/기준 포함)", "...", "..."]\n'
+        "}\n"
+        "규칙: faq는 정확히 3개, 본문과 겹치지 않는 질문. 불확실한 단가·법규는 '현장 확인 필요'로 표기. "
+        "가상의 시공 사례 금지. 키워드 '" + topic.get("keyword", "") + "'와 지역 '" + topic.get("region", "") + "'를 자연스럽게 반영.\n\n"
+        "## 제목\n" + title + "\n\n## 본문\n" + content[:3500]
+    )
+    for attempt in range(2):
+        raw = gemini_generate_with_retry(prompt, label="aeo-extras")
+        if not raw:
+            continue
+        try:
+            data = parse_llm_json(raw)
+        except Exception as e:
+            print("AEO JSON 파싱 실패 (" + str(e)[:80] + ") → 재시도")
+            continue
+        faq = [x for x in (data.get("faq") or []) if isinstance(x, dict) and x.get("q") and x.get("a")][:3]
+        quotes = [str(x).strip() for x in (data.get("key_quotes") or []) if str(x).strip()][:3]
+        tldr = str(data.get("tldr") or "").strip()
+        if len(faq) == 3 and tldr:
+            return {"tldr": tldr[:120], "faq": faq, "key_quotes": quotes}
+        print("AEO 결과 불충분 (faq=" + str(len(faq)) + ", tldr=" + str(bool(tldr)) + ") → 재시도")
+    print("AEO 확장 생성 실패 — 즉답/FAQ 없이 발행")
+    return {}
 
 
 # ─── meta description 생성 ───
@@ -530,6 +586,14 @@ def render_faq(faq):
             + "\n".join(items) + "\n  </section>\n")
 
 
+def render_key_quotes(quotes):
+    if not quotes:
+        return ""
+    items = "".join("      <li>" + _esc(q) + "</li>\n" for q in quotes[:3])
+    return ('  <div class="keypoints">\n    <span class="keypoints-label">한 줄로 정리하면</span>\n'
+            '    <ul>\n' + items + '    </ul>\n  </div>\n')
+
+
 def render_references(references):
     items = []
     for r in references:
@@ -592,6 +656,7 @@ def save_to_html(post_id, title, content, topic, meta_desc, image_url=None,
                                  today, focus_keyword, faq, references, how_to_steps)
     tldr_html = render_tldr(tldr)
     faq_html = render_faq(faq)
+    quotes_html = render_key_quotes(extra.get("key_quotes", []) or [])
     refs_html = render_references(references)
     eeat_html = render_eeat(today)
     html = (
@@ -649,6 +714,10 @@ def save_to_html(post_id, title, content, topic, meta_desc, image_url=None,
         '.post-body table{width:100%;border-collapse:collapse;margin:24px 0;font-size:14px}\n'
         '.post-body th,.post-body td{border:1px solid rgba(201,169,110,0.2);padding:10px 12px;text-align:left}\n'
         '.post-body th{background:rgba(201,169,110,0.08);color:var(--gold);font-weight:500}\n'
+        '.keypoints{margin:36px 0;padding:20px 24px;background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.2)}\n'
+        '.keypoints-label{display:block;font-size:11px;letter-spacing:1px;color:var(--gold);margin-bottom:10px}\n'
+        '.keypoints ul{margin:0;padding-left:18px}\n'
+        '.keypoints li{font-family:var(--font-body);font-size:14px;color:rgba(240,235,224,0.85);line-height:1.8;margin:4px 0}\n'
         '.faq{margin:48px 0}\n'
         '.faq h2{font-family:var(--font-serif);font-size:clamp(22px,2.5vw,30px);font-weight:400;color:var(--ivory);margin-bottom:16px}\n'
         '.faq details{border-bottom:1px solid rgba(201,169,110,0.12);padding:14px 0}\n'
@@ -676,6 +745,7 @@ def save_to_html(post_id, title, content, topic, meta_desc, image_url=None,
         + tldr_html +
         '  <div class="post-body">\n'
         + body_html + '\n'
+        + quotes_html +
         '  </div>\n'
         + refs_html
         + faq_html
@@ -840,6 +910,16 @@ def main():
     if not title or not content:
         print("파싱 실패")
         exit(1)
+    # AEO: 질문형 소제목 비율이 낮으면 1회 재생성 (## 소제목 중 '?'/~나요/~까요 비율 60% 미만)
+    ratio = question_heading_ratio(content)
+    if ratio < QUESTION_H2_MIN_RATIO:
+        print("질문형 소제목 비율 " + str(int(ratio * 100)) + "% < " + str(int(QUESTION_H2_MIN_RATIO * 100)) + "% → 재생성 1회")
+        raw2 = generate_content(topic, cta_this_post)
+        if raw2:
+            t2, c2 = parse_content(raw2)
+            if t2 and c2 and len(t2) <= TITLE_MAX_LEN and question_heading_ratio(c2) > ratio:
+                title, content = t2, c2
+                print("재생성 채택: 질문형 소제목 " + str(int(question_heading_ratio(content) * 100)) + "%")
     # 가드: LLM이 '# 제목' 줄 없이 출력하면 첫 문단이 제목으로 잡힘 → 80자 초과면 발행 중단 (2026-09 결함 재발 방지)
     if len(title) > TITLE_MAX_LEN:
         print("제목 길이 초과(" + str(len(title)) + "자 > " + str(TITLE_MAX_LEN) + "): 첫 문단이 제목으로 파싱된 것으로 판단, 발행 중단")
@@ -856,9 +936,15 @@ def main():
     meta_desc = generate_meta_description(topic, content)
     print("메타: " + meta_desc[:60] + "...")
 
+    # AEO/GEO 확장 (즉답·FAQ·인용 단문) — 실패해도 발행은 계속
+    print("AEO/GEO 확장 생성 중...")
+    extra = generate_aeo_extras(title, content, topic)
+    extra["focus_keyword"] = topic.get("keyword", "")
+    print("즉답: " + (extra.get("tldr") or "(없음)")[:60] + " | FAQ " + str(len(extra.get("faq") or [])) + "개 | 인용 " + str(len(extra.get("key_quotes") or [])) + "개")
+
     # 저장
-    save_to_blog_data(post_id, title, content, topic, meta_desc)
-    save_to_html(post_id, title, content, topic, meta_desc)
+    save_to_blog_data(post_id, title, content, topic, meta_desc, extra=extra)
+    save_to_html(post_id, title, content, topic, meta_desc, extra=extra)
 
     # 중복 방지 기록
     save_used_topic(topic["keyword"], topic["region"])

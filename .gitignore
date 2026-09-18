@@ -39,3 +39,4 @@ __pycache__/
 
 # bkit 자동 상태 파일 (커밋 제외)
 .bkit/
+scripts/dryrun_last.html

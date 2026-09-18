@@ -56,6 +56,8 @@ jobs:
         run: python update_sitemap.py
       - name: blog.html 목록 정적 폴백 재생성 (크롤러용 서버 렌더 목록)
         run: python scripts/build_blog_static.py
+      - name: llms.txt 최신 글 섹션 갱신 (AI 검색엔진용)
+        run: python scripts/build_llms_txt.py
       # - name: 워드프레스 자동 포스팅
       #   env:
       #     WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
