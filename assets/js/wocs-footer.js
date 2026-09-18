@@ -84,6 +84,7 @@ function buildWocsFooter() {
       <div style="font-size:11px;color:rgba(240,235,224,0.3);margin-bottom:8px">${tc('footArea')}</div>
       <div class="footer-copy">${tc('footCopy')}
       </div>
+      <p class="biz-line" style="font-size:11px;color:rgba(240,235,224,0.45);margin:12px 0 0;line-height:1.7">정식상호 우성어닝천막공사캠프시스템 | 대표 김우성 | 사업자등록번호 465-02-03270 | 전라남도 화순군 사평면 유마로 592 | 010-4337-0582</p>
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-top:40px;padding-top:30px;border-top:1px solid rgba(201,169,110,0.12)">
         <div class="social-links" style="display:flex;gap:16px;align-items:center">
           <a href="https://instagram.com/woosung_tent" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="color:#c9a96e;transition:color .3s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#c9a96e'"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>

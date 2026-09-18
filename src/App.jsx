@@ -1569,6 +1569,7 @@ function WOCSHomepage() {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div style={{ ...S.sf, fontSize: 11, color: `${IVORY}44` }}>
               {t("footCopy")}
+              <div className="biz-line" style={{ marginTop: 10, lineHeight: 1.7 }}>정식상호 우성어닝천막공사캠프시스템 | 대표 김우성 | 사업자등록번호 465-02-03270 | 전라남도 화순군 사평면 유마로 592 | 010-4337-0582</div>
             </div>
             <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
               {[
