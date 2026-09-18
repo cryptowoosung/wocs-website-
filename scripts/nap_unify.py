@@ -21,6 +21,11 @@ SAMEAS = [
     "https://glampingtentgo.com",
     "https://blog.naver.com/glampingtentgo",
     "https://www.instagram.com/woosung_tent/",
+    "https://bsky.app/profile/wocs83.bsky.social",
+    "https://www.youtube.com/@countrydiy",
+    "https://www.linkedin.com/company/wocs-glamping",
+    "https://www.facebook.com/profile.php?id=61559084995838",
+    "https://x.com/mysunshinews",
 ]
 BIZ_LINE = f"정식상호 {NAME_FULL} | 대표 {CEO} | 사업자등록번호 {BIZNUM} | {ADDR} | {TEL}"
 BIZ_HTML = f'<p class="biz-line" style="font-size:11px;color:rgba(240,235,224,0.45);margin:12px 0 0;line-height:1.7">{BIZ_LINE}</p>'
