@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 
 # ─── 재시도 설정 (Gemini 503/UNAVAILABLE 대응) ───
 RETRY_ATTEMPTS = 5
+TITLE_MAX_LEN = 80  # 제목 상한 (초과 시 첫 문단 오파싱으로 간주하고 실패 처리)
 RETRY_BASE_DELAY = 15  # 초, 지수 백오프 시작값
 # 순수 일시 장애(서버측 5xx)만 재시도 대상
 TRANSIENT_STATUS = ("503", "UNAVAILABLE", "500", "INTERNAL", "504", "DEADLINE_EXCEEDED")
@@ -747,6 +748,8 @@ def run_webhook_mode(payload_raw):
         exit(1)
 
     title = str(payload["title"]).strip()
+    if len(title) > TITLE_MAX_LEN:
+        raise ValueError("제목 길이 초과(" + str(len(title)) + "자 > " + str(TITLE_MAX_LEN) + ")")
     content = str(payload["content"])
     image_url = str(payload["image_url"]).strip()
     keyword = str(payload.get("keyword") or "").strip()
@@ -836,6 +839,10 @@ def main():
     title, content = parse_content(raw)
     if not title or not content:
         print("파싱 실패")
+        exit(1)
+    # 가드: LLM이 '# 제목' 줄 없이 출력하면 첫 문단이 제목으로 잡힘 → 80자 초과면 발행 중단 (2026-09 결함 재발 방지)
+    if len(title) > TITLE_MAX_LEN:
+        print("제목 길이 초과(" + str(len(title)) + "자 > " + str(TITLE_MAX_LEN) + "): 첫 문단이 제목으로 파싱된 것으로 판단, 발행 중단")
         exit(1)
 
     if cta_this_post:
