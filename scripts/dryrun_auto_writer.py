@@ -38,12 +38,18 @@ def openai_generate(prompt: str, label: str = "gen") -> str:
 
 def main() -> int:
     tmp = Path(tempfile.mkdtemp(prefix="wocs_dryrun_"))
-    for f in ("auto_writer.py", "llm_json.py", "used_topics.json", "cta_counter.json"):
+    for f in ("auto_writer.py", "llm_json.py", "wocs_internal_links.py",
+              "used_topics.json", "cta_counter.json"):
         shutil.copy(ROOT / f, tmp / f)
     (tmp / "assets" / "js").mkdir(parents=True)
     shutil.copy(ROOT / "assets" / "js" / "blog-data.js", tmp / "assets" / "js" / "blog-data.js")
+    # 내부링크 후보를 만들려면 상품 페이지와 이전 글이 있어야 한다.
+    shutil.copytree(ROOT / "products", tmp / "products")
     (tmp / "content").mkdir()
+    for src in sorted((ROOT / "content").glob("auto_post_*.html"), reverse=True)[:5]:
+        shutil.copy(src, tmp / "content" / src.name)
     os.chdir(tmp)
+    sys.path.insert(0, str(tmp))  # auto_writer 가 import 하는 wocs_internal_links 해석용
     os.environ.setdefault("GEMINI_API_KEY", "dryrun")
     sys.argv = ["auto_writer.py"]
     spec = importlib.util.spec_from_file_location("aw", tmp / "auto_writer.py")
@@ -75,6 +81,10 @@ def main() -> int:
         "faq_section": "자주 묻는 질문" in h, "faq_details": h.count("<details>"),
         "keypoints_block": 'class="keypoints"' in h, "eeat_block": 'class="eeat"' in h,
         "hedge_phrases": h.count("현장 확인") + h.count("견적 시"), "experience_signal": h.count("16년"),
+        "product_links": h.count('href="/products/'),
+        "post_links": h.count('href="/content/'),
+        "internal_links_total": h.count('href="/products/') + h.count('href="/content/'),
+        "banned_word_글람핑": h.count("글람핑"),
     }
     print(json.dumps(report, ensure_ascii=False, indent=1))
     print("H2:", h2)

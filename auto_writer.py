@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import os, json, random, re, time
 from datetime import datetime, timedelta
+
+import wocs_internal_links as wil
 # google-genai는 기존 Gemini 모드에서만 필요 → webhook 모드는 표준 라이브러리만 사용
 
 # ─── 재시도 설정 (Gemini 503/UNAVAILABLE 대응) ───
@@ -161,6 +163,16 @@ CTA_TEXT = (
 
 # ─── SEO/AEO/GEO 상수 (Phase 5) ───
 SITE_URL = "https://wocs.kr"
+
+# 금칙어: 표기 흔들림 방지. 프롬프트에서 금지시키고, 생성 후 강제 치환까지 한다.
+BANNED_WORDS = (
+    ("글람핑", "글램핑"),
+)
+
+# 본문에 요구하는 최소 내부링크: 상품 페이지 2개 + 이전 글 1개
+MIN_PRODUCT_LINKS = 2
+MIN_POST_LINKS = 1
+
 COMPANY_NAME = "우성어닝천막공사"
 COMPANY_PHONE = "010-4337-0582"
 COMPANY_ADDR = "전남 화순군 사평면 유마로 592"
@@ -173,6 +185,81 @@ CATEGORY_LABELS = {
     "cat_revenue": "수익분석",
     "cat_case": "시공사례",
 }
+
+
+def apply_banned_words(text):
+    """생성 결과에 금칙어가 남아 있으면 강제로 치환한다 (프롬프트 무시 대비)."""
+    if not text:
+        return text
+    for bad, good in BANNED_WORDS:
+        text = text.replace(bad, good)
+    return text
+
+
+def internal_link_rules(topic):
+    """주제에 맞는 상품·이전 글 후보를 프롬프트에 주입할 지시문으로 만든다.
+
+    상품 목록은 하드코딩하지 않고 products/ 디렉토리에서 동적으로 읽는다.
+    """
+    try:
+        products = wil.load_products()
+        seed = topic.get("long_tail", "") + " " + topic.get("keyword", "")
+        picked = wil.match_products(seed, products, limit=4)
+        posts = wil.recent_posts(limit=3)
+    except Exception:
+        # 후보를 못 만들어도 글 생성 자체는 막지 않는다 (사후 보정이 있다).
+        return ""
+    if not picked:
+        return ""
+
+    lines = [
+        "### 내부링크 (필수)",
+        "- 본문 안에 아래 WOCS 상품 페이지 링크를 최소 "
+        + str(MIN_PRODUCT_LINKS) + "개 넣어라.",
+        "- 아래 이전 글 링크도 최소 " + str(MIN_POST_LINKS) + "개 넣어라.",
+        "- 형식은 마크다운 링크 [앵커텍스트](경로) 이며, 경로는 아래 값을 "
+        "그대로 써라 (임의 경로 생성 금지).",
+        "- 앵커텍스트는 '여기', '자세히 보기' 같은 무의미한 말 대신 "
+        "문장 안에서 자연스럽게 읽히는 표현으로 쓴다.",
+        "- 링크만 나열한 단락을 따로 만들지 말고 본문 문맥 안에 녹여라.",
+        "",
+        "상품 페이지 후보:",
+    ]
+    lines += ["  - " + p["name"] + " -> " + p["url"] for p in picked]
+    if posts:
+        lines += ["", "이전 글 후보:"]
+        lines += ["  - " + q["title"] + " -> " + q["url"] for q in posts]
+    lines.append("")
+    return "\n".join(lines) + "\n"
+
+
+def md_links_to_html(text):
+    """마크다운 링크 [텍스트](/경로) -> <a href="/경로">텍스트</a>."""
+    return re.sub(r"\[([^\[\]]+?)\]\(([^)\s]+)\)",
+                  r'<a href="\2">\1</a>', text)
+
+
+def enforce_internal_links(content, title, topic):
+    """LLM이 링크를 빠뜨렸을 때를 대비한 안전망.
+
+    부족분만 '관련 제품' 섹션으로 보충한다 (이미 충분하면 원문 그대로).
+    """
+    try:
+        products = wil.load_products()
+    except Exception:
+        return content
+    have = content.count("](/products/")
+    if have >= MIN_PRODUCT_LINKS:
+        return content
+    seed = title + " " + topic.get("long_tail", "") + " " + topic.get("keyword", "")
+    picks = [p for p in wil.match_products(seed, products, limit=3, body=content)
+             if ("](" + p["url"] + ")") not in content]
+    if not picks:
+        return content
+    block = ["", "## 관련 제품", ""]
+    for p in picks[: max(0, 3 - have)]:
+        block.append("- [" + p["name"] + "](" + p["url"] + ")")
+    return content.rstrip() + "\n".join(block) + "\n"
 
 
 # ─── 유틸리티 ───
@@ -299,6 +386,9 @@ def generate_content(topic, cta_this_post):
         "- 첫 단락 100자 이내에 메인 키워드 1회\n"
         "- 중간 단락에 롱테일 키워드 1회\n"
         "- 지역명 자연스럽게 3~5회 분산\n\n"
+        "### 표기 규칙 (금칙어)\n"
+        '- "글람핑"은 금칙어다. 반드시 "글램핑"으로만 표기한다.\n\n'
+        + internal_link_rules(topic) +
         "### 절대 금지\n"
         '- "안녕하세요" "오늘은 ~에 대해 알아보겠습니다" 같은 판에 박힌 도입부\n'
         '- "무료 견적 받기" "지금 바로 문의" 같은 노골적 광고 문구\n'
@@ -465,12 +555,12 @@ def markdown_to_html(text):
         elif stripped.startswith("# "):
             html_lines.append("<h2>" + stripped[2:] + "</h2>")
         elif stripped.startswith("- ") or stripped.startswith("* "):
-            html_lines.append("<li>" + stripped[2:] + "</li>")
+            html_lines.append("<li>" + md_links_to_html(stripped[2:]) + "</li>")
         elif stripped.startswith("**") and stripped.endswith("**"):
             html_lines.append("<p><strong>" + stripped[2:-2] + "</strong></p>")
         else:
             bold = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', stripped)
-            html_lines.append("<p>" + bold + "</p>")
+            html_lines.append("<p>" + md_links_to_html(bold) + "</p>")
     result = []
     in_list = False
     for line in html_lines:
@@ -924,6 +1014,13 @@ def main():
     if len(title) > TITLE_MAX_LEN:
         print("제목 길이 초과(" + str(len(title)) + "자 > " + str(TITLE_MAX_LEN) + "): 첫 문단이 제목으로 파싱된 것으로 판단, 발행 중단")
         exit(1)
+
+    # 금칙어 강제 치환 + 내부링크 최소 개수 보장 (프롬프트 미준수 대비 안전망)
+    title = apply_banned_words(title)
+    content = apply_banned_words(content)
+    content = enforce_internal_links(content, title, topic)
+    print("내부링크: products " + str(content.count("](/products/"))
+          + "개 / content " + str(content.count("](/content/")) + "개")
 
     if cta_this_post:
         content += CTA_TEXT

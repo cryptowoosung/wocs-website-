@@ -5,6 +5,16 @@
   "installCommand": "npm install",
   "framework": "vite",
   "rewrites": [
-    { "source": "/", "destination": "/vite-index.html" }
+    {
+      "source": "/",
+      "destination": "/vite-index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/privacy.html",
+      "destination": "/legal/privacy.html",
+      "permanent": true
+    }
   ]
 }
