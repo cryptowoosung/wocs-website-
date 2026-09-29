@@ -14,7 +14,7 @@
     {
       "source": "/privacy.html",
       "destination": "/legal/privacy.html",
-      "permanent": true
+      "statusCode": 301
     }
   ]
 }
