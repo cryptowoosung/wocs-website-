@@ -28,6 +28,8 @@ PAGES = [
 
 def main() -> int:
     posts = bbs.parse_blog_data((ROOT / "assets" / "js" / "blog-data.js").read_text(encoding="utf-8"))
+    # noindex 글(어닝·천막 → 자매 브랜드 이관)은 최신 글 목록에서 뺀다.
+    posts = [p for p in posts if not p.get("noindex")]
     bbs.resolve_links(posts)
     tr = bbs.translation_lookup((ROOT / "resources" / "blog.html").read_text(encoding="utf-8"))
     lines = [

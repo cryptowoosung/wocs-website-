@@ -35,7 +35,7 @@ def _unescape_js(s: str) -> str:
 
 
 def parse_blog_data(text: str) -> list:
-    """BLOG_POSTS 배열의 각 객체에서 id/title/excerpt/description/date/category만 추출."""
+    """BLOG_POSTS 배열의 각 객체에서 id/title/excerpt/description/date/category/noindex 추출."""
     body = text.split("var BLOG_POSTS = [", 1)[1]
     posts = []
     # 객체 경계: 줄 시작의 '{' ~ 줄 시작의 '}' (blog-data.js 포맷 고정)
@@ -52,6 +52,8 @@ def parse_blog_data(text: str) -> list:
             "excerpt": _unescape_js(field("excerpt") or field("description")),
             "date": field("date"),
             "category": field("category"),
+            # noindex 글은 llms.txt·정적 목록에서 제외된다 (플래그 없으면 False).
+            "noindex": field("noindex", r"(true|false)") == "true",
         })
     return posts
 

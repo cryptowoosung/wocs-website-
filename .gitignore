@@ -40,3 +40,5 @@ __pycache__/
 # bkit 자동 상태 파일 (커밋 제외)
 .bkit/
 scripts/dryrun_last.html
+# Claude Code 작업 지시서 (로컬 전용)
+*_task.md

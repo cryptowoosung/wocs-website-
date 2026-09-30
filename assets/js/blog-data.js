@@ -73,7 +73,7 @@ var BLOG_POSTS = [
 },
 {
   id:239, title:'광주 어닝 시공 비용과 종류별 가격, 2026년 전망과 고려사항', excerpt:'## 광주 어닝 시공 비용 종류별 가격 2026, 초기 투자보다 중요한 것   어닝의 가격은 종류, 재질, 크기, 그리고 작동 방식에 따라 천차만별입니다. 글램핑 시설에 주로 사용',
-  date:'2026-09-07', category:'cat_construction', featured:false,
+  date:'2026-09-07', category:'cat_construction', featured:false, noindex:true,
   image:'https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=800&h=500&fit=crop&q=85&awning,outdoor',
   description:'광주 어닝 시공 비용, 2026년 기준 수동/전동 어닝 가격과 재질별 차이를 상세히 안내합니다. 글램핑 어닝 설치 시 초기 투자와 장기적 편의성을 비교하여 최적의 선택을 돕습니다.',
   tldr:'', faq_count:0, has_how_to:false, ref_count:0,
@@ -227,7 +227,7 @@ var BLOG_POSTS = [
 },
 {
   id:225, title:'광주 컨테이너 천막 시공의 방수·단열 설계: 16년 경력 전문가의 기술 가이드', excerpt:'광주 컨테이너 천막 시공, 왜 방수와 단열이 핵심인가 컨테이너 천막이란 기존 철재 컨테이너 박스 위에 구조용 천막 프레임을 설치하고 고기능성 방수 천막지를 덮어 임시·반영구 건축물',
-  date:'2026-08-03', category:'cat_construction', featured:false,
+  date:'2026-08-03', category:'cat_construction', featured:false, noindex:true,
   image:'https://res.cloudinary.com/dd0jjn8bl/image/upload/v1785798113/wocs-kr-20260804.png',
   description:'광주 컨테이너 천막의 방수·단열 설계는 단순한 천막 설치가 아닌 구조 엔지니어링이다. 16년 경력의 전문가가 실전 기술, 재료 규격, 결로 방지 시스템을 상세히 설명한다.',
   tldr:'컨테이너 천막 방수는 천막지 규격(800~1200mmH2O), 용접 솔기 밀폐, 배수 시스템 3단계로 구성된다. 단열은 우레탄 폼(0.025W/m·K) 또는 글래스울에 방습층, 환기 시스템을 병행해야 한다. 광주 지역 습도와 일교차를 고려한 설계가 15년 이상 내용년수를 결정한다.', faq_count:5, has_how_to:false, ref_count:5,
@@ -260,7 +260,7 @@ var BLOG_POSTS = [
 },
 {
   id:222, title:'전남 천막 구조물 설계 KS 기준과 허가 절차 안내', excerpt:'글램핑 사업의 첫걸음은 부지 선정 못지않게 법적 기준을 제대로 이해하는 데 있습니다. 많은 분이 글램핑 텐트를 단순한 야영 장비로 생각하시지만, 일정 규모 이상의 시설은 \'가설 건',
-  date:'2026-07-30', category:'cat_construction', featured:false,
+  date:'2026-07-30', category:'cat_construction', featured:false, noindex:true,
   image:'https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=800&h=500&fit=crop&q=85&tent,canopy',
   description:'전남에서 글램핑 사업을 시작하려면 천막 구조물을 단순 야영 장비로 보지 않고 \'가설 건축물\'로 인식해 안전성 확보가 필수입니다. 지자체별 조례 및 개발행위허가 등 법적 기준을 철저히 준비해야 시행착오를 줄일 수 있습니다.',
   tldr:'', faq_count:0, has_how_to:false, ref_count:0,
@@ -282,7 +282,7 @@ var BLOG_POSTS = [
 },
 {
   id:220, title:'화순 어닝 시공 구조 설계와 자재 선택 기준 | B2B 전문가 가이드', excerpt:'상업용 어닝의 구조 설계 원칙 상업용 어닝 시공이란 사업장, 공장, 상업시설의 외부 공간에 설치되는 고정형 또는 가동형 차양 구조물로, 건축물 외벽에 부착되거나 독립 지주로 지지되',
-  date:'2026-07-27', category:'cat_construction', featured:false,
+  date:'2026-07-27', category:'cat_construction', featured:false, noindex:true,
   image:'https://res.cloudinary.com/dd0jjn8bl/image/upload/v1785193304/wocs-kr-20260728.png',
   description:'상업용 어닝 시공의 구조 설계와 자재 선택은 풍압, 적설하중, 기후 조건을 고려한 정밀한 계산이 필수다. 화순 지역 16년 경험의 시공 기술 관점에서 강재 규격, 천재 선택, 고정부재 기준을 상세 해설한다.',
   tldr:'상업용 어닝은 풍압, 적설하중, 지역 기후를 반영한 정밀 설계가 필수다. 화순 지역은 태풍 영향 및 적설 고려해 50kg/㎡ 이상 설계를 권장한다. 강재는 SS400 또는 SM490, 천재는 아크릴/PVC 코팅포 선택이 장기 경제성을 좌우한다. 기초 강도, 용접부, 하중 재하 검사 등 다단계 검증이 필수적이다.', faq_count:5, has_how_to:false, ref_count:4,

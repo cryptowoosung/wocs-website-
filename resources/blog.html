@@ -239,10 +239,14 @@ th:{p1:"ประสบการณ์ภาคสนาม 16 ปี",p2:"ข�
   var currentCat = 'cat_all';
   var shown = 0;
 
+  // noindex 글(자매 브랜드 주제로 이관)은 목록·캐러셀에서 모두 숨긴다.
+  // 글 자체는 살아 있고 링크로는 접근 가능하다.
+  var VISIBLE_POSTS = BLOG_POSTS.filter(function(p){return !p.noindex});
+
   // Featured carousel
   function renderFeatured(){
     var track = document.getElementById('featTrack');
-    var featured = BLOG_POSTS.filter(function(p){return p.featured});
+    var featured = VISIBLE_POSTS.filter(function(p){return p.featured});
     track.innerHTML = featured.map(function(p){
       return '<a class="feat-card" href="blog-post.html?id='+p.id+'">'
         +'<img src="'+p.image+'" alt="'+t(p.title)+'" loading="lazy">'
@@ -265,8 +269,8 @@ th:{p1:"ประสบการณ์ภาคสนาม 16 ปี",p2:"ข�
 
   // Blog grid
   function getFiltered(){
-    if(currentCat === 'cat_all') return BLOG_POSTS;
-    return BLOG_POSTS.filter(function(p){return p.category === currentCat});
+    if(currentCat === 'cat_all') return VISIBLE_POSTS;
+    return VISIBLE_POSTS.filter(function(p){return p.category === currentCat});
   }
 
   function renderGrid(reset){

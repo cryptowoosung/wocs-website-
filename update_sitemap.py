@@ -7,6 +7,7 @@ drops any path that slipped through. index.html is normalised to the
 directory URL (e.g. about/index.html -> https://wocs.kr/about/).
 """
 import os
+import re
 import subprocess
 from datetime import datetime
 
@@ -87,6 +88,25 @@ def url_for(rel_posix):
     return SITE_URL + "/" + rel_posix
 
 
+NOINDEX_RE = re.compile(
+    r'<meta\s+name=["\']robots["\'][^>]*content=["\'][^"\']*noindex', re.I
+)
+
+
+def is_noindex(full):
+    """robots 메타에 noindex 가 있으면 sitemap 에서 뺀다.
+
+    하드코딩 목록 대신 메타를 읽는 이유: 앞으로 어떤 글을 noindex 하더라도
+    생성기를 고치지 않고 자동으로 반영된다 (색인 정책의 단일 출처).
+    """
+    try:
+        with open(full, encoding="utf-8", errors="ignore") as fh:
+            head = fh.read(8192)  # robots 메타는 <head> 안에 있다
+    except OSError:
+        return False
+    return bool(NOINDEX_RE.search(head))
+
+
 def collect_html_files():
     seen = set()
     results = []
@@ -129,6 +149,7 @@ def collect_html_files():
                 seen.add(rel)
                 results.append((rel, full))
 
+    results = [(rel, full) for rel, full in results if not is_noindex(full)]
     results.sort(key=lambda t: t[0])
     return results
 
