@@ -108,8 +108,6 @@ TOPICS = [
     # ── 시공정보 ──
     {"keyword": "글램핑 시공 업체", "region": "광주", "long_tail": "광주 글램핑 시공 업체 선택 기준 5가지", "category": "시공정보", "cta_every": 3},
     {"keyword": "글램핑 시공 업체", "region": "전남", "long_tail": "전남 글램핑 시공 전문 업체 비교 방법", "category": "시공정보", "cta_every": 3},
-    {"keyword": "어닝 시공", "region": "광주", "long_tail": "광주 어닝 시공 비용 종류별 가격 2026", "category": "시공정보", "cta_every": 3},
-    {"keyword": "천막 구조물", "region": "전남", "long_tail": "전남 천막 구조물 설계 KS 기준 허가 절차", "category": "시공정보", "cta_every": 3},
     {"keyword": "글램핑 단지 조성", "region": "전남북", "long_tail": "전남북 글램핑 단지 조성 토지 선정부터 완공", "category": "시공정보", "cta_every": 3},
     # ── 수익분석 ──
     {"keyword": "글램핑 수익", "region": "전남", "long_tail": "전남 글램핑 1동당 월 수익 현실 수치 공개", "category": "수익분석", "cta_every": 4},
@@ -141,8 +139,6 @@ UNSPLASH_TAGS = {
     "글램핑": "glamping,tent",
     "사파리": "safari,tent,camping",
     "돔": "dome,tent,geodesic",
-    "어닝": "awning,outdoor",
-    "천막": "tent,canopy",
     "캠핑": "camping,nature",
     "모듈러": "modular,cabin",
     "수익": "business,profit",
@@ -178,7 +174,7 @@ COMPANY_PHONE = "010-4337-0582"
 COMPANY_ADDR = "전남 화순군 사평면 유마로 592"
 COMPANY_LOGO = "https://wocs.kr/assets/images/logo_preview_dark.png"
 AUTHOR_NAME = "김우성"
-AUTHOR_TITLE = "WOCS 대표 · 16년 경력 어닝·천막·구조물 시공 전문가"
+AUTHOR_TITLE = "WOCS 대표 · 16년 경력 글램핑 구조물 제조·시공 전문가"
 CATEGORY_LABELS = {
     "cat_startup": "창업가이드",
     "cat_construction": "시공정보",
@@ -386,6 +382,9 @@ def generate_content(topic, cta_this_post):
         "- 첫 단락 100자 이내에 메인 키워드 1회\n"
         "- 중간 단락에 롱테일 키워드 1회\n"
         "- 지역명 자연스럽게 3~5회 분산\n\n"
+        "### 브랜드 범위 (필수)\n"
+        "- 이 사이트는 글램핑 전용이다. 어닝·천막·전동어닝을 주제로 글을 쓰지 마라.\n"
+        "- 본문에서 어닝·천막을 언급해야 하면 '자매 브랜드 우성어닝(https://glampingtentgo.com)'으로 한 번만 안내하라.\n\n"
         "### 표기 규칙 (금칙어)\n"
         '- "글람핑"은 금칙어다. 반드시 "글램핑"으로만 표기한다.\n\n'
         + internal_link_rules(topic) +
@@ -842,7 +841,7 @@ def save_to_html(post_id, title, content, topic, meta_desc, image_url=None,
         + eeat_html +
         '  <div class="post-cta">\n'
         '    <h4>' + esc(COMPANY_NAME) + ' 시공 전문 상담</h4>\n'
-        '    <p>전남 화순 기반 어닝·천막·구조물 제조·시공 전문</p>\n'
+        '    <p>전남 화순 기반 글램핑 구조물 제조·시공 전문</p>\n'
         '    <a href="' + SITE_URL + '/contact/index.html">무료 상담 신청</a>\n'
         '  </div>\n'
         '</div>\n'
