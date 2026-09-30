@@ -296,6 +296,29 @@ def is_topic_available(topic):
     return (datetime.now() - last_date) > timedelta(days=60)
 
 
+# 브랜드 범위 가드: 자매 브랜드(우성어닝) 소관 주제가 생성되면 발행하지 않는다.
+# scripts/noindex_awning_posts.py 의 탐지 규칙과 같은 기준을 쓴다.
+OFFBRAND_RE = re.compile(r"(어닝|천막|차양|캐노피|캠프시스템)")
+OFFBRAND_KEEP = "글램핑"   # 글램핑이 함께 있으면 wocs.kr 콘텐츠로 인정
+OFFBRAND_MAX_RETRY = 2
+
+
+def is_offbrand_title(title):
+    """제목이 어닝·천막 계열이고 글램핑 언급이 없으면 True (발행 차단 대상)."""
+    if not title:
+        return False
+    return bool(OFFBRAND_RE.search(title)) and OFFBRAND_KEEP not in title
+
+
+def pick_other_topic(tried):
+    """이미 시도한 주제를 빼고 새 주제를 고른다. 없으면 None."""
+    pool = [t for t in TOPICS
+            if (t["keyword"], t["region"]) not in tried and is_topic_available(t)]
+    if not pool:
+        pool = [t for t in TOPICS if (t["keyword"], t["region"]) not in tried]
+    return random.choice(pool) if pool else None
+
+
 def pick_topic():
     available = [t for t in TOPICS if is_topic_available(t)]
     if not available:
@@ -1012,6 +1035,29 @@ def main():
     # 가드: LLM이 '# 제목' 줄 없이 출력하면 첫 문단이 제목으로 잡힘 → 80자 초과면 발행 중단 (2026-09 결함 재발 방지)
     if len(title) > TITLE_MAX_LEN:
         print("제목 길이 초과(" + str(len(title)) + "자 > " + str(TITLE_MAX_LEN) + "): 첫 문단이 제목으로 파싱된 것으로 판단, 발행 중단")
+        exit(1)
+
+    # 브랜드 범위 가드: 어닝·천막 주제가 나오면 다른 주제로 재생성 (최대 OFFBRAND_MAX_RETRY 회)
+    tried = {(topic["keyword"], topic["region"])}
+    for attempt in range(1, OFFBRAND_MAX_RETRY + 1):
+        if not is_offbrand_title(title):
+            break
+        print("BLOCKED: 어닝·천막 주제 — " + title)
+        alt = pick_other_topic(tried)
+        if not alt:
+            break
+        topic = alt
+        tried.add((topic["keyword"], topic["region"]))
+        cta_this_post = should_include_cta(topic)
+        print("다른 주제로 재생성 " + str(attempt) + "/" + str(OFFBRAND_MAX_RETRY) + ": " + topic["long_tail"])
+        raw_alt = generate_content(topic, cta_this_post)
+        if not raw_alt:
+            continue
+        t_alt, c_alt = parse_content(raw_alt)
+        if t_alt and c_alt and len(t_alt) <= TITLE_MAX_LEN:
+            title, content = t_alt, c_alt
+    if is_offbrand_title(title):
+        print("BLOCKED: 어닝·천막 주제 — 재시도 한도 초과, 발행 중단")
         exit(1)
 
     # 금칙어 강제 치환 + 내부링크 최소 개수 보장 (프롬프트 미준수 대비 안전망)
