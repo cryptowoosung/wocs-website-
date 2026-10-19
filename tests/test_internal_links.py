@@ -155,6 +155,34 @@ def test_enforce_internal_links_is_noop_when_already_linked(aw):
     assert aw.enforce_internal_links(content, "제목", topic) == content
 
 
+def test_enforce_internal_links_html_fills_to_minimum(aw):
+    topic = {"keyword": "돔텐트"}
+    content = '<p>본문 <a href="/products/dome-tent.html">돔</a></p>'
+    out = aw.enforce_internal_links_html(content, "돔텐트 창업", topic)
+    assert '<section class="related-products">' in out
+    assert wil.count_internal_links(out) == wil.MIN_INTERNAL_LINKS
+    assert out.count('href="/products/dome-tent.html"') == 1
+
+
+def test_enforce_internal_links_html_is_noop_when_already_linked(aw):
+    content = ('<a href="/products/a.html">a</a> <a href="/products/b.html">b</a> '
+               '<a href="/content/c.html">c</a>')
+    assert aw.enforce_internal_links_html(content, "제목", {"keyword": "x"}) == content
+
+
+def test_webhook_blocks_offbrand_title_before_saving(aw, monkeypatch):
+    # Arrange: 저장 함수가 불리면 실패
+    def boom(*a, **k):
+        raise AssertionError("저장되면 안 됨")
+    monkeypatch.setattr(aw, "save_to_blog_data", boom)
+    monkeypatch.setattr(aw, "save_to_html", boom)
+    payload = '{"title": "전남 어닝 시공 비용", "content": "<p>x</p>", "image_url": "https://x/y.jpg"}'
+
+    # Act / Assert
+    with pytest.raises(SystemExit):
+        aw.run_webhook_mode(payload)
+
+
 def test_internal_link_rules_mentions_real_paths(aw):
     rules = aw.internal_link_rules({"long_tail": "돔텐트 비용", "keyword": "돔텐트"})
     assert "### 내부링크 (필수)" in rules

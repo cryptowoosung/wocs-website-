@@ -260,6 +260,28 @@ def enforce_internal_links(content, title, topic):
     return content.rstrip() + "\n".join(block) + "\n"
 
 
+def enforce_internal_links_html(content, title, topic):
+    """webhook(HTML 본문) 안전망: 내부링크가 wil.MIN_INTERNAL_LINKS 미만이면
+    부족한 만큼 '관련 제품' 섹션(backfill_internal_links.py 와 같은 마크업)을 본문 끝에 붙인다."""
+    have = wil.count_internal_links(content)
+    need = wil.MIN_INTERNAL_LINKS - have
+    if need <= 0:
+        return content
+    try:
+        products = wil.load_products()
+    except Exception:
+        return content
+    seed = title + " " + topic.get("keyword", "")
+    plain = re.sub(r"<[^>]+>", " ", content)
+    picks = [p for p in wil.match_products(seed, products, limit=3, body=plain)
+             if 'href="' + p["url"] + '"' not in content][:need]
+    if not picks:
+        return content
+    items = "\n".join('    <li><a href="' + p["url"] + '">' + _esc(p["name"]) + "</a></li>" for p in picks)
+    return (content.rstrip() + "\n<section class=\"related-products\">\n  <h2>관련 제품</h2>\n  <ul>\n"
+            + items + "\n  </ul>\n</section>\n")
+
+
 # ─── 유틸리티 ───
 
 def get_unsplash_image(keyword):
@@ -947,6 +969,10 @@ def run_webhook_mode(payload_raw):
     title = str(payload["title"]).strip()
     if len(title) > TITLE_MAX_LEN:
         raise ValueError("제목 길이 초과(" + str(len(title)) + "자 > " + str(TITLE_MAX_LEN) + ")")
+    # 브랜드 범위 가드: wocs.kr 은 글램핑 전용 — 어닝·천막 주제는 발행하지 않는다 (webhook 은 재생성 불가 → 차단)
+    if is_offbrand_title(title):
+        print("BLOCKED: 어닝·천막 주제 — 자매 사이트 glampingtentgo.com 소관, 발행 중단: " + title)
+        exit(1)
     content = str(payload["content"])
     image_url = str(payload["image_url"]).strip()
     keyword = str(payload.get("keyword") or "").strip()
@@ -979,6 +1005,8 @@ def run_webhook_mode(payload_raw):
         topic_category = "창업가이드"
 
     topic = {"keyword": keyword or "글램핑", "region": region, "category": topic_category}
+    content = enforce_internal_links_html(content, title, topic)
+    print("내부링크 " + str(wil.count_internal_links(content)) + "개")
 
     # meta description 보강: excerpt → tldr → 본문 순 (외부 API 미사용)
     if not meta_desc:
