@@ -1,0 +1,44 @@
+{
+  "_comment": "제휴 상품 블록 공통 정의 (wocs.kr auto_writer.py · glampingtentgo n8n 공용). 링크 값은 여기 두지 않고 환경변수 COUPANG_LINK_n / NAVER_CONNECT_LINK_n 에서 읽는다. 슬롯 n = 같은 상품.",
+  "slots": {
+    "1": {"product": "루메나 온풍기", "note": "텐트·글램핑 객실 겨울 보조 난방"},
+    "2": {"product": "코멧 타프 특대형", "note": "그늘·비가림을 넓게 잡는 대형 타프"},
+    "3": {"product": "코멧 충전식 LED 랜턴", "note": "야간 동선·객실 조명용 충전식 랜턴"}
+  },
+  "sites": {
+    "wocs": {
+      "heading": "관련 캠핑용품",
+      "default_slot": "3",
+      "keyword_slots": [
+        ["1", ["겨울", "동계", "난방", "온풍", "보온", "추위", "결로", "단열"]],
+        ["2", ["타프", "그늘", "차양", "비가림", "우천", "장마", "여름", "자외선", "바람", "데크"]],
+        ["3", ["조명", "야간", "랜턴", "감성", "인테리어", "비품", "운영", "객실"]]
+      ],
+      "category_slots": {"cat_construction": "2", "cat_startup": "3", "cat_revenue": "3", "cat_case": "1"}
+    },
+    "glampingtentgo": {
+      "heading": "관련 어닝·천막 보수용품",
+      "default_slot": "2",
+      "notes": {"2": "천막 보수·교체 공사 전후 임시 그늘·비가림용 대형 타프"},
+      "keyword_slots": [],
+      "category_slots": {}
+    }
+  },
+  "programs": {
+    "coupang": {
+      "env": "COUPANG_LINK_",
+      "label": "쿠팡에서 보기",
+      "disclosure": "#광고 #쿠팡파트너스 — 이 포스팅은 쿠팡 파트너스 활동의 일환으로 일정액의 수수료를 제공받습니다"
+    },
+    "naver": {
+      "env": "NAVER_CONNECT_LINK_",
+      "label": "네이버에서 보기",
+      "disclosure": "#광고 #네이버쇼핑커넥트 — 이 포스팅은 네이버 쇼핑 커넥트 활동의 일환으로 판매 발생 시 수수료를 제공받습니다"
+    }
+  },
+  "html": {
+    "wrap": "<aside class=\"wocs-aff\" data-wocs-aff=\"{slot}\" style=\"margin:40px 0;padding:18px 20px;border:1px solid rgba(128,128,128,.35);border-radius:6px;font-size:14px;line-height:1.7\">{disclosures}<p style=\"margin:10px 0 6px;font-weight:600;font-size:16px\">{heading}</p><p style=\"margin:0 0 8px\">{product} — {note}</p><p style=\"margin:0\">{buttons}</p></aside>",
+    "disclosure": "<p style=\"margin:0 0 4px;font-size:12px;opacity:.75\">{text}</p>",
+    "button": "<a href=\"{url}\" target=\"_blank\" rel=\"sponsored nofollow noopener\" style=\"display:inline-block;margin:4px 8px 0 0;padding:8px 16px;border:1px solid currentColor;border-radius:4px;text-decoration:none;color:inherit\">{label}</a>"
+  }
+}

@@ -70,6 +70,35 @@ function renameViteIndexPlugin() {
   }
 }
 
+// 애드센스 삽입 자리: 빌드 환경변수 ADSENSE_CLIENT_ID(ca-pub-… 또는 pub-…)가 있을 때만
+// dist 의 모든 HTML <head> 에 adsbygoogle 스크립트를 넣고 dist/ads.txt 를 만든다. 비어 있으면 아무것도 안 함.
+function adsensePlugin() {
+  return {
+    name: 'adsense-head-and-ads-txt',
+    closeBundle() {
+      const raw = String(process.env.ADSENSE_CLIENT_ID || '').trim()
+      const m = raw.match(/^(?:ca-)?(pub-\d{10,20})$/)
+      if (!m) {
+        console.log(raw ? '⚠ ADSENSE_CLIENT_ID 형식 오류 — 삽입 생략' : '· ADSENSE_CLIENT_ID 없음 — 애드센스 삽입 생략')
+        return
+      }
+      const pub = m[1]
+      const tag = `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-${pub}" crossorigin="anonymous"></script>\n`
+      const walk = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((d) =>
+        d.isDirectory() ? walk(resolve(dir, d.name)) : d.name.endsWith('.html') ? [resolve(dir, d.name)] : [])
+      let n = 0
+      for (const file of walk(resolve(__dirname, 'dist'))) {
+        const html = fs.readFileSync(file, 'utf8')
+        if (html.includes('adsbygoogle.js') || !html.includes('</head>')) continue
+        fs.writeFileSync(file, html.replace('</head>', tag + '</head>'))
+        n++
+      }
+      fs.writeFileSync(resolve(__dirname, 'dist/ads.txt'), `google.com, ${pub}, DIRECT, f08c47fec0942fa0\n`)
+      console.log(`✓ 애드센스 스크립트 ${n}개 HTML 삽입 + dist/ads.txt 생성`)
+    },
+  }
+}
+
 export default defineConfig({
   plugins: [
     react(),
@@ -97,6 +126,7 @@ export default defineConfig({
     injectLcpPreloadPlugin(),
     asyncCssPlugin(),
     renameViteIndexPlugin(),
+    adsensePlugin(),
   ],
   publicDir: false,
   build: {

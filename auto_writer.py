@@ -3,6 +3,7 @@ import os, json, random, re, time
 from datetime import datetime, timedelta
 
 import wocs_internal_links as wil
+import affiliate_block
 # google-genai는 기존 Gemini 모드에서만 필요 → webhook 모드는 표준 라이브러리만 사용
 
 # ─── 재시도 설정 (Gemini 503/UNAVAILABLE 대응) ───
@@ -174,6 +175,7 @@ COMPANY_PHONE = "010-4337-0582"
 COMPANY_ADDR = "전남 화순군 사평면 유마로 592"
 COMPANY_LOGO = "https://wocs.kr/assets/images/logo_preview_dark.png"
 AUTHOR_NAME = "김우성"
+THREADS_URL = "https://www.threads.com/@woosung_tent"
 AUTHOR_TITLE = "WOCS 대표 · 16년 경력 글램핑 구조물 제조·시공 전문가"
 CATEGORY_LABELS = {
     "cat_startup": "창업가이드",
@@ -771,6 +773,9 @@ def save_to_html(post_id, title, content, topic, meta_desc, image_url=None,
     quotes_html = render_key_quotes(extra.get("key_quotes", []) or [])
     refs_html = render_references(references)
     eeat_html = render_eeat(today)
+    # 제휴 상품 블록: 제목·키워드로 상품 슬롯 선택, 링크는 환경변수(COUPANG_LINK_n)에서만 읽음 — 비면 생략
+    aff_slot = affiliate_block.pick_slot("wocs", title + " " + focus_keyword, cat_key)
+    aff_html = affiliate_block.render("wocs", aff_slot)
     html = (
         '<!DOCTYPE html>\n'
         '<html lang="ko">\n'
@@ -843,6 +848,9 @@ def save_to_html(post_id, title, content, topic, meta_desc, image_url=None,
         '.eeat{margin:40px 0;padding:20px 24px;border:1px solid rgba(201,169,110,0.15);background:rgba(201,169,110,0.03)}\n'
         '.eeat p{font-family:var(--font-body);font-size:12px;color:rgba(240,235,224,0.5);margin:4px 0}\n'
         '.eeat strong{color:var(--gold)}\n'
+        '.post-follow{font-family:var(--font-body);font-size:13px;color:rgba(240,235,224,0.6);margin:-24px 0 32px}\n'
+        '.post-follow a{color:var(--gold)}\n'
+        '.wocs-aff{color:rgba(240,235,224,0.85);font-family:var(--font-body)}\n'
         '</style>\n'
         '</head>\n'
         '<body>\n'
@@ -853,12 +861,14 @@ def save_to_html(post_id, title, content, topic, meta_desc, image_url=None,
         '    <span>' + esc(focus_keyword) + ' · ' + esc(region) + '</span>\n'
         '    <span>' + esc(cat_label) + '</span>\n'
         '  </div>\n'
+        '  <p class="post-follow">캠핑·글램핑 현장 노하우는 스레드 <a href="' + THREADS_URL + '" target="_blank" rel="noopener">@woosung_tent</a>에서도 받아보실 수 있어요.</p>\n'
         '  <img src="' + image_url + '" alt="' + esc(title) + '" style="width:100%;height:auto;margin-bottom:40px;border-radius:4px;filter:brightness(0.9)" loading="lazy">\n'
         + tldr_html +
         '  <div class="post-body">\n'
         + body_html + '\n'
         + quotes_html +
         '  </div>\n'
+        + aff_html
         + refs_html
         + faq_html
         + eeat_html +

@@ -44,6 +44,13 @@ jobs:
       - name: 블로그 글 발행 (webhook)
         env:
           N8N_PAYLOAD: ${{ toJSON(github.event.client_payload) }}
+          # 제휴 상품 블록 (빈 값이면 블록 생략)
+          COUPANG_LINK_1: ${{ secrets.COUPANG_LINK_1 }}
+          COUPANG_LINK_2: ${{ secrets.COUPANG_LINK_2 }}
+          COUPANG_LINK_3: ${{ secrets.COUPANG_LINK_3 }}
+          NAVER_CONNECT_LINK_1: ${{ secrets.NAVER_CONNECT_LINK_1 }}
+          NAVER_CONNECT_LINK_2: ${{ secrets.NAVER_CONNECT_LINK_2 }}
+          NAVER_CONNECT_LINK_3: ${{ secrets.NAVER_CONNECT_LINK_3 }}
         run: python auto_writer.py
       - name: 커밋 & 푸시
         run: |
