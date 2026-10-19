@@ -28,15 +28,18 @@
     "coupang": {
       "env": "COUPANG_LINK_",
       "label": "쿠팡에서 보기",
+      "name": "쿠팡 파트너스",
       "disclosure": "#광고 #쿠팡파트너스 — 이 포스팅은 쿠팡 파트너스 활동의 일환으로 일정액의 수수료를 제공받습니다"
     },
     "naver": {
       "env": "NAVER_CONNECT_LINK_",
       "label": "네이버에서 보기",
+      "name": "네이버 쇼핑 커넥트",
       "disclosure": "#광고 #네이버쇼핑커넥트 — 이 포스팅은 네이버 쇼핑 커넥트 활동의 일환으로 판매 발생 시 수수료를 제공받습니다"
     }
   },
   "html": {
+    "top_notice": "<p class=\"wocs-aff-top\" style=\"margin:0 0 24px;font-size:13px;opacity:.75\">#광고 — 이 글에는 {names} 제휴 링크가 포함되어 있으며 일정액의 수수료를 제공받습니다</p>",
     "wrap": "<aside class=\"wocs-aff\" data-wocs-aff=\"{slot}\" style=\"margin:40px 0;padding:18px 20px;border:1px solid rgba(128,128,128,.35);border-radius:6px;font-size:14px;line-height:1.7\">{disclosures}<p style=\"margin:10px 0 6px;font-weight:600;font-size:16px\">{heading}</p><p style=\"margin:0 0 8px\">{product} — {note}</p><p style=\"margin:0\">{buttons}</p></aside>",
     "disclosure": "<p style=\"margin:0 0 4px;font-size:12px;opacity:.75\">{text}</p>",
     "button": "<a href=\"{url}\" target=\"_blank\" rel=\"sponsored nofollow noopener\" style=\"display:inline-block;margin:4px 8px 0 0;padding:8px 16px;border:1px solid currentColor;border-radius:4px;text-decoration:none;color:inherit\">{label}</a>"

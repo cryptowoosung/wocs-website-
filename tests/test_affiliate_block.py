@@ -54,6 +54,22 @@ def test_glampingtentgo_heading_and_note():
     assert "천막 보수" in html
 
 
+TOP = "#광고 — 이 글에는 쿠팡 파트너스 제휴 링크가 포함되어 있으며 일정액의 수수료를 제공받습니다"
+
+
+def test_top_notice_exact_text_for_coupang():
+    assert TOP in ab.render_top_notice("2", env=ENV)
+
+
+def test_top_notice_names_both_programs():
+    html = ab.render_top_notice("2", env=dict(ENV, NAVER_CONNECT_LINK_2="https://naver.me/abc"))
+    assert "쿠팡 파트너스·네이버 쇼핑 커넥트 제휴 링크" in html
+
+
+def test_top_notice_empty_without_links():
+    assert ab.render_top_notice("2", env={}) == ""
+
+
 def test_url_is_escaped():
     html = ab.render("wocs", "1", env={"COUPANG_LINK_1": 'https://x.com/"><script>'})
     assert "<script>" not in html

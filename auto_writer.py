@@ -776,6 +776,7 @@ def save_to_html(post_id, title, content, topic, meta_desc, image_url=None,
     # 제휴 상품 블록: 제목·키워드로 상품 슬롯 선택, 링크는 환경변수(COUPANG_LINK_n)에서만 읽음 — 비면 생략
     aff_slot = affiliate_block.pick_slot("wocs", title + " " + focus_keyword, cat_key)
     aff_html = affiliate_block.render("wocs", aff_slot)
+    aff_top = affiliate_block.render_top_notice(aff_slot) if aff_html else ""  # 본문 맨 위 '#광고' 1줄
     html = (
         '<!DOCTYPE html>\n'
         '<html lang="ko">\n'
@@ -851,6 +852,9 @@ def save_to_html(post_id, title, content, topic, meta_desc, image_url=None,
         '.post-follow{font-family:var(--font-body);font-size:13px;color:rgba(240,235,224,0.6);margin:-24px 0 32px}\n'
         '.post-follow a{color:var(--gold)}\n'
         '.wocs-aff{color:rgba(240,235,224,0.85);font-family:var(--font-body)}\n'
+        '.wocs-aff-top{color:rgba(240,235,224,0.85);font-family:var(--font-body)}\n'
+        '.post-meta+.wocs-aff-top{margin-top:-24px!important}\n'
+        '.wocs-aff-top+.post-follow{margin-top:0}\n'
         '</style>\n'
         '</head>\n'
         '<body>\n'
@@ -861,6 +865,7 @@ def save_to_html(post_id, title, content, topic, meta_desc, image_url=None,
         '    <span>' + esc(focus_keyword) + ' · ' + esc(region) + '</span>\n'
         '    <span>' + esc(cat_label) + '</span>\n'
         '  </div>\n'
+        + aff_top +
         '  <p class="post-follow">캠핑·글램핑 현장 노하우는 스레드 <a href="' + THREADS_URL + '" target="_blank" rel="noopener">@woosung_tent</a>에서도 받아보실 수 있어요.</p>\n'
         '  <img src="' + image_url + '" alt="' + esc(title) + '" style="width:100%;height:auto;margin-bottom:40px;border-radius:4px;filter:brightness(0.9)" loading="lazy">\n'
         + tldr_html +

@@ -30,6 +30,16 @@ def _link(env, prefix, slot):
     return url if url.startswith("https://") else ""
 
 
+def render_top_notice(slot, env=None, spec=None):
+    """본문 맨 위 '#광고' 1줄. 해당 슬롯에 표시할 링크가 없으면 빈 문자열"""
+    spec = spec or load_spec()
+    env = os.environ if env is None else env
+    names = [p["name"] for prog, p in spec["programs"].items() if _link(env, p["env"], slot)]
+    if not names:
+        return ""
+    return spec["html"]["top_notice"].replace("{names}", html.escape("·".join(names)))
+
+
 def render(site, slot, env=None, spec=None):
     """슬롯 하나의 블록 HTML. 표시할 링크가 없으면 빈 문자열"""
     spec = spec or load_spec()
