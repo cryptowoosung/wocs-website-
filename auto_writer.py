@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import os, json, random, re, time
+import os, json, random, re, sys, time
 from datetime import datetime, timedelta
 
 import wocs_internal_links as wil
@@ -948,6 +948,18 @@ def save_linkedin_data(title, li_text):
 
 # ─── Webhook 모드 (n8n 외부 입력) ───
 
+def mark_webhook_blocked(title):
+    """GitHub Actions 단계 출력에 차단 사실을 남긴다 (로컬 실행이면 아무것도 안 함)."""
+    out_path = os.environ.get("GITHUB_OUTPUT")
+    if not out_path:
+        return
+    # 단계 출력은 한 줄 값만 허용 → 줄바꿈 제거
+    safe_title = " ".join(str(title).split())
+    with open(out_path, "a", encoding="utf-8") as f:
+        f.write("blocked=1\n")
+        f.write("blocked_title=" + safe_title + "\n")
+
+
 def run_webhook_mode(payload_raw):
     print("Webhook 모드 (n8n 외부 입력)")
     try:
@@ -970,9 +982,11 @@ def run_webhook_mode(payload_raw):
     if len(title) > TITLE_MAX_LEN:
         raise ValueError("제목 길이 초과(" + str(len(title)) + "자 > " + str(TITLE_MAX_LEN) + ")")
     # 브랜드 범위 가드: wocs.kr 은 글램핑 전용 — 어닝·천막 주제는 발행하지 않는다 (webhook 은 재생성 불가 → 차단)
+    # 차단은 의도된 동작이므로 실패(exit 1)가 아닌 '건너뜀'(exit 0)으로 끝내고, 워크플로가 알림을 보내도록 출력만 남긴다
     if is_offbrand_title(title):
-        print("BLOCKED: 어닝·천막 주제 — 자매 사이트 glampingtentgo.com 소관, 발행 중단: " + title)
-        exit(1)
+        print("SKIPPED: 어닝·천막 주제 — 자매 사이트 glampingtentgo.com 소관, 발행 건너뜀: " + title)
+        mark_webhook_blocked(title)
+        sys.exit(0)
     content = str(payload["content"])
     image_url = str(payload["image_url"]).strip()
     keyword = str(payload.get("keyword") or "").strip()
