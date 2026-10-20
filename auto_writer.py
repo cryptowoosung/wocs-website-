@@ -795,10 +795,11 @@ def save_to_html(post_id, title, content, topic, meta_desc, image_url=None,
     quotes_html = render_key_quotes(extra.get("key_quotes", []) or [])
     refs_html = render_references(references)
     eeat_html = render_eeat(today)
-    # 제휴 상품 블록: 제목·키워드로 상품 슬롯 선택, 링크는 환경변수(COUPANG_LINK_n)에서만 읽음 — 비면 생략
+    # 제휴 상품 블록: 제목·키워드로 상품 슬롯 선택, 링크는 환경변수(COUPANG_LINK_n·NAVER_CONNECT_LINK_n)에서만 읽음 — 비면 생략
     aff_slot = affiliate_block.pick_slot("wocs", title + " " + focus_keyword, cat_key)
     aff_html = affiliate_block.render("wocs", aff_slot)
-    aff_top = affiliate_block.render_top_notice(aff_slot) if aff_html else ""  # 본문 맨 위 '#광고' 1줄
+    # 본문 맨 위 '#광고' 1줄 — 쿠팡+네이버 둘 다면 "쿠팡 파트너스 및 네이버 쇼핑 커넥트 …" 합친 문장 (문구: shared/affiliate_block.json)
+    aff_top = affiliate_block.render_top_notice(aff_slot) if aff_html else ""
     html = (
         '<!DOCTYPE html>\n'
         '<html lang="ko">\n'

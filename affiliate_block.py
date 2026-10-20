@@ -30,14 +30,31 @@ def _link(env, prefix, slot):
     return url if url.startswith("https://") else ""
 
 
+PROGRAMS = ("coupang", "naver")
+PRODUCT_KEYS = {"coupang": "product", "naver": "naver_product"}  # 프로그램별 상품명 필드 (slots.n)
+
+
+def _active(env, slot, spec):
+    """해당 슬롯에 https 링크가 있는 프로그램 목록 (쿠팡 → 네이버 순)"""
+    return [prog for prog in PROGRAMS if _link(env, spec["programs"][prog]["env"], slot)]
+
+
+def _combined(spec, progs):
+    return spec["combined_disclosure"].replace("{names}", " 및 ".join(spec["programs"][p]["name"] for p in progs))
+
+
 def render_top_notice(slot, env=None, spec=None):
-    """본문 맨 위 '#광고' 1줄. 해당 슬롯에 표시할 링크가 없으면 빈 문자열"""
+    """본문 맨 위 '#광고' 1줄. 두 프로그램 모두면 합친 고지문, 링크가 없으면 빈 문자열"""
     spec = spec or load_spec()
     env = os.environ if env is None else env
-    names = [p["name"] for prog, p in spec["programs"].items() if _link(env, p["env"], slot)]
-    if not names:
+    progs = _active(env, slot, spec)
+    if not progs:
         return ""
-    return spec["html"]["top_notice"].replace("{names}", html.escape("·".join(names)))
+    if len(progs) > 1:
+        text = _combined(spec, progs)
+    else:
+        text = spec["top_notice_text"].replace("{names}", spec["programs"][progs[0]]["name"])
+    return spec["html"]["top_notice"].replace("{text}", html.escape(text))
 
 
 def render(site, slot, env=None, spec=None):
@@ -46,22 +63,26 @@ def render(site, slot, env=None, spec=None):
     env = os.environ if env is None else env
     conf = spec["sites"][site]
     tpl = spec["html"]
-    disclosures, buttons = [], []
-    for prog in ("coupang", "naver"):
-        p = spec["programs"][prog]
-        url = _link(env, p["env"], slot)
-        if not url:
-            continue
-        disclosures.append(tpl["disclosure"].replace("{text}", html.escape(p["disclosure"])))
-        buttons.append(tpl["button"].replace("{url}", html.escape(url, quote=True))
-                       .replace("{label}", html.escape(p["label"])))
-    if not buttons:
+    progs = _active(env, slot, spec)
+    if not progs:
         return ""
     item = spec["slots"][slot]
+    if len(progs) > 1:
+        texts = [_combined(spec, progs)]
+    else:
+        texts = [spec["programs"][progs[0]]["disclosure"]]
+    disclosures = "".join(tpl["disclosure"].replace("{text}", html.escape(t)) for t in texts)
+    buttons = "".join(tpl["button"].replace("{url}", html.escape(_link(env, spec["programs"][p]["env"], slot), quote=True))
+                      .replace("{label}", html.escape(spec["programs"][p]["label"])) for p in progs)
+    products = []
+    for p in progs:
+        name = item.get(PRODUCT_KEYS[p]) or item["product"]
+        if name not in products:
+            products.append(name)
     note = conf.get("notes", {}).get(slot, item["note"])
     return (tpl["wrap"].replace("{slot}", slot)
-            .replace("{disclosures}", "".join(disclosures))
+            .replace("{disclosures}", disclosures)
             .replace("{heading}", html.escape(conf["heading"]))
-            .replace("{product}", html.escape(item["product"]))
+            .replace("{product}", html.escape(" · ".join(products)))
             .replace("{note}", html.escape(note))
-            .replace("{buttons}", "".join(buttons)))
+            .replace("{buttons}", buttons))
