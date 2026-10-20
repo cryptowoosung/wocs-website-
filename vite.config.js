@@ -99,6 +99,33 @@ function adsensePlugin() {
   }
 }
 
+// GA4: 빌드 환경변수 VITE_GA_ID(G-XXXXXXX)가 있을 때만 dist 의 모든 HTML </head> 앞에 gtag 를 넣는다.
+// 비어 있거나 형식이 다르면 아무것도 안 함.
+function ga4Plugin() {
+  return {
+    name: 'ga4-gtag-head',
+    closeBundle() {
+      const id = String(process.env.VITE_GA_ID || '').trim()
+      if (!/^G-[A-Z0-9]{4,20}$/.test(id)) {
+        console.log(id ? '⚠ VITE_GA_ID 형식 오류 — GA4 삽입 생략' : '· VITE_GA_ID 없음 — GA4 삽입 생략')
+        return
+      }
+      const tag = `<script async src="https://www.googletagmanager.com/gtag/js?id=${id}"></script>\n` +
+        `<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${id}');</script>\n`
+      const walk = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((d) =>
+        d.isDirectory() ? walk(resolve(dir, d.name)) : d.name.endsWith('.html') ? [resolve(dir, d.name)] : [])
+      let n = 0
+      for (const file of walk(resolve(__dirname, 'dist'))) {
+        const html = fs.readFileSync(file, 'utf8')
+        if (html.includes('googletagmanager.com/gtag/js') || !html.includes('</head>')) continue
+        fs.writeFileSync(file, html.replace('</head>', tag + '</head>'))
+        n++
+      }
+      console.log(`✓ GA4 gtag ${n}개 HTML 삽입`)
+    },
+  }
+}
+
 export default defineConfig({
   plugins: [
     react(),
@@ -127,6 +154,7 @@ export default defineConfig({
     asyncCssPlugin(),
     renameViteIndexPlugin(),
     adsensePlugin(),
+    ga4Plugin(),
   ],
   publicDir: false,
   build: {
