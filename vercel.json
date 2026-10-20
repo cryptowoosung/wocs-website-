@@ -12,6 +12,11 @@
   ],
   "redirects": [
     {
+      "source": "/assets/images/:name((?!(?:logo_preview_dark|deck|smartdoorlock)\\.png)[^/.]+)\\.png",
+      "destination": "/assets/images/:name.webp",
+      "statusCode": 301
+    },
+    {
       "source": "/privacy.html",
       "destination": "/legal/privacy.html",
       "statusCode": 301

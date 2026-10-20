@@ -1,0 +1,39 @@
+# Vercel 배포에서 제외할 파일 (2026-10-20 배포 용량 축소)
+# 빌드는 `vite build`(vite.config.js, vite-index.html, src/, 정적 복사 폴더)만 필요하다.
+# 여기서 빠진 파일은 소스 업로드·빌드 캐시·dist 복사에서 모두 제외된다. git 에서는 그대로 유지.
+
+# ── 사이트와 무관한 폴더·파일 ──
+/OneDrive/
+/.github/
+/.claude/
+/.omc/
+/.bkit/
+/tests/
+/scripts/
+/tools/
+/wordpress_auto/
+/queue/
+__pycache__/
+*.py
+*.pyc
+*.backup_*
+/*.md
+/used_topics.json
+/linkedin_post.json
+/seo_backup.json
+/seo_fix_log.json
+
+# ── assets: 페이지에서 참조하지 않는 대용량 파일 ──
+# 같은 이름의 .webp 가 있는 원본 PNG (페이지는 webp 만 사용, 약 149MB)
+/assets/images/*.png
+# webp 가 없는 PNG 는 유지 (logo_preview_dark.png 는 페이지에서 참조)
+!/assets/images/logo_preview_dark.png
+!/assets/images/deck.png
+!/assets/images/smartdoorlock.png
+!/assets/images/*.png.png
+# 분할 압축 백업 (약 167MB, 참조 없음)
+/assets/images/images.z0*
+/assets/images/images.zip
+# 참조 없는 대용량 파일
+/assets/images/portpolio3.gif
+/assets/downloads/wocs_brochure_v3.pdf
