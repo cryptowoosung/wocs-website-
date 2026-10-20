@@ -4,6 +4,12 @@
   "outputDirectory": "dist",
   "installCommand": "npm install",
   "framework": "vite",
+  "ignoreCommand": "bash vercel_ignore_build.sh",
+  "git": {
+    "deploymentEnabled": {
+      "blog-queue": false
+    }
+  },
   "rewrites": [
     {
       "source": "/",

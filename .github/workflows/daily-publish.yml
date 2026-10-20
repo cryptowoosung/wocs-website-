@@ -1,0 +1,74 @@
+name: Daily Blog Publish
+
+# 하루 1회 배포 (2026-10-20 신설): blog-queue 에 쌓인 글을 매일 09:00 KST 에 main 으로 한 번만 반영한다.
+# auto_blog.yml · n8n-webhook.yml 은 글을 blog-queue 에만 푸시한다 → Vercel 배포가 하루 최대 1회로 줄어든다.
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 매일 00:00 UTC = 09:00 KST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# 글 생성 그룹(blog-write)과 분리: 같은 그룹이면 대기 중인 발행이 새 생성 실행에 밀려 취소될 수 있다.
+# 동시 실행 안전장치는 큐 초기화의 --force-with-lease 와 blog_queue.sh push 의 재시도가 맡는다.
+concurrency:
+  group: blog-publish
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+      - name: 큐 확인
+        id: queue
+        run: |
+          if ! git ls-remote --exit-code --heads origin blog-queue >/dev/null; then
+            echo "blog-queue 브랜치 없음 — 반영할 글 없음"
+            echo "pending=0" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git fetch origin blog-queue
+          echo "queue_sha=$(git rev-parse origin/blog-queue)" >> "$GITHUB_OUTPUT"
+          # 세 점(...) 비교 = 큐가 main 에서 갈라진 뒤 추가된 변경만
+          if git diff --quiet origin/main...origin/blog-queue; then
+            echo "큐에 새 변경 없음"
+            echo "pending=0" >> "$GITHUB_OUTPUT"
+          else
+            NEW_POSTS=$(git diff --name-only --diff-filter=A origin/main...origin/blog-queue -- content/ | wc -l)
+            echo "반영 대기 글: ${NEW_POSTS}편"
+            echo "pending=1" >> "$GITHUB_OUTPUT"
+            echo "new_posts=${NEW_POSTS}" >> "$GITHUB_OUTPUT"
+          fi
+      - name: main 에 1회 커밋 & 푸시
+        if: steps.queue.outputs.pending == '1'
+        run: |
+          git config user.name "WOCS Daily Publisher"
+          git config user.email "actions@wocs.kr"
+          git merge --squash "${{ steps.queue.outputs.queue_sha }}"
+          git diff --staged --quiet || git commit -m "auto: 블로그 일일 발행 $(TZ='Asia/Seoul' date '+%Y-%m-%d') (${{ steps.queue.outputs.new_posts }}편)"
+          git push origin HEAD:main
+      # 반영한 시점 이후 큐에 새 글이 들어왔으면 lease 가 거부 → 초기화하지 않고 다음날 함께 반영 (글 유실 방지)
+      - name: 큐를 main 으로 초기화
+        if: steps.queue.outputs.pending == '1'
+        run: |
+          git push --force-with-lease=refs/heads/blog-queue:${{ steps.queue.outputs.queue_sha }} \
+            origin HEAD:refs/heads/blog-queue \
+            || echo "큐에 새 글이 추가되어 초기화 생략 — 다음 발행 때 함께 반영"
+      - name: 실패 시 Telegram 알림
+        if: failure()
+        run: |
+          KST_TIME=$(TZ='Asia/Seoul' date '+%Y-%m-%d %H:%M:%S KST')
+          RUN_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          MSG="⚠️ wocs.kr 일일 발행 실패
+
+          날짜: ${KST_TIME}
+          큐(blog-queue)의 글은 그대로 남아 있음 — 원인(병합 충돌 등) 해결 후 수동 실행:
+          ${RUN_URL}"
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            --data-urlencode "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+            --data-urlencode "text=${MSG}"
