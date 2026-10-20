@@ -3,11 +3,11 @@
    - 15초 후 또는 스크롤 50% 시 팝업
    - 세션 쿨다운 (브라우저 닫으면 리셋)
    - 제출 완료 시 영구 차단 (localStorage)
-   - GAS + Backend 동시 전송
+   - GAS 전송 (백엔드 동시 전송은 c40e4dc 에서 제거됨)
+   - 스팸 방지: 허니팟 필드 + 제출 간격 3초 제한
    - 15개 언어 지원
    ═══════════════════════════════════════════════════ */
 
-// ★ 배포 후 아래 URL을 교체하세요
 const POPUP_GAS_URL = "https://script.google.com/macros/s/AKfycby7cq4Krqif_h0A059Rz4ip0KOJb3uJv8XU8fdHZRknNW-Zsmlsz8C2DQ_oQ2eHideE/exec";
 
 // ── 15개 언어 번역 ──
@@ -28,6 +28,20 @@ const POPUP_TR = {
   id: { hide24h: "Sembunyikan popup 24 jam", headline: "Katalog Struktur Glamping Premium", sub: "Tinggalkan kontak Anda dan kami akan mengirimkan tautan katalog secara instan.", privacy: "Informasi Anda hanya digunakan untuk pengiriman katalog.", namePh: "Budi Santoso", phonePh: "+82-10-0000-0000", locationPh: "Contoh: Gangwon-do", productLabel: "Produk yang diminati", optAll: "Semua", optS: "Seri S", optD: "Kubah Seri D", optSig: "Seri Signature", optMod: "Sistem Modular", btn: "Dapatkan tautan katalog", sending: "Mengirim...", successTitle: "Permintaan selesai!", successMsg: "Tautan katalog akan segera dikirimkan.", successLink: "Unduh sekarang →", failMsg: "Gagal mengirim. Hubungi 010-4337-0582.", nameLabel: "Nama *", phoneLabel: "Telepon *", locationLabel: "Lokasi proyek" },
   th: { hide24h: "ซ่อนป๊อปอัพ 24 ชั่วโมง", headline: "แคตตาล็อกโครงสร้างแกลมปิ้งพรีเมียม", sub: "ฝากข้อมูลติดต่อ แล้วเราจะส่งลิงก์ดาวน์โหลดแคตตาล็อกให้ทันที", privacy: "ข้อมูลของคุณใช้เพื่อการส่งแคตตาล็อกเท่านั้น", namePh: "สมชาย", phonePh: "081-000-0000", locationPh: "เช่น คังวอนโด", productLabel: "ผลิตภัณฑ์ที่สนใจ", optAll: "ทั้งหมด", optS: "ซีรีส์ S", optD: "โดมซีรีส์ D", optSig: "ซีรีส์ Signature", optMod: "ระบบโมดูลาร์", btn: "รับลิงก์แคตตาล็อก", sending: "กำลังส่ง...", successTitle: "คำขอเสร็จสมบูรณ์!", successMsg: "ลิงก์แคตตาล็อกจะถูกส่งให้คุณในเร็วๆ นี้", successLink: "ดาวน์โหลดตอนนี้ →", failMsg: "ส่งไม่สำเร็จ โทร 010-4337-0582", nameLabel: "ชื่อ *", phoneLabel: "โทรศัพท์ *", locationLabel: "สถานที่โครงการ" }
 };
+
+// ── 스팸 방지 ──
+var POPUP_MIN_INTERVAL_MS = 3000;  // 팝업 열림·직전 제출로부터 최소 간격
+var POPUP_LAST_SUBMIT_KEY = 'wocs-lead-last-submit';
+var popupOpenedAt = 0;
+
+function lastPopupSubmitAt() {
+  try { return parseInt(localStorage.getItem(POPUP_LAST_SUBMIT_KEY), 10) || 0; }
+  catch(e) { return 0; }
+}
+
+function isPopupSubmitTooSoon() {
+  return Date.now() - Math.max(popupOpenedAt, lastPopupSubmitAt()) < POPUP_MIN_INTERVAL_MS;
+}
 
 function getPopupLang() {
   try { return typeof WOCS_LANG !== 'undefined' ? WOCS_LANG : (typeof getWocsLang === 'function' ? getWocsLang() : 'ko'); }
@@ -67,6 +81,9 @@ function createPopup() {
         '<p style="font-family:\'Lexend\',sans-serif;font-size:12px;color:rgba(240,235,224,0.55);margin-top:8px;line-height:1.6">' + pt('sub') + '</p>' +
       '</div>' +
       '<div id="popup-form">' +
+        // 허니팟: 사람에게는 안 보이는 칸. 봇이 채우면 전송하지 않음
+        '<div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden"><label for="popup-website">Website</label>' +
+          '<input id="popup-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>' +
         '<div style="margin-bottom:14px"><label style="font-family:\'Lexend\',sans-serif;font-size:10px;letter-spacing:1px;color:#c9a96e;display:block;margin-bottom:6px">' + pt('nameLabel') + '</label>' +
           '<input id="popup-name" type="text" placeholder="' + pt('namePh') + '" required style="width:100%;padding:12px 14px;background:rgba(240,235,224,0.04);border:1px solid rgba(201,169,110,0.12);color:#f0ebe0;font-family:\'Lexend\',sans-serif;font-size:13px;outline:none;box-sizing:border-box"></div>' +
         '<div style="margin-bottom:14px"><label style="font-family:\'Lexend\',sans-serif;font-size:10px;letter-spacing:1px;color:#c9a96e;display:block;margin-bottom:6px">' + pt('phoneLabel') + '</label>' +
@@ -94,6 +111,7 @@ function createPopup() {
     '</div>';
 
   document.body.appendChild(overlay);
+  popupOpenedAt = Date.now();
 
   // Close handlers
   document.getElementById('popup-close').addEventListener('click', closePopup);
@@ -118,6 +136,11 @@ function submitPopup() {
   var location = document.getElementById('popup-location').value.trim();
   var product = document.getElementById('popup-product').value;
   var btn = document.getElementById('popup-submit');
+  var honeypot = document.getElementById('popup-website');
+
+  // 스팸 차단: 허니팟에 값이 있거나 3초 안에 다시 제출하면 전송하지 않음
+  if (honeypot && honeypot.value) return;
+  if (isPopupSubmitTooSoon()) return;
 
   // Validation
   if (!name) { document.getElementById('popup-name').style.borderColor = '#e74c3c'; return; }
@@ -140,6 +163,8 @@ function submitPopup() {
     localStorage.setItem('wocs-lead-submitted', 'true');
     alert('문의가 접수되었습니다');
   }
+
+  try { localStorage.setItem(POPUP_LAST_SUBMIT_KEY, Date.now().toString()); } catch(e) {}
 
   fetch(POPUP_GAS_URL, {
     method: 'POST',

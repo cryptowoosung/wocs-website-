@@ -1,8 +1,9 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
-import { resolve } from 'path'
+import { resolve, dirname } from 'path'
 import fs from 'node:fs'
+import crypto from 'node:crypto'
 
 // Inject LCP preload hint AFTER Vite's default HTML processing.
 // Placed in source HTML, Vite would resolve/rewrite the href to a hashed
@@ -70,6 +71,74 @@ function renameViteIndexPlugin() {
   }
 }
 
+// dist 아래 모든 HTML 파일 경로 (정적 복사 폴더 포함)
+function listDistHtml(dir = resolve(__dirname, 'dist')) {
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((d) =>
+    d.isDirectory() ? listDistHtml(resolve(dir, d.name)) : d.name.endsWith('.html') ? [resolve(dir, d.name)] : [])
+}
+
+// GA4 삽입 자리: 빌드 환경변수 VITE_GA_ID(G-XXXXXXXXXX)가 있을 때만
+// dist 의 모든 HTML <head> 에 gtag 스크립트를 넣는다. 비어 있으면 아무것도 안 함.
+function ga4Plugin() {
+  return {
+    name: 'ga4-head',
+    closeBundle() {
+      const id = String(process.env.VITE_GA_ID || '').trim()
+      if (!/^G-[A-Z0-9]{4,20}$/.test(id)) {
+        console.log(id ? '⚠ VITE_GA_ID 형식 오류 — GA4 삽입 생략' : '· VITE_GA_ID 없음 — GA4 삽입 생략')
+        return
+      }
+      const tag =
+        `<script async src="https://www.googletagmanager.com/gtag/js?id=${id}"></script>\n` +
+        `<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${id}');</script>\n`
+      let n = 0
+      for (const file of listDistHtml()) {
+        const html = fs.readFileSync(file, 'utf8')
+        if (html.includes('googletagmanager.com/gtag/js') || !html.includes('</head>')) continue
+        fs.writeFileSync(file, html.replace('</head>', tag + '</head>'))
+        n++
+      }
+      console.log(`✓ GA4(${id}) 스크립트 ${n}개 HTML 삽입`)
+    },
+  }
+}
+
+// /assets/js·/assets/css 처럼 해시 없는 정적 JS·CSS 참조에 ?v=<내용 해시>를 붙인다.
+// vercel.json 에서 JS·CSS 를 1년 immutable 로 캐시하므로, 파일을 고치면 URL 이 바뀌어야 재방문자에게 반영된다.
+function cacheBustPlugin() {
+  return {
+    name: 'static-js-css-cache-bust',
+    closeBundle() {
+      const dist = resolve(__dirname, 'dist')
+      const hashes = new Map()
+      const hashOf = (file) => {
+        if (!hashes.has(file)) {
+          hashes.set(file, crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex').slice(0, 8))
+        }
+        return hashes.get(file)
+      }
+      let n = 0
+      for (const file of listDistHtml()) {
+        const html = fs.readFileSync(file, 'utf8')
+        const out = html.replace(
+          /\b(src|href)="([^"?#:]+\.(?:js|css))(?:\?[^"]*)?"/g,
+          (match, attr, url) => {
+            if (url.startsWith('//') || url.includes('/assets-built/')) return match
+            const target = url.startsWith('/') ? resolve(dist, url.slice(1)) : resolve(dirname(file), url)
+            if (!target.startsWith(dist) || !fs.existsSync(target)) return match
+            return `${attr}="${url}?v=${hashOf(target)}"`
+          },
+        )
+        if (out !== html) {
+          fs.writeFileSync(file, out)
+          n++
+        }
+      }
+      console.log(`✓ 정적 JS·CSS 캐시 버스팅: ${n}개 HTML, ${hashes.size}개 파일`)
+    },
+  }
+}
+
 // 애드센스 삽입 자리: 빌드 환경변수 ADSENSE_CLIENT_ID(ca-pub-… 또는 pub-…)가 있을 때만
 // dist 의 모든 HTML <head> 에 adsbygoogle 스크립트를 넣고 dist/ads.txt 를 만든다. 비어 있으면 아무것도 안 함.
 function adsensePlugin() {
@@ -84,10 +153,8 @@ function adsensePlugin() {
       }
       const pub = m[1]
       const tag = `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-${pub}" crossorigin="anonymous"></script>\n`
-      const walk = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((d) =>
-        d.isDirectory() ? walk(resolve(dir, d.name)) : d.name.endsWith('.html') ? [resolve(dir, d.name)] : [])
       let n = 0
-      for (const file of walk(resolve(__dirname, 'dist'))) {
+      for (const file of listDistHtml()) {
         const html = fs.readFileSync(file, 'utf8')
         if (html.includes('adsbygoogle.js') || !html.includes('</head>')) continue
         fs.writeFileSync(file, html.replace('</head>', tag + '</head>'))
@@ -127,6 +194,8 @@ export default defineConfig({
     asyncCssPlugin(),
     renameViteIndexPlugin(),
     adsensePlugin(),
+    ga4Plugin(),
+    cacheBustPlugin(),
   ],
   publicDir: false,
   build: {

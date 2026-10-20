@@ -49,6 +49,8 @@ const BG3 = "#18181b";
 function WOCSHomepage() {
   const [scrollY, setScrollY] = useState(0);
   const [heroIdx, setHeroIdx] = useState(0);
+  // 히어로 슬라이드 이미지를 붙일 최대 인덱스. 0 = 첫 슬라이드만 즉시 로드
+  const [heroLoadMax, setHeroLoadMax] = useState(0);
   const [megaNav, setMegaNav] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDome, setActiveDome] = useState(2);
@@ -97,6 +99,17 @@ function WOCSHomepage() {
     const t = setInterval(() => setHeroIdx(p => (p + 1) % heroSlides.length), 6000);
     return () => clearInterval(t);
   }, []);
+
+  // 첫 화면 로드가 끝나면 다음 슬라이드 1장을 미리 받고, 이후엔 현재+다음 슬라이드까지만 받는다
+  useEffect(() => {
+    const next = () => setHeroLoadMax(m => Math.max(m, 1));
+    if (document.readyState === "complete") { next(); return; }
+    window.addEventListener("load", next, { once: true });
+    return () => window.removeEventListener("load", next);
+  }, []);
+  useEffect(() => {
+    setHeroLoadMax(m => Math.max(m, heroIdx + 1));
+  }, [heroIdx]);
 
   // Review auto-slide
   useEffect(() => {
@@ -288,10 +301,10 @@ function WOCSHomepage() {
   };
 
   const productCards = [
-    { name: t("pcName1"), sub: t("pcSub1"), img: "assets/images/s-classic.webp", w: 1200, h: 673, href: "products/safari-tents.html" },
-    { name: t("pcName2"), sub: t("pcSub2"), img: "assets/images/19-d800-ext.webp", w: 1200, h: 673, href: "products/geodesic-domes.html" },
-    { name: t("pcName3"), sub: t("pcSub3"), img: "assets/images/22-sig-o-ext.webp", w: 1200, h: 673, href: "products/luxury-tents.html" },
-    { name: t("pcName4"), sub: t("pcSub4"), img: "assets/images/42-modular-unit.webp", w: 1200, h: 673, href: "products/modular-systems.html" },
+    { name: t("pcName1"), sub: t("pcSub1"), img: "assets/images/home/s-classic-800.webp", w: 1200, h: 673, href: "products/safari-tents.html" },
+    { name: t("pcName2"), sub: t("pcSub2"), img: "assets/images/home/19-d800-ext-800.webp", w: 1200, h: 673, href: "products/geodesic-domes.html" },
+    { name: t("pcName3"), sub: t("pcSub3"), img: "assets/images/home/22-sig-o-ext-800.webp", w: 1200, h: 673, href: "products/luxury-tents.html" },
+    { name: t("pcName4"), sub: t("pcSub4"), img: "assets/images/home/42-modular-unit-800.webp", w: 1200, h: 673, href: "products/modular-systems.html" },
   ];
 
   const domeSizes = [
@@ -332,16 +345,16 @@ function WOCSHomepage() {
   ];
 
   const occasions = [
-    { img: "assets/images/15-lodge-lx-ext.webp", w: 1024, h: 1024, name: t("occ1"), href: "occasions/glamping.html" },
-    { img: "assets/images/50-resort-mountain.webp", w: 1200, h: 673, name: t("occ2"), href: "occasions/resort.html" },
-    { img: "assets/images/s-classic.webp", w: 1200, h: 673, name: t("occ3"), href: "occasions/airbnb.html" },
-    { img: "assets/images/26-sig-p-ext.webp", w: 1456, h: 816, name: t("occ4"), href: "occasions/wedding.html" },
-    { img: "assets/images/19-d800-ext.webp", w: 1200, h: 673, name: t("occ5"), href: "occasions/sports.html" },
-    { img: "assets/images/17-d600-ext.webp", w: 1200, h: 800, name: t("occ6"), href: "occasions/glamping-pod.html" },
-    { img: "assets/images/35-sig-q-ext.webp", w: 1200, h: 673, name: t("occ7"), href: "occasions/permanent.html" },
-    { img: "assets/images/02-ex25-ext.webp", w: 1200, h: 673, name: t("occ8"), href: "occasions/winter.html" },
-    { img: "assets/images/50-resort-mountain3.webp", w: 1200, h: 673, name: t("occ9"), href: "occasions/index.html" },
-    { img: "assets/images/28-sig-h-ext.webp", w: 1200, h: 673, name: t("occ10"), href: "occasions/index.html" },
+    { img: "assets/images/home/15-lodge-lx-ext-160.webp", w: 1024, h: 1024, name: t("occ1"), href: "occasions/glamping.html" },
+    { img: "assets/images/home/50-resort-mountain-160.webp", w: 1200, h: 673, name: t("occ2"), href: "occasions/resort.html" },
+    { img: "assets/images/home/s-classic-160.webp", w: 1200, h: 673, name: t("occ3"), href: "occasions/airbnb.html" },
+    { img: "assets/images/home/26-sig-p-ext-160.webp", w: 1456, h: 816, name: t("occ4"), href: "occasions/wedding.html" },
+    { img: "assets/images/home/19-d800-ext-160.webp", w: 1200, h: 673, name: t("occ5"), href: "occasions/sports.html" },
+    { img: "assets/images/home/17-d600-ext-160.webp", w: 1200, h: 800, name: t("occ6"), href: "occasions/glamping-pod.html" },
+    { img: "assets/images/home/35-sig-q-ext-160.webp", w: 1200, h: 673, name: t("occ7"), href: "occasions/permanent.html" },
+    { img: "assets/images/home/02-ex25-ext-160.webp", w: 1200, h: 673, name: t("occ8"), href: "occasions/winter.html" },
+    { img: "assets/images/home/50-resort-mountain3-160.webp", w: 1200, h: 673, name: t("occ9"), href: "occasions/index.html" },
+    { img: "assets/images/home/28-sig-h-ext-160.webp", w: 1200, h: 673, name: t("occ10"), href: "occasions/index.html" },
   ];
 
   const features = [
@@ -365,9 +378,9 @@ function WOCSHomepage() {
   ];
 
   const blogs = [
-    { tag: t("blogTag1"), title: t("blogTitle1"), ko: t("blogKo1"), img: "assets/images/01-ex15-ext.webp", w: 1200, h: 673, href: "resources/blog.html" },
-    { tag: t("blogTag2"), title: t("blogTitle2"), ko: t("blogKo2"), img: "assets/images/22-sig-o-ext.webp", w: 1200, h: 673, href: "resources/blog.html" },
-    { tag: t("blogTag3"), title: t("blogTitle3"), ko: t("blogKo3"), img: "assets/images/50-resort-mountain.webp", w: 1200, h: 673, href: "resources/blog.html" },
+    { tag: t("blogTag1"), title: t("blogTitle1"), ko: t("blogKo1"), img: "assets/images/home/01-ex15-ext-800.webp", w: 1200, h: 673, href: "resources/blog.html" },
+    { tag: t("blogTag2"), title: t("blogTitle2"), ko: t("blogKo2"), img: "assets/images/home/22-sig-o-ext-800.webp", w: 1200, h: 673, href: "resources/blog.html" },
+    { tag: t("blogTag3"), title: t("blogTitle3"), ko: t("blogKo3"), img: "assets/images/home/50-resort-mountain-800.webp", w: 1200, h: 673, href: "resources/blog.html" },
   ];
 
   // Language / Flag data
@@ -757,7 +770,7 @@ function WOCSHomepage() {
             opacity: heroIdx === i ? 1 : 0,
             transition: "opacity 1.5s ease",
           }}>
-            <img width={slide.w} height={slide.h} src={slide.img} alt="WOCS 프리미엄 글램핑 시공 index" loading={i === 0 ? "eager" : "lazy"} fetchPriority={i === 0 ? "high" : "low"} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+            {i <= heroLoadMax && <img width={slide.w} height={slide.h} src={slide.img} alt="WOCS 프리미엄 글램핑 시공 index" loading={i === 0 ? "eager" : "lazy"} decoding={i === 0 ? "auto" : "async"} fetchPriority={i === 0 ? "high" : "low"} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />}
             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(9,9,11,0) 0%, rgba(9,9,11,0) 50%, rgba(9,9,11,0) 100%)" }} />
           </div>
         ))}
@@ -864,7 +877,7 @@ function WOCSHomepage() {
               >
                 {/* Card image area */}
                 <div style={{ height: 200, overflow: "hidden" }}>
-                  <img width={card.w} height={card.h} src={card.img} alt={card.name} style={{width:"100%",height:"100%",objectFit:"cover"}} />
+                  <img width={card.w} height={card.h} src={card.img} alt={card.name} loading="lazy" decoding="async" style={{width:"100%",height:"100%",objectFit:"cover"}} />
                 </div>
                 {/* Card info */}
                 <div style={{ padding: "24px 28px 28px" }}>
@@ -1101,7 +1114,7 @@ function WOCSHomepage() {
             {/* Visual side */}
             <div style={{ order: pi % 2 === 0 ? 2 : 1 }} {...anim(`prodv-${pi}`, "fs")}>
               <div style={{aspectRatio:"4/3",overflow:"hidden",border:`1px solid ${GOLD}12`}}>
-                <img src={pi === 0 ? "assets/images/19-d800-ext.webp" : pi === 1 ? "assets/images/15-lodge-lx-ext.webp" : pi === 2 ? "assets/images/22-sig-o-ext.webp" : "assets/images/37-sig-m-s60-ext.webp"} alt={prod.label} style={{width:"100%",height:"100%",objectFit:"cover"}} />
+                <img src={pi === 0 ? "assets/images/home/19-d800-ext-800.webp" : pi === 1 ? "assets/images/home/15-lodge-lx-ext-800.webp" : pi === 2 ? "assets/images/home/22-sig-o-ext-800.webp" : "assets/images/home/37-sig-m-s60-ext-800.webp"} alt={prod.label} loading="lazy" decoding="async" style={{width:"100%",height:"100%",objectFit:"cover"}} />
               </div>
             </div>
           </div>
@@ -1134,7 +1147,7 @@ function WOCSHomepage() {
                   transform: `${anim(`occ-${i}`, "fu", i * 0.06).style.transform} ${hovOccasion === i ? "translateY(-6px)" : ""}`,
                 }}
               >
-                <div style={{ marginBottom: 14, transition: "transform .3s", transform: hovOccasion === i ? "scale(1.1)" : "scale(1)" }}><img width={occ.w} height={occ.h} src={occ.img} alt={occ.name} style={{width:"80px",height:"80px",objectFit:"cover",borderRadius:"8px"}} /></div>
+                <div style={{ marginBottom: 14, transition: "transform .3s", transform: hovOccasion === i ? "scale(1.1)" : "scale(1)" }}><img width={occ.w} height={occ.h} src={occ.img} alt={occ.name} loading="lazy" decoding="async" style={{width:"80px",height:"80px",objectFit:"cover",borderRadius:"8px"}} /></div>
                 <div style={{ ...S.sf, fontSize: 13, fontWeight: 500, color: IVORY }}>{occ.name}</div>
               </div>
             ))}
