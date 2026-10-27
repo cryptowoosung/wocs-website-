@@ -656,7 +656,13 @@
   </url>
   <url>
     <loc>https://wocs.kr/content/auto_post_2026-10-22.html</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-10-23T04:27:43Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://wocs.kr/content/auto_post_2026-10-26.html</loc>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -962,7 +968,7 @@
   </url>
   <url>
     <loc>https://wocs.kr/resources/blog.html</loc>
-    <lastmod>2026-10-19T07:09:29Z</lastmod>
+    <lastmod>2026-10-23T04:27:43Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
