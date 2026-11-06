@@ -46,6 +46,47 @@ def test_same_day_posts_get_suffix_by_id_order(tmp_path, monkeypatch):
     assert by_id[1] == "blog-post.html?id=1"                     # 파일 없음 → 뷰어 링크
 
 
+def test_links_follow_file_title_not_date_order(tmp_path, monkeypatch):
+    # 같은 날짜 글 2편 중 나중 글(id 12)의 파일만 접미사 없이 있는 경우: 날짜 순서로 짝지으면 뒤바뀐다
+    monkeypatch.setattr(bbs, "CONTENT_DIR", tmp_path)
+    (tmp_path / "auto_post_2026-01-02.html").write_text(
+        "<h1 class=\"post-title\">둘째 글 &#39;따옴표&#39;</h1>", encoding="utf-8")
+    (tmp_path / "auto_post_2026-01-02_2.html").write_text("<h1>첫 글</h1>", encoding="utf-8")
+    posts = bbs.parse_blog_data(SAMPLE)
+    bbs.resolve_links(posts)
+    by_id = {p["id"]: p["href"] for p in posts}
+    assert by_id[12] == "../content/auto_post_2026-01-02.html"
+    assert by_id[11] == "../content/auto_post_2026-01-02_2.html"
+
+
+def test_post_without_own_file_keeps_viewer_link(tmp_path, monkeypatch):
+    # 날짜 파일이 다른 글의 것이면 그 파일로 연결하지 않고 뷰어 주소를 유지한다
+    monkeypatch.setattr(bbs, "CONTENT_DIR", tmp_path)
+    (tmp_path / "auto_post_2026-01-02.html").write_text("<h1>첫 글</h1>", encoding="utf-8")
+    posts = bbs.parse_blog_data(SAMPLE)
+    bbs.resolve_links(posts)
+    by_id = {p["id"]: p["href"] for p in posts}
+    assert by_id[11] == "../content/auto_post_2026-01-02.html"
+    assert by_id[12] == "blog-post.html?id=12"
+
+
+def test_links_block_lists_only_posts_with_content_file():
+    posts = [{"id": 5, "href": "../content/auto_post_2026-01-02.html"},
+             {"id": 6, "href": "blog-post.html?id=6"}]
+    block = bbs.render_links_block(posts)
+    assert '"5": "../content/auto_post_2026-01-02.html"' in block
+    assert '"6"' not in block
+
+
+def test_inject_links_is_idempotent_and_runs_before_blog_data():
+    page = '<a></a>\n<script src="../assets/js/blog-data.js"></script>\n'
+    once = bbs.inject_links(page, bbs.render_links_block([{"id": 5, "href": "../content/a.html"}]))
+    assert once.index("BLOG_LINKS") < once.index("blog-data.js")
+    twice = bbs.inject_links(once, bbs.render_links_block([{"id": 7, "href": "../content/b.html"}]))
+    assert twice.count("BLOG_LINKS") == 1
+    assert '"7"' in twice and '"5"' not in twice
+
+
 def test_render_resolves_translation_keys_and_escapes():
     posts = bbs.parse_blog_data(SAMPLE)
     bbs.resolve_links(posts)

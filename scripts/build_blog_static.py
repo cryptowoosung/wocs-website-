@@ -8,6 +8,7 @@ assets/js/blog-data.js(BLOG_POSTS)를 읽어 resources/blog.html 의 #blogGrid �
 auto_writer.py 실행 뒤(auto_blog.yml) 매번 호출된다. 단독 실행도 가능: python scripts/build_blog_static.py
 """
 import html
+import json
 import re
 import sys
 from collections import defaultdict
@@ -21,6 +22,8 @@ SITE_URL = "https://wocs.kr"
 MAX_ITEMS = 60          # 정적 목록 상한 (페이지 크기 관리)
 START = "<!-- static-blog-list:start -->"
 END = "<!-- static-blog-list:end -->"
+LINKS_START = "<!-- blog-links:start -->"
+LINKS_END = "<!-- blog-links:end -->"
 
 CATEGORY_LABELS = {
     "cat_startup": "창업가이드", "cat_construction": "시공기술", "cat_trend": "트렌드",
@@ -66,8 +69,30 @@ def translation_lookup(blog_html: str) -> dict:
     return {k: v for k, v in re.findall(r'(\w+):"((?:[^"\\]|\\.)*)"', m.group(1))}
 
 
+def _title_key(text: str) -> str:
+    """제목 비교용 키: 태그·HTML 엔티티·공백·문장부호 차이를 없앤다."""
+    plain = html.unescape(re.sub(r"<[^>]+>", "", text))
+    return re.sub(r"[\s\W_]+", "", plain).lower()
+
+
+def content_titles() -> dict:
+    """content/*.html 의 <h1> 제목 키 → 파일명."""
+    titles = {}
+    for path in sorted(CONTENT_DIR.glob("*.html")):
+        found = re.search(r"<h1[^>]*>(.*?)</h1>", path.read_text(encoding="utf-8"), re.S)
+        if found:
+            titles.setdefault(_title_key(found.group(1)), path.name)
+    return titles
+
+
 def resolve_links(posts: list) -> None:
-    """같은 날짜 글이 여러 개면 auto_writer와 같은 규칙(_2, _3…)으로 파일을 배정. 최신 id가 먼저 온다는 점을 반영."""
+    """글마다 제목이 같은 content 파일을 찾아 연결한다. 제목으로 못 찾으면 날짜 규칙(_2, _3…)을 쓴다.
+
+    날짜 규칙만 쓰면 같은 날짜 글이 뒤바뀐다(2026-03~04 글 5쌍). 그래서 날짜 규칙으로 고른
+    파일이 다른 글의 제목을 가지고 있으면 연결하지 않고 뷰어 주소로 둔다.
+    """
+    titles = content_titles()
+    claimed = set(titles.values())
     by_date = defaultdict(list)
     for p in posts:
         by_date[p["date"]].append(p)
@@ -75,7 +100,10 @@ def resolve_links(posts: list) -> None:
         group_sorted = sorted(group, key=lambda p: p["id"])  # 오래된 id = 먼저 생성 = 접미사 없음
         for idx, p in enumerate(group_sorted):
             fname = f"auto_post_{date}.html" if idx == 0 else f"auto_post_{date}_{idx + 1}.html"
-            if (CONTENT_DIR / fname).exists():
+            own_file = titles.get(_title_key(p["title"]))
+            if own_file:
+                p["href"] = f"../content/{own_file}"
+            elif (CONTENT_DIR / fname).exists() and fname not in claimed:
                 p["href"] = f"../content/{fname}"
             else:
                 p["href"] = f"blog-post.html?id={p['id']}"
@@ -107,6 +135,23 @@ def inject(blog_html: str, static_block: str) -> str:
     return blog_html.replace(anchor, anchor + "\n" + static_block, 1)
 
 
+def render_links_block(posts: list) -> str:
+    """목록 카드가 쓰는 글 id → /content/ 주소 표. 대응 글이 없는 글은 넣지 않는다."""
+    links = {str(p["id"]): p["href"] for p in posts if p["href"].startswith("../content/")}
+    return f"{LINKS_START}<script>var BLOG_LINKS={json.dumps(links)};</script>{LINKS_END}"
+
+
+def inject_links(blog_html: str, links_block: str) -> str:
+    # 기존 표가 있으면 교체, 없으면 blog-data.js 앞에 삽입
+    if LINKS_START in blog_html and LINKS_END in blog_html:
+        pattern = re.escape(LINKS_START) + r".*?" + re.escape(LINKS_END)
+        return re.sub(pattern, lambda _: links_block, blog_html, flags=re.S)
+    anchor = '<script src="../assets/js/blog-data.js"></script>'
+    if anchor not in blog_html:
+        raise RuntimeError("blog.html에서 blog-data.js 앵커를 찾을 수 없음")
+    return blog_html.replace(anchor, links_block + "\n" + anchor, 1)
+
+
 def main() -> int:
     blog_html = BLOG_HTML.read_text(encoding="utf-8")
     posts = parse_blog_data(BLOG_DATA.read_text(encoding="utf-8"))
@@ -114,7 +159,7 @@ def main() -> int:
         raise RuntimeError("blog-data.js에서 글을 하나도 파싱하지 못함")
     resolve_links(posts)
     static_block = render_static_list(posts, translation_lookup(blog_html))
-    new_html = inject(blog_html, static_block)
+    new_html = inject_links(inject(blog_html, static_block), render_links_block(posts))
     # 빈 상태 문구는 JS가 채우도록 서버 HTML에서 제거 (크롤러가 '글 없음'으로 오독하지 않게)
     new_html = new_html.replace(
         '<div class="blog-empty" id="blogEmpty" style="display:none" data-t="p11">해당 카테고리의 글이 없습니다.</div>',
