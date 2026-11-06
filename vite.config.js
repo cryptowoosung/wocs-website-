@@ -126,6 +126,80 @@ function ga4Plugin() {
   }
 }
 
+// sitemap 의 디렉터리 URL(/about/)을 그 페이지의 canonical(/about/index.html)에 맞춘다.
+// 저장소 sitemap.xml 은 auto_blog 워크플로의 update_sitemap.py 가 발행 때마다 다시 만들기 때문에
+// 원본이 아니라 빌드 산출물 dist/sitemap.xml 에서 맞춰야 유지된다.
+function sitemapCanonicalPlugin() {
+  return {
+    name: 'sitemap-match-canonical',
+    closeBundle() {
+      const file = resolve(__dirname, 'dist/sitemap.xml')
+      if (!fs.existsSync(file)) return
+      let n = 0
+      const xml = fs.readFileSync(file, 'utf8').replace(/<loc>(https:\/\/wocs\.kr\/[^<]*\/)<\/loc>/g, (tag, url) => {
+        const page = resolve(__dirname, 'dist', new URL(url).pathname.slice(1), 'index.html')
+        if (!fs.existsSync(page)) return tag
+        const canonical = fs.readFileSync(page, 'utf8').match(/<link\s+rel="canonical"\s+href="([^"]+)"/)?.[1]
+        if (!canonical || canonical === url) return tag
+        n++
+        return `<loc>${canonical}</loc>`
+      })
+      fs.writeFileSync(file, xml)
+      console.log(`✓ sitemap loc ${n}개를 canonical 에 맞춤`)
+    },
+  }
+}
+
+// noindex 블로그 글(dist/content)에서는 애드센스 스크립트를 뺀다.
+// adsensePlugin 은 dist 전체에 넣으므로, 그 뒤에 실행되도록 plugins 에서 adsensePlugin 다음에 둔다.
+function adsenseSkipNoindexPlugin() {
+  return {
+    name: 'adsense-skip-noindex-posts',
+    closeBundle() {
+      const dir = resolve(__dirname, 'dist/content')
+      if (!fs.existsSync(dir)) return
+      const noindex = /<meta\s+name=["']robots["'][^>]*content=["'][^"']*noindex/i
+      const adsTag = /<script[^>]*adsbygoogle\.js[^>]*><\/script>\n?/g
+      let n = 0
+      for (const name of fs.readdirSync(dir).filter((f) => f.endsWith('.html'))) {
+        const file = resolve(dir, name)
+        const html = fs.readFileSync(file, 'utf8')
+        if (!noindex.test(html) || !html.includes('adsbygoogle.js')) continue
+        fs.writeFileSync(file, html.replace(adsTag, ''))
+        n++
+      }
+      console.log(`✓ noindex 글 ${n}편 애드센스 스크립트 제외`)
+    },
+  }
+}
+
+// 홈 본문이 <noscript> 안에만 있어, 그것을 읽지 않는 크롤러에게 홈이 빈 페이지로 보인다.
+// 빌드 때 noscript 내용을 #root 안으로 옮겨 JS 실행 전에도 본문과 <h1> 1개가 HTML 에 있게 한다.
+// React 의 createRoot().render() 가 첫 렌더 때 #root 안을 비우므로 React 가 뜬 뒤 화면은 그대로다.
+// noscript 를 남겨 두면 <h1> 이 2개가 되므로 복사가 아니라 이동이다.
+function staticHomePlugin() {
+  const WRAPPER_STYLE = 'max-width:1200px;margin:0 auto;padding:120px 20px 40px;line-height:1.7'
+  return {
+    name: 'static-home-body',
+    closeBundle() {
+      const file = resolve(__dirname, 'dist/index.html')
+      const html = fs.readFileSync(file, 'utf8')
+      const block = /<noscript>\s*(<div>\s*<header>[\s\S]*?)<\/noscript>\s*<div id="root"><\/div>/
+      const found = html.match(block)
+      if (!found) {
+        console.log('⚠ 홈 noscript 본문을 찾지 못함 — 정적 본문 삽입 생략')
+        return
+      }
+      // 이제 사람에게도 보이는 내용이므로 크롤러 전용 안내문과 색인 대상이 아닌 껍데기 페이지 링크는 뺀다.
+      const body = found[1]
+        .replace(/<p>JavaScript 미실행 환경[\s\S]*?<\/p>/, '<p><a href="/sitemap.html">사이트맵 전체 보기</a></p>')
+        .replace(/\s*<li><a href="\/(?:products\/product-template|portfolio\/case-detail|resources\/blog-post)\.html">[^<]*<\/a><\/li>/g, '')
+      fs.writeFileSync(file, html.replace(block, () => `<div id="root"><div style="${WRAPPER_STYLE}">${body}</div></div>`))
+      console.log('✓ 홈 정적 본문을 #root 안에 삽입')
+    },
+  }
+}
+
 export default defineConfig({
   plugins: [
     react(),
@@ -153,8 +227,11 @@ export default defineConfig({
     injectLcpPreloadPlugin(),
     asyncCssPlugin(),
     renameViteIndexPlugin(),
+    staticHomePlugin(),
     adsensePlugin(),
+    adsenseSkipNoindexPlugin(),
     ga4Plugin(),
+    sitemapCanonicalPlugin(),
   ],
   publicDir: false,
   build: {
