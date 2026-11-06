@@ -126,6 +126,30 @@ function ga4Plugin() {
   }
 }
 
+// sitemap 의 디렉터리 URL(/about/)을 그 페이지의 canonical(/about/index.html)에 맞춘다.
+// 저장소 sitemap.xml 은 auto_blog 워크플로의 update_sitemap.py 가 발행 때마다 다시 만들기 때문에
+// 원본이 아니라 빌드 산출물 dist/sitemap.xml 에서 맞춰야 유지된다.
+function sitemapCanonicalPlugin() {
+  return {
+    name: 'sitemap-match-canonical',
+    closeBundle() {
+      const file = resolve(__dirname, 'dist/sitemap.xml')
+      if (!fs.existsSync(file)) return
+      let n = 0
+      const xml = fs.readFileSync(file, 'utf8').replace(/<loc>(https:\/\/wocs\.kr\/[^<]*\/)<\/loc>/g, (tag, url) => {
+        const page = resolve(__dirname, 'dist', new URL(url).pathname.slice(1), 'index.html')
+        if (!fs.existsSync(page)) return tag
+        const canonical = fs.readFileSync(page, 'utf8').match(/<link\s+rel="canonical"\s+href="([^"]+)"/)?.[1]
+        if (!canonical || canonical === url) return tag
+        n++
+        return `<loc>${canonical}</loc>`
+      })
+      fs.writeFileSync(file, xml)
+      console.log(`✓ sitemap loc ${n}개를 canonical 에 맞춤`)
+    },
+  }
+}
+
 export default defineConfig({
   plugins: [
     react(),
@@ -155,6 +179,7 @@ export default defineConfig({
     renameViteIndexPlugin(),
     adsensePlugin(),
     ga4Plugin(),
+    sitemapCanonicalPlugin(),
   ],
   publicDir: false,
   build: {
