@@ -18,6 +18,12 @@
   ],
   "redirects": [
     {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.wocs.kr" }],
+      "destination": "https://wocs.kr/:path*",
+      "statusCode": 301
+    },
+    {
       "source": "/assets/images/:name((?!(?:logo_preview_dark|deck|smartdoorlock)\\.png)[^/.]+)\\.png",
       "destination": "/assets/images/:name.webp",
       "statusCode": 301
