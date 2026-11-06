@@ -150,6 +150,29 @@ function sitemapCanonicalPlugin() {
   }
 }
 
+// noindex 블로그 글(dist/content)에서는 애드센스 스크립트를 뺀다.
+// adsensePlugin 은 dist 전체에 넣으므로, 그 뒤에 실행되도록 plugins 에서 adsensePlugin 다음에 둔다.
+function adsenseSkipNoindexPlugin() {
+  return {
+    name: 'adsense-skip-noindex-posts',
+    closeBundle() {
+      const dir = resolve(__dirname, 'dist/content')
+      if (!fs.existsSync(dir)) return
+      const noindex = /<meta\s+name=["']robots["'][^>]*content=["'][^"']*noindex/i
+      const adsTag = /<script[^>]*adsbygoogle\.js[^>]*><\/script>\n?/g
+      let n = 0
+      for (const name of fs.readdirSync(dir).filter((f) => f.endsWith('.html'))) {
+        const file = resolve(dir, name)
+        const html = fs.readFileSync(file, 'utf8')
+        if (!noindex.test(html) || !html.includes('adsbygoogle.js')) continue
+        fs.writeFileSync(file, html.replace(adsTag, ''))
+        n++
+      }
+      console.log(`✓ noindex 글 ${n}편 애드센스 스크립트 제외`)
+    },
+  }
+}
+
 export default defineConfig({
   plugins: [
     react(),
@@ -178,6 +201,7 @@ export default defineConfig({
     asyncCssPlugin(),
     renameViteIndexPlugin(),
     adsensePlugin(),
+    adsenseSkipNoindexPlugin(),
     ga4Plugin(),
     sitemapCanonicalPlugin(),
   ],
