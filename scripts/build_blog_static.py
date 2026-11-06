@@ -66,8 +66,30 @@ def translation_lookup(blog_html: str) -> dict:
     return {k: v for k, v in re.findall(r'(\w+):"((?:[^"\\]|\\.)*)"', m.group(1))}
 
 
+def _title_key(text: str) -> str:
+    """제목 비교용 키: 태그·HTML 엔티티·공백·문장부호 차이를 없앤다."""
+    plain = html.unescape(re.sub(r"<[^>]+>", "", text))
+    return re.sub(r"[\s\W_]+", "", plain).lower()
+
+
+def content_titles() -> dict:
+    """content/*.html 의 <h1> 제목 키 → 파일명."""
+    titles = {}
+    for path in sorted(CONTENT_DIR.glob("*.html")):
+        found = re.search(r"<h1[^>]*>(.*?)</h1>", path.read_text(encoding="utf-8"), re.S)
+        if found:
+            titles.setdefault(_title_key(found.group(1)), path.name)
+    return titles
+
+
 def resolve_links(posts: list) -> None:
-    """같은 날짜 글이 여러 개면 auto_writer와 같은 규칙(_2, _3…)으로 파일을 배정. 최신 id가 먼저 온다는 점을 반영."""
+    """글마다 제목이 같은 content 파일을 찾아 연결한다. 제목으로 못 찾으면 날짜 규칙(_2, _3…)을 쓴다.
+
+    날짜 규칙만 쓰면 같은 날짜 글이 뒤바뀐다(2026-03~04 글 5쌍). 그래서 날짜 규칙으로 고른
+    파일이 다른 글의 제목을 가지고 있으면 연결하지 않고 뷰어 주소로 둔다.
+    """
+    titles = content_titles()
+    claimed = set(titles.values())
     by_date = defaultdict(list)
     for p in posts:
         by_date[p["date"]].append(p)
@@ -75,7 +97,10 @@ def resolve_links(posts: list) -> None:
         group_sorted = sorted(group, key=lambda p: p["id"])  # 오래된 id = 먼저 생성 = 접미사 없음
         for idx, p in enumerate(group_sorted):
             fname = f"auto_post_{date}.html" if idx == 0 else f"auto_post_{date}_{idx + 1}.html"
-            if (CONTENT_DIR / fname).exists():
+            own_file = titles.get(_title_key(p["title"]))
+            if own_file:
+                p["href"] = f"../content/{own_file}"
+            elif (CONTENT_DIR / fname).exists() and fname not in claimed:
                 p["href"] = f"../content/{fname}"
             else:
                 p["href"] = f"blog-post.html?id={p['id']}"
