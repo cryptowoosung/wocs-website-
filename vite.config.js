@@ -161,14 +161,15 @@ function adsenseSkipNoindexPlugin() {
       const noindex = /<meta\s+name=["']robots["'][^>]*content=["'][^"']*noindex/i
       const adsTag = /<script[^>]*adsbygoogle\.js[^>]*><\/script>\n?/g
       let n = 0
-      for (const name of fs.readdirSync(dir).filter((f) => f.endsWith('.html'))) {
-        const file = resolve(dir, name)
+      const posts = fs.readdirSync(dir).filter((f) => f.endsWith('.html')).map((name) => resolve(dir, name))
+      // blog-post.html 껍데기도 noindex 이므로 같은 규칙으로 뺀다
+      for (const file of [...posts, resolve(__dirname, 'dist/resources/blog-post.html')]) {
         const html = fs.readFileSync(file, 'utf8')
         if (!noindex.test(html) || !html.includes('adsbygoogle.js')) continue
         fs.writeFileSync(file, html.replace(adsTag, ''))
         n++
       }
-      console.log(`✓ noindex 글 ${n}편 애드센스 스크립트 제외`)
+      console.log(`✓ noindex 페이지 ${n}개 애드센스 스크립트 제외`)
     },
   }
 }
