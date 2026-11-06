@@ -18,6 +18,12 @@
   ],
   "redirects": [
     {
+      "source": "/",
+      "has": [{ "type": "host", "value": "www.wocs.kr" }],
+      "destination": "https://wocs.kr/",
+      "statusCode": 301
+    },
+    {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "www.wocs.kr" }],
       "destination": "https://wocs.kr/:path*",
