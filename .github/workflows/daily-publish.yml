@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write
+  actions: read   # 연속 실패 판정용 (이전 실행 결과 조회)
 
 # 글 생성 그룹(blog-write)과 분리: 같은 그룹이면 대기 중인 발행이 새 생성 실행에 밀려 취소될 수 있다.
 # 동시 실행 안전장치는 큐 초기화의 --force-with-lease 와 blog_queue.sh push 의 재시도가 맡는다.
@@ -72,3 +73,24 @@ jobs:
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
             --data-urlencode "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
             --data-urlencode "text=${MSG}"
+
+      # 2026-11-12 추가: 직전 실행도 실패였으면 기존 알림과 별도로 '연속 실패'를 강조해 한 번 더 보낸다
+      - name: 연속 실패 강조 알림
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TG_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TG_CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          [ -z "$TG_TOKEN" ] && exit 0
+          # 이번 실행보다 앞선 완료 실행 중 끊김 없이 이어진 실패 횟수 (취소·건너뜀 제외)
+          PREV=$(gh run list -R "$GITHUB_REPOSITORY" -w "$GITHUB_WORKFLOW" -L 20 --json databaseId,status,conclusion \
+            --jq "[.[] | select(.databaseId < $GITHUB_RUN_ID and .status == \"completed\" and .conclusion != \"cancelled\" and .conclusion != \"skipped\") | .conclusion == \"failure\"] | (index(false) // length)") || exit 0
+          STREAK=$((PREV + 1))
+          [ "$STREAK" -lt 2 ] && exit 0
+          RUN_URL="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          curl -s -o /dev/null -X POST "https://api.telegram.org/bot${TG_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${TG_CHAT}" \
+            --data-urlencode "text=🚨🚨 [연속 실패 ${STREAK}회] wocs.kr 블로그 일일 발행
+          ${STREAK}번 연달아 실패했습니다. 일시 오류가 아닐 가능성이 높아 확인이 필요합니다.
+          ${RUN_URL}"
